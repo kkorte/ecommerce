@@ -1,0 +1,12 @@
+{
+    "name": "matthijs/shop",
+    "description": "laravel e-commerce platform",
+    "authors": [
+        {
+            "name": "Matthijs Neijenhuijs",
+            "email": "matthijs@dutchbridge.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
