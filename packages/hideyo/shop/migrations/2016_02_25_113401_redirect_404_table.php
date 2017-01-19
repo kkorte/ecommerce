@@ -16,6 +16,7 @@ class Redirect404Table extends Migration
         Schema::create('redirect', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
+            $table->integer('clicks')->default(0);
             $table->string('url')->unique();
             $table->string('redirect_url')->nullable();
             $table->integer('shop_id')->unsigned()->nullable();
