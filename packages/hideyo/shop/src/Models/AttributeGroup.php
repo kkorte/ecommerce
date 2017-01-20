@@ -21,19 +21,6 @@ class AttributeGroup extends Model
         parent::__construct($attributes);
     }
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            foreach ($model->toArray() as $key => $value) {
-                    $model->{$key} = (empty($value) and $value != 0) ? null : $value;
-            }
-
-            return true;
-        });
-    }
-
     public function categories()
     {
         return $this->belongsToMany('ProductCategory', 'product_category_related_extra_field');

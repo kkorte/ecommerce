@@ -17,19 +17,6 @@ class Attribute extends Model
         parent::__construct($attributes);
     }
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            foreach ($model->toArray() as $key => $value) {
-                    $model->{$key} = (empty($value) and $value != 0) ? null : $value;
-            }
-
-            return true;
-        });
-    }
-
     public function attributeGroup()
     {
         return $this->belongsTo('App\AttributeGroup');

@@ -20,14 +20,12 @@ class ProductAmountSeries extends Model
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
-    }
- 
+    } 
 
     public function product()
     {
         return $this->belongsTo('App\Product');
     }
-
 
     public function range()
     {

@@ -35,7 +35,6 @@ class ProductCategory extends Node implements SluggableInterface
 
     public function __construct(array $attributes = array())
     {
-
         parent::__construct($attributes);
     }
 
@@ -43,7 +42,6 @@ class ProductCategory extends Node implements SluggableInterface
     {
         return $this->belongsTo('App\Shop');
     }
-
 
     protected function getExistingSlugs($slug)
     {
@@ -98,21 +96,15 @@ class ProductCategory extends Node implements SluggableInterface
         return $this->hasMany('App\ProductCategoryImage');
     }
 
-
-
     public function productCategoryHighlightProduct()
     {
         return $this->belongsToMany('App\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
     }
 
-
-
     public function productCategoryHighlightProductActive()
     {
         return $this->belongsToMany('App\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
     }
-
-
 
     public function products()
     {

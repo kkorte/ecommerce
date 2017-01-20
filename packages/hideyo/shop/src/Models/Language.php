@@ -19,16 +19,4 @@ class Language extends Model  {
     public function __construct(array $attributes = array()) {
         parent::__construct($attributes);
     }
-
-    public static function boot() {
-        parent::boot();
-
-        static::saving(function($model){
-            foreach ($model->toArray() as $key => $value) {
-                    $model->{$key} = empty($value) ? null : $value;
-            }
-
-            return true;
-        });
-    }
 }

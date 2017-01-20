@@ -37,8 +37,6 @@ class Shop extends Model implements SluggableInterface
         $this->sluggify();
     }
 
-
-
     public function shops()
     {
         return $this->hasMany('App\Shop');

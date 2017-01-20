@@ -27,8 +27,7 @@ class News extends Model implements SluggableInterface
     {
         parent::__construct($attributes);
     }
-
-
+    
     public function setPublishedAtAttribute($value)
     {
         if ($value) {

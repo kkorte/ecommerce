@@ -22,6 +22,11 @@ class Blog extends Model implements SluggableInterface
 
     protected $fillable = array('active', 'title', 'intro', 'content', 'content_two', 'content_three', 'content_four', 'content_five', 'slug', 'meta_title', 'meta_description', 'modified_by_user_id');
 
+    public function __construct(array $attributes = array())
+    {
+        parent::__construct($attributes);
+    }
+
     public function blogImages()
     {
         return $this->hasMany('App\BlogImage');

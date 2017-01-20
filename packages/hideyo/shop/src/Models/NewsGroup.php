@@ -27,7 +27,6 @@ class NewsGroup extends Model implements SluggableInterface
         parent::__construct($attributes);
     }
 
-
     public function news()
     {
         return $this->hasMany('App\News');

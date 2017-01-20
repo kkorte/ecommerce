@@ -22,8 +22,6 @@ class ProductAmountOption extends Model
         parent::__construct($attributes);
     }
 
-
-
     public function setDiscountValueAttribute($value)
     {
         if ($value) {

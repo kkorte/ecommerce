@@ -22,7 +22,6 @@ class OrderAddress extends Model
         parent::__construct($attributes);
     }
 
-
     public function order()
     {
         return $this->belongsTo('App\Order');
