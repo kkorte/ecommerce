@@ -13,6 +13,11 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
+        ]);
+
+
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
 

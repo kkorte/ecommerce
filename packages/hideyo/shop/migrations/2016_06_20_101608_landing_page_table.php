@@ -12,7 +12,7 @@ class LandingPageTable extends Migration
      */
     public function up()
     {
-        Schema::create('landing_page', function (Blueprint $table) {
+        Schema::create(config('hideyo.db_prefix').'landing_page', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->string('file')->nullable();
@@ -28,20 +28,20 @@ class LandingPageTable extends Migration
             $table->text('javascript')->nullable();
             $table->string('slug');
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
             $table->timestamps();
         });
 
 
-        Schema::create('landing_page_product', function (Blueprint $table) {
+        Schema::create(config('hideyo.db_prefix').'landing_page_product', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(true);
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on(config('hideyo.db_prefix').'product')->onDelete('cascade');
             $table->integer('landing_page_id')->unsigned();
-            $table->foreign('landing_page_id')->references('id')->on('landing_page')->onDelete('cascade');
+            $table->foreign('landing_page_id')->references('id')->on(config('hideyo.db_prefix').'landing_page')->onDelete('cascade');
             $table->timestamps();
         });
 
