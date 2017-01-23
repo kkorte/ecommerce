@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function getUserProfileData()
     {
-        return $this->hasMany('UserProfileData');
+        return $this->hasMany('Hideyo\Shop\Models\UserProfileData');
     }
 
     public function shop()
