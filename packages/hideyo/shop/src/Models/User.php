@@ -54,12 +54,12 @@ class User extends Authenticatable
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop', 'selected_shop_id', 'id');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop', 'selected_shop_id', 'id');
     }
 
 
     public function roles()
     {
-        return $this->belongsToMany('App\Role', 'assigned_roles');
+        return $this->belongsToMany('Hideyo\Shop\Models\Role', 'assigned_roles');
     }
 }

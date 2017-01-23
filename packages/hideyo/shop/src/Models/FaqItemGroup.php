@@ -30,6 +30,6 @@ class FaqItemGroup extends Model implements SluggableInterface
 
     public function faqItems()
     {
-        return $this->hasMany('App\FaqItem');
+        return $this->hasMany('Hideyo\Shop\Models\FaqItem');
     }
 }

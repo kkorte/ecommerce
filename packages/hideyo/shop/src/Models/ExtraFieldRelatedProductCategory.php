@@ -35,11 +35,11 @@ class ExtraFieldRelatedProductCategory extends Model
 
     public function extraField()
     {
-        return $this->belongsTo('App\ExtraField', 'extra_field_id');
+        return $this->belongsTo('Hideyo\Shop\Models\ExtraField', 'extra_field_id');
     }
 
     public function relatedProductCategory()
     {
-        return $this->belongsTo('App\ProductCategory', 'product_category_id');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory', 'product_category_id');
     }
 }

@@ -23,13 +23,13 @@ class OrderProduct extends Model
 
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('Hideyo\Shop\Models\Order');
     }
 
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('Hideyo\Shop\Models\Product');
     }
 
 
@@ -81,6 +81,6 @@ class OrderProduct extends Model
 
     public function productAttribute()
     {
-        return $this->belongsTo('App\ProductAttribute');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
     }
 }

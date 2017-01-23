@@ -39,17 +39,17 @@ class Shop extends Model implements SluggableInterface
 
     public function shops()
     {
-        return $this->hasMany('App\Shop');
+        return $this->hasMany('Hideyo\Shop\Models\Shop');
     }
     
     public function categories()
     {
-        return $this->hasMany('App\ProductCategory');
+        return $this->hasMany('Hideyo\Shop\Models\ProductCategory');
     }
 
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('Hideyo\Shop\Models\Product');
     }
 
     public function setSquareThumbnailSizesAttribute($value = null)

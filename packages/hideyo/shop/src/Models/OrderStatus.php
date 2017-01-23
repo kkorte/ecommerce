@@ -21,6 +21,6 @@ class OrderStatus extends Model
 
     public function orderStatusEmailTemplate()
     {
-        return $this->belongsTo('App\OrderStatusEmailTemplate');
+        return $this->belongsTo('Hideyo\Shop\Models\OrderStatusEmailTemplate');
     }
 }

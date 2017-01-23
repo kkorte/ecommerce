@@ -23,15 +23,15 @@ class ProductExtraFieldValue extends Model
 
     public function extraField()
     {
-        return $this->belongsTo('App\ExtraField');
+        return $this->belongsTo('Hideyo\Shop\Models\ExtraField');
     }
     public function extraFieldDefaultValue()
     {
-        return $this->belongsTo('App\ExtraFieldDefaultValue');
+        return $this->belongsTo('Hideyo\Shop\Models\ExtraFieldDefaultValue');
     }
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('Hideyo\Shop\Models\Product');
     }
 }

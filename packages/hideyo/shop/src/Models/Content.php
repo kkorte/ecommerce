@@ -55,12 +55,12 @@ class Content extends Model implements SluggableInterface
 
     public function contentGroup()
     {
-        return $this->belongsTo('App\ContentGroup');
+        return $this->belongsTo('Hideyo\Shop\Models\ContentGroup');
     }
 
     public function contentImages()
     {
-        return $this->hasMany('App\ContentImage');
+        return $this->hasMany('Hideyo\Shop\Models\ContentImage');
     }
 
 

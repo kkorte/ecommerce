@@ -23,11 +23,11 @@ class SendingPaymentMethodRelated extends Model
 
     public function sendingMethod()
     {
-        return $this->belongsTo('App\SendingMethod');
+        return $this->belongsTo('Hideyo\Shop\Models\SendingMethod');
     }
 
     public function paymentMethod()
     {
-        return $this->belongsTo('App\PaymentMethod');
+        return $this->belongsTo('Hideyo\Shop\Models\PaymentMethod');
     }
 }

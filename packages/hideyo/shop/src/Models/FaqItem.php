@@ -29,6 +29,6 @@ class FaqItem extends Model implements SluggableInterface
 
     public function faqItemGroup()
     {
-        return $this->belongsTo('App\faqItemGroup');
+        return $this->belongsTo('Hideyo\Shop\Models\faqItemGroup');
     }
 }

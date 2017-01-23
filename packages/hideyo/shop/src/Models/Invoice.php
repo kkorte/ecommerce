@@ -48,34 +48,34 @@ class Invoice extends Model
 
     public function products()
     {
-        return $this->hasMany('App\InvoiceRule');
+        return $this->hasMany('Hideyo\Shop\Models\InvoiceRule');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('Hideyo\Shop\Models\Client');
     }
 
 
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('Hideyo\Shop\Models\Order');
     }
 
 
     public function invoiceAddress()
     {
-        return $this->hasMany('App\InvoiceAddress');
+        return $this->hasMany('Hideyo\Shop\Models\InvoiceAddress');
     }
 
     public function invoiceDeliveryAddress()
     {
-        return $this->hasOne('App\InvoiceAddress', 'id', 'delivery_invoice_address_id');
+        return $this->hasOne('Hideyo\Shop\Models\InvoiceAddress', 'id', 'delivery_invoice_address_id');
     }
 
     public function invoiceBillAddress()
     {
-        return $this->hasOne('App\InvoiceAddress', 'id', 'bill_invoice_address_id');
+        return $this->hasOne('Hideyo\Shop\Models\InvoiceAddress', 'id', 'bill_invoice_address_id');
     }
 
 

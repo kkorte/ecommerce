@@ -26,6 +26,6 @@ class NewsImage extends Model
 
     public function news()
     {
-        return $this->belongsTo('App\News');
+        return $this->belongsTo('Hideyo\Shop\Models\News');
     }
 }

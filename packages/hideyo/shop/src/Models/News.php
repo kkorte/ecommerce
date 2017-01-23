@@ -55,12 +55,12 @@ class News extends Model implements SluggableInterface
 
     public function newsImages()
     {
-        return $this->hasMany('App\NewsImage');
+        return $this->hasMany('Hideyo\Shop\Models\NewsImage');
     }
 
     public function newsGroup()
     {
-        return $this->belongsTo('App\NewsGroup');
+        return $this->belongsTo('Hideyo\Shop\Models\NewsGroup');
     }
 
     public function setNewsGroupIdAttribute($value)

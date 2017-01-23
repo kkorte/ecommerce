@@ -30,6 +30,6 @@ class ContentGroup extends Model implements SluggableInterface
 
     public function contents()
     {
-        return $this->hasMany('App\Content');
+        return $this->hasMany('Hideyo\Shop\Models\Content');
     }
 }

@@ -44,24 +44,24 @@ class PaymentMethod extends Model
 
     public function taxRate()
     {
-        return $this->belongsTo('App\TaxRate');
+        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
     }
 
 
     public function orderConfirmedOrderStatus()
     {
-        return $this->belongsTo('App\OrderStatus', 'order_confirmed_order_status_id');
+        return $this->belongsTo('Hideyo\Shop\Models\OrderStatus', 'order_confirmed_order_status_id');
     }
 
 
     public function orderPaymentCompletedOrderStatus()
     {
-        return $this->belongsTo('App\OrderStatus', 'payment_completed_order_status_id');
+        return $this->belongsTo('Hideyo\Shop\Models\OrderStatus', 'payment_completed_order_status_id');
     }
 
     public function orderPaymentFailedOrderStatus()
     {
-        return $this->belongsTo('App\OrderStatus', 'payment_failed_order_status_id');
+        return $this->belongsTo('Hideyo\Shop\Models\OrderStatus', 'payment_failed_order_status_id');
     }
 
 
@@ -69,7 +69,7 @@ class PaymentMethod extends Model
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 
     public function setTotalPriceDiscountStartDateAttribute($value)

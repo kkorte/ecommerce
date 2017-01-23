@@ -61,65 +61,65 @@ class Order extends Model
 
     public function products()
     {
-        return $this->hasMany('App\OrderProduct');
+        return $this->hasMany('Hideyo\Shop\Models\OrderProduct');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('Hideyo\Shop\Models\Client');
     }
 
     public function orderStatus()
     {
-        return $this->belongsTo('App\OrderStatus');
+        return $this->belongsTo('Hideyo\Shop\Models\OrderStatus');
     }
 
     public function orderPaymentLog()
     {
-        return $this->hasMany('App\OrderPaymentLog');
+        return $this->hasMany('Hideyo\Shop\Models\OrderPaymentLog');
     }
 
     public function orderAddress()
     {
-        return $this->hasMany('App\OrderAddress');
+        return $this->hasMany('Hideyo\Shop\Models\OrderAddress');
     }
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 
 
     public function coupon()
     {
-        return $this->belongsTo('App\Coupon');
+        return $this->belongsTo('Hideyo\Shop\Models\Coupon');
     }
 
 
 
     public function invoice()
     {
-        return $this->hasOne('App\Invoice');
+        return $this->hasOne('Hideyo\Shop\Models\Invoice');
     }
 
     public function orderDeliveryAddress()
     {
-        return $this->hasOne('App\OrderAddress', 'id', 'delivery_order_address_id');
+        return $this->hasOne('Hideyo\Shop\Models\OrderAddress', 'id', 'delivery_order_address_id');
     }
 
     public function orderBillAddress()
     {
-        return $this->hasOne('App\OrderAddress', 'id', 'bill_order_address_id');
+        return $this->hasOne('Hideyo\Shop\Models\OrderAddress', 'id', 'bill_order_address_id');
     }
 
     public function orderSendingMethod()
     {
-        return $this->hasOne('App\OrderSendingMethod');
+        return $this->hasOne('Hideyo\Shop\Models\OrderSendingMethod');
     }
 
     public function orderPaymentMethod()
     {
-        return $this->hasOne('App\OrderPaymentMethod');
+        return $this->hasOne('Hideyo\Shop\Models\OrderPaymentMethod');
     }
 
 

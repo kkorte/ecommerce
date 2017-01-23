@@ -29,6 +29,6 @@ class Blog extends Model implements SluggableInterface
 
     public function blogImages()
     {
-        return $this->hasMany('App\BlogImage');
+        return $this->hasMany('Hideyo\Shop\Models\BlogImage');
     }
 }

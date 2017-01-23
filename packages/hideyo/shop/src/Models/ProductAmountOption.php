@@ -87,6 +87,6 @@ class ProductAmountOption extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('Hideyo\Shop\Models\Product');
     }
 }

@@ -27,6 +27,6 @@ class BlogImage extends Model
 
     public function blog()
     {
-        return $this->belongsTo('Blog');
+        return $this->belongsTo('Hideyo\Shop\Models\Blog');
     }
 }

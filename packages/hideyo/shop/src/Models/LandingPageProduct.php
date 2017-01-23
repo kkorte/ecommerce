@@ -25,6 +25,6 @@ class LandingPageProduct extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\Product', 'product_id');
+        return $this->belongsTo('Hideyo\Shop\Models\Product', 'product_id');
     }
 }

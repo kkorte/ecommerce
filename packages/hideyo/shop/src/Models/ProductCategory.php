@@ -40,7 +40,7 @@ class ProductCategory extends Node implements SluggableInterface
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 
     protected function getExistingSlugs($slug)
@@ -88,26 +88,26 @@ class ProductCategory extends Node implements SluggableInterface
 
     public function refProductCategory()
     {
-        return $this->belongsTo('App\ProductCategory', 'redirect_product_category_id');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory', 'redirect_product_category_id');
     }
 
     public function productCategoryImages()
     {
-        return $this->hasMany('App\ProductCategoryImage');
+        return $this->hasMany('Hideyo\Shop\Models\ProductCategoryImage');
     }
 
     public function productCategoryHighlightProduct()
     {
-        return $this->belongsToMany('App\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
     }
 
     public function productCategoryHighlightProductActive()
     {
-        return $this->belongsToMany('App\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
     }
 
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('Hideyo\Shop\Models\Product');
     }
 }

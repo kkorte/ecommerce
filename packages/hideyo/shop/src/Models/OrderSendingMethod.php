@@ -24,7 +24,7 @@ class OrderSendingMethod extends Model
 
     public function order()
     {
-        return $this->belongsTo('Order');
+        return $this->belongsTo('Hideyo\Shop\Models\Order');
     }
 
     public function getPriceWithTaxNumberFormat()

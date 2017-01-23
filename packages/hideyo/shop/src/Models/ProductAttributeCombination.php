@@ -23,11 +23,11 @@ class ProductAttributeCombination extends Model
 
     public function attribute()
     {
-        return $this->belongsTo('App\Attribute');
+        return $this->belongsTo('Hideyo\Shop\Models\Attribute');
     }
 
     public function productAttribute()
     {
-        return $this->belongsTo('App\ProductAttribute');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
     }
 }

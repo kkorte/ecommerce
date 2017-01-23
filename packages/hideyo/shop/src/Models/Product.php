@@ -197,49 +197,49 @@ class Product extends Model implements SluggableInterface
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 
     public function attributeGroup()
     {
-        return $this->belongsTo('App\AttributeGroup', 'leading_atrribute_group_id');
+        return $this->belongsTo('Hideyo\Shop\Models\AttributeGroup', 'leading_atrribute_group_id');
     }
     
 
     public function extraFields()
     {
-        return $this->hasMany('App\ProductExtraFieldValue');
+        return $this->hasMany('Hideyo\Shop\Models\ProductExtraFieldValue');
     }
 
     public function taxRate()
     {
-        return $this->belongsTo('App\TaxRate');
+        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
     }
 
     public function brand()
     {
-        return $this->belongsTo('App\Brand');
+        return $this->belongsTo('Hideyo\Shop\Models\Brand');
     }
 
 
     public function productCategory()
     {
-        return $this->belongsTo('App\ProductCategory');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory');
     }
 
     public function subcategories()
     {
-        return $this->belongsToMany('App\ProductCategory', 'product_sub_product_category');
+        return $this->belongsToMany('Hideyo\Shop\Models\ProductCategory', 'product_sub_product_category');
     }
 
     public function relatedProducts()
     {
-        return $this->belongsToMany('App\Product', 'product_related_product', 'product_id', 'related_product_id');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_related_product', 'product_id', 'related_product_id');
     }
 
     public function relatedProductsActive()
     {
-        return $this->belongsToMany('App\Product', 'product_related_product', 'product_id', 'related_product_id')->whereHas('productCategory', function ($query) {
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_related_product', 'product_id', 'related_product_id')->whereHas('productCategory', function ($query) {
             $query->where('active', '=', '1');
         })->where('product.active', '=', '1');
     }
@@ -247,21 +247,21 @@ class Product extends Model implements SluggableInterface
 
     public function productImages()
     {
-        return $this->hasMany('App\ProductImage');
+        return $this->hasMany('Hideyo\Shop\Models\ProductImage');
     }
 
     public function attributes()
     {
-        return $this->hasMany('App\ProductAttribute');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAttribute');
     }
 
     public function amountOptions()
     {
-        return $this->hasMany('App\ProductAmountOption');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAmountOption');
     }
 
     public function amountSeries()
     {
-        return $this->hasMany('App\ProductAmountSeries');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAmountSeries');
     }
 }

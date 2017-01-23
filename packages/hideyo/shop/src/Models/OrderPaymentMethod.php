@@ -24,12 +24,12 @@ class OrderPaymentMethod extends Model
 
     public function order()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('Hideyo\Shop\Models\Order');
     }
 
     public function paymentMethod()
     {
-        return $this->belongsTo('App\PaymentMethod');
+        return $this->belongsTo('Hideyo\Shop\Models\PaymentMethod');
     }
 
     public function getPriceWithTaxNumberFormat()

@@ -24,7 +24,7 @@ class SendingMethod extends Model
 
     public function relatedPaymentMethods()
     {
-        return $this->belongsToMany('App\PaymentMethod', 'sending_payment_method_related');
+        return $this->belongsToMany('Hideyo\Shop\Models\PaymentMethod', 'sending_payment_method_related');
     }
 
 
@@ -54,12 +54,12 @@ class SendingMethod extends Model
 
     public function taxRate()
     {
-        return $this->belongsTo('App\TaxRate');
+        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
     }
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 
 

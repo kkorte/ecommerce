@@ -30,11 +30,11 @@ class ClientAddress extends Model
 
     public function clientDeliveryAddress()
     {
-        return $this->belongsTo('App\Client', 'id', 'delivery_client_address_id');
+        return $this->belongsTo('Hideyo\Shop\Models\Client', 'id', 'delivery_client_address_id');
     }
 
     public function clientBillAddress()
     {
-        return $this->belongsTo('App\Client', 'id', 'bill_client_address_id');
+        return $this->belongsTo('Hideyo\Shop\Models\Client', 'id', 'bill_client_address_id');
     }
 }

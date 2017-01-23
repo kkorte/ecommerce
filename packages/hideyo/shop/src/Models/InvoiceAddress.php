@@ -24,6 +24,6 @@ class InvoiceAddress extends Model
 
     public function invoice()
     {
-        return $this->belongsTo('Invoice');
+        return $this->belongsTo('Hideyo\Shop\Models\Invoice');
     }
 }

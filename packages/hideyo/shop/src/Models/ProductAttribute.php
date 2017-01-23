@@ -76,18 +76,18 @@ class ProductAttribute extends Model
 
     public function combinations()
     {
-        return $this->hasMany('App\ProductAttributeCombination');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeCombination');
     }
 
     public function images()
     {
-        return $this->hasMany('App\ProductAttributeImage');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeImage');
     }
 
 
     public function productAttributeCombinations()
     {
-        return $this->hasMany('App\ProductAttributeCombination');
+        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeCombination');
     }
 
     public function setAmountAttribute($value)
@@ -110,12 +110,12 @@ class ProductAttribute extends Model
 
     public function taxRate()
     {
-        return $this->belongsTo('App\TaxRate');
+        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
     }
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('Hideyo\Shop\Models\Product');
     }
 
 

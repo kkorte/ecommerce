@@ -29,11 +29,11 @@ class LandingPage extends Model implements SluggableInterface
 
     public function products()
     {
-        return $this->belongsToMany('App\Product', 'landing_page_product', 'landing_page_id', 'product_id');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'landing_page_product', 'landing_page_id', 'product_id');
     }
 
     public function productsActive()
     {
-        return $this->belongsToMany('App\Product', 'landing_page_product', 'landing_page_id', 'product_id')->where('product.active', '=', '1');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'landing_page_product', 'landing_page_id', 'product_id')->where('product.active', '=', '1');
     }
 }

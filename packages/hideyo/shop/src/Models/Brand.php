@@ -39,17 +39,17 @@ class Brand extends Model implements SluggableInterface
 
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('Hideyo\Shop\Models\Product');
     }
 
 
     public function brandImages()
     {
-        return $this->hasMany('App\BrandImage');
+        return $this->hasMany('Hideyo\Shop\Models\BrandImage');
     }
 
     public function shop()
     {
-        return $this->belongsTo('App\Shop');
+        return $this->belongsTo('Hideyo\Shop\Models\Shop');
     }
 }

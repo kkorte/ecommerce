@@ -24,29 +24,29 @@ class Coupon extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product', 'coupon_product');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'coupon_product');
     }
 
 
     public function couponGroup()
     {
-        return $this->belongsTo('App\CouponGroup');
+        return $this->belongsTo('Hideyo\Shop\Models\CouponGroup');
     }
 
 
     public function productCategories()
     {
-        return $this->belongsToMany('App\ProductCategory', 'coupon_product_category');
+        return $this->belongsToMany('Hideyo\Shop\Models\ProductCategory', 'coupon_product_category');
     }
 
     public function sendingMethods()
     {
-        return $this->belongsToMany('App\SendingMethod', 'coupon_sending_method');
+        return $this->belongsToMany('Hideyo\Shop\Models\SendingMethod', 'coupon_sending_method');
     }
 
     public function paymentMethods()
     {
-        return $this->belongsToMany('App\PaymentMethod', 'coupon_payment_method');
+        return $this->belongsToMany('Hideyo\Shop\Models\PaymentMethod', 'coupon_payment_method');
     }
 
     public function setPublishedAtAttribute($value)

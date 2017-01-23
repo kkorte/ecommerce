@@ -28,6 +28,6 @@ class AttributeGroup extends Model
 
     public function attributes()
     {
-        return $this->hasMany('App\Attribute');
+        return $this->hasMany('Hideyo\Shop\Models\Attribute');
     }
 }

@@ -18,11 +18,11 @@ class ProductWaitingList extends Model
     
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('Hideyo\Shop\Models\Product');
     }
 
     public function productAttribute()
     {
-        return $this->belongsTo('App\ProductAttribute');
+        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
     }
 }

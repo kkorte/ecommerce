@@ -24,11 +24,11 @@ class ProductRelatedProduct extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\Product', 'product_id');
+        return $this->belongsTo('Hideyo\Shop\Models\Product', 'product_id');
     }
 
     public function relatedProduct()
     {
-        return $this->belongsTo('App\Product', 'related_product_id');
+        return $this->belongsTo('Hideyo\Shop\Models\Product', 'related_product_id');
     }
 }

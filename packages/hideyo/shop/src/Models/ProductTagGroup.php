@@ -22,6 +22,6 @@ class ProductTagGroup extends Model
     
     public function relatedProducts()
     {
-        return $this->belongsToMany('App\Product', 'product_tag_group_related_product');
+        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_tag_group_related_product');
     }
 }
