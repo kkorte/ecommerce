@@ -6,9 +6,9 @@ use Validator;
 use Notification;
 use Illuminate\Http\Request;
 use BrowserDetect;
-use Hideyo\Repositories\ContentRepositoryInterface;
-use Hideyo\Repositories\ProductTagGroupRepositoryInterface;
-use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Shop\Repositories\ContentRepositoryInterface;
+use Hideyo\Shop\Repositories\ProductTagGroupRepositoryInterface;
+use Hideyo\Shop\Repositories\ShopRepositoryInterface;
 use GoogleTagManager;
 
 class BasicController extends Controller

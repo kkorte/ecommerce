@@ -1,0 +1,27 @@
+<?php 
+
+namespace Hideyo\Shop\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class BrandImage extends Model
+{
+
+    public static $rules = array(
+        'file'      => 'required|',
+        'extension' => 'required',
+        'size'      => 'required',
+    );
+    protected $table = 'brand_image';
+
+    protected $guarded =  array('file');
+
+    // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
+    protected $fillable = ['brand_id', 'file', 'extension', 'size', 'path', 'rank', 'tag', 'modified_by_user_id',];
+
+    public function __construct(array $attributes = array())
+    {
+
+        parent::__construct($attributes);
+    }
+}
