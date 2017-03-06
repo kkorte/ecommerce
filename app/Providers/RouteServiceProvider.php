@@ -14,7 +14,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $frontendNamespace = 'App\Http\Controllers\Frontend';
+    protected $backendNamespace = 'App\Http\Controllers\Backend';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,9 +36,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        //$this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        $this->mapFrontendRoutes();
 
         //
     }
@@ -49,13 +50,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapFrontendRoutes()
     {
         Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
+            'middleware' => 'detect.shop',
+            'namespace' => $this->frontendNamespace,
         ], function ($router) {
-            require base_path('routes/web.php');
+            require base_path('routes/frontend.php');
         });
     }
 

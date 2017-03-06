@@ -162,11 +162,39 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Hideyo\Shop\ShopServiceProvider::class,
+
+
+        Hideyo\Repositories\BackendServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
         /*
          * Package Service Providers...
-         */
+         */       
+
+     
+   
+        Krucas\Notification\NotificationServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
+        Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Skovmand\Mailchimp\MailchimpServiceProvider::class,
+        Elasticquent\ElasticquentServiceProvider::class,
+        hisorange\BrowserDetect\Provider\BrowserDetectService::class,
+        Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        Spatie\GoogleTagManager\GoogleTagManagerServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
+        Roumen\Feed\FeedServiceProvider::class,
+        SocialEngine\SnifferRules\ServiceProvider::class,
+        Tylercd100\LERN\LERNServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
+        ChrisKonnertz\OpenGraph\OpenGraphServiceProvider::class,
+
 
         //
 
@@ -227,6 +255,14 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+
+        'Notification'          => Krucas\Notification\Facades\Notification::class,
+        'BrowserDetect'         => 'hisorange\BrowserDetect\Facade\Parser',
+        'HtmlBlockHelper'       => App\Helpers\HtmlBlockHelper::class,
+        'GoogleTagManager' => 'Spatie\GoogleTagManager\GoogleTagManagerFacade'
     ],
 
 ];

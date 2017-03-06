@@ -6,7 +6,40 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+
+        "edvinaskrucas/notification": "5.1.*",
+        "zizaco/entrust": "5.2.x-dev",
+        "cviebrock/eloquent-sluggable": "^3.1",
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "barryvdh/laravel-debugbar": "^2.1",
+        "laravelcollective/html": "^5.2",
+        "baum/baum": "~1.1",
+        "intervention/image": "~2.3",
+        "intervention/imagecache": "^2.3",
+        "felixkiss/uniquewith-validator": "2.*",
+        "hisorange/browser-detect": "2.*",
+        "nesbot/carbon": "~1.14",
+        "barryvdh/laravel-dompdf": "0.8.*",
+        "predis/predis": "~1.1@dev",
+        "maatwebsite/excel": "~2.1.0",
+        "skovmand/mailchimp-laravel": "1.*",
+        "elasticquent/elasticquent": "dev-master",
+        "mollie/mollie-api-php": "1.8.x",
+        "flynsarmy/db-blade-compiler": "2.*",
+        "freshheads/postcode-api-client": "^2.0",
+        "khill/lavacharts": "3.0.4",
+        "spatie/laravel-googletagmanager": "^2.2",
+        "roumen/sitemap": "^2.6",
+        "roumen/feed": "~2.10",
+        "socialengine/sniffer-rules": "^2.2",
+        "tylercd100/lern": "^3.6",
+        "unisharp/laravel-ckeditor": "4.5.7",
+        "unisharp/laravel-filemanager": "1.6.4",
+        "chriskonnertz/open-graph": "~1",
+        "dividebv/postnl": "^1.1"
+
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -21,7 +54,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Hideyo\\Shop\\": "packages/hideyo/shop/src"
+            "Hideyo\\": "hideyo"
         }
     },
     "autoload-dev": {
