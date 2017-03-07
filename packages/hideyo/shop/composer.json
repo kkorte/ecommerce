@@ -41,6 +41,8 @@
         "unisharp/laravel-filemanager": "^1.6",
         "chriskonnertz/open-graph": "~1"
     },
+
+
     "autoload": {    
         "psr-4": {
             "Hideyo\\Shop\\": "src/"
