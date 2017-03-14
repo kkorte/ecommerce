@@ -3,6 +3,9 @@
 namespace Hideyo\Shop;
 
 use Illuminate\Support\ServiceProvider;
+use Cviebrock\EloquentSluggable\SluggableServiceProvider;
+use hisorange\BrowserDetect\Provider\BrowserDetectService;
+
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -28,8 +31,13 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+       $this->registerRequiredProviders();
+
+
+
         include __DIR__.'/Routes/frontend.php';
-        $this->app->make('Hideyo\Shop\Controllers\Frontend\BasicController');
+
 
         $this->app->bind(
             'Hideyo\Shop\Repositories\BrandRepositoryInterface',
@@ -107,7 +115,6 @@ class ShopServiceProvider extends ServiceProvider
             'Hideyo\Shop\Repositories\CouponRepository'
         );
 
-
         $this->app->bind(
             'Hideyo\Shop\Repositories\ClientRepositoryInterface',
             'Hideyo\Shop\Repositories\ClientRepository'
@@ -144,20 +151,15 @@ class ShopServiceProvider extends ServiceProvider
             'Hideyo\Shop\Repositories\ProductAmountSeriesRepository'
         );
 
-
-
         $this->app->bind(
             'Hideyo\Shop\Repositories\ProductTagGroupRepositoryInterface',
             'Hideyo\Shop\Repositories\ProductTagGroupRepository'
         );
 
-
         $this->app->bind(
             'Hideyo\Shop\Repositories\ProductWaitingListRepositoryInterface',
             'Hideyo\Shop\Repositories\ProductWaitingListRepository'
         );
-
-
 
         $this->app->bind(
             'Hideyo\Shop\Repositories\TaxRateRepositoryInterface',
@@ -265,6 +267,17 @@ class ShopServiceProvider extends ServiceProvider
             'Hideyo\Shop\Repositories\ExceptionRepository'
         );
 
-
     }
+
+    /**
+     * Register 3rd party providers.
+     */
+    protected function registerRequiredProviders()
+    {
+        $this->app->register(SluggableServiceProvider::class);
+        $this->app->register(BrowserDetectService::class);
+
+        $this->app->alias('BrowserDetect', 'hisorange\BrowserDetect\Provider\Parser');
+    }
+
 }

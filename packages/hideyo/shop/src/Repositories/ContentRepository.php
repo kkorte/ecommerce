@@ -1,14 +1,14 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Shop\Repositories;
  
-use App\Content;
-use App\ContentImage;
-use App\ContentGroup;
+use Hideyo\Shop\Models\Content;
+use Hideyo\Shop\Models\ContentImage;
+use Hideyo\Shop\Models\ContentGroup;
 use Image;
 use File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Shop\Repositories\ShopRepositoryInterface;
  
 class ContentRepository implements ContentRepositoryInterface
 {
