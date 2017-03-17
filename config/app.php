@@ -168,7 +168,7 @@ return [
          * Package Service Providers...
          */       
 
-        Hideyo\Shop\ShopServiceProvider::class,
+        Hideyo\Backend\BackendServiceProvider::class,
 
         //
 

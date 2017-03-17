@@ -1,1 +1,0 @@
-news.ajax.blade.php

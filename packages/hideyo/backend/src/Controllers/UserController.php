@@ -1,0 +1,208 @@
+<?php namespace App\Http\Controllers\Admin;
+
+/**
+ * ProductWeightTypeController
+ *
+ * This is the controller of the product weight types of the shop
+ * @author Matthijs Neijenhuijs <matthijs@Dutchbridge.nl>
+ * @version 1.0
+ */
+
+use App\Http\Controllers\Controller;
+
+use Dutchbridge\Validators\UserValidator;
+use Dutchbridge\Datatable\UserNumberDatatable;
+use Dutchbridge\Repositories\UserRepositoryInterface;
+use Dutchbridge\Repositories\LanguageRepositoryInterface;
+use Dutchbridge\Repositories\RoleRepositoryInterface;
+use Dutchbridge\Repositories\UserLogRepositoryInterface;
+use Dutchbridge\Repositories\ShopRepositoryInterface;
+use Auth;
+use Notification;
+use Redirect;
+
+
+use \Request;
+
+class UserController extends Controller
+{
+    public function __construct(
+        UserRepositoryInterface $user,
+        LanguageRepositoryInterface $language,
+        RoleRepositoryInterface $role,
+        ShopRepositoryInterface $shop
+    ) {
+        $this->user         = $user;
+        $this->language     = $language;
+        $this->role         = $role;
+        $this->shop         = $shop;
+    }
+
+    public function index()
+    {
+
+        if (Request::wantsJson()) {
+
+            $query = $this->user->getModel()->select(
+                [
+                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                'id',
+                'email', 'username']
+            );
+            
+            $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
+                $delete = \Form::deleteajax('/admin/user/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="/admin/user/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+            
+                return $link;
+            });
+
+            return $datatables->make(true);
+
+        } else {
+            return view('admin.user.index')->with('users', $this->user->selectAll());
+        }
+    }
+
+    public function show($id)
+    {
+        $user = $this->user->find($id);
+        $userProfileData = $user->getUserProfileData()->get();
+        return view('admin.user.show')->with(array('user' => $user, 'user_profile_data' => $userProfileData));
+    }
+
+    public function create()
+    {
+        $roles = $this->role->getModel()->lists('name', 'id');
+        $languages = $this->language->getModel()->lists('language', 'id');
+        $shops = $this->shop->selectAll()->lists('title', 'id');
+        return view('admin.user.create', array('roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+    }
+
+    public function selectNumber($id)
+    {
+        $numbers = $this->number->selectNewNumbers();
+
+        return view('admin.user.select_number', array('numbers' => $numbers, 'user' => $this->user->find($id)));
+    }
+
+    public function storeNumber($user_id)
+    {
+        $result  = $this->userNumber->create(Request::all(), $user_id);
+ 
+        if ($result->user_id) {
+            return Redirect::route('admin.user.numbers', $user_id);
+        } else {
+            Notification::error('field are required');
+        }
+
+        return Redirect::back()->withInput()->withErrors($result->errors);
+    }
+
+    public function store()
+    {
+        $result  = $this->user->signup(Request::all());
+ 
+
+        if (isset($result->id)) {
+            Notification::success('The user was inserted.');
+            return Redirect::route('admin.user.index');
+        }
+        
+        foreach ($result->errors()->all() as $error) {
+            \Notification::error($error);
+        }
+        
+        return \Redirect::back()->withInput();
+    }
+
+    public function edit($id)
+    {
+        $roles = $this->role->getModel()->lists('name', 'id');
+        $languages = $this->language->getModel()->lists('language', 'id');
+        $shops = $this->shop->selectAll()->lists('title', 'id');
+        return view('admin.user.edit')->with(array('user' => $this->user->find($id), 'roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+    }
+
+    public function editProfile()
+    {
+        if (Auth::user()) {
+            $id = Auth::id();
+        }
+
+        $shops = $this->shop->selectAll()->lists('title', 'id');
+        $languages = $this->language->getModel()->lists('language', 'id');
+        return view('admin.user.profile')->with(array('user' => User::find($id), 'languages' => $languages, 'shops' => $shops));
+    }
+
+    public function changeShopProfile($shopId)
+    {
+        if (Auth::guard('admin')->user()) {
+            $id = Auth::guard('admin')->id();
+        }
+
+        $shop = $this->shop->find($shopId);
+
+        $result  = $this->user->updateShopProfileById($shop, $id);
+        Notification::success('The shop changed.');
+        return Redirect::to('/admin');
+    }
+
+    public function updateProfile()
+    {
+        if (Auth::user()) {
+            $id = Auth::id();
+        }
+
+        $result  = $this->user->updateProfileById(Request::all(), Request::file('avatar'), $id);
+
+        if ($result->errors) {
+            return Redirect::back()->withInput()->withErrors($result->errors);
+        } else {
+            //$this->userLog->create('info', 'My Profile '.$result->email.' updated', $result->id);
+            Notification::success('The user was updated.');
+            return Redirect::route('edit.profile');
+        }
+    }
+
+    public function updateLanguage()
+    {
+        $rules = [
+        'language' => 'in:en,fr' //list of supported languages of your application.
+        ];
+
+        $language = Request::get('lang'); //lang is name of form select field.
+
+        $validator = Validator::make(compact($language), $rules);
+
+        if ($validator->passes()) {
+            Session::put('language', $language);
+            App::setLocale($language);
+        } else {
+/**/
+        }
+    }
+
+    public function update($id)
+    {
+        $result  = $this->user->updateById(Request::all(), Request::file('avatar'), $id);
+    
+        if ($result->errors) {
+            return Redirect::back()->withInput()->withErrors($result->errors);
+        } else {
+            // $this->userLog->create('info', 'Profile '.$result->email.' updated', $result->id);
+            Notification::success('The user was updated.');
+            return Redirect::route('admin.user.edit', $result->id);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $result  = $this->user->destroy($id);
+
+        if ($result) {
+            Notification::success('The user was deleted.');
+            return Redirect::route('admin.user.index');
+        }
+    }
+}
