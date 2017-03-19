@@ -20,7 +20,7 @@ class AuthenticateAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard('admin')->guest()) {
+        if (Auth::guard('hideyobackend')->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
@@ -28,7 +28,7 @@ class AuthenticateAdmin
             }
         }
 
-        if (Auth::guard('admin')->check()) {
+        if (Auth::guard('hideyobackend')->check()) {
             View::share('this_user', Auth::guard('admin')->user());
             
             View::share('available_shops', Shop::all());

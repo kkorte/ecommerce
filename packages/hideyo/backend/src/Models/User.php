@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
 
+
+
+
     /**
      * The database table used by the model.
      *
@@ -29,6 +32,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+
+    public function __construct(array $attributes = array())
+    {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
+        parent::__construct($attributes);
+    }
+    
 
 
     /**

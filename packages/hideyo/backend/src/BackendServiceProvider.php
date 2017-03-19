@@ -18,6 +18,19 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
+
+        $router->middleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
+    
+        $router->middlewareGroup('hideyobackend', array(
+                \App\Http\Middleware\EncryptCookies::class,
+                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                \Illuminate\Session\Middleware\StartSession::class,
+                \Krucas\Notification\Middleware\NotificationMiddleware::class,
+                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                \App\Http\Middleware\VerifyCsrfToken::class
+            )
+        );
+
         $this->publishes([
             __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
             __DIR__.'/Resources/views' => resource_path('views/vendor/hideyo'),
@@ -27,7 +40,7 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         
-        $router->middleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
+
     }
 
     /**
@@ -280,9 +293,7 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->register(SluggableServiceProvider::class);
         $this->app->register(BrowserDetectService::class);
         $this->app->register(HtmlServiceProvider::class);
-$this->app->register(NotificationServiceProvider::class);
-
-
+        $this->app->register(NotificationServiceProvider::class);
 
         if (class_exists('Illuminate\Foundation\AliasLoader')) {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();

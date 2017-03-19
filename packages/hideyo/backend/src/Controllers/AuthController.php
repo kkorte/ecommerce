@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     protected $auth;
 
-    protected $guard = 'admin';
+    protected $guard = 'hideyobackend';
 
     /**
      * Show the application login form.
@@ -35,7 +35,7 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('hideyobackend')->logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
@@ -54,13 +54,13 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
+        if (Auth::guard('hideyobackend')->attempt($credentials)) {
             return redirect()->intended('/');
         }
 
         Notification::error('inloggegevens zijn fout');
      
-        return redirect('/admin/security/login')
+        return redirect('/hideyo/admin/security/login')
                     ->withInput($request->only('email', 'remember'));
     }
 }
