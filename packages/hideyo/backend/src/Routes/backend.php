@@ -8,7 +8,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 });
 
 
-Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['auth.admin']], function () {
+Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['auth.hideyo.backend']], function () {
   
     Route::resource('/', 'DashboardController');
     Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));

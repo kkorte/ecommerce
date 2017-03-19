@@ -25,7 +25,7 @@ class AuthController extends Controller
      */
     public function getLogin()
     {
-        return view('admin.auth.login');
+        return view('hideyo_backend::auth.login');
     }
     
     /**

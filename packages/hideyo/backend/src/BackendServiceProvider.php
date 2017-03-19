@@ -5,6 +5,8 @@ namespace Hideyo\Backend;
 use Illuminate\Support\ServiceProvider;
 use Cviebrock\EloquentSluggable\SluggableServiceProvider;
 use hisorange\BrowserDetect\Provider\BrowserDetectService;
+use Collective\Html\HtmlServiceProvider;
+use Krucas\Notification\NotificationServiceProvider;
 
 
 class BackendServiceProvider extends ServiceProvider
@@ -14,19 +16,18 @@ class BackendServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(\Illuminate\Routing\Router $router)
     {
         $this->publishes([
             __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
             __DIR__.'/Resources/views' => resource_path('views/vendor/hideyo'),
         ]);
-        
-        $this->loadViewsFrom(__DIR__.'/Resources/views/', 'hideyo');
+
+        $this->loadViewsFrom(__DIR__.'/Resources/views/', 'hideyo_backend');
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         
-        $this->registerMiddleware('Hideyo\Backend\Middleware\AuthenticateAdmin');
-
+        $router->middleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
     }
 
     /**
@@ -271,19 +272,6 @@ class BackendServiceProvider extends ServiceProvider
 
     }
 
-
-    /**
-     * Register the Middlewares
-     *
-     * @param  string $middleware
-     */
-    protected function registerMiddleware($middleware)
-    {
-        $kernel = $this->app['Illuminate\Contracts\Http\Kernel'];
-        $kernel->pushMiddleware($middleware);
-    }
-
-
     /**
      * Register 3rd party providers.
      */
@@ -291,8 +279,22 @@ class BackendServiceProvider extends ServiceProvider
     {
         $this->app->register(SluggableServiceProvider::class);
         $this->app->register(BrowserDetectService::class);
+        $this->app->register(HtmlServiceProvider::class);
+$this->app->register(NotificationServiceProvider::class);
 
-        $this->app->alias('BrowserDetect', 'hisorange\BrowserDetect\Provider\Parser');
+
+
+        if (class_exists('Illuminate\Foundation\AliasLoader')) {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('Form', \Collective\Html\FormFacade::class);
+            $loader->alias('Html', \Collective\Html\HtmlFacade::class);
+            $loader->alias('Notification', \Krucas\Notification\Facades\Notification::class);
+        }
+
+  
+
+
+
     }
 
 }
