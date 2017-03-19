@@ -55,7 +55,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('hideyobackend')->attempt($credentials)) {
-            return redirect()->intended('/');
+            return redirect()->intended('/hideyo/admin');
         }
 
         Notification::error('inloggegevens zijn fout');

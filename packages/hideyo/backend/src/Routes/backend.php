@@ -1,14 +1,9 @@
 <?php
 
 
-Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers'], function () {
-    Route::get('/security/login', 'AuthController@getLogin');
-    Route::post('/security/login', 'AuthController@postLogin');
-    Route::get('/security/logout', 'AuthController@getLogout');
-});
 
 
-Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['auth.hideyo.backend']], function () {
+Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web','auth.hideyo.backend']], function () {
   
     Route::resource('/', 'DashboardController');
     Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));
@@ -248,5 +243,13 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::post('profile', array('as' => 'update.profile', 'uses' => 'UserController@updateProfile'));
     Route::post('profile_language', array('as' => 'update.language', 'uses' => 'UserController@updateLanguage'));
 });
+
+
+Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web']], function () {
+    Route::get('/security/login', 'AuthController@getLogin');
+    Route::post('/security/login', 'AuthController@postLogin');
+    Route::get('/security/logout', 'AuthController@getLogout');
+});
+
 
 

@@ -41,8 +41,8 @@ class OrderRepository implements OrderRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
 
@@ -56,8 +56,8 @@ class OrderRepository implements OrderRepositoryInterface
     public function createByAdmin(array $attributes)
     {
         $attributes['client_id'] = $attributes['client_id'];
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
 
         $client  = $this->client->selectOneById($attributes['client_id']);
 
@@ -281,9 +281,9 @@ class OrderRepository implements OrderRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        if (\Auth::guard('admin')->check()) {
-            $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        if (\Auth::guard('hideyobackend')->check()) {
+            $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         }
 
         return $this->updateEntity($attributes);
@@ -323,7 +323,7 @@ class OrderRepository implements OrderRepositoryInterface
     public function selectAllByShopIdAndStatusId($orderStatusId, $startDate = false, $endDate = false, $shopId = false)
     {
         $query = $this->model
-        ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+        ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
         ->where('order_status_id', '=', $orderStatusId);
 
         if ($startDate) {
@@ -352,7 +352,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
 
@@ -400,11 +400,11 @@ class OrderRepository implements OrderRepositoryInterface
     public function monthlyRevenue($year, $month = false)
     {
   
-        $result = DB::table('order')
+        $result = DB::table(config()->get('hideyo.db_prefix').'order as order')
         ->select(DB::raw('YEAR(order.created_at) as SalesYear, MONTH(order.created_at) as SalesMonth, COUNT(order.id) as total_orders, SUM(order.price_with_tax) as price_with_tax, DATE_FORMAT(order.created_at, "%M") AS dm'))
-        ->leftJoin('order_status', 'order_status.id', '=', 'order.order_status_id')
+        ->leftJoin(config()->get('hideyo.db_prefix').'order_status as order_status', 'order_status.id', '=', 'order.order_status_id')
         ->where(DB::raw('YEAR(order.created_at)'), $year)
-        ->where('order.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+        ->where('order.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         if ($month) {
             $result->where(DB::raw('MONTH(order.created_at)'), $month);
@@ -424,10 +424,10 @@ class OrderRepository implements OrderRepositoryInterface
     public function yearsRevenue()
     {
   
-        $result = DB::table('order')
+        $result = DB::table(config()->get('hideyo.db_prefix').'order as order')
         ->select(DB::raw('YEAR(order.created_at) as SalesYear, SUM(order.price_with_tax) as price_with_tax, DATE_FORMAT(order.created_at, "%Y") AS year'))
-        ->leftJoin('order_status', 'order_status.id', '=', 'order.order_status_id')
-        ->where('order.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+        ->leftJoin(config()->get('hideyo.db_prefix').'order_status as order_status', 'order_status.id', '=', 'order.order_status_id')
+        ->where('order.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
  
 
@@ -448,11 +448,11 @@ class OrderRepository implements OrderRepositoryInterface
     public function browserDetectOrdersInformation($year, $month = false)
     {
 
-        $result = DB::table('order')
+        $result = DB::table(config()->get('hideyo.db_prefix').'order as order')
         ->select(DB::raw('MONTH(order.created_at) as SalesMonth, SUM(order.browser_detect LIKE \'%"isMobile";b:1;%\') AS mobile, SUM(order.browser_detect LIKE \'%"isTablet";b:1;%\') AS tablet,  SUM(order.browser_detect LIKE \'%"isDesktop";b:1;%\') AS desktop, DATE_FORMAT(order.created_at, "%M") AS dm'))
-        ->leftJoin('order_status', 'order_status.id', '=', 'order.order_status_id')
+        ->leftJoin(config()->get('hideyo.db_prefix').'order_status as order_status', 'order_status.id', '=', 'order.order_status_id')
         ->where(DB::raw('YEAR(order.created_at)'), $year)
-        ->where('order.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+        ->where('order.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         if ($month) {
             $result->where(DB::raw('MONTH(order.created_at)'), $month);
@@ -478,13 +478,13 @@ class OrderRepository implements OrderRepositoryInterface
     public function paymentMethodOrdersInformation($year, $month = false)
     {
 
-        $result = DB::table('order')
+        $result = DB::table(config()->get('hideyo.db_prefix').'order as order')
         ->select(DB::raw('DATE_FORMAT(order.created_at, "%Y") AS dm,   order_payment_method.title as paymenttitle, COUNT(*) as count'))
-        ->leftJoin('order_status', 'order_status.id', '=', 'order.order_status_id')
+        ->leftJoin(config()->get('hideyo.db_prefix').'order_status as order_status', 'order_status.id', '=', 'order.order_status_id')
         ->leftJoin('order_payment_method', 'order_payment_method.order_id', '=', 'order.id')
 
         ->where(DB::raw('YEAR(order.created_at)'), $year)
-        ->where('order.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+        ->where('order.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         if ($month) {
             $result->where(DB::raw('MONTH(order.created_at)'), $month);
@@ -511,7 +511,7 @@ class OrderRepository implements OrderRepositoryInterface
     {
         return $this->model->
         select(DB::raw('DISTINCT YEAR(created_at) as year'))
-        ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+        ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
         
         ->get();
     }

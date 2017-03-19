@@ -6,7 +6,7 @@ namespace Hideyo\Backend\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use View;
-use App\Shop as Shop;
+use Hideyo\Backend\Models\Shop as Shop;
 
 class AuthenticateAdmin
 {
