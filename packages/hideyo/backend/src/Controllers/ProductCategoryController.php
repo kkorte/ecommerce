@@ -11,8 +11,8 @@
 use App\Http\Controllers\Controller;
 
 use Dutchbridge\Datatable\ProductCategoryDatatable;
-use Dutchbridge\Repositories\ProductCategoryRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;

@@ -75,6 +75,32 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     ]]);
 
 
+    Route::resource('order-status', 'OrderStatusController', ['names' => [
+        'index'     => 'hideyo.order-status.index',
+        'create'    => 'hideyo.order-status.create',
+        'store'     => 'hideyo.order-status.store',
+        'edit'      => 'hideyo.order-status.edit',
+        'update'    => 'hideyo.order-status.update',
+        'destroy'   => 'hideyo.order-status.destroy'
+    ]]);
+
+    Route::get('order-status-email-template/show-template/{id}', array('as' => 'order.status.email.template.ajax.show', 'uses' => 'OrderStatusEmailTemplateController@showAjaxTemplate'));
+
+
+    Route::resource('order-status-email-template', 'OrderStatusEmailTemplateController', ['names' => [
+        'index'     => 'hideyo.order-status-email-template.index',
+        'create'    => 'hideyo.order-status-email-template.create',
+        'store'     => 'hideyo.order-status-email-template.store',
+        'edit'      => 'hideyo.order-status-email-template.edit',
+        'update'    => 'hideyo.order-status-email-template.update',
+        'destroy'   => 'hideyo.order-status-email-template.destroy'
+    ]]);
+
+
+
+
+
+
 
 
     Route::resource('/redirect', 'RedirectController');
@@ -164,9 +190,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('order/{orderId}/download', 'OrderController@download');
     Route::resource('order/{orderId}/download-label', 'OrderController@downloadLabel');
 
-    Route::resource('order-status', 'OrderStatusController');
-    Route::resource('order-status-email-template', 'OrderStatusEmailTemplateController');
-    Route::get('order-status-email-template/show-template/{id}', array('as' => 'order.status.email.template.ajax.show', 'uses' => 'OrderStatusEmailTemplateController@showAjaxTemplate'));
 
 
 

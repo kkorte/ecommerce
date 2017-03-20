@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\BrandRepositoryInterface;
+use Hideyo\Backend\Repositories\BrandRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;

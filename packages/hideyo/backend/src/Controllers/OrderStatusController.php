@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * OrderStatusController
@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\OrderStatusRepositoryInterface;
-use Dutchbridge\Repositories\OrderStatusEmailTemplateRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderStatusRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderStatusEmailTemplateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -37,7 +37,7 @@ class OrderStatusController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id', 'color',
                 'title']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
 
@@ -61,13 +61,13 @@ class OrderStatusController extends Controller
 
 
         } else {
-            return view('admin.order-status.index')->with('content', $this->orderStatus->selectAll());
+            return view('hideyo_backend::order-status.index')->with('content', $this->orderStatus->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.order-status.create')->with(array('templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('admin')->user()->selected_shop_id)->lists('title', 'id')));
+        return view('hideyo_backend::order-status.create')->with(array('templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('hideyobackend')->user()->selected_shop_id)->pluck('title', 'id')));
     }
 
     public function store()
@@ -76,7 +76,7 @@ class OrderStatusController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The order status was inserted.');
-            return redirect()->route('admin.order-status.index');
+            return redirect()->route('hideyo.order-status.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -91,18 +91,18 @@ class OrderStatusController extends Controller
 
         $populatedData = array();
            
-        return view('admin.order-status.edit')->with(
+        return view('hideyo_backend::order-status.edit')->with(
             array(
             'orderStatus' => $orderStatus,
             'populatedData' => $populatedData,
-            'templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('admin')->user()->selected_shop_id)->lists('title', 'id')
+            'templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('hideyobackend')->user()->selected_shop_id)->lists('title', 'id')
             )
         );
     }
 
     public function editSeo($id)
     {
-        return view('admin.order-status.edit_seo')->with(array('content' => $this->orderStatus->find($id)));
+        return view('hideyo_backend::order-status.edit_seo')->with(array('content' => $this->orderStatus->find($id)));
     }
 
     public function update($orderStatusId)
@@ -111,7 +111,7 @@ class OrderStatusController extends Controller
 
         if (isset($result->id)) {
             Notification::success('order status was updated.');
-            return redirect()->route('admin.order-status.index');
+            return redirect()->route('hideyo.order-status.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -127,7 +127,7 @@ class OrderStatusController extends Controller
 
         if ($result) {
             Notification::success('The order status was deleted.');
-            return redirect()->route('admin.order-status.index');
+            return redirect()->route('hideyo.order-status.index');
         }
     }
 }

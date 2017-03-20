@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\OrderStatusEmailTemplate;
+use Hideyo\Backend\Models\OrderStatusEmailTemplate;
 
 class OrderStatusEmailTemplateRepository implements OrderStatusEmailTemplateRepositoryInterface
 {

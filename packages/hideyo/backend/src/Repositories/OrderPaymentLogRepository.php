@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\OrderPaymentLog;
+use Hideyo\Backend\Models\OrderPaymentLog;
  
 class OrderPaymentLogRepository implements OrderPaymentLogRepositoryInterface
 {

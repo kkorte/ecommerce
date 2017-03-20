@@ -1,9 +1,9 @@
 <?php
 namespace Hideyo\Repositories;
  
-use App\News;
-use App\NewsImage;
-use App\NewsGroup;
+use Hideyo\Backend\Models\News;
+use Hideyo\Backend\Models\NewsImage;
+use Hideyo\Backend\Models\NewsGroup;
 use Carbon\Carbon;
 use Image;
 use File;

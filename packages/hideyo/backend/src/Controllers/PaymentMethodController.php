@@ -8,9 +8,9 @@
  * @version 1.0
  */
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\OrderStatusRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderStatusRepositoryInterface;
 
 
 use Illuminate\Http\Request;

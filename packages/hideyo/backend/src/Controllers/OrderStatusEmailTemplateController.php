@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * OrderStatusEmailTemplateController
@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\OrderStatusEmailTemplateRepositoryInterface;
-use Dutchbridge\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderStatusEmailTemplateRepositoryInterface;
+use Hideyo\Backend\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -35,7 +35,7 @@ class OrderStatusEmailTemplateController extends Controller
                 [
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id', 'title', 'subject']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
@@ -49,13 +49,13 @@ class OrderStatusEmailTemplateController extends Controller
 
 
         } else {
-            return view('admin.order-status-email-template.index')->with(array('orderHtmlTemplate' =>  $this->orderHtmlTemplate->selectAll()));
+            return view('hideyo_backend::order-status-email-template.index')->with(array('orderHtmlTemplate' =>  $this->orderHtmlTemplate->selectAll()));
         }
     }
 
     public function create()
     {
-        return view('admin.order-status-email-template.create')->with(array());
+        return view('hideyo_backend::order-status-email-template.create')->with(array());
     }
 
     public function store()
@@ -76,7 +76,7 @@ class OrderStatusEmailTemplateController extends Controller
 
     public function edit($id)
     {
-        return view('admin.order-status-email-template.edit')->with(array('orderHtmlTemplate' => $this->orderHtmlTemplate->find($id)));
+        return view('hideyo_backend::order-status-email-template.edit')->with(array('orderHtmlTemplate' => $this->orderHtmlTemplate->find($id)));
     }
 
     public function showAjaxTemplate($id)

@@ -11,11 +11,11 @@
 use App\Http\Controllers\Controller;
 
 use Dutchbridge\Datatable\ProductAmountOptionDatatable;
-use Dutchbridge\Repositories\ProductAmountOptionRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
-use Dutchbridge\Repositories\ExtraFieldRepositoryInterface;
-use Dutchbridge\Repositories\AttributeGroupRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductAmountOptionRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Backend\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
 
 use \Request;
 use \Notification;

@@ -38,8 +38,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="{{ URL::route('hideyo.order.index') }}">Overview</a></li>
 		
-						<li><a href="/admin/order-status">Statuses</a></li>
-						<li><a href="/admin/order-status-email-template">Status email templates</a></li>
+						<li><a href="{{ URL::route('hideyo.order-status.index') }}">Statuses</a></li>
+						<li><a href="{{ URL::route('hideyo.order-status-email-template.index') }}">Status email templates</a></li>
 					</ul>
 				</li>                        
 		

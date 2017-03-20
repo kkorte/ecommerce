@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Backend\Repositories\AttributeGroupRepositoryInterface;
 use Request;
 use Notification;
 use Redirect;

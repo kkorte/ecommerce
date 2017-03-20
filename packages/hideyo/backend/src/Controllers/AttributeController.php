@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\AttributeRepositoryInterface;
-use Dutchbridge\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Backend\Repositories\AttributeRepositoryInterface;
+use Hideyo\Backend\Repositories\AttributeGroupRepositoryInterface;
 
 use \Request;
 use \Notification;

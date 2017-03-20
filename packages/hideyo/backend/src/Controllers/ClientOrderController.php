@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
  * @version 1.0
  */
 
-use Dutchbridge\Repositories\ClientAddressRepositoryInterface;
-use Dutchbridge\Repositories\ClientRepositoryInterface;
-use Dutchbridge\Repositories\OrderRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientAddressRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderRepositoryInterface;
 
 use Illuminate\Http\Request;
 
