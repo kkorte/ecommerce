@@ -29,7 +29,7 @@ class AuthenticateAdmin
         }
 
         if (Auth::guard('hideyobackend')->check()) {
-            View::share('this_user', Auth::guard('admin')->user());
+            View::share('this_user', Auth::guard('hideyobackend')->user());
             
             View::share('available_shops', Shop::all());
         }
