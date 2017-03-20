@@ -62,9 +62,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::post('order/print/download', array('as' => 'hideyo.order.download.print', 'uses' => 'OrderController@postDownloadPrint'));
   
  
-
-
-
     Route::resource('order', 'OrderController', ['names' => [
         'index'     => 'hideyo.order.index',
         'create'    => 'hideyo.order.create',
@@ -98,39 +95,68 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
 
 
-
-
-
-
-
     Route::resource('/redirect', 'RedirectController');
 
 
+    Route::resource('tax-rate', 'TaxRateController', ['names' => [
+        'index'     => 'hideyo.tax-rate.index',
+        'create'    => 'hideyo.tax-rate.create',
+        'store'     => 'hideyo.tax-rate.store',
+        'edit'      => 'hideyo.tax-rate.edit',
+        'update'    => 'hideyo.tax-rate.update',
+        'destroy'   => 'hideyo.tax-rate.destroy'
+    ]]);
+
+
+
+    Route::resource('general-setting', 'GeneralSettingController', ['names' => [
+        'index'     => 'hideyo.general-setting.index',
+        'create'    => 'hideyo.general-setting.create',
+        'store'     => 'hideyo.general-setting.store',
+        'edit'      => 'hideyo.general-setting.edit',
+        'update'    => 'hideyo.general-setting.update',
+        'destroy'   => 'hideyo.general-setting.destroy'
+    ]]);
 
 
 
 
-    // Route::resource('/content', 'ContentController');
+    Route::resource('sending-method', 'SendingMethodController', ['names' => [
+        'index'     => 'hideyo.sending-method.index',
+        'create'    => 'hideyo.sending-method.create',
+        'store'     => 'hideyo.sending-method.store',
+        'edit'      => 'hideyo.sending-method.edit',
+        'update'    => 'hideyo.sending-method.update',
+        'destroy'   => 'hideyo.sending-method.destroy'
+    ]]);
+    
+    Route::resource('payment-method', 'PaymentMethodController', ['names' => [
+        'index'     => 'hideyo.payment-method.index',
+        'create'    => 'hideyo.payment-method.create',
+        'store'     => 'hideyo.payment-method.store',
+        'edit'      => 'hideyo.payment-method.edit',
+        'update'    => 'hideyo.payment-method.update',
+        'destroy'   => 'hideyo.payment-method.destroy'
+    ]]);
 
- //Route::resource('inventory', 'InventoryController');
-    Route::resource('tax-rate', 'TaxRateController');
-    Route::resource('general-setting', 'GeneralSettingController');
+
+    Route::resource('sending-payment-method-related', 'SendingPaymentMethodRelatedController', ['names' => [
+        'index'     => 'hideyo.sending-payment-method-related.index',
+        'create'    => 'hideyo.sending-payment-method-related.create',
+        'store'     => 'hideyo.sending-payment-method-related.store',
+        'edit'      => 'hideyo.sending-payment-method-related.edit',
+        'update'    => 'hideyo.sending-payment-method-related.update',
+        'destroy'   => 'hideyo.sending-payment-method-related.destroy'
+    ]]);
+
+    
+
+
+
+
     Route::resource('error', 'ErrorController');
-    Route::resource('sending-method', 'SendingMethodController');
-    Route::resource('payment-method', 'PaymentMethodController');
-    Route::resource('sending-payment-method-related', 'SendingPaymentMethodRelatedController');
-
-    Route::resource('recipe/{recipeId}/images', 'RecipeImageController');
- 
-    Route::get('recipe/edit/{recipeId}/seo', array('as' => 'admin.recipe.edit_seo', 'uses' => 'RecipeController@editSeo'));
-
-    Route::get('recipe/refactor-images', array('as' => 'recipe.refactor.images', 'uses' => 'RecipeController@refactorAllImages'));
- 
-    Route::get('recipe/re-directory-images', array('as' => 'recipe.re.directory.images', 'uses' => 'RecipeController@reDirectoryAllImages'));
- 
 
 
-    Route::resource('recipe', 'RecipeController');
  
 
     Route::resource('content/{contentId}/images', 'ContentImageController');

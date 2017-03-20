@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * PaymentMethodController
@@ -36,7 +36,7 @@ class PaymentMethodController extends Controller
 
             $query = $this->paymentMethod->getModel()->select(
                 [\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'title', 'order_confirmed_order_status_id', 'payment_completed_order_status_id', 'payment_failed_order_status_id']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->with(array('orderConfirmedOrderStatus', 'orderPaymentCompletedOrderStatus', 'orderPaymentFailedOrderStatus'));
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->with(array('orderConfirmedOrderStatus', 'orderPaymentCompletedOrderStatus', 'orderPaymentFailedOrderStatus'));
             
             $datatables = \Datatables::of($query)
 
@@ -64,13 +64,13 @@ class PaymentMethodController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.payment_method.index')->with('paymentMethod', $this->paymentMethod->selectAll());
+            return view('hideyo_backend::payment_method.index')->with('paymentMethod', $this->paymentMethod->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.payment_method.create')->with(
+        return view('hideyo_backend::payment_method.create')->with(
             array(
                 'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
                 'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')                
@@ -96,7 +96,7 @@ class PaymentMethodController extends Controller
 
     public function edit($id)
     {
-        return view('admin.payment_method.edit')->with(
+        return view('hideyo_backend::payment_method.edit')->with(
             array(
                 'paymentMethod' => $this->paymentMethod->find($id),
                 'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),

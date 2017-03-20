@@ -66,12 +66,11 @@
 					</ul>
 				</li>
 
-				<li><a href="/admin/box">Box</a></li>
+
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/admin/recipe">Recipes</a></li>
-						<li><a href="/admin/news">News</a></li>
+								<li><a href="/admin/news">News</a></li>
 						<li><a href="/admin/news-group">News group</a></li>
 						<li><a href="/admin/content">Static content</a></li>
 						<li><a href="/admin/content-group">Static content groups</a></li>
@@ -84,12 +83,12 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin settings <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/admin/tax-rate">Tax rates</a></li>
-						<li><a href="/admin/sending-method">Sending methods</a></li>
-						<li><a href="/admin/payment-method">Payment methods</a></li>
+						<li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Tax rates</a></li>
+						<li><a href="{{ URL::route('hideyo.sending-method.index') }}">Sending methods</a></li>
+						<li><a href="{{ URL::route('hideyo.payment-method.index') }}">Payment methods</a></li>
 						<li><a href="/admin/user">Users</a></li>
-						<li><a href="/admin/sending-payment-method-related">Order templates</a></li>
-						<li><a href="/admin/general-setting">General settings</a></li>
+						<li><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Order templates</a></li>
+						<li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>
 						<li><a href="/admin/error">Errors</a></li>
 						<li><a href="/admin/redirect">Redirects</a></li>
 					</ul>

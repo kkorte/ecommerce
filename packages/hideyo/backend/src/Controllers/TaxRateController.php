@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -25,7 +25,7 @@ class TaxRateController extends Controller
                 'id',
                 'rate',
                 'title']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
                 $delete = \Form::deleteajax('/admin/tax-rate/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
@@ -37,13 +37,13 @@ class TaxRateController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.tax_rate.index')->with('taxRate', $this->taxRate->selectAll());
+            return view('hideyo_backend::tax_rate.index')->with('taxRate', $this->taxRate->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.tax_rate.create')->with(array());
+        return view('hideyo_backend::tax_rate.create')->with(array());
     }
 
     public function store()
@@ -63,7 +63,7 @@ class TaxRateController extends Controller
 
     public function edit($id)
     {
-        return view('admin.tax_rate.edit')->with(array('taxRate' => $this->taxRate->find($id)));
+        return view('hideyo_backend::tax_rate.edit')->with(array('taxRate' => $this->taxRate->find($id)));
     }
 
     public function update($id)

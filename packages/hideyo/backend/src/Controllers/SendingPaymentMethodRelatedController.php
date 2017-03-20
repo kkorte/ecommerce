@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * CouponController
@@ -8,9 +8,9 @@
  * @version 1.0
  */
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
 use DB;
 use Request;
 

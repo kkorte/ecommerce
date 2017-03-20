@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * CouponController
@@ -9,9 +9,9 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\SendingMethodRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\SendingMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -35,7 +35,7 @@ class SendingMethodController extends Controller
         if ($this->request->wantsJson()) {
             $query = $this->sendingMethod->getModel()
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','title'])
-            ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
                 $delete = \Form::deleteajax('/admin/sending-method/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
@@ -46,13 +46,13 @@ class SendingMethodController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.sending_method.index')->with('sendingMethod', $this->sendingMethod->selectAll());
+            return view('hideyo_backend::sending_method.index')->with('sendingMethod', $this->sendingMethod->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.sending_method.create')->with(array(
+        return view('hideyo_backend::sending_method.create')->with(array(
             'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
             'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id')
         ));
@@ -76,7 +76,7 @@ class SendingMethodController extends Controller
 
     public function edit($id)
     {    
-        return view('admin.sending_method.edit')->with(array(
+        return view('hideyo_backend::sending_method.edit')->with(array(
             'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
             'sendingMethod' => $this->sendingMethod->find($id),
             'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id'),
