@@ -31,18 +31,12 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="{{ URL::route('hideyo.shop.index') }}">Shops</a></li>
-				<li><a href="/admin/client">Clients</a></li>     
-<!-- 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventory <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="/admin/inventory">Overview</a></li>
-					</ul>
-				</li>   -->
+				<li><a href="{{ URL::route('hideyo.client.index') }}">Clients</a></li>     
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Orders <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/admin/order">Overview</a></li>
+						<li><a href="{{ URL::route('hideyo.order.index') }}">Overview</a></li>
 		
 						<li><a href="/admin/order-status">Statuses</a></li>
 						<li><a href="/admin/order-status-email-template">Status email templates</a></li>

@@ -54,7 +54,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
@@ -62,7 +62,7 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         $attributes['password'] = \Hash::make($attributes['password']);
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
         $clientAddress = $this->clientAddress->create($attributes, $this->model->id);
@@ -96,8 +96,8 @@ class ClientRepository implements ClientRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
 
         $validator = \Validator::make($attributes, $this->rules($id));
 
@@ -135,13 +135,13 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     public function selectAllByBillClientAddress()
     {
         return $this->model->selectRaw('CONCAT(client_address.firstname, " ", client_address.lastname) as fullname, client_address.*, client.id')
-        ->leftJoin('client_address', 'client.bill_client_address_id', '=', 'client_address.id')->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+        ->leftJoin('client_address', 'client.bill_client_address_id', '=', 'client_address.id')->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
         ->get();
     }
 
@@ -311,7 +311,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     function selectOneById($id)
     {
-        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $id)->first();
+        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $id)->first();
         return $result;
     }
 
@@ -546,7 +546,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function selectAllExport()
     {
-        return $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->whereNotNull('account_created')->where('active', '=', 1)->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->whereNotNull('account_created')->where('active', '=', 1)->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
 

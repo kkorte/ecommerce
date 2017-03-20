@@ -1,5 +1,5 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
 use App\OrderStatusEmailTemplate;
 

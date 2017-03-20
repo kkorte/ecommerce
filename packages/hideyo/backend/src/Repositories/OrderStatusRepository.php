@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\OrderStatus;
+use Hideyo\Backend\Models\OrderStatus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  

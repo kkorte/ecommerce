@@ -3,29 +3,32 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Carbon\Carbon;
 use Elasticquent\ElasticquentTrait;
 
-class Product extends Model implements SluggableInterface
+class Product extends Model
 {
 
-    use ElasticquentTrait, SluggableTrait;
+    use ElasticquentTrait, Sluggable;
 
     protected $table = 'product';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['active', 'discount_promotion', 'discount_type', 'discount_value', 'discount_start_date', 'discount_end_date', 'title', 'brand_id', 'product_category_id', 'reference_code', 'ean_code', 'mpn_code', 'short_description', 'description', 'ingredients', 'price', 'commercial_price', 'tax_rate_id', 'amount', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id', 'modified_by_user_id', 'weight', 'leading_atrribute_group_id', 'weight_title'];
 
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
 

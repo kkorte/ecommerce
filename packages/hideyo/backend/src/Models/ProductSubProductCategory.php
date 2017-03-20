@@ -1,6 +1,6 @@
 <?php 
 
-namespace Hideyo\Shop\Models;
+namespace Hideyo\Backend\Models;
 
 use LaravelBook\Ardent\Ardent;
 use Illuminate\Database\Eloquent\Model;

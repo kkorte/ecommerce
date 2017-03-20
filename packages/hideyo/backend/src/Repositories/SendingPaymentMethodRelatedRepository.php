@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\SendingPaymentMethodRelated;
+use Hideyo\Backend\Models\SendingPaymentMethodRelated;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  

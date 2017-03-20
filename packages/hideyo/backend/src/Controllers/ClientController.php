@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
+
 
 use App\Http\Controllers\Controller;
 
@@ -11,8 +12,8 @@ use App\Http\Controllers\Controller;
  */
 
 
-use Dutchbridge\Repositories\ClientRepositoryInterface;
-use Dutchbridge\Repositories\ClientAddressRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientAddressRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -30,19 +31,19 @@ class ClientController extends Controller
 
     public function index()
     {
-        $shop  = \Auth::guard('admin')->user()->shop;
+        $shop  = \Auth::guard('hideyobackend')->user()->shop;
 
         if ($shop->wholesale) {
 
             if ($this->request->wantsJson()) {
 
-                $shop  = \Auth::guard('admin')->user()->shop();
+                $shop  = \Auth::guard('hideyobackend')->user()->shop();
                 $clients = $this->client->getModel()->select(
                     [
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'id', 'company', 'bill_client_address_id', 'vat_number', 'debtor_number', 'active', 'confirmed', 'iban_number', 'chamber_of_commerce_number',
                     'email', 'last_login']
-                )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+                )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
                 
                 $datatables = \Datatables::of($clients)
 
@@ -84,19 +85,19 @@ class ClientController extends Controller
 
 
             } else {
-                return view('admin.client.index-wholesale')->with('client', $this->client->selectAll());
+                return view('hideyo_backend::client.index-wholesale')->with('client', $this->client->selectAll());
             }
         } else {
 
 
             if ($this->request->wantsJson()) {
-                $shop  = \Auth::guard('admin')->user()->shop();
+                $shop  = \Auth::guard('hideyobackend')->user()->shop();
                 $clients = $this->client->getModel()->select(
                     [
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'id', 'confirmed', 'active',
                     'email', 'last_login']
-                )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+                )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
                 
                 $datatables = \Datatables::of($clients)
 
@@ -122,26 +123,26 @@ class ClientController extends Controller
 
 
             } else {
-                return view('admin.client.index')->with('client', $this->client->selectAll());
+                return view('hideyo_backend::client.index')->with('client', $this->client->selectAll());
             }
         }
     }
 
     public function create()
     {
-        return view('admin.client.create')->with(array());
+        return view('hideyo_backend::client.create')->with(array());
     }
 
     public function getActivate($id)
     {
 
-        return view('admin.client.activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
+        return view('hideyo_backend::client.activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
     }
 
     public function getDeActivate($id)
     {
 
-        return view('admin.client.de-activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
+        return view('hideyo_backend::client.de-activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
     }
 
 
@@ -152,7 +153,7 @@ class ClientController extends Controller
         $result  = $this->client->activate($id);
 
 
-        $shop  = \Auth::guard('admin')->user()->shop;
+        $shop  = \Auth::guard('hideyobackend')->user()->shop;
 
         if ($shop->wholesale and $result) {
             if ($input['send_mail']) {
@@ -217,12 +218,12 @@ class ClientController extends Controller
             }
         }
 
-        return view('admin.client.edit')->with(array('client' => $this->client->find($id), 'addresses' => $addressesList));
+        return view('hideyo_backend::client.edit')->with(array('client' => $this->client->find($id), 'addresses' => $addressesList));
     }
 
     public function getExport()
     {
-        return view('admin.client.export')->with(array());
+        return view('hideyo_backend::client.export')->with(array());
     }
 
     public function postExport()
@@ -281,7 +282,7 @@ class ClientController extends Controller
         $input = $this->request->all();
         if (isset($result->id)) {
             if ($result->active) {
-                $shop  = \Auth::guard('admin')->user()->shop;
+                $shop  = \Auth::guard('hideyobackend')->user()->shop;
 
                 if ($shop->wholesale and $result) {
                     if ($input['send_mail']) {

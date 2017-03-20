@@ -18,24 +18,69 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('dashboard', 'Hideyo\Shop\Controllers\Backend\DashboardController');
  
     Route::resource('shop', 'ShopController', ['names' => [
-        'index' => 'hideyo.shop.index',
-        'create' => 'hideyo.shop.create',
-        'store' => 'hideyo.shop.store',
-        'edit' => 'hideyo.shop.edit',
-        'update' => 'hideyo.shop.update',
-        'destroy' => 'hideyo.shop.destroy'
+        'index'     => 'hideyo.shop.index',
+        'create'    => 'hideyo.shop.create',
+        'store'     => 'hideyo.shop.store',
+        'edit'      => 'hideyo.shop.edit',
+        'update'    => 'hideyo.shop.update',
+        'destroy'   => 'hideyo.shop.destroy'
     ]]);
 
-  
-    Route::get('redirect/export', array('as' => 'admin.redirect.export', 'uses' => 'RedirectController@getExport'));
+    Route::post('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@postExport'));
+    Route::get('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@getExport'));
+    
+    Route::get('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@getActivate'));    
+    Route::post('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@postActivate'));
+    
+    Route::get('client/{clientId}/de-activate', array('as' => 'admin.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
+    Route::post('client/{clientId}/de-activate', array('as' => 'admin.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
 
+    Route::resource('client/{clientId}/addresses', 'ClientAddressController');
+    Route::resource('client/{clientId}/order', 'ClientOrderController');
+
+    Route::resource('client', 'ClientController', ['names' => [
+        'index'     => 'hideyo.client.index',
+        'create'    => 'hideyo.client.create',
+        'store'     => 'hideyo.client.store',
+        'edit'      => 'hideyo.client.edit',
+        'update'    => 'hideyo.client.update',
+        'destroy'   => 'hideyo.client.destroy'
+    ]]);
+
+ 
+    Route::get('redirect/export', array('as' => 'admin.redirect.export', 'uses' => 'RedirectController@getExport'));
     Route::get('redirect/import', array('as' => 'admin.redirect.import', 'uses' => 'RedirectController@getImport'));
     Route::post('redirect/import', array('as' => 'admin.redirect.import', 'uses' => 'RedirectController@postImport'));
+
+    
+
+    Route::get('order/print/products', array('as' => 'hideyo.order.print.products', 'uses' => 'OrderController@getPrintOrders'));
+    
+    Route::get('order/print', array('as' => 'hideyo.order.print', 'uses' => 'OrderController@getPrint'));
+    Route::post('order/print', array('as' => 'hideyo.order.print', 'uses' => 'OrderController@postPrint'));
+  
+    Route::post('order/print/download', array('as' => 'hideyo.order.download.print', 'uses' => 'OrderController@postDownloadPrint'));
+  
+ 
+
+
+
+    Route::resource('order', 'OrderController', ['names' => [
+        'index'     => 'hideyo.order.index',
+        'create'    => 'hideyo.order.create',
+        'store'     => 'hideyo.order.store',
+        'edit'      => 'hideyo.order.edit',
+        'update'    => 'hideyo.order.update',
+        'destroy'   => 'hideyo.order.destroy'
+    ]]);
 
 
 
 
     Route::resource('/redirect', 'RedirectController');
+
+
+
 
 
 
@@ -109,14 +154,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('coupon', 'CouponController');
     
 
-    Route::get('order/print/products', array('as' => 'admin.order.print.products', 'uses' => 'OrderController@getPrintOrders'));
-    
-    Route::get('order/print', array('as' => 'admin.order.print', 'uses' => 'OrderController@getPrint'));
-    Route::post('order/print', array('as' => 'admin.order.print', 'uses' => 'OrderController@postPrint'));
-  
-      Route::post('order/print/download', array('as' => 'admin.order.download.print', 'uses' => 'OrderController@postDownloadPrint'));
-  
-    Route::resource('order', 'OrderController');
+
     Route::post('order/update-status/{orderId}', array('as' => 'order.update-status', 'uses' => 'OrderController@updateStatus'));
  
     Route::get('order/update-sending-method/{sendingMethodId}', array('as' => 'order.update.sending.method', 'uses' => 'OrderController@updateSendingMethod'));
@@ -153,26 +191,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('invoice', 'InvoiceController');
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
-    Route::post('client/export', array('as' => 'admin.client.export', 'uses' => 'ClientController@postExport'));
-
-    Route::get('client/export', array('as' => 'admin.client.export', 'uses' => 'ClientController@getExport'));
-
-
-    Route::resource('client', 'ClientController');
-
-    Route::get('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@getActivate'));
-    Route::get('client/{clientId}/de-activate', array('as' => 'admin.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
-
-
-
-
-
-    Route::post('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@postActivate'));
-    Route::post('client/{clientId}/de-activate', array('as' => 'admin.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
-
-
-    Route::resource('client/{clientId}/addresses', 'ClientAddressController');
-    Route::resource('client/{clientId}/order', 'ClientOrderController');
 
     Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController');
     Route::resource('attribute-group', 'AttributeGroupController');

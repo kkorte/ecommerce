@@ -1,14 +1,14 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\Product;
-use App\ProductImage;
+use Hideyo\Backend\Models\Product;
+use Hideyo\Backend\Models\ProductImage;
 use Image;
 use File;
 
-use Hideyo\Repositories\ProductImageRepositoryInterface;
-use Hideyo\Repositories\RedirectRepositoryInterface;
-use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductImageRepositoryInterface;
+use Hideyo\Backend\Repositories\RedirectRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface
 {

@@ -1,5 +1,6 @@
-<?php
-namespace Hideyo\Shop\Models;
+<?php 
+
+namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

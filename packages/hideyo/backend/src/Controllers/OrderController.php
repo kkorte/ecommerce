@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductWeightTypeController
@@ -9,14 +9,14 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\OrderRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
-use Dutchbridge\Repositories\SendingMethodRepositoryInterface;
-use Dutchbridge\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
-use Dutchbridge\Repositories\ClientAddressRepositoryInterface;
-use Dutchbridge\Repositories\ClientRepositoryInterface;
-use Dutchbridge\Repositories\OrderStatusRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\SendingMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientAddressRepositoryInterface;
+use Hideyo\Backend\Repositories\ClientRepositoryInterface;
+use Hideyo\Backend\Repositories\OrderStatusRepositoryInterface;
 use Dutchbridge\Services\AssembleOrder;
 
 use Carbon\Carbon;
@@ -56,10 +56,10 @@ class OrderController extends Controller
 
     public function index()
     {
-        $shop  = \Auth::guard('admin')->user()->shop;
+        $shop  = \Auth::guard('hideyobackend')->user()->shop;
         $now = Carbon::now();
 
-        $revenueThisMonth = $this->order->monthlyRevenue($now->year, $now->month);
+        $revenueThisMonth = null;
 
         if ($shop->wholesale) {
             if (Request::wantsJson()) {
@@ -75,11 +75,11 @@ class OrderController extends Controller
                     'order.delivery_order_address_id',
                     'order.bill_order_address_id',
                     'order.price_with_tax']
-                )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+                )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 
 
 
-                ->leftJoin('order_address', 'order.bill_order_address_id', '=', 'order_address.id');
+                ->leftJoin(config()->get('hideyo.db_prefix').'order_address', 'order.bill_order_address_id', '=', 'order_address.id');
                 
                 
                 $datatables = \Datatables::of($order)
@@ -172,14 +172,17 @@ class OrderController extends Controller
 
 
             } else {
-                return view('admin.order.index-wholesale')->with(array('revenueThisMonth' => $revenueThisMonth, 'order' => $this->order->selectAll()));
+                return view('hideyo_backend::order.index-wholesale')->with(array('revenueThisMonth' => $revenueThisMonth, 'order' => $this->order->selectAll()));
             }
         } else {
 
             if (Request::wantsJson()) {
 
-                $order = $this->order->getModel()->select(
+                $order = $this->order->getModel()
+                    ->from(config()->get('hideyo.db_prefix').'order as order')
+                    ->select(
                     [
+
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'order.id',
                     'order.created_at',
@@ -189,11 +192,11 @@ class OrderController extends Controller
                     'order.delivery_order_address_id',
                     'order.bill_order_address_id',
                     'order.price_with_tax']
-                )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+                )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 
 
 
-                ->leftJoin('order_address', 'order.bill_order_address_id', '=', 'order_address.id');
+                ->leftJoin(config()->get('hideyo.db_prefix').'order_address', 'order.bill_order_address_id', '=', config()->get('hideyo.db_prefix').'order_address.id');
                 
                 
                 $datatables = \Datatables::of($order)
@@ -275,7 +278,7 @@ class OrderController extends Controller
 
 
             } else {
-                return view('admin.order.index')->with(array('revenueThisMonth' => $revenueThisMonth, 'order' => $this->order->selectAll()));
+                return view('hideyo_backend::order.index')->with(array('revenueThisMonth' => $revenueThisMonth, 'order' => $this->order->selectAll()));
             }
         }
     }
@@ -290,7 +293,7 @@ class OrderController extends Controller
 
     public function getPrint()
     {
-        return view('admin.order.print')->with(array('orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::order.print')->with(array('orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
     }
     
     public function postDownloadPrint()
@@ -392,7 +395,7 @@ class OrderController extends Controller
     {
         $order = $this->order->find($id);
 
-        return view('admin.order.show')->with(array('order' => $order, 'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::order.show')->with(array('order' => $order, 'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
     }
 
     public function updateStatus($orderId)
@@ -505,7 +508,7 @@ class OrderController extends Controller
             $paymentMethodsList = $summary->paymentMethods();
         }
 
-        return view('admin.order.create')->with(
+        return view('hideyo_backend::order.create')->with(
             array(
                 'orderAssembleSession' => $this->assembleOrder,
                 'products' => $products,
@@ -869,7 +872,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        return view('admin.order.edit')->with(array('order' => $this->order->find($id)));
+        return view('hideyo_backend::order.edit')->with(array('order' => $this->order->find($id)));
     }
 
     public function update($id)

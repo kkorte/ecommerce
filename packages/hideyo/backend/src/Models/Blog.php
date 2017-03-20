@@ -1,6 +1,6 @@
 <?php 
 
-namespace Hideyo\Shop\Models;
+namespace Hideyo\Backend\Models;
 
 namespace App;
 

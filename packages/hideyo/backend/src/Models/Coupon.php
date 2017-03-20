@@ -1,6 +1,6 @@
 <?php 
 
-namespace Hideyo\Shop\Models;
+namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;

@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
 
-use App\Redirect;
+use Hideyo\Backend\Models\Redirect;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use File;
