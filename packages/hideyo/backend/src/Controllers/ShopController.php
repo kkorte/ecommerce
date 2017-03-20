@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * CouponController
@@ -9,9 +9,10 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
+use Datatables;
 
 class ShopController extends Controller
 {
@@ -30,11 +31,11 @@ class ShopController extends Controller
             $query = $this->shop->getModel()
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'title', 'logo_file_name']);
 
-            $datatables = \Datatables::of($query)
+            $datatables = Datatables::of($query)
 
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/shop/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/shop/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.shop.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.shop.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
                 return $link;
             })
 
@@ -46,13 +47,13 @@ class ShopController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.shop.index')->with('shop', $this->shop->selectAll());
+            return view('hideyo_backend::shop.index')->with('shop', $this->shop->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.shop.create');
+        return view('hideyo_backend::shop.create');
     }
 
     public function store()
@@ -61,7 +62,7 @@ class ShopController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The shop was inserted.');
-            return redirect()->route('admin.shop.index');
+            return redirect()->route('hideyo.shop.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -73,7 +74,7 @@ class ShopController extends Controller
 
     public function edit($id)
     {
-        return view('admin.shop.edit')->with(array('shop' => $this->shop->find($id)));
+        return view('hideyo_backend::shop.edit')->with(array('shop' => $this->shop->find($id)));
     }
 
     public function update($id)
@@ -82,7 +83,7 @@ class ShopController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The shop was updated.');
-            return redirect()->route('admin.shop.index');
+            return redirect()->route('hideyo.shop.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -98,7 +99,7 @@ class ShopController extends Controller
 
         if ($result) {
             Notification::success('The shop was deleted.');
-            return redirect()->route('admin.shop.index');
+            return redirect()->route('hideyo.shop.index');
         }
     }
 }

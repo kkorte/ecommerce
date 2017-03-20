@@ -3,11 +3,13 @@
 namespace Hideyo\Backend;
 
 use Illuminate\Support\ServiceProvider;
-use Cviebrock\EloquentSluggable\SluggableServiceProvider;
+
+use Cviebrock\EloquentSluggable\ServiceProvider as SluggableServiceProvider;
 use hisorange\BrowserDetect\Provider\BrowserDetectService;
 use Collective\Html\HtmlServiceProvider;
+use Hideyo\Backend\Services\HtmlServiceProvider as CustomHtmlServiceProvider;
 use Krucas\Notification\NotificationServiceProvider;
-
+use Yajra\Datatables\DatatablesServiceProvider;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -34,7 +36,13 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
-            __DIR__.'/Resources/views' => resource_path('views/vendor/hideyo'),
+            __DIR__.'/Resources/views' => resource_path('views/vendor/hideyobackend'),
+            __DIR__.'/Resources/scss' => resource_path('assets/vendor/hideyobackend/scss'),
+            __DIR__.'/Resources/javascript' => resource_path('assets/vendor/hideyobackend/javascript'),
+            __DIR__.'/Resources/bower.json' => resource_path('assets/vendor/hideyobackend/bower.json'),
+            __DIR__.'/Resources/gulpfile.js' => resource_path('assets/vendor/hideyobackend/gulpfile.js'),
+            __DIR__.'/Resources/package.json' => resource_path('assets/vendor/hideyobackend/package.json'),
+
         ]);
 
         $this->loadViewsFrom(__DIR__.'/Resources/views/', 'hideyo_backend');
@@ -295,6 +303,8 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->register(BrowserDetectService::class);
         $this->app->register(HtmlServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
+        $this->app->register(DatatablesServiceProvider::class);
+        $this->app->register(CustomHtmlServiceProvider::class);
 
         if (class_exists('Illuminate\Foundation\AliasLoader')) {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();

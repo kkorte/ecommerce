@@ -2,6 +2,7 @@
 /public/storage
 /vendor
 /packages/hideyo/shop/vendor
+/resources/assets/vendor
 /.idea
 Homestead.json
 Homestead.yaml

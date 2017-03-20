@@ -1,17 +1,17 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.shop.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.shop.create') }}">Edit</a></li>
+            <li><a href="{{ URL::route('hideyo.shop.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="#">Edit</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.shop.index') }}">Shops</a></li>  
+            <li><a href="{{ URL::route('hideyo.shop.index') }}">Shops</a></li>  
             <li class="active">edit</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-    {!! Form::model($shop, array('method' => 'put', 'route' => array('admin.shop.update', $shop->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+    {!! Form::model($shop, array('method' => 'put', 'route' => array('hideyo.shop.update', $shop->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 		<input type="hidden" name="_token" value="{!! Session::getToken() !!}">
         <div class="form-group">
             {!! Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) !!}
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        @include('admin._fields.seo-fields')
+        @include('hideyo_backend::_fields.seo-fields')
 
         <div class="form-group">
             {!! Form::label('logo', 'Logo', array('class' => 'col-sm-3 control-label')) !!}
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        @include('admin._fields.buttons', array('cancelRoute' => 'admin.shop.index'))
+        @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.shop.index'))
 
 
     {!! Form::close() !!}

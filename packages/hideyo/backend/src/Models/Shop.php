@@ -3,14 +3,13 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use \Auth;
 
-class Shop extends Model implements SluggableInterface
+class Shop extends Model
 {
 
-    use SluggableTrait;
+    use Sluggable;
 
     public static $rules = array(
         'title' => 'required'
@@ -19,13 +18,23 @@ class Shop extends Model implements SluggableInterface
     protected $table = 'shop';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
-    protected $fillable = ['active', 'email', 'wholesale', 'currency_code', 'title', 'url', 'description', 'square_thumbnail_sizes', 'widescreen_thumbnail_sizes', 'meta_title', 'meta_description', 'meta_keywords', 'logo_file_name', 'logo_file_path'];
+    protected $fillable = ['active', 'email', 'wholesale', 'currency_code', 'title', 'url', 'description', 'meta_title', 'meta_description', 'meta_keywords', 'logo_file_name', 'logo_file_path'];
 
     protected $sluggable = array(
         'build_from'        => 'title',
         'save_to'           => 'slug',
         'on_update'         => true,
     );
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
 
     public function __construct(array $attributes = array())
     {

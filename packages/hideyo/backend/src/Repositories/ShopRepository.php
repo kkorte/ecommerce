@@ -19,11 +19,11 @@ class ShopRepository implements ShopRepositoryInterface
   
     public function create(array $attributes)
     {
-        $this->model->sluggify();
+        $this->model->slug = null;
         $this->model->fill($attributes);
         $this->model->save();
         
-        if ($attributes['logo']) {
+        if (isset($attributes['logo'])) {
             $destinationPath = storage_path() . "/app/files/".$this->model->id."/logo/";
             $filename =  str_replace(" ", "_", strtolower($attributes['logo']->getClientOriginalName()));
             $upload_success = $attributes['logo']->move($destinationPath, $filename);
@@ -70,7 +70,7 @@ class ShopRepository implements ShopRepositoryInterface
             }
 
 
-            $this->model->sluggify();
+            $this->model->slug = null;
             $this->model->fill($attributes);
             $this->model->save();
 

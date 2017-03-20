@@ -16,7 +16,16 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
         
     Route::get('dashboard/stats', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@showStats'));
     Route::resource('dashboard', 'Hideyo\Shop\Controllers\Backend\DashboardController');
-    Route::resource('shop', 'ShopController');
+ 
+    Route::resource('shop', 'ShopController', ['names' => [
+        'index' => 'hideyo.shop.index',
+        'create' => 'hideyo.shop.create',
+        'store' => 'hideyo.shop.store',
+        'edit' => 'hideyo.shop.edit',
+        'update' => 'hideyo.shop.update',
+        'destroy' => 'hideyo.shop.destroy'
+    ]]);
+
   
     Route::get('redirect/export', array('as' => 'admin.redirect.export', 'uses' => 'RedirectController@getExport'));
 

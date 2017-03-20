@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductWeightTypeController
@@ -12,11 +12,10 @@ use App\Http\Controllers\Controller;
 
 use Dutchbridge\Validators\UserValidator;
 use Dutchbridge\Datatable\UserNumberDatatable;
-use Dutchbridge\Repositories\UserRepositoryInterface;
-use Dutchbridge\Repositories\LanguageRepositoryInterface;
-use Dutchbridge\Repositories\RoleRepositoryInterface;
-use Dutchbridge\Repositories\UserLogRepositoryInterface;
-use Dutchbridge\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\UserRepositoryInterface;
+
+use Hideyo\Backend\Repositories\UserLogRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 use Auth;
 use Notification;
 use Redirect;
@@ -28,13 +27,13 @@ class UserController extends Controller
 {
     public function __construct(
         UserRepositoryInterface $user,
-        LanguageRepositoryInterface $language,
-        RoleRepositoryInterface $role,
+ 
+     
         ShopRepositoryInterface $shop
     ) {
         $this->user         = $user;
-        $this->language     = $language;
-        $this->role         = $role;
+ 
+ 
         $this->shop         = $shop;
     }
 
@@ -137,15 +136,16 @@ class UserController extends Controller
 
     public function changeShopProfile($shopId)
     {
-        if (Auth::guard('admin')->user()) {
-            $id = Auth::guard('admin')->id();
+        if (Auth::guard('hideyobackend')->user()) {
+            $id = Auth::guard('hideyobackend')->id();
         }
 
         $shop = $this->shop->find($shopId);
 
         $result  = $this->user->updateShopProfileById($shop, $id);
+
         Notification::success('The shop changed.');
-        return Redirect::to('/admin');
+        return Redirect::route('hideyo.shop.index');
     }
 
     public function updateProfile()

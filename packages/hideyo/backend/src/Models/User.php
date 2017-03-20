@@ -43,20 +43,7 @@ class User extends Authenticatable
     
 
 
-    /**
-     * Detach multiple roles from a user
-     *
-     * @param mixed $roles
-     *
-     * @return void
-     */
-    public function detachAllRoles($roles)
-    {
 
-        foreach ($roles as $role) {
-            $this->detachRole($role);
-        }
-    }
 
 
     public function getUserProfileData()
@@ -70,8 +57,5 @@ class User extends Authenticatable
     }
 
 
-    public function roles()
-    {
-        return $this->belongsToMany('Hideyo\Backend\Models\Role', 'assigned_roles');
-    }
+
 }

@@ -9,7 +9,7 @@
         "laravel/framework": "5.3.*",
         "edvinaskrucas/notification": "5.1.*",
         "zizaco/entrust": "5.2.x-dev",
-        "cviebrock/eloquent-sluggable": "^3.1",
+        "cviebrock/eloquent-sluggable": "^4.1",
         "yajra/laravel-datatables-oracle": "~6.0",
         "barryvdh/laravel-debugbar": "^2.1",
         "laravelcollective/html": "^5.2",

@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="{{ URL::asset('css/admin/style.css')}}">
-<script src="{{ URL::asset('javascript/admin/site.js')}}"></script>
-<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="{{ URL::asset('hideyo/css/style.css')}}">
+<script src="{{ URL::asset('hideyo/javascript/site.js')}}"></script>
+<!-- <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
 
 <script>
@@ -16,4 +16,4 @@ $(document).ready(function() {
 
   });
   
-</script>
+</script> -->
