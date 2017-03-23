@@ -370,9 +370,16 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     ]]);
 
 
+    Route::resource('user', 'UserController', ['names' => [
+        'index'     => 'hideyo.user.index',
+        'create'    => 'hideyo.user.create',
+        'store'     => 'hideyo.user.store',
+        'edit'      => 'hideyo.user.edit',
+        'update'    => 'hideyo.user.update',
+        'destroy'   => 'hideyo.user.destroy'
+    ]]);
 
 
-    Route::resource('user', 'UserController'); // return the protected resource
     Route::get('profile/shop/change/{shopId}', array('as' => 'change.language.profile', 'uses' => 'UserController@changeShopProfile'));
     Route::get('profile', array('as' => 'edit.profile', 'uses' => 'UserController@editProfile'));
     Route::post('profile', array('as' => 'update.profile', 'uses' => 'UserController@updateProfile'));

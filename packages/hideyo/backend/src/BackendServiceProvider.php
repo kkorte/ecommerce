@@ -10,6 +10,7 @@ use Collective\Html\HtmlServiceProvider;
 use Hideyo\Backend\Services\HtmlServiceProvider as CustomHtmlServiceProvider;
 use Krucas\Notification\NotificationServiceProvider;
 use Yajra\Datatables\DatatablesServiceProvider;
+use Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -305,6 +306,9 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(DatatablesServiceProvider::class);
         $this->app->register(CustomHtmlServiceProvider::class);
+        $this->app->register(UniqueWithValidatorServiceProvider::class);
+
+
 
         if (class_exists('Illuminate\Foundation\AliasLoader')) {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();

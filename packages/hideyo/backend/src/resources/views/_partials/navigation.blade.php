@@ -85,7 +85,7 @@
 						<li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Tax rates</a></li>
 						<li><a href="{{ URL::route('hideyo.sending-method.index') }}">Sending methods</a></li>
 						<li><a href="{{ URL::route('hideyo.payment-method.index') }}">Payment methods</a></li>
-						<li><a href="/admin/user">Users</a></li>
+						<li><a href="{{ URL::route('hideyo.user.index') }}">Users</a></li>
 						<li><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Order templates</a></li>
 						<li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>
 						<li><a href="/admin/error">Errors</a></li>

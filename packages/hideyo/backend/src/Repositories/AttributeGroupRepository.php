@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
  
 class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 {
-
     protected $model;
 
     public function __construct(AttributeGroup $model)

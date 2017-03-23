@@ -27,8 +27,6 @@ class UserController extends Controller
 {
     public function __construct(
         UserRepositoryInterface $user,
- 
-     
         ShopRepositoryInterface $shop
     ) {
         $this->user         = $user;
@@ -59,7 +57,7 @@ class UserController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.user.index')->with('users', $this->user->selectAll());
+            return view('hideyo_backend::user.index')->with('users', $this->user->selectAll());
         }
     }
 
@@ -67,7 +65,7 @@ class UserController extends Controller
     {
         $user = $this->user->find($id);
         $userProfileData = $user->getUserProfileData()->get();
-        return view('admin.user.show')->with(array('user' => $user, 'user_profile_data' => $userProfileData));
+        return view('hideyo_backend::user.show')->with(array('user' => $user, 'user_profile_data' => $userProfileData));
     }
 
     public function create()
@@ -75,14 +73,14 @@ class UserController extends Controller
         $roles = $this->role->getModel()->lists('name', 'id');
         $languages = $this->language->getModel()->lists('language', 'id');
         $shops = $this->shop->selectAll()->lists('title', 'id');
-        return view('admin.user.create', array('roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+        return view('hideyo_backend::user.create', array('roles' => $roles, 'languages' => $languages, 'shops' => $shops));
     }
 
     public function selectNumber($id)
     {
         $numbers = $this->number->selectNewNumbers();
 
-        return view('admin.user.select_number', array('numbers' => $numbers, 'user' => $this->user->find($id)));
+        return view('hideyo_backend::user.select_number', array('numbers' => $numbers, 'user' => $this->user->find($id)));
     }
 
     public function storeNumber($user_id)
@@ -120,7 +118,7 @@ class UserController extends Controller
         $roles = $this->role->getModel()->lists('name', 'id');
         $languages = $this->language->getModel()->lists('language', 'id');
         $shops = $this->shop->selectAll()->lists('title', 'id');
-        return view('admin.user.edit')->with(array('user' => $this->user->find($id), 'roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+        return view('hideyo_backend::user.edit')->with(array('user' => $this->user->find($id), 'roles' => $roles, 'languages' => $languages, 'shops' => $shops));
     }
 
     public function editProfile()
@@ -131,7 +129,7 @@ class UserController extends Controller
 
         $shops = $this->shop->selectAll()->lists('title', 'id');
         $languages = $this->language->getModel()->lists('language', 'id');
-        return view('admin.user.profile')->with(array('user' => User::find($id), 'languages' => $languages, 'shops' => $shops));
+        return view('hideyo_backend::user.profile')->with(array('user' => User::find($id), 'languages' => $languages, 'shops' => $shops));
     }
 
     public function changeShopProfile($shopId)

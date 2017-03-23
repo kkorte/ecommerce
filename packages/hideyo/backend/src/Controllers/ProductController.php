@@ -23,6 +23,7 @@ use Hideyo\Backend\Repositories\BrandRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
 use Excel;
+use DB;
 
 class ProductController extends Controller
 {
@@ -54,16 +55,16 @@ class ProductController extends Controller
             $product = $this->product->getModel()->select(
                 [
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                'product.id', 'product.rank', 'product.brand_id', 'product.reference_code', 'product.shop_id', 'product.tax_rate_id', 'product.amount', 'product.price',
-                'product.active', 'product.brand_id', 'brand.title as brandtitle', 'product.product_category_id', 'product.discount_value',
-                'product.title', 'product_category.title as categorytitle', 'product.meta_title', 'product.meta_description']
+                config()->get('hideyo.db_prefix').'product.*', 
+                'brand.title as brandtitle', 
+                'product_category.title as categorytitle']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'product_category as product_category', 'product_category.id', '=', 'product.product_category_id')
+            ->leftJoin(config()->get('hideyo.db_prefix').'product_category as product_category', 'product_category.id', '=', config()->get('hideyo.db_prefix').'product.product_category_id')
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'brand', 'brand.id', '=', 'product.brand_id')
+            ->leftJoin(config()->get('hideyo.db_prefix').'brand as brand', 'brand.id', '=', config()->get('hideyo.db_prefix').'product.brand_id')
 
-            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            ->where(config()->get('hideyo.db_prefix').'product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
 
             $datatables = \Datatables::of($product)
