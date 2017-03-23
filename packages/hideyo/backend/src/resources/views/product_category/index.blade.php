@@ -1,22 +1,22 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('admin.product-category.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('admin.product-category.tree') }}">Tree</a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.product-category.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('hideyo.product-category.tree') }}">Tree</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.product-category.index') }}">Product categories</a></li>  
+            <li><a href="{{ URL::route('hideyo.product-category.index') }}">Product categories</a></li>  
             <li class="active">overview</li>
         </ol>
 
-        <a href="{{ URL::route('admin.product-category.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('hideyo.product-category.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
         <h2>Product categories <small>overview</small></h2>
         <hr/>
@@ -45,7 +45,7 @@
                 "stateSave": true,
 
 
-                "ajax": "/admin/product-category",
+                "ajax": "{{ URL::route('hideyo.product-category.index') }}",
 
                 columns: [
                 {data: 'active', name: 'active'},

@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
+
 
 use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\BrandRepositoryInterface;
@@ -19,7 +20,7 @@ class BrandController extends Controller
         if ($this->request->wantsJson()) {
             $brand = $this->brand->getModel()
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id', 'rank','title'])
-            ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($brand)->addColumn('action', function ($brand) {
                 $delete = \Form::deleteajax('/admin/brand/'. $brand->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $brand->title);
@@ -30,13 +31,13 @@ class BrandController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.brand.index')->with('brand', $this->brand->selectAll());
+            return view('hideyo_backend::brand.index')->with('brand', $this->brand->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.brand.create')->with(array());
+        return view('hideyo_backend::brand.create')->with(array());
     }
 
     public function store()
@@ -56,12 +57,12 @@ class BrandController extends Controller
 
     public function editSeo($id)
     {
-        return view('admin.brand.edit_seo')->with(array('brand' => $this->brand->find($id)));
+        return view('hideyo_backend::brand.edit_seo')->with(array('brand' => $this->brand->find($id)));
     }
 
     public function edit($id)
     {
-        return view('admin.brand.edit')->with(array('brand' => $this->brand->find($id)));
+        return view('hideyo_backend::brand.edit')->with(array('brand' => $this->brand->find($id)));
     }
 
     public function update($brandId)

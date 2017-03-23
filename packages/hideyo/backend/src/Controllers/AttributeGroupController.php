@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductWeightTypeController
@@ -31,7 +31,7 @@ class AttributeGroupController extends Controller
 
             $query = $this->attributeGroup->getModel()
             ->select([DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','title'])
-            ->where('shop_id', '=', Auth::guard('admin')->user()->selected_shop_id);
+            ->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = Datatables::of($query)->addColumn('action', function ($query) {
                 $delete = Form::deleteajax('/admin/attribute-group/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
@@ -42,13 +42,13 @@ class AttributeGroupController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.attribute-group.index')->with('attributeGroup', $this->attributeGroup->selectAll());
+            return view('hideyo_backend::attribute-group.index')->with('attributeGroup', $this->attributeGroup->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.attribute-group.create')->with(array());
+        return view('hideyo_backend::attribute-group.create')->with(array());
     }
 
     public function store()
@@ -69,7 +69,7 @@ class AttributeGroupController extends Controller
 
     public function edit($id)
     {
-        return view('admin.attribute-group.edit')->with(array('attributeGroup' => $this->attributeGroup->find($id)));
+        return view('hideyo_backend::attribute-group.edit')->with(array('attributeGroup' => $this->attributeGroup->find($id)));
     }
 
     public function update($id)

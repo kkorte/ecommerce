@@ -84,13 +84,13 @@ class SendingPaymentMethodRelatedController extends Controller
 
 
         } else {
-            return view('admin.sending_payment_method_related.index')->with('sendingMethod', $this->sendingPaymentMethodRelated->selectAll());
+            return view('hideyo_backend::sending_payment_method_related.index')->with('sendingMethod', $this->sendingPaymentMethodRelated->selectAll());
         }
     }
 
     public function edit($id)
     {
-        return view('admin.sending_payment_method_related.edit')->with(array(
+        return view('hideyo_backend::sending_payment_method_related.edit')->with(array(
             'sendingPaymentMethodRelated' => $this->sendingPaymentMethodRelated->find($id)
             ));
     }

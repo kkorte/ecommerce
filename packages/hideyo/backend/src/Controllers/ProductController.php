@@ -198,7 +198,7 @@ class ProductController extends Controller
 
             ->addColumn('categorytitle', function ($product) {
                 if ($product->subcategories()->count()) {
-                    $subcategories = $product->subcategories()->lists('title')->toArray();
+                    $subcategories = $product->subcategories()->pluck('title')->toArray();
             
                     return $product->categorytitle.', <small> '.implode(', ', $subcategories).'</small>';
                 } else {
@@ -277,7 +277,7 @@ class ProductController extends Controller
 
             ->addColumn('categorytitle', function ($product) {
                 if ($product->subcategories()->count()) {
-                    $subcategories = $product->subcategories()->lists('title')->toArray();
+                    $subcategories = $product->subcategories()->pluck('title')->toArray();
             
                     return $product->categorytitle.', <small> '.implode(', ', $subcategories).'</small>';
                 } else {
@@ -307,7 +307,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('hideyo_backend::product.create')->with(array('brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->lists('title', 'id')));
+        return view('hideyo_backend::product.create')->with(array('brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->pluck('title', 'id')));
     }
 
     public function store()
@@ -352,9 +352,9 @@ class ProductController extends Controller
         return view('hideyo_backend::product.edit')->with(
             array(
             'product' => $product,
-            'brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(),
-            'productCategories' => $this->productCategory->selectAllProductPullDown()->lists('title', 'id'),
-            'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id')
+            'brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(),
+            'productCategories' => $this->productCategory->selectAllProductPullDown()->pluck('title', 'id'),
+            'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id')
             )
         );
     }
@@ -419,10 +419,10 @@ class ProductController extends Controller
 
         return view('hideyo_backend::product.copy')->with(
             array(
-                'brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(),
+                'brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(),
             'product' => $product,
-            'productCategories' => $this->productCategory->selectAll()->lists('title', 'id'),
-            'taxRates' => $this->taxRate->selectAll()->lists('title', 'id')
+            'productCategories' => $this->productCategory->selectAll()->pluck('title', 'id'),
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id')
             )
         );
     }
@@ -463,7 +463,7 @@ class ProductController extends Controller
 
     public function editPrice($id)
     {
-        return view('hideyo_backend::product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id')));
+        return view('hideyo_backend::product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id')));
     }
 
     public function update($productId)

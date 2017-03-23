@@ -44,14 +44,14 @@ class BrandRepository implements BrandRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             
         $this->model->fill($attributes);
         $this->model->save();
@@ -62,8 +62,8 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function createImage(array $attributes, $brandId)
     {
-        $userId = \Auth::guard('admin')->user()->id;
-        $shopId = \Auth::guard('admin')->user()->selected_shop_id;
+        $userId = \Auth::guard('hideyobackend')->user()->id;
+        $shopId = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
        
         $rules = array(
@@ -122,12 +122,12 @@ class BrandRepository implements BrandRepositoryInterface
     {
 
         $validator = \Validator::make($attributes, $this->rules($id, $attributes));
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model = $this->find($id);
 
 
@@ -160,7 +160,7 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function updateImageById(array $attributes, $brandId, $id)
     {
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->modelImage = $this->findImage($id);
         return $this->updateImageEntity($attributes);
     }
@@ -192,7 +192,7 @@ class BrandRepository implements BrandRepositoryInterface
     {
         $this->modelImage = $this->findImage($id);
         $filename = storage_path() ."/app/files/brand/".$this->modelImage->brand_id."/".$this->modelImage->file;
-        $shopId = \Auth::guard('admin')->user()->selected_shop_id;
+        $shopId = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
 
         if (\File::exists($filename)) {
@@ -268,7 +268,7 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
     }
     
     public function find($id)

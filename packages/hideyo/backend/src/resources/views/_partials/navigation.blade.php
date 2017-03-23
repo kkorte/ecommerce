@@ -57,12 +57,11 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalog <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ URL::route('hideyo.product.index') }}">Products</a></li>
-						<li><a href="/admin/product-category">Categories</a></li>
-						<li><a href="/admin/brand">Brands</a></li>
-						<li><a href="/admin/product-tag-group">Product tag groups</a></li>
-						<li><a href="/admin/extra-field">Extra fields</a></li>
-						<li><a href="/admin/attribute-group">Attribute groups</a></li>
-						<li><a href="/admin/product-waiting-list">Product waiting list</a></li>
+						<li><a href="{{ URL::route('hideyo.product-category.index') }}">Categories</a></li>
+						<li><a href="{{ URL::route('hideyo.brand.index') }}">Brands</a></li>
+						<li><a href="{{ URL::route('hideyo.product-tag-group.index') }}">Product tag groups</a></li>
+						<li><a href="{{ URL::route('hideyo.extra-field.index') }}">Extra fields</a></li>
+						<li><a href="{{ URL::route('hideyo.attribute-group.index') }}">Attribute groups</a></li>
 					</ul>
 				</li>
 

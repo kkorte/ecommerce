@@ -37,7 +37,7 @@ class ProductCategoryController extends Controller
                 'shop_id',
                 'parent_id', 'redirect_product_category_id',
                 'title', 'meta_title', 'meta_description']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($productCategory)
 
@@ -96,14 +96,14 @@ class ProductCategoryController extends Controller
 
 
         } else {
-            return view('admin.product_category.index')->with(array('productCategory' =>  $this->productCategory->selectAll(), 'tree' => $this->productCategory->entireTreeStructure(Auth::guard('admin')->user()->shop->id)->toArray()));
+            return view('hideyo_backend::product_category.index')->with(array('productCategory' =>  $this->productCategory->selectAll(), 'tree' => $this->productCategory->entireTreeStructure(Auth::guard('hideyobackend')->user()->shop->id)->toArray()));
         }
     }
 
     public function reDirectoryAllImages()
     {
     
-        $this->productCategoryImage->reDirectoryAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->productCategoryImage->reDirectoryAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         return redirect()->route('admin.product-category.index');
     }
@@ -111,14 +111,14 @@ class ProductCategoryController extends Controller
 
     public function refactorAllImages()
     {
-        $this->productCategoryImage->refactorAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->productCategoryImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         return redirect()->route('admin.product-category.index');
     }
 
     public function tree()
     {
-        return view('admin.product_category.tree')->with(array('productCategory' =>  $this->productCategory->selectAll(), 'tree' => $this->productCategory->entireTreeStructure(Auth::guard('admin')->user()->shop->id)->toArray()));
+        return view('hideyo_backend::product_category.tree')->with(array('productCategory' =>  $this->productCategory->selectAll(), 'tree' => $this->productCategory->entireTreeStructure(Auth::guard('hideyobackend')->user()->shop->id)->toArray()));
     }
 
     public function ajaxCategories(Request $request)
@@ -154,7 +154,7 @@ class ProductCategoryController extends Controller
 
     public function create()
     {
-        return view('admin.product_category.create')->with(array('categories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::product_category.create')->with(array('categories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
     public function store(Request $request)
@@ -176,20 +176,20 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         $category =$this->productCategory->find($id);
-        return view('admin.product_category.edit')->with(array('productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::product_category.edit')->with(array('productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
     public function editHighlight($id)
     {
         $category =$this->productCategory->find($id);
-        $products = $this->product->selectAll()->lists('title', 'id');
-        return view('admin.product_category.edit-highlight')->with(array('products' => $products, 'productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        $products = $this->product->selectAll()->pluck('title', 'id');
+        return view('hideyo_backend::product_category.edit-highlight')->with(array('products' => $products, 'productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
 
     public function editSeo($id)
     {
-        return view('admin.product_category.edit_seo')->with(array('productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::product_category.edit_seo')->with(array('productCategory' => $this->productCategory->find($id), 'categories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
     public function update(Request $request, $id)
@@ -228,7 +228,7 @@ class ProductCategoryController extends Controller
 
     public function ajaxRootTree()
     {
-        $tree = $this->productCategory->entireTreeStructure(Auth::guard('admin')->user()->shop->id);
+        $tree = $this->productCategory->entireTreeStructure(Auth::guard('hideyobackend')->user()->shop->id);
         foreach ($tree as $key => $row) {
             $children = false;
             if ($row->children->count()) {

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductWeightTypeController
@@ -10,8 +10,8 @@
 
 use App\Http\Controllers\Controller;
 
-use Dutchbridge\Repositories\ExtraFieldRepositoryInterface;
-use Dutchbridge\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCategoryRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -33,7 +33,7 @@ class ExtraFieldController extends Controller
 
             $query = $this->extraField->getModel()
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id', 'all_products','title'])
-            ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
 
@@ -59,13 +59,13 @@ class ExtraFieldController extends Controller
 
 
         } else {
-            return \View::make('admin.extra-field.index')->with('extraField', $this->extraField->selectAll());
+            return \View::make('hideyo_backend::extra-field.index')->with('extraField', $this->extraField->selectAll());
         }
     }
 
     public function create()
     {
-        return \View::make('admin.extra-field.create')->with(array('productCategories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        return \View::make('hideyo_backend::extra-field.create')->with(array('productCategories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
     public function store()
@@ -86,7 +86,7 @@ class ExtraFieldController extends Controller
 
     public function edit($id)
     {
-        return \View::make('admin.extra-field.edit')->with(array('extraField' => $this->extraField->find($id), 'productCategories' => $this->productCategory->selectAll()->lists('title', 'id')));
+        return \View::make('hideyo_backend::extra-field.edit')->with(array('extraField' => $this->extraField->find($id), 'productCategories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
 
     public function update($id)

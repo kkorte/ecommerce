@@ -36,6 +36,8 @@ class ProductCategory extends Node
 
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
+        
         parent::__construct($attributes);
     }
 

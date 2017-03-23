@@ -1,17 +1,17 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.brand.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.brand.create') }}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.brand.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.brand.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.brand.index') }}">Brands</a></li>  
+            <li><a href="{{ URL::route('hideyo.brand.index') }}">Brands</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-    	{!! Form::open(array('route' => array('admin.brand.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+    	{!! Form::open(array('route' => array('hideyo.brand.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 	        <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 	 
 
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            @include('admin._fields.buttons', array('cancelRoute' => 'admin.brand.index'))
+            @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.brand.index'))
 
     	{!! Form::close() !!}
     </div>

@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
+
 
 /**
  * CouponController
@@ -32,7 +33,7 @@ class ProductTagGroupController extends Controller
 
             $query = $this->productTagGroup->getModel()
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','tag'])
-            ->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
                 $delete = \Form::deleteajax('/admin/product-tag-group/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
@@ -45,14 +46,14 @@ class ProductTagGroupController extends Controller
 
 
         } else {
-            return view('admin.product_tag_group.index')->with('productTagGroup', $this->productTagGroup->selectAll());
+            return view('hideyo_backend::product_tag_group.index')->with('productTagGroup', $this->productTagGroup->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.product_tag_group.create')->with(array(
-            'products' => $this->product->selectAll()->lists('title', 'id')
+        return view('hideyo_backend::product_tag_group.create')->with(array(
+            'products' => $this->product->selectAll()->pluck('title', 'id')
         ));
     }
 
@@ -75,8 +76,8 @@ class ProductTagGroupController extends Controller
     public function edit($id)
     {
     
-        return view('admin.product_tag_group.edit')->with(array(
-            'products' => $this->product->selectAll()->lists('title', 'id'),
+        return view('hideyo_backend::product_tag_group.edit')->with(array(
+            'products' => $this->product->selectAll()->pluck('title', 'id'),
             'productTagGroup' => $this->productTagGroup->find($id)
             ));
     }

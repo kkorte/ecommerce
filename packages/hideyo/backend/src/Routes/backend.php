@@ -242,10 +242,28 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
 
     Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController');
-    Route::resource('attribute-group', 'AttributeGroupController');
+  
+    Route::resource('attribute-group', 'AttributeGroupController', ['names' => [
+        'index'     => 'hideyo.attribute-group.index',
+        'create'    => 'hideyo.attribute-group.create',
+        'store'     => 'hideyo.attribute-group.store',
+        'edit'      => 'hideyo.attribute-group.edit',
+        'update'    => 'hideyo.attribute-group.update',
+        'destroy'   => 'hideyo.attribute-group.destroy'
+    ]]);
+
 
     Route::resource('extra-field/{extraFieldId}/values', 'ExtraFieldDefaultValueController');
-    Route::resource('extra-field', 'ExtraFieldController');
+    
+    Route::resource('extra-field', 'ExtraFieldController', ['names' => [
+        'index'     => 'hideyo.extra-field.index',
+        'create'    => 'hideyo.extra-field.create',
+        'store'     => 'hideyo.extra-field.store',
+        'edit'      => 'hideyo.extra-field.edit',
+        'update'    => 'hideyo.extra-field.update',
+        'destroy'   => 'hideyo.extra-field.destroy'
+    ]]);
+
 
     Route::get('product/refactor-images', array('as' => 'product.refactor-images', 'uses' => 'ProductController@refactorAllImages'));
     Route::get('product/re-directory-images', array('as' => 'product.re-directory-images', 'uses' => 'ProductController@reDirectoryAllImages'));
@@ -292,8 +310,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount}', array('as' => 'hideyo.product.change-amount', 'uses' => 'ProductCombinationController@changeAmount'));
  
 
-     Route::resource('product-waiting-list', 'ProductWaitingListController');
- 
     Route::post('product/{productId}/copy', array('as' => 'product.store-copy', 'uses' => 'ProductController@storeCopy'));
     Route::resource('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController');
     Route::resource('product/{productId}/related-product', 'ProductRelatedProductController');
@@ -305,11 +321,19 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('brand/edit/{brandId}/seo', array('as' => 'admin.brand.edit_seo', 'uses' => 'BrandController@editSeo'));
  
 
-    Route::resource('brand', 'BrandController');
+    Route::resource('brand', 'BrandController', ['names' => [
+        'index'     => 'hideyo.brand.index',
+        'create'    => 'hideyo.brand.create',
+        'store'     => 'hideyo.brand.store',
+        'edit'      => 'hideyo.brand.edit',
+        'update'    => 'hideyo.brand.update',
+        'destroy'   => 'hideyo.brand.destroy'
+    ]]);
+
 
     Route::get('product-category/change-active/{productCategoryId}', array('as' => 'hideyo.product-category.change-active', 'uses' => 'ProductCategoryController@changeActive'));
-    Route::resource('product-category', 'ProductCategoryController');
-    Route::resource('product-tag-group', 'ProductTagGroupController');
+
+
     Route::get('product_category/get_ajax_categories', array('as' => 'hideyo.product-category.ajax_categories', 'uses' => 'ProductCategoryController@ajaxCategories'));
     Route::get('product_category/get_ajax_category/{id}', array('as' => 'hideyo.product-category.ajax_category', 'uses' => 'ProductCategoryController@ajaxCategory'));
  
@@ -324,6 +348,29 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product_category/ajax-move-node', array('as' => 'hideyo.product-category.ajax-move-node', 'uses' => 'ProductCategoryController@ajaxMoveNode'));
 
     Route::get('product_category/tree', array('as' => 'hideyo.product-category.tree', 'uses' => 'ProductCategoryController@tree'));
+
+
+    Route::resource('product-category', 'ProductCategoryController', ['names' => [
+        'index'     => 'hideyo.product-category.index',
+        'create'    => 'hideyo.product-category.create',
+        'store'     => 'hideyo.product-category.store',
+        'edit'      => 'hideyo.product-category.edit',
+        'update'    => 'hideyo.product-category.update',
+        'destroy'   => 'hideyo.product-category.destroy'
+    ]]);
+
+
+    Route::resource('product-tag-group', 'ProductTagGroupController', ['names' => [
+        'index'     => 'hideyo.product-tag-group.index',
+        'create'    => 'hideyo.product-tag-group.create',
+        'store'     => 'hideyo.product-tag-group.store',
+        'edit'      => 'hideyo.product-tag-group.edit',
+        'update'    => 'hideyo.product-tag-group.update',
+        'destroy'   => 'hideyo.product-tag-group.destroy'
+    ]]);
+
+
+
 
     Route::resource('user', 'UserController'); // return the protected resource
     Route::get('profile/shop/change/{shopId}', array('as' => 'change.language.profile', 'uses' => 'UserController@changeShopProfile'));

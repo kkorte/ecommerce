@@ -1,18 +1,18 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('admin.product.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{!! URL::route('admin.product.create') !!}">Create</a></li>
-            <li><a href="{{ URL::route('admin.product.export') }}">Export</a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{!! URL::route('hideyo.product.create') !!}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.product.export') }}">Export</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Products</a></li>  
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Products</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::open(array('route' => array('admin.product.store'), 'files' => true, 'role' => 'form', 'class' => 'form-horizontal', 'data-focus' => 'true', 'data-toggle' => 'validator')) !!}
+        {!! Form::open(array('route' => array('hideyo.product.store'), 'files' => true, 'role' => 'form', 'class' => 'form-horizontal', 'data-focus' => 'true', 'data-toggle' => 'validator')) !!}
         <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
         <div class="form-group">
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        @include('admin._fields.buttons', array('cancelRoute' => 'admin.product.index'))
+        @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.product.index'))
 
         {!! Form::close() !!}
     </div>

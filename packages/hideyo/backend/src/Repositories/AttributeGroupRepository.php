@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\AttributeGroup;
+use Hideyo\Backend\Models\AttributeGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  
@@ -30,13 +30,13 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         } else {
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             $this->model->fill($attributes);
             $this->model->save();
             return $this->model;
@@ -45,13 +45,13 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 
     public function updateById(array $attributes, $id)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules($id));
         if ($validator->fails()) {
             return $validator;
         } else {
             $this->model = $this->find($id);
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             return $this->updateEntity($attributes);
         }
     }
@@ -86,7 +86,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
     
     public function find($id)

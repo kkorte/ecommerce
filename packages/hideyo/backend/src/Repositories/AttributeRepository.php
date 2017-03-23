@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\Attribute;
+use Hideyo\Backend\Models\Attribute;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  
@@ -36,7 +36,7 @@ class AttributeRepository implements AttributeRepositoryInterface
         if ($validator->fails()) {
             return $validator;
         } else {
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             $this->model->fill($attributes);
             $this->model->save();
             return $this->model;
@@ -52,7 +52,7 @@ class AttributeRepository implements AttributeRepositoryInterface
             return $validator;
         } else {
             $this->model = $this->find($id);
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             return $this->updateEntity($attributes);
         }
     }
@@ -87,7 +87,7 @@ class AttributeRepository implements AttributeRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
     
     public function find($id)

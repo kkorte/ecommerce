@@ -17,8 +17,8 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             
         $this->model->fill($attributes);
         $this->model->save();
@@ -33,8 +33,8 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         return $this->updateEntity($attributes);
     }
 
@@ -62,7 +62,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
 
     public function selectAll()
     {
-        return $this->model->select('sending_payment_method_related.*')->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->where('payment_method.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->select('sending_payment_method_related.*')->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('payment_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectAllActiveByShopId($shopId)
@@ -106,7 +106,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
 
     function selectOneByPaymentMethodIdAndSendingMethodIdAdmin($sendingPaymentMethodId, $paymentMethodId)
     {
-         $shopId = \Auth::guard('admin')->user()->selected_shop_id;
+         $shopId = \Auth::guard('hideyobackend')->user()->selected_shop_id;
 
         $result = $this->model->with(array('sendingMethod' => function ($query) use ($shopId) {
             $query->where('shop_id', '=', $shopId);

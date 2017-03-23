@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
+
 
 /**
  * ProductWeightTypeController
@@ -42,13 +43,13 @@ class AttributeController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.attribute.index')->with('attributeGroup', $this->attributeGroup->find($attributeGroupId));
+            return view('hideyo_backend::attribute.index')->with('attributeGroup', $this->attributeGroup->find($attributeGroupId));
         }
     }
 
     public function create($attributeGroupId)
     {
-        return view('admin.attribute.create')->with(array('attributeGroup' =>  $this->attributeGroup->find($attributeGroupId)));
+        return view('hideyo_backend::attribute.create')->with(array('attributeGroup' =>  $this->attributeGroup->find($attributeGroupId)));
     }
 
     public function store($attributeGroupId)
@@ -69,7 +70,7 @@ class AttributeController extends Controller
 
     public function edit($attributeGroupId, $id)
     {
-        return view('admin.attribute.edit')->with(array('attribute' => $this->attribute->find($id)));
+        return view('hideyo_backend::attribute.edit')->with(array('attribute' => $this->attribute->find($id)));
     }
 
     public function update($attributeGroupId, $id)
