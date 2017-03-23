@@ -259,7 +259,19 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product/rank', array('as' => 'admin.product.ranking', 'uses' => 'ProductController@getRank'));
 
 
-    Route::resource('product', 'ProductController');
+
+    Route::resource('product', 'ProductController', ['names' => [
+        'index'     => 'hideyo.product.index',
+        'create'    => 'hideyo.product.create',
+        'store'     => 'hideyo.product.store',
+        'edit'      => 'hideyo.product.edit',
+        'update'    => 'hideyo.product.update',
+        'destroy'   => 'hideyo.product.destroy'
+    ]]);
+
+
+
+
     Route::get('product/edit/{productId}/price', array('as' => 'admin.product.edit_price', 'uses' => 'ProductController@editPrice'));
     Route::get('product/change-active/{productId}', array('as' => 'admin.product.change-active', 'uses' => 'ProductController@changeActive'));
     Route::get('product/change-amount/{productId}/{amount}', array('as' => 'admin.product.change-amount', 'uses' => 'ProductController@changeAmount'));

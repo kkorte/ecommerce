@@ -941,16 +941,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855"
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/0d6c7ca039329247e4f0f8f8f6506810e8248855",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
                 "shasum": ""
             },
             "require": {
@@ -1002,7 +1002,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-02-27 10:51:17"
+            "time": "2017-03-20 17:10:46"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -1733,16 +1733,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.36",
+            "version": "1.0.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297"
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
                 "shasum": ""
             },
             "require": {
@@ -1812,7 +1812,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-03-18 16:02:30"
+            "time": "2017-03-22 15:43:14"
         },
         {
             "name": "league/fractal",
@@ -4474,16 +4474,16 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "f80d6623cb33c446e499c24de92f5d58a2678bf5"
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/f80d6623cb33c446e499c24de92f5d58a2678bf5",
-                "reference": "f80d6623cb33c446e499c24de92f5d58a2678bf5",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/df97c5c7bf43eb0660f13fdc16a0efefc534311a",
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a",
                 "shasum": ""
             },
             "require": {
@@ -4531,7 +4531,7 @@
                 "tinymce",
                 "upload"
             ],
-            "time": "2017-02-17 08:42:40"
+            "time": "2017-03-23 06:55:16"
         },
         {
             "name": "vlucas/phpdotenv",

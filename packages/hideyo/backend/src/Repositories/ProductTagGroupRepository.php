@@ -1,5 +1,5 @@
 <?php
-namespace Hideyo\Shop\Repositories;
+namespace Hideyo\Backend\Repositories;
  
 use Hideyo\Shop\Models\ProductTagGroup;
 use Symfony\Component\HttpFoundation\Request;

@@ -11,14 +11,14 @@
 use App\Http\Controllers\Controller;
 
 
-use Dutchbridge\Repositories\ProductRepositoryInterface;
-use Dutchbridge\Repositories\ProductCategoryRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\ProductWeightTypeRepositoryInterface;
-use Dutchbridge\Repositories\ProductExtraFieldValueRepositoryInterface;
-use Dutchbridge\Repositories\ExtraFieldRepositoryInterface;
-use Dutchbridge\Repositories\ProductCombinationRepositoryInterface;
-use Dutchbridge\Repositories\BrandRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductWeightTypeRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCombinationRepositoryInterface;
+use Hideyo\Backend\Repositories\BrandRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;

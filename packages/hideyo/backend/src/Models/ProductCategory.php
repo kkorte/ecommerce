@@ -4,15 +4,14 @@ namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 use Baum\Node;
 
-class ProductCategory extends Node implements SluggableInterface
+class ProductCategory extends Node
 {
 
-    use SluggableTrait;
+    use Sluggable;
 
     public static $rules = array(
         'title' => 'required|between:4,65|unique_with:product_category, shop_id',
@@ -26,12 +25,14 @@ class ProductCategory extends Node implements SluggableInterface
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['active', 'parent_id', 'title', 'product_category_highlight_title', 'product_overview_title', 'product_overview_description', 'short_description', 'description', 'meta_title', 'meta_description', 'meta_keywords', 'slug', 'shop_id', 'redirect_product_category_id', 'modified_by_user_id'];
 
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
-
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function __construct(array $attributes = array())
     {

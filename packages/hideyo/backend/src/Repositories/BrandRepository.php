@@ -1,5 +1,5 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
 use App\Brand;
 use App\BrandImage;

@@ -1,15 +1,15 @@
 <?php
-namespace Hideyo\Repositories;
- 
-use App\ProductCategory;
-use Hideyo\Repositories\ProductCategoryImageRepositoryInterface;
-use Hideyo\Repositories\RedirectRepositoryInterface;
+namespace Hideyo\Backend\Repositories;
 
-use App\ProductCategoryImage;
+
+use Hideyo\Backend\Repositories\ProductCategoryImageRepositoryInterface;
+use Hideyo\Backend\Repositories\RedirectRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
+
+use Hideyo\Backend\Models\ProductCategory;
+use Hideyo\Backend\Models\ProductCategoryImage;
 use Image;
 use File;
-use Hideyo\Repositories\ShopRepositoryInterface;
-
  
 class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 {

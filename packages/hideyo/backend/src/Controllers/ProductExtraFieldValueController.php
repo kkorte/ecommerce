@@ -11,9 +11,9 @@
 use App\Http\Controllers\Controller;
 
 
-use Dutchbridge\Repositories\ProductExtraFieldValueRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
-use Dutchbridge\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
 
 use \Request;
 use \Notification;

@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ProductWaitingListRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductWaitingListRepositoryInterface;
 
 use \Request;
 use \Redirect;
