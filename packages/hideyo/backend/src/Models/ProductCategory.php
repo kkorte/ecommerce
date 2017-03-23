@@ -10,7 +10,6 @@ use Baum\Node;
 
 class ProductCategory extends Node
 {
-
     use Sluggable;
 
     public static $rules = array(
@@ -43,7 +42,7 @@ class ProductCategory extends Node
 
     public function shop()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Shop');
+        return $this->belongsTo('Hideyo\Backend\Models\Shop');
     }
 
     protected function getExistingSlugs($slug)
@@ -91,26 +90,26 @@ class ProductCategory extends Node
 
     public function refProductCategory()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory', 'redirect_product_category_id');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory', 'redirect_product_category_id');
     }
 
     public function productCategoryImages()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ProductCategoryImage');
+        return $this->hasMany('Hideyo\Backend\Models\ProductCategoryImage');
     }
 
     public function productCategoryHighlightProduct()
     {
-        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
     }
 
     public function productCategoryHighlightProductActive()
     {
-        return $this->belongsToMany('Hideyo\Shop\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
     }
 
     public function products()
     {
-        return $this->hasMany('Hideyo\Shop\Models\Product');
+        return $this->hasMany('Hideyo\Backend\Models\Product');
     }
 }

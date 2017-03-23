@@ -27,11 +27,11 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
             $rules = array();
         } else {
             $rules = array(
-                'title'                 => 'required|unique_with:product_category, shop_id'
+                'title'                 => 'required|unique_with:'.config()->get('hideyo.db_prefix').'product_category, shop_id'
             );
             
             if ($id) {
-                $rules['title'] =   'required|between:4,65|unique_with:product_category, shop_id, '.$id.' = id';
+                $rules['title'] =   'required|between:4,65|unique_with:'.config()->get('hideyo.db_prefix').'product_category, shop_id, '.$id.' = id';
             }
         }
         return $rules;
@@ -57,7 +57,6 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
         $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
-        $this->model->sluggify();
         $this->model->save();
         $this->model->rebuild();
         return $this->model;
