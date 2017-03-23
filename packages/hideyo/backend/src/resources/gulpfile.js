@@ -85,7 +85,7 @@ gulp.task('adminsass', function() {
         .pipe($.autoprefixer({
           browsers: ['last 2 versions', 'ie >= 9']
         }))
-        .pipe($.cleanCss())
+        //.pipe($.cleanCss())
         .pipe(gulp.dest('../../../../public/hideyo/css/'));
 });
 
