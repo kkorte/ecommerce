@@ -59,11 +59,11 @@ class ProductController extends Controller
                 'product.title', 'product_category.title as categorytitle', 'product.meta_title', 'product.meta_description']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))
 
-            ->leftJoin('product_category', 'product_category.id', '=', 'product.product_category_id')
+            ->leftJoin(config()->get('hideyo.db_prefix').'product_category as product_category', 'product_category.id', '=', 'product.product_category_id')
 
-            ->leftJoin('brand', 'brand.id', '=', 'product.brand_id')
+            ->leftJoin(config()->get('hideyo.db_prefix').'brand', 'brand.id', '=', 'product.brand_id')
 
-            ->where('product.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
 
             $datatables = \Datatables::of($product)
@@ -221,7 +221,7 @@ class ProductController extends Controller
 
 
         } else {
-            return view('admin.product.index')->with('product', $this->product->selectAll());
+            return view('hideyo_backend::product.index')->with('product', $this->product->selectAll());
         }
     }
 
@@ -288,7 +288,7 @@ class ProductController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.product.rank')->with('product', $this->product->selectAll());
+            return view('hideyo_backend::product.rank')->with('product', $this->product->selectAll());
         }
     }
 
@@ -307,7 +307,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create')->with(array('brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->lists('title', 'id')));
+        return view('hideyo_backend::product.create')->with(array('brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->lists('title', 'id')));
     }
 
     public function store()
@@ -349,7 +349,7 @@ class ProductController extends Controller
     {
         $product = $this->product->find($productId);
 
-        return view('admin.product.edit')->with(
+        return view('hideyo_backend::product.edit')->with(
             array(
             'product' => $product,
             'brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(),
@@ -361,7 +361,7 @@ class ProductController extends Controller
 
     public function getExport()
     {
-        return view('admin.product.export')->with(array());
+        return view('hideyo_backend::product.export')->with(array());
     }
 
     public function postExport()
@@ -417,7 +417,7 @@ class ProductController extends Controller
     {
         $product = $this->product->find($productId);
 
-        return view('admin.product.copy')->with(
+        return view('hideyo_backend::product.copy')->with(
             array(
                 'brands' => $this->brand->selectAll()->lists('title', 'id')->toArray(),
             'product' => $product,
@@ -458,12 +458,12 @@ class ProductController extends Controller
 
     public function editSeo($id)
     {
-        return view('admin.product.edit_seo')->with(array('product' => $this->product->find($id)));
+        return view('hideyo_backend::product.edit_seo')->with(array('product' => $this->product->find($id)));
     }
 
     public function editPrice($id)
     {
-        return view('admin.product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id')));
+        return view('hideyo_backend::product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAllOrder()->lists('title', 'id')));
     }
 
     public function update($productId)

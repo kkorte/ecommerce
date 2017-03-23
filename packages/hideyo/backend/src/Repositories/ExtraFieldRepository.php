@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
 
-use App\ExtraField;
+use Hideyo\Backend\Models\ExtraField;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

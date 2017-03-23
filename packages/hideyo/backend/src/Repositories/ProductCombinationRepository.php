@@ -3,7 +3,7 @@ namespace Hideyo\Backend\Repositories;
  
 use Hideyo\Backend\Models\ProductAttribute;
 use Hideyo\Backend\Models\ProductAttributeCombination;
-use Hideyo\repositories\ProductCombinationRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCombinationRepositoryInterface;
  
 class ProductCombinationRepository implements ProductCombinationRepositoryInterface
 {
