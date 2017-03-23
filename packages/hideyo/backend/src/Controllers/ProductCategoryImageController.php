@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductController
@@ -10,7 +10,7 @@
 
 use App\Http\Controllers\Controller;
 
-use Dutchbridge\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductCategoryRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;

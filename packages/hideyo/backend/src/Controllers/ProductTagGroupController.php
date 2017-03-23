@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ProductTagGroupRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductTagGroupRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 
 use \Request;
 use \Notification;

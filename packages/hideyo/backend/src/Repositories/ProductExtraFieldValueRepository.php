@@ -1,8 +1,8 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\ProductExtraFieldValue;
-use Hideyo\repositories\ProductExtraFieldValueRepositoryInterface;
+use Hideyo\Backend\Models\ProductExtraFieldValue;
+use Hideyo\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
  
 class ProductExtraFieldValueRepository implements ProductExtraFieldValueRepositoryInterface
 {

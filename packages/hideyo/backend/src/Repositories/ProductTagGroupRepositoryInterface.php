@@ -1,5 +1,5 @@
 <?php
-namespace Hideyo\Shop\Repositories;
+namespace Hideyo\Backend\Repositories;
 
 interface ProductTagGroupRepositoryInterface
 {

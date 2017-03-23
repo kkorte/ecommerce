@@ -1001,7 +1001,11 @@
                 "uri",
                 "url"
             ],
+<<<<<<< HEAD
             "time": "2017-03-20T17:10:46+00:00"
+=======
+            "time": "2017-03-20 17:10:46"
+>>>>>>> cf45bde2fca54fc4ce6f0fc8180232eef97ebcec
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -1732,16 +1736,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.36",
+            "version": "1.0.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297"
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
                 "shasum": ""
             },
             "require": {
@@ -1811,7 +1815,11 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
             "time": "2017-03-18T16:02:30+00:00"
+=======
+            "time": "2017-03-22 15:43:14"
+>>>>>>> cf45bde2fca54fc4ce6f0fc8180232eef97ebcec
         },
         {
             "name": "league/fractal",
@@ -4473,16 +4481,16 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "f80d6623cb33c446e499c24de92f5d58a2678bf5"
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/f80d6623cb33c446e499c24de92f5d58a2678bf5",
-                "reference": "f80d6623cb33c446e499c24de92f5d58a2678bf5",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/df97c5c7bf43eb0660f13fdc16a0efefc534311a",
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a",
                 "shasum": ""
             },
             "require": {
@@ -4530,7 +4538,11 @@
                 "tinymce",
                 "upload"
             ],
+<<<<<<< HEAD
             "time": "2017-02-17T08:42:40+00:00"
+=======
+            "time": "2017-03-23 06:55:16"
+>>>>>>> cf45bde2fca54fc4ce6f0fc8180232eef97ebcec
         },
         {
             "name": "vlucas/phpdotenv",

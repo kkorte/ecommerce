@@ -56,7 +56,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalog <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/admin/product">Products</a></li>
+						<li><a href="{{ URL::route('hideyo.product.index') }}">Products</a></li>
 						<li><a href="/admin/product-category">Categories</a></li>
 						<li><a href="/admin/brand">Brands</a></li>
 						<li><a href="/admin/product-tag-group">Product tag groups</a></li>

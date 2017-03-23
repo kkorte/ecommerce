@@ -4,13 +4,12 @@ namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Brand extends Model implements SluggableInterface
+class Brand extends Model
 {
 
-    use SluggableTrait;
+    use Sluggable;
 
     protected $table = 'brand';
 
@@ -24,11 +23,14 @@ class Brand extends Model implements SluggableInterface
         parent::__construct($attributes);
     }
 
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
 
     public function beforeValidate()

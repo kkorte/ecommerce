@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;

@@ -252,21 +252,33 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
 
 
-    Route::post('product/export', array('as' => 'admin.product.export', 'uses' => 'ProductController@postExport'));
+    Route::post('product/export', array('as' => 'hideyo.product.export', 'uses' => 'ProductController@postExport'));
 
-    Route::get('product/export', array('as' => 'admin.product.export', 'uses' => 'ProductController@getExport'));
+    Route::get('product/export', array('as' => 'hideyo.product.export', 'uses' => 'ProductController@getExport'));
 
-    Route::get('product/rank', array('as' => 'admin.product.ranking', 'uses' => 'ProductController@getRank'));
+    Route::get('product/rank', array('as' => 'hideyo.product.ranking', 'uses' => 'ProductController@getRank'));
 
 
-    Route::resource('product', 'ProductController');
-    Route::get('product/edit/{productId}/price', array('as' => 'admin.product.edit_price', 'uses' => 'ProductController@editPrice'));
-    Route::get('product/change-active/{productId}', array('as' => 'admin.product.change-active', 'uses' => 'ProductController@changeActive'));
-    Route::get('product/change-amount/{productId}/{amount}', array('as' => 'admin.product.change-amount', 'uses' => 'ProductController@changeAmount'));
-    Route::get('product/change-rank/{productId}/{rank}', array('as' => 'admin.product.change-rank', 'uses' => 'ProductController@changeRank'));
+
+    Route::resource('product', 'ProductController', ['names' => [
+        'index'     => 'hideyo.product.index',
+        'create'    => 'hideyo.product.create',
+        'store'     => 'hideyo.product.store',
+        'edit'      => 'hideyo.product.edit',
+        'update'    => 'hideyo.product.update',
+        'destroy'   => 'hideyo.product.destroy'
+    ]]);
+
+
+
+
+    Route::get('product/edit/{productId}/price', array('as' => 'hideyo.product.edit_price', 'uses' => 'ProductController@editPrice'));
+    Route::get('product/change-active/{productId}', array('as' => 'hideyo.product.change-active', 'uses' => 'ProductController@changeActive'));
+    Route::get('product/change-amount/{productId}/{amount}', array('as' => 'hideyo.product.change-amount', 'uses' => 'ProductController@changeAmount'));
+    Route::get('product/change-rank/{productId}/{rank}', array('as' => 'hideyo.product.change-rank', 'uses' => 'ProductController@changeRank'));
   
  
-    Route::get('product/edit/{productId}/seo', array('as' => 'admin.product.edit_seo', 'uses' => 'ProductController@editSeo'));
+    Route::get('product/edit/{productId}/seo', array('as' => 'hideyo.product.edit_seo', 'uses' => 'ProductController@editSeo'));
     Route::resource('product/{productId}/images', 'ProductImageController');
     Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController');
     Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController');
@@ -277,7 +289,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('product/{productId}/product-combination', 'ProductCombinationController');
 
 
-    Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount}', array('as' => 'admin.product.change-amount', 'uses' => 'ProductCombinationController@changeAmount'));
+    Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount}', array('as' => 'hideyo.product.change-amount', 'uses' => 'ProductCombinationController@changeAmount'));
  
 
      Route::resource('product-waiting-list', 'ProductWaitingListController');
@@ -295,23 +307,23 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     Route::resource('brand', 'BrandController');
 
-    Route::get('product-category/change-active/{productCategoryId}', array('as' => 'admin.product-category.change-active', 'uses' => 'ProductCategoryController@changeActive'));
+    Route::get('product-category/change-active/{productCategoryId}', array('as' => 'hideyo.product-category.change-active', 'uses' => 'ProductCategoryController@changeActive'));
     Route::resource('product-category', 'ProductCategoryController');
     Route::resource('product-tag-group', 'ProductTagGroupController');
-    Route::get('product_category/get_ajax_categories', array('as' => 'admin.product-category.ajax_categories', 'uses' => 'ProductCategoryController@ajaxCategories'));
-    Route::get('product_category/get_ajax_category/{id}', array('as' => 'admin.product-category.ajax_category', 'uses' => 'ProductCategoryController@ajaxCategory'));
+    Route::get('product_category/get_ajax_categories', array('as' => 'hideyo.product-category.ajax_categories', 'uses' => 'ProductCategoryController@ajaxCategories'));
+    Route::get('product_category/get_ajax_category/{id}', array('as' => 'hideyo.product-category.ajax_category', 'uses' => 'ProductCategoryController@ajaxCategory'));
  
-    Route::get('product_category/edit/{productCategoryId}/hightlight', array('as' => 'admin.product-category.edit.hightlight', 'uses' => 'ProductCategoryController@editHighlight'));
+    Route::get('product_category/edit/{productCategoryId}/hightlight', array('as' => 'hideyo.product-category.edit.hightlight', 'uses' => 'ProductCategoryController@editHighlight'));
 
 
     Route::resource('product-category/{productCategoryId}/images', 'ProductCategoryImageController');
-    Route::get('product_category/edit/{productCategoryId}/seo', array('as' => 'admin.product-category.edit_seo', 'uses' => 'ProductCategoryController@editSeo'));
+    Route::get('product_category/edit/{productCategoryId}/seo', array('as' => 'hideyo.product-category.edit_seo', 'uses' => 'ProductCategoryController@editSeo'));
 
-    Route::get('product_category/ajax-root-tree', array('as' => 'admin.product-category.ajax-root-tree', 'uses' => 'ProductCategoryController@ajaxRootTree'));
-    Route::get('product_category/ajax-children-tree', array('as' => 'admin.product-category.ajax-children-tree', 'uses' => 'ProductCategoryController@ajaxChildrenTree'));
-    Route::get('product_category/ajax-move-node', array('as' => 'admin.product-category.ajax-move-node', 'uses' => 'ProductCategoryController@ajaxMoveNode'));
+    Route::get('product_category/ajax-root-tree', array('as' => 'hideyo.product-category.ajax-root-tree', 'uses' => 'ProductCategoryController@ajaxRootTree'));
+    Route::get('product_category/ajax-children-tree', array('as' => 'hideyo.product-category.ajax-children-tree', 'uses' => 'ProductCategoryController@ajaxChildrenTree'));
+    Route::get('product_category/ajax-move-node', array('as' => 'hideyo.product-category.ajax-move-node', 'uses' => 'ProductCategoryController@ajaxMoveNode'));
 
-    Route::get('product_category/tree', array('as' => 'admin.product-category.tree', 'uses' => 'ProductCategoryController@tree'));
+    Route::get('product_category/tree', array('as' => 'hideyo.product-category.tree', 'uses' => 'ProductCategoryController@tree'));
 
     Route::resource('user', 'UserController'); // return the protected resource
     Route::get('profile/shop/change/{shopId}', array('as' => 'change.language.profile', 'uses' => 'UserController@changeShopProfile'));
