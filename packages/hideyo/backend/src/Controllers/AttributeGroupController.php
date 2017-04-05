@@ -3,16 +3,15 @@
 /**
  * ProductWeightTypeController
  *
- * This is the controller of the product weight types of the shop
+ * This is the controller of the attributes groups used by products of the shop
  * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
  * @version 1.0
  */
 
 use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\AttributeGroupRepositoryInterface;
-use Request;
+use Illuminate\Http\Request;
 use Notification;
-use Redirect;
 use DB;
 use Auth;
 use Datatables;
@@ -25,9 +24,9 @@ class AttributeGroupController extends Controller
         $this->attributeGroup = $attributeGroup;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        if (Request::wantsJson()) {
+        if ($request->wantsJson()) {
 
             $query = $this->attributeGroup->getModel()
             ->select([DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','title'])
@@ -42,29 +41,29 @@ class AttributeGroupController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('hideyo_backend::attribute-group.index')->with('attributeGroup', $this->attributeGroup->selectAll());
+            return view('hideyo_backend::attribute-group.index');
         }
     }
 
     public function create()
     {
-        return view('hideyo_backend::attribute-group.create')->with(array());
+        return view('hideyo_backend::attribute-group.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $result  = $this->attributeGroup->create(\Request::all());
+        $result  = $this->attributeGroup->create($request->all());
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was inserted.');
-            return \Redirect::route('admin.attribute-group.index');
+            Notification::success('The extra field was inserted.');
+            return redirect()->route('hideyo.attribute-group.index');
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function edit($id)
@@ -77,15 +76,15 @@ class AttributeGroupController extends Controller
         $result  = $this->attributeGroup->updateById(\Request::all(), $id);
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was updated.');
-            return \Redirect::route('admin.attribute-group.index');
+            Notification::success('The extra field was updated.');
+            return redirect()->route('hideyo.attribute-group.index');
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function destroy($id)
@@ -94,7 +93,7 @@ class AttributeGroupController extends Controller
 
         if ($result) {
             Notification::success('Extra field was deleted.');
-            return Redirect::route('admin.attribute-group.index');
+            return Redirect::route('hideyo.attribute-group.index');
         }
     }
 }

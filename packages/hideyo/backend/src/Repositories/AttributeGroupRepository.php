@@ -16,12 +16,13 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
   
     public function rules($id = false)
     {
+
         $rules = array(
-            'title' => 'required|between:1,65|unique_with:attribute_group, shop_id'
+            'title' => 'required|between:1,65|unique_with:'.$this->model->getTable().', shop_id'
         );
         
         if ($id) {
-            $rules['title'] =   'required|between:1,65|unique_with:attribute_group, shop_id, '.$id.' = id';
+            $rules['title'] =   'required|between:1,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;

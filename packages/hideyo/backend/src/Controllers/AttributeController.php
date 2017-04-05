@@ -2,9 +2,9 @@
 
 
 /**
- * ProductWeightTypeController
+ * AttributeController
  *
- * This is the controller of the product weight types of the shop
+ * This is the controller of the attributes of a attribute group
  * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
  * @version 1.0
  */
@@ -13,9 +13,9 @@ use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\AttributeRepositoryInterface;
 use Hideyo\Backend\Repositories\AttributeGroupRepositoryInterface;
 
-use \Request;
-use \Notification;
-use \Redirect;
+use Request;
+use Notification;
+use Redirect;
 
 class AttributeController extends Controller
 {
