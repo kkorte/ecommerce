@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 use Notification;
 use Mail;
 use Excel;
+use Auth;
+use Notification;
 
 class ClientController extends Controller
 {
@@ -31,19 +33,19 @@ class ClientController extends Controller
 
     public function index()
     {
-        $shop  = \Auth::guard('hideyobackend')->user()->shop;
+        $shop  = Auth::guard('hideyobackend')->user()->shop;
 
         if ($shop->wholesale) {
 
             if ($this->request->wantsJson()) {
 
-                $shop  = \Auth::guard('hideyobackend')->user()->shop();
+                $shop  = Auth::guard('hideyobackend')->user()->shop();
                 $clients = $this->client->getModel()->select(
                     [
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'id', 'company', 'bill_client_address_id', 'vat_number', 'debtor_number', 'active', 'confirmed', 'iban_number', 'chamber_of_commerce_number',
                     'email', 'last_login']
-                )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+                )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
                 
                 $datatables = \Datatables::of($clients)
 
@@ -91,13 +93,13 @@ class ClientController extends Controller
 
 
             if ($this->request->wantsJson()) {
-                $shop  = \Auth::guard('hideyobackend')->user()->shop();
+                $shop  = Auth::guard('hideyobackend')->user()->shop();
                 $clients = $this->client->getModel()->select(
                     [
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                     'id', 'confirmed', 'active',
                     'email', 'last_login']
-                )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+                )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
                 
                 $datatables = \Datatables::of($clients)
 
@@ -153,7 +155,7 @@ class ClientController extends Controller
         $result  = $this->client->activate($id);
 
 
-        $shop  = \Auth::guard('hideyobackend')->user()->shop;
+        $shop  = Auth::guard('hideyobackend')->user()->shop;
 
         if ($shop->wholesale and $result) {
             if ($input['send_mail']) {
@@ -173,7 +175,7 @@ class ClientController extends Controller
             }
         }
 
-        \Notification::success('The client was activate.');
+        Notification::success('The client was activate.');
         return redirect()->route('admin.client.index');
     }
 
@@ -181,7 +183,7 @@ class ClientController extends Controller
     public function postDeActivate($id)
     {
         $result  = $this->client->deactivate($id);
-        \Notification::success('The client was deactivate.');
+        Notification::success('The client was deactivate.');
         return redirect()->route('admin.client.index');
     }
 
@@ -191,12 +193,12 @@ class ClientController extends Controller
  
 
         if (isset($result->id)) {
-            \Notification::success('The client was inserted.');
+            Notification::success('The client was inserted.');
             return redirect()->route('admin.client.index');
         }
             
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }
@@ -270,7 +272,7 @@ class ClientController extends Controller
         })->download('xls');
 
 
-        \Notification::success('The product export is completed.');
+        Notification::success('The product export is completed.');
         return redirect()->route('admin.product.index');
     }
 
@@ -282,7 +284,7 @@ class ClientController extends Controller
         $input = $this->request->all();
         if (isset($result->id)) {
             if ($result->active) {
-                $shop  = \Auth::guard('hideyobackend')->user()->shop;
+                $shop  = Auth::guard('hideyobackend')->user()->shop;
 
                 if ($shop->wholesale and $result) {
                     if ($input['send_mail']) {
@@ -305,12 +307,12 @@ class ClientController extends Controller
 
 
 
-            \Notification::success('The client was updated.');
+            Notification::success('The client was updated.');
             return redirect()->route('admin.client.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }
