@@ -241,7 +241,16 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
 
-    Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController');
+
+    Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController', ['names' => [
+        'index'     => 'hideyo.attribute.index',
+        'create'    => 'hideyo.attribute.create',
+        'store'     => 'hideyo.attribute.store',
+        'edit'      => 'hideyo.attribute.edit',
+        'update'    => 'hideyo.attribute.update',
+        'destroy'   => 'hideyo.attribute.destroy'
+    ]]);
+
   
     Route::resource('attribute-group', 'AttributeGroupController', ['names' => [
         'index'     => 'hideyo.attribute-group.index',
@@ -316,9 +325,19 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product-category/refactor-images', array('as' => 'product-category.refactor-images', 'uses' => 'ProductCategoryController@refactorAllImages'));
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));
 
-    Route::resource('brand/{brandId}/images', 'BrandImageController');
+
+    Route::resource('brand/{brandId}/images', 'BrandImageController', ['names' => [
+        'index'     => 'hideyo.brand-image.index',
+        'create'    => 'hideyo.brand-image.create',
+        'store'     => 'hideyo.brand-image.store',
+        'edit'      => 'hideyo.brand-image.edit',
+        'update'    => 'hideyo.brand-image.update',
+        'destroy'   => 'hideyo.brand-image.destroy'
+    ]]);
+
+
  
-    Route::get('brand/edit/{brandId}/seo', array('as' => 'admin.brand.edit_seo', 'uses' => 'BrandController@editSeo'));
+    Route::get('brand/edit/{brandId}/seo', array('as' => 'hideyo.brand.edit_seo', 'uses' => 'BrandController@editSeo'));
  
 
     Route::resource('brand', 'BrandController', ['names' => [

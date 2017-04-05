@@ -1,5 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
-
+<?php namespace Hideyo\Backend\Controllers;
 /**
  * ProductController
  *
@@ -45,14 +44,14 @@ class BrandImageController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.brand_image.index')->with(array( 'brand' => $brand));
+            return view('hideyo_backend::brand_image.index')->with(array( 'brand' => $brand));
         }
     }
 
     public function create($brandId)
     {
         $brand = $this->brand->find($brandId);
-        return view('admin.brand_image.create')->with(array('brand' => $brand));
+        return view('hideyo_backend::brand_image.create')->with(array('brand' => $brand));
     }
 
     public function store($brandId)
@@ -73,7 +72,7 @@ class BrandImageController extends Controller
     public function edit($brandId, $id)
     {
         $brand = $this->brand->find($brandId);
-        return view('admin.brand_image.edit')->with(array('brandImage' => $this->brand->findImage($id), 'brand' => $brand));
+        return view('hideyo_backend::brand_image.edit')->with(array('brandImage' => $this->brand->findImage($id), 'brand' => $brand));
     }
 
     public function update($brandId, $id)

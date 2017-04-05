@@ -27,15 +27,15 @@ class BrandRepository implements BrandRepositoryInterface
     {
         if (isset($attributes['seo'])) {
             $rules = array(
-                'meta_title'                 => 'required|between:4,65|unique_with:brand, shop_id'
+                'meta_title'                 => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
             );
         } else {
             $rules = array(
-                'title'                 => 'required|between:4,65|unique_with:brand, shop_id',
+                'title'                 => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id',
             );
             
             if ($id) {
-                $rules['title'] =   'required|between:4,65|unique_with:brand, shop_id, '.$id.' = id';
+                $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
             }
         }
 
@@ -137,11 +137,11 @@ class BrandRepository implements BrandRepositoryInterface
         $result = $this->updateEntity($attributes);
 
 
-        if (isset($attributes['title']) AND $oldTitle != $attributes['title']) {
-            $url = $result->shop->url.route('brand.item', ['slug' => $oldSlug], null);
-            $newUrl = $result->shop->url.route('brand.item', ['slug' => $result->slug], null);
-            $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $result->shop_id));
-        }
+        // if (isset($attributes['title']) AND $oldTitle != $attributes['title']) {
+        //     $url = $result->shop->url.route('brand.item', ['slug' => $oldSlug], null);
+        //     $newUrl = $result->shop->url.route('brand.item', ['slug' => $result->slug], null);
+        //     $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $result->shop_id));
+        // }
 
 
         return $result;
@@ -179,9 +179,9 @@ class BrandRepository implements BrandRepositoryInterface
     {
         $this->model = $this->find($id);
 
-        $url = $this->model->shop->url.route('brand.item', ['slug' => $this->model->slug], null);
-        $newUrl = $this->model->shop->url.route('brand.overview', array(), null);
-        $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $this->model->shop_id));
+        // $url = $this->model->shop->url.route('brand.item', ['slug' => $this->model->slug], null);
+        // $newUrl = $this->model->shop->url.route('brand.overview', array(), null);
+        // $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $this->model->shop_id));
 
         $this->model->save();
 

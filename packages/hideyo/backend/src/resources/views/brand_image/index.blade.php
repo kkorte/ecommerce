@@ -1,21 +1,21 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.brand-tabs', array('brandImages' => true))
+        @include('hideyo_backend::_partials.brand-tabs', array('brandImages' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.brand.index') !!}">Brand</a></li>  
-            <li><a href="{!! URL::route('admin.brand.edit', $brand->id) !!}">edit</a></li>
-            <li class="active"><a href="{!! URL::route('admin.brand.edit', $brand->id) !!}">{!! $brand->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.brand.index') !!}">Brand</a></li>  
+            <li><a href="{!! URL::route('hideyo.brand.edit', $brand->id) !!}">edit</a></li>
+            <li class="active"><a href="{!! URL::route('hideyo.brand.edit', $brand->id) !!}">{!! $brand->title !!}</a></li>
             <li class="active">images</li>           
         </ol>
 
-        <a href="{{ URL::route('admin.brand.{brandId}.images.create', $brand->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
+        <a href="{{ URL::route('hideyo.brand-image.create', $brand->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
 
         <h2>Brand <small>images</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('admin.brand.{brandId}.images.index', $brand->id) }}",
+                   "ajax": "{{ URL::route('hideyo.brand-image.index', $brand->id) }}",
 
                  columns: [
               {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

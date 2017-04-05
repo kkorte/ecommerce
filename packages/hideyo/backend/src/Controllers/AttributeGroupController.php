@@ -1,7 +1,7 @@
 <?php namespace Hideyo\Backend\Controllers;
 
 /**
- * ProductWeightTypeController
+ * AttributeGroupController
  *
  * This is the controller of the attributes groups used by products of the shop
  * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
@@ -33,8 +33,10 @@ class AttributeGroupController extends Controller
             ->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = Datatables::of($query)->addColumn('action', function ($query) {
-                $delete = Form::deleteajax('/admin/attribute-group/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/attribute-group/'.$query->id.'/attributes" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->attributes->count().' Attributes</a> <a href="/admin/attribute-group/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
+                $delete = Form::deleteajax(url()->route('hideyo.attribute-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '
+                    <a href="'.url()->route('hideyo.attribute.index', $query->id).'" class="btn btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->attributes->count().' Attributes</a>
+                    <a href="'.url()->route('hideyo.attribute-group.edit', $query->id).'" class="btn btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
                 '.$delete;
                 return $link;
             });
@@ -68,12 +70,17 @@ class AttributeGroupController extends Controller
 
     public function edit($id)
     {
-        return view('hideyo_backend::attribute-group.edit')->with(array('attributeGroup' => $this->attributeGroup->find($id)));
+        return view('hideyo_backend::attribute-group.edit')
+        ->with(
+            array(
+                'attributeGroup' => $this->attributeGroup->find($id)
+            )
+        );
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $result  = $this->attributeGroup->updateById(\Request::all(), $id);
+        $result  = $this->attributeGroup->updateById($request->all(), $id);
 
         if (isset($result->id)) {
             Notification::success('The extra field was updated.');
@@ -93,7 +100,7 @@ class AttributeGroupController extends Controller
 
         if ($result) {
             Notification::success('Extra field was deleted.');
-            return Redirect::route('hideyo.attribute-group.index');
+            return redirect()->route('hideyo.attribute-group.index');
         }
     }
 }

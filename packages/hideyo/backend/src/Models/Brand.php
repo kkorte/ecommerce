@@ -43,17 +43,17 @@ class Brand extends Model
 
     public function products()
     {
-        return $this->hasMany('Hideyo\Shop\Models\Product');
+        return $this->hasMany('Hideyo\Backend\Models\Product');
     }
 
 
     public function brandImages()
     {
-        return $this->hasMany('Hideyo\Shop\Models\BrandImage');
+        return $this->hasMany('Hideyo\Backend\Models\BrandImage');
     }
 
     public function shop()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Shop');
+        return $this->belongsTo('Hideyo\Backend\Models\Shop');
     }
 }

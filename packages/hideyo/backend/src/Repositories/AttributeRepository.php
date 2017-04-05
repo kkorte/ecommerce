@@ -19,11 +19,11 @@ class AttributeRepository implements AttributeRepositoryInterface
     {
         if ($id) {
             return [
-                'value' => 'required|unique_with:attribute,attribute_group_id,'.$id,
+                'value' => 'required|unique_with:'.$this->model->getTable().',attribute_group_id,'.$id,
             ];
         } else {
             return [
-                'value' => 'required|unique_with:attribute,attribute_group_id'
+                'value' => 'required|unique_with:'.$this->model->getTable().',attribute_group_id'
             ];
         }
     }
