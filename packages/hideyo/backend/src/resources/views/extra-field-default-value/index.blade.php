@@ -13,7 +13,7 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
             <li><a href="{!! URL::route('hideyo.extra-field.index') !!}">Extra fields</a></li>  
             <li><a href="{!! URL::route('hideyo.extra-field.edit', $extraField->id) !!}">edit</a></li>
             <li class="active"><a href="{!! URL::route('hideyo.extra-field.{extraFieldId}.values.index', $extraField->id) !!}">{!! $extraField->title !!}</a></li>

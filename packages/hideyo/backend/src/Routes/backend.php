@@ -4,8 +4,18 @@
 
 
 Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web','auth.hideyo.backend']], function () {
-  
-    Route::resource('/', 'DashboardController');
+ 
+ 
+    Route::resource('dashboard', 'DashboardController', ['names' => [
+        'index'     => 'hideyo.dashboard.index',
+        'create'    => 'hideyo.dashboard.create',
+        'store'     => 'hideyo.dashboard.store',
+        'edit'      => 'hideyo.dashboard.edit',
+        'update'    => 'hideyo.dashboard.update',
+        'destroy'   => 'hideyo.dashboard.destroy'
+    ]]);
+
+
     Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));
     Route::get('dashboard/stats/order-average-by-year/{year}', array('as' => 'admin.dashboard.stats.average', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsOrderAverageByYear'));
     
@@ -15,7 +25,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
        
         
     Route::get('dashboard/stats', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@showStats'));
-    Route::resource('dashboard', 'Hideyo\Shop\Controllers\Backend\DashboardController');
+
  
     Route::resource('shop', 'ShopController', ['names' => [
         'index'     => 'hideyo.shop.index',

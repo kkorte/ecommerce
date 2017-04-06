@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
             <li><a href="{{ URL::route('hideyo.order-status.index') }}">Order statuses</a></li>  
             <li class="active">create</li>
         </ol>
