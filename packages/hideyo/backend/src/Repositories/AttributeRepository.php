@@ -75,16 +75,6 @@ class AttributeRepository implements AttributeRepositoryInterface
         return $this->model->delete();
     }
 
-    public function selectAllByAllProductsAndProductCategoryId($productCategoryId)
-    {
-        return $this->model
-        ->select('extra_field.*')
-        ->leftJoin('product_category_related_extra_field', 'extra_field.id', '=', 'product_category_related_extra_field.attribute_group_id')
-        ->where('all_products', '=', 1)
-        ->orWhere('product_category_related_extra_field.product_category_id', '=', $productCategoryId)
-        ->get();
-    }
-
     public function selectAll()
     {
         return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
@@ -95,10 +85,8 @@ class AttributeRepository implements AttributeRepositoryInterface
         return $this->model->find($id);
     }
 
-
     public function getModel()
     {
         return $this->model;
-    }
-    
+    } 
 }

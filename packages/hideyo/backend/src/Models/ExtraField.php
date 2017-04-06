@@ -21,17 +21,17 @@ class ExtraField extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('Hideyo\Shop\Models\ProductCategory', 'extra_field_related_product_category');
+        return $this->belongsToMany('Hideyo\Backend\Models\ProductCategory', 'extra_field_related_product_category');
     }
 
     public function productCategory()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory');
     }
 
     public function values()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ExtraFieldDefaultValue');
+        return $this->hasMany('Hideyo\Backend\Models\ExtraFieldDefaultValue');
     }
 
     public function setProductCategoryIdAttribute($value)

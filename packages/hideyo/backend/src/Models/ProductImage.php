@@ -26,16 +26,16 @@ class ProductImage extends Model
 
     public function product()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Product');
+        return $this->belongsTo('Hideyo\Backend\Models\Product');
     }
 
     public function relatedProductAttributes()
     {
-        return $this->belongsToMany('Hideyo\Shop\Models\ProductAttribute', 'product_attribute_image', 'product_image_id', 'product_attribute_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\ProductAttribute', 'product_attribute_image', 'product_image_id', 'product_attribute_id');
     }
 
     public function relatedAttributes()
     {
-        return $this->belongsToMany('Hideyo\Shop\Models\Attribute', 'product_image_attribute', 'product_image_id', 'attribute_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Attribute', 'product_image_attribute', 'product_image_id', 'attribute_id');
     }
 }

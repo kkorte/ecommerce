@@ -25,7 +25,6 @@ class ClientAddressRepository implements ClientAddressRepositoryInterface
         return $this->model;
     }
 
-
     public function createByClient(array $attributes, $clientId)
     {
         $attributes['client_id'] = $clientId;
@@ -35,7 +34,6 @@ class ClientAddressRepository implements ClientAddressRepositoryInterface
         
         return $this->model;
     }
-
 
     public function updateById(array $attributes, $clientId, $id)
     {

@@ -74,16 +74,6 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
         return $this->model->delete();
     }
 
-    public function selectAllByAllProductsAndProductCategoryId($productCategoryId)
-    {
-        return $this->model
-        ->select('extra_field.*')
-        ->leftJoin('product_category_related_extra_field', 'extra_field.id', '=', 'product_category_related_extra_field.extra_field_id')
-        ->where('all_products', '=', 1)
-        ->orWhere('product_category_related_extra_field.product_category_id', '=', $productCategoryId)
-        ->get();
-    }
-
     public function selectAll()
     {
         return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
@@ -97,6 +87,5 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     public function getModel()
     {
         return $this->model;
-    }
-    
+    }   
 }

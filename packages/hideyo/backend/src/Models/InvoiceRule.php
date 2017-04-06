@@ -65,11 +65,11 @@ class InvoiceRule extends Model
 
     public function invoice()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Invoice');
+        return $this->belongsTo('Hideyo\Backend\Models\Invoice');
     }
 
     public function productAttribute()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductAttribute');
     }
 }

@@ -18,12 +18,12 @@ class TaxRateRepository implements TaxRateRepositoryInterface
     public function rules($id = false)
     {
         $rules = array(
-            'title' => 'required|between:4,65|unique_with:tax_rate, shop_id'
+            'title' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
 
         );
         
         if ($id) {
-            $rules['title'] =   'required|between:4,65|unique_with:tax_rate, shop_id, '.$id.' = id';
+            $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;
@@ -78,11 +78,6 @@ class TaxRateRepository implements TaxRateRepositoryInterface
     public function selectAll()
     {
         return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
-    }
-
-    public function selectAllOrder()
-    {
-        return $this->model->orderBy('title', 'desc')->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     public function getModel() {

@@ -20,11 +20,11 @@ class RedirectRepository implements RedirectRepositoryInterface
     public function rules($id = false)
     {
         $rules = array(
-            'url' => 'required|unique_with:redirect, shop_id'
+            'url' => 'required|unique_with:'.$this->model->getTable().', shop_id'
         );
         
         if ($id) {
-            $rules['url'] = 'required|unique_with:redirect, shop_id, '.$id.' = id';
+            $rules['url'] = 'required|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;

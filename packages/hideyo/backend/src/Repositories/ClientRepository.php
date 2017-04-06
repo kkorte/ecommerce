@@ -513,41 +513,11 @@ class ClientRepository implements ClientRepositoryInterface
         return $result;
     }
 
-    public function oldPasswordCheck(array $attributes)
-    {
-        $oldPassword = self::encodePassword($attributes['password']);
-
-        $result = $this->model->whereNull('password')->where('shop_id', '=', $attributes['shop_id'])->whereNotNull('old_password')->whereNotNull('account_created')->where('email', '=', $attributes['email'])->get()->first();
-    
-
-        if ($result) {
-            if ($result->old_password == $oldPassword) {
-                $this->model = $this->model->where('email', '=', $attributes['email'])->where('shop_id', '=', $attributes['shop_id'])->where('old_password', '=', $oldPassword)->get()->first();
-
-                if ($this->model) {
-                    if ($attributes['password']) {
-                        $attributes['confirmed'] = 1;
-                        $attributes['active'] = 1;
-                        $attributes['confirmation_code'] = null;
-                    }
-                    $attributes['password'] = \Hash::make($attributes['password']);
-                    unset($attributes['shop_id']);
-                    $this->updateEntity($attributes);
-
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
 
     public function selectAllExport()
     {
         return $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->whereNotNull('account_created')->where('active', '=', 1)->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
-
-
 
     public static function encodePassword($password, $salt = 'foodeliciousnl', $count = 1000, $length = 32, $algorithm = 'sha1', $start = 16)
     {
@@ -555,7 +525,6 @@ class ClientRepository implements ClientRepositoryInterface
 
         return base64_encode($hash);
     }
-
 
 
     function editAddress($shopId, $clientId, $addressId, $attributes)

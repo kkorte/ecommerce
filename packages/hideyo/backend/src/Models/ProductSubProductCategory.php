@@ -21,16 +21,16 @@ class ProductSubProductCategory extends Model
 
     public function shop()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Shop');
+        return $this->belongsTo('Hideyo\Backend\Models\Shop');
     }
 
     public function product()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Product');
+        return $this->belongsTo('Hideyo\Backend\Models\Product');
     }
 
     public function productCategory()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory');
     }
 }

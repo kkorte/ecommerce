@@ -12,7 +12,6 @@ use Hideyo\Backend\Repositories\ShopRepositoryInterface;
  
 class BrandRepository implements BrandRepositoryInterface
 {
-
     protected $model;
 
     public function __construct(Brand $model, BrandImage $modelImage, RedirectRepositoryInterface $redirect, ShopRepositoryInterface $shop)
@@ -117,10 +116,8 @@ class BrandRepository implements BrandRepositoryInterface
         }
     }
 
-
     public function updateById(array $attributes, $id)
     {
-
         $validator = \Validator::make($attributes, $this->rules($id, $attributes));
         $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         if ($validator->fails()) {
@@ -136,14 +133,6 @@ class BrandRepository implements BrandRepositoryInterface
 
         $result = $this->updateEntity($attributes);
 
-
-        // if (isset($attributes['title']) AND $oldTitle != $attributes['title']) {
-        //     $url = $result->shop->url.route('brand.item', ['slug' => $oldSlug], null);
-        //     $newUrl = $result->shop->url.route('brand.item', ['slug' => $result->slug], null);
-        //     $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $result->shop_id));
-        // }
-
-
         return $result;
     }
 
@@ -156,7 +145,6 @@ class BrandRepository implements BrandRepositoryInterface
 
         return $this->model;
     }
-
 
     public function updateImageById(array $attributes, $brandId, $id)
     {
@@ -238,32 +226,6 @@ class BrandRepository implements BrandRepositoryInterface
                 }
             }
         }
-    }
-
-    function selectAllByShopIdAndPaginate($shopId, $totalPage, $filters = false)
-    {
-        $result = $this->model
-           ->where('shop_id', '=', $shopId)->where('active', '=', 1)
-           ->orderBy(\DB::raw('rank = 0, rank'), 'ASC');
-        if ($filters) {
-        }
-
-        return array(
-            'totals' => $result->get()->count(),
-            'totalPages' => ceil($result->get()->count() / $totalPage),
-            'result' => $result->paginate($totalPage),
-            'totalOnPage' => $totalPage
-        );
-    }
-
-    function selectOneBySlug($shopId, $slug)
-    {
-           return $this->model->where('slug', '=', $slug)->where('active', '=', 1)->get()->first();
-    }
-
-    public function selectAllByShopId($shopId)
-    {
-        return $this->model->where('shop_id', '=', $shopId)->where('active', '=', 1)->get();
     }
 
     public function selectAll()

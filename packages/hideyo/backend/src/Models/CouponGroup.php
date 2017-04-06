@@ -20,6 +20,6 @@ class CouponGroup extends Model
 
     public function coupon()
     {
-        return $this->hasMany('Hideyo\Shop\Models\Coupon');
+        return $this->hasMany('Hideyo\Backend\Models\Coupon');
     }
 }

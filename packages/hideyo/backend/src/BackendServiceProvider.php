@@ -51,7 +51,6 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         
-
     }
 
     /**
@@ -246,7 +245,6 @@ class BackendServiceProvider extends ServiceProvider
             'Hideyo\Backend\Repositories\SendingPaymentMethodRelatedRepository'
         );
 
-
         $this->app->bind(
             'Hideyo\Backend\Repositories\RecipeRepositoryInterface',
             'Hideyo\Backend\Repositories\RecipeRepository'
@@ -256,7 +254,6 @@ class BackendServiceProvider extends ServiceProvider
             'Hideyo\Backend\Repositories\NewsRepositoryInterface',
             'Hideyo\Backend\Repositories\NewsRepository'
         );
-
 
         $this->app->bind(
             'Hideyo\Backend\Repositories\ContentRepositoryInterface',
@@ -272,17 +269,6 @@ class BackendServiceProvider extends ServiceProvider
             'Hideyo\Backend\Repositories\HtmlBlockRepositoryInterface',
             'Hideyo\Backend\Repositories\HtmlBlockRepository'
         );
-
-        $this->app->bind(
-            'Hideyo\Backend\Repositories\BoxRepositoryInterface',
-            'Hideyo\Backend\Repositories\BoxRepository'
-        );
-
-        $this->app->bind(
-            'Hideyo\Backend\Repositories\LandingPageRepositoryInterface',
-            'Hideyo\Backend\Repositories\LandingPageRepository'
-        );
-
 
         $this->app->bind(
             'Hideyo\Backend\Repositories\GeneralSettingRepositoryInterface',
@@ -309,19 +295,12 @@ class BackendServiceProvider extends ServiceProvider
         $this->app->register(CustomHtmlServiceProvider::class);
         $this->app->register(UniqueWithValidatorServiceProvider::class);
 
-
-
         if (class_exists('Illuminate\Foundation\AliasLoader')) {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
             $loader->alias('Form', \Collective\Html\FormFacade::class);
             $loader->alias('Html', \Collective\Html\HtmlFacade::class);
             $loader->alias('Notification', \Krucas\Notification\Facades\Notification::class);
         }
-
-  
-
-
-
     }
 
 }

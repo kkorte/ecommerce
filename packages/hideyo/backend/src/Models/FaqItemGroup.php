@@ -27,9 +27,8 @@ class FaqItemGroup extends Model implements SluggableInterface
         parent::__construct($attributes);
     }
 
-
     public function faqItems()
     {
-        return $this->hasMany('Hideyo\Shop\Models\FaqItem');
+        return $this->hasMany('Hideyo\Backend\Models\FaqItem');
     }
 }

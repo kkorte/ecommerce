@@ -29,6 +29,6 @@ class NewsGroup extends Model implements SluggableInterface
 
     public function news()
     {
-        return $this->hasMany('Hideyo\Shop\Models\News');
+        return $this->hasMany('Hideyo\Backend\Models\News');
     }
 }

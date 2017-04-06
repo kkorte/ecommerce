@@ -18,12 +18,12 @@ class ProductWaitingListRepository implements ProductWaitingListRepositoryInterf
     public function rules($id = false)
     {
         $rules = array(
-            'tag' => 'required|between:4,65|unique_with:product_tag_group, shop_id'
+            'tag' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
 
         );
         
         if ($id) {
-            $rules['tag'] =   'required|between:4,65|unique_with:product_tag_group, shop_id, '.$id.' = id';
+            $rules['tag'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;

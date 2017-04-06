@@ -3,7 +3,6 @@ namespace Hideyo\Backend\Repositories;
 
 interface AttributeGroupRepositoryInterface
 {
-
     public function rules($id = false);
 
     public function create(array $attributes);
@@ -14,9 +13,9 @@ interface AttributeGroupRepositoryInterface
 
     public function destroy($id);
 
-    public function selectAllByAllProductsAndProductCategoryId($productCategoryId);
-
     public function selectAll();
     
     public function find($id);
+
+    public function getModel();
 }

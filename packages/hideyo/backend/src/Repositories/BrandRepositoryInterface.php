@@ -11,4 +11,6 @@ interface BrandRepositoryInterface
     public function selectAll();
     
     public function find($id);
+
+    public function getModel();
 }
