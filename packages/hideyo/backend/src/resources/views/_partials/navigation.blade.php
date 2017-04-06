@@ -47,8 +47,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coupons <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/admin/coupon">Coupons</a></li>
-						<li><a href="/admin/coupon-group">Groups</a></li>
+						<li><a href="{{ URL::route('hideyo.coupon.index') }}">Coupons</a></li>
+						<li><a href="{{ URL::route('hideyo.coupon-group.index') }}">Groups</a></li>
 					</ul>
 				</li>
 
@@ -69,13 +69,13 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-								<li><a href="/admin/news">News</a></li>
-						<li><a href="/admin/news-group">News group</a></li>
+						<li><a href="{{ URL::route('hideyo.news.index') }}">News</a></li>
+						<li><a href="{{ URL::route('hideyo.news-group.index') }}">News group</a></li>
 						<li><a href="{{ URL::route('hideyo.content.index') }}">Static content</a></li>
 						<li><a href="{{ URL::route('hideyo.content-group.index') }}">Static content groups</a></li>
-						<li><a href="/admin/html-block">HTML blocks</a></li>
-						<li><a href="/admin/faq">Faq items</a></li>
-						<li><a href="/admin/landing-page">Landingpages</a></li>
+						<li><a href="{{ URL::route('hideyo.html-block.index') }}">HTML blocks</a></li>
+						<li><a href="{{ URL::route('hideyo.faq.index') }}">Faq items</a></li>
+						<li><a href="{{ URL::route('hideyo.landing-page.index') }}">Landingpages</a></li>
 					</ul>
 				</li>
 
@@ -88,8 +88,8 @@
 						<li><a href="{{ URL::route('hideyo.user.index') }}">Users</a></li>
 						<li><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Order templates</a></li>
 						<li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>
-						<li><a href="/admin/error">Errors</a></li>
-						<li><a href="/admin/redirect">Redirects</a></li>
+						<li><a href="{{ URL::route('hideyo.error.index') }}">Errors</a></li>
+						<li><a href="{{ URL::route('hideyo.redirect.index') }}">Redirects</a></li>
 					</ul>
 				</li>
 				<li><a href="/admin/security/logout">Log-out</a></li>

@@ -110,9 +110,16 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
         'destroy'   => 'hideyo.order-status-email-template.destroy'
     ]]);
 
+    Route::resource('redirect', 'RedirectController', ['names' => [
+        'index'     => 'hideyo.redirect.index',
+        'create'    => 'hideyo.redirect.create',
+        'store'     => 'hideyo.redirect.store',
+        'edit'      => 'hideyo.redirect.edit',
+        'update'    => 'hideyo.redirect.update',
+        'destroy'   => 'hideyo.redirect.destroy'
+    ]]);
 
 
-    Route::resource('/redirect', 'RedirectController');
 
 
     Route::resource('tax-rate', 'TaxRateController', ['names' => [
@@ -169,9 +176,17 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     
 
 
+    Route::resource('error', 'ErrorController', ['names' => [
+        'index'     => 'hideyo.error.index',
+        'create'    => 'hideyo.error.create',
+        'store'     => 'hideyo.error.store',
+        'edit'      => 'hideyo.error.edit',
+        'update'    => 'hideyo.error.update',
+        'destroy'   => 'hideyo.error.destroy'
+    ]]);
 
 
-    Route::resource('error', 'ErrorController');
+
 
 
 
@@ -221,14 +236,38 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     Route::get('news/edit/{newsId}/seo', array('as' => 'admin.news.edit_seo', 'uses' => 'NewsController@editSeo'));
 
-    Route::resource('news', 'NewsController');
+    Route::resource('news', 'NewsController', ['names' => [
+        'index'     => 'hideyo.news.index',
+        'create'    => 'hideyo.news.create',
+        'store'     => 'hideyo.news.store',
+        'edit'      => 'hideyo.news.edit',
+        'update'    => 'hideyo.news.update',
+        'destroy'   => 'hideyo.news.destroy'
+    ]]);
 
-    Route::resource('news-group', 'NewsGroupController');
+
+    Route::resource('news-group', 'NewsGroupController', ['names' => [
+        'index'     => 'hideyo.news-group.index',
+        'create'    => 'hideyo.news-group.create',
+        'store'     => 'hideyo.news-group.store',
+        'edit'      => 'hideyo.news-group.edit',
+        'update'    => 'hideyo.news-group.update',
+        'destroy'   => 'hideyo.news-group.destroy'
+    ]]);
+
 
     Route::get('news-group/edit/{newsGroupId}/seo', array('as' => 'admin.news-group.edit_seo', 'uses' => 'NewsGroupController@editSeo'));
 
+    Route::resource('faq', 'FaqItemController', ['names' => [
+        'index'     => 'hideyo.faq.index',
+        'create'    => 'hideyo.faq.create',
+        'store'     => 'hideyo.faq.store',
+        'edit'      => 'hideyo.faq.edit',
+        'update'    => 'hideyo.faq.update',
+        'destroy'   => 'hideyo.faq.destroy'
+    ]]);
 
-    Route::resource('faq', 'FaqItemController');
+
 
     Route::resource('html-block/{htmlBlockId}/copy', 'HtmlBlockController@copy');
     Route::get('html-block/change-active/{htmlBlockId}', array('as' => 'admin.html.block.change-active', 'uses' => 'HtmlBlockController@changeActive'));
@@ -236,20 +275,52 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     Route::post('html-block/{htmlBlockId}/copy', array('as' => 'html.block.store.copy', 'uses' => 'HtmlBlockController@storeCopy'));
  
-    Route::resource('html-block', 'HtmlBlockController');
+    Route::resource('html-block', 'HtmlBlockController', ['names' => [
+        'index'     => 'hideyo.html-block.index',
+        'create'    => 'hideyo.html-block.create',
+        'store'     => 'hideyo.html-block.store',
+        'edit'      => 'hideyo.html-block.edit',
+        'update'    => 'hideyo.html-block.update',
+        'destroy'   => 'hideyo.html-block.destroy'
+    ]]);
+
+
 
     Route::get('landing-page/refactor-images', array('as' => 'landing.page.refactor.images', 'uses' => 'LandingPageController@refactorAllImages'));
  
     Route::get('landing-page/re-directory-images', array('as' => 'landing.page.re.directory.images', 'uses' => 'LandingPageController@reDirectoryAllImages'));
  
-    Route::resource('landing-page', 'LandingPageController');
+
+    Route::resource('landing-page', 'LandingPageController', ['names' => [
+        'index'     => 'hideyo.landing-page.index',
+        'create'    => 'hideyo.landing-page.create',
+        'store'     => 'hideyo.landing-page.store',
+        'edit'      => 'hideyo.landing-page.edit',
+        'update'    => 'hideyo.landing-page.update',
+        'destroy'   => 'hideyo.landing-page.destroy'
+    ]]);
+
+
     Route::get('landing-page/change-active/{landingPageId}', array('as' => 'admin.landing-page.change-active', 'uses' => 'LandingPageController@changeActive'));
 
-    Route::resource('box/{boxId}/download', 'BoxController@download');
-    Route::resource('box', 'BoxController');
-    Route::resource('coupon-group', 'CouponGroupController');
-    Route::resource('coupon', 'CouponController');
-    
+    Route::resource('coupon-group', 'CouponGroupController', ['names' => [
+        'index'     => 'hideyo.coupon-group.index',
+        'create'    => 'hideyo.coupon-group.create',
+        'store'     => 'hideyo.coupon-group.store',
+        'edit'      => 'hideyo.coupon-group.edit',
+        'update'    => 'hideyo.coupon-group.update',
+        'destroy'   => 'hideyo.coupon-group.destroy'
+    ]]);
+
+    Route::resource('coupon', 'CouponController', ['names' => [
+        'index'     => 'hideyo.coupon.index',
+        'create'    => 'hideyo.coupon.create',
+        'store'     => 'hideyo.coupon.store',
+        'edit'      => 'hideyo.coupon.edit',
+        'update'    => 'hideyo.coupon.update',
+        'destroy'   => 'hideyo.coupon.destroy'
+    ]]);
+
 
 
     Route::post('order/update-status/{orderId}', array('as' => 'order.update-status', 'uses' => 'OrderController@updateStatus'));
