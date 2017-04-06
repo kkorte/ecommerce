@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 /**
  * ClientAddressController
  *
- * This is the controller for the shop clients images
+ * This is the controller for the client addresses
  * @author Matthijs Neijenhuijs <matthijs@Dutchbridge.nl>
  * @version 1.0
  */

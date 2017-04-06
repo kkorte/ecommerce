@@ -1,22 +1,26 @@
 <?php
 
+function generateCrud($name, $controllerName) {
 
+    Route::resource($name, $controllerName, ['names' => [
+
+        'index'     => 'hideyo.'.$name.'.index',
+        'create'    => 'hideyo.'.$name.'.create',
+        'store'     => 'hideyo.'.$name.'.store',
+        'edit'      => 'hideyo.'.$name.'.edit',
+        'update'    => 'hideyo.'.$name.'.update',
+        'destroy'   => 'hideyo.'.$name.'.destroy'
+    ]]);
+
+}
 
 
 Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web','auth.hideyo.backend']], function () {
  
     Route::get('/', array('as' => 'hideyo.index', 'uses' => 'DashboardController@index'));
    
- 
-    Route::resource('dashboard', 'DashboardController', ['names' => [
+    generateCrud('dashboard', 'DashboardController');
 
-        'index'     => 'hideyo.dashboard.index',
-        'create'    => 'hideyo.dashboard.create',
-        'store'     => 'hideyo.dashboard.store',
-        'edit'      => 'hideyo.dashboard.edit',
-        'update'    => 'hideyo.dashboard.update',
-        'destroy'   => 'hideyo.dashboard.destroy'
-    ]]);
 
 
     Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));
@@ -28,16 +32,13 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
        
         
     Route::get('dashboard/stats', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@showStats'));
+    
+
+    generateCrud('shop', 'ShopController');
+
 
  
-    Route::resource('shop', 'ShopController', ['names' => [
-        'index'     => 'hideyo.shop.index',
-        'create'    => 'hideyo.shop.create',
-        'store'     => 'hideyo.shop.store',
-        'edit'      => 'hideyo.shop.edit',
-        'update'    => 'hideyo.shop.update',
-        'destroy'   => 'hideyo.shop.destroy'
-    ]]);
+
 
     Route::post('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@postExport'));
     Route::get('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@getExport'));
@@ -47,6 +48,8 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     
     Route::get('client/{clientId}/de-activate', array('as' => 'hideyo.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
     Route::post('client/{clientId}/de-activate', array('as' => 'hideyo.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
+
+
 
 
 
@@ -92,151 +95,40 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::post('order/print/download', array('as' => 'hideyo.order.download.print', 'uses' => 'OrderController@postDownloadPrint'));
   
  
-    Route::resource('order', 'OrderController', ['names' => [
-        'index'     => 'hideyo.order.index',
-        'create'    => 'hideyo.order.create',
-        'store'     => 'hideyo.order.store',
-        'edit'      => 'hideyo.order.edit',
-        'update'    => 'hideyo.order.update',
-        'destroy'   => 'hideyo.order.destroy'
-    ]]);
+    generateCrud('order', 'OrderController');
 
-
-    Route::resource('order-status', 'OrderStatusController', ['names' => [
-        'index'     => 'hideyo.order-status.index',
-        'create'    => 'hideyo.order-status.create',
-        'store'     => 'hideyo.order-status.store',
-        'edit'      => 'hideyo.order-status.edit',
-        'update'    => 'hideyo.order-status.update',
-        'destroy'   => 'hideyo.order-status.destroy'
-    ]]);
+    generateCrud('order-status', 'OrderStatusController');
 
     Route::get('order-status-email-template/show-template/{id}', array('as' => 'order.status.email.template.ajax.show', 'uses' => 'OrderStatusEmailTemplateController@showAjaxTemplate'));
 
+    generateCrud('order-status-email-template', 'OrderStatusEmailTemplateController');
 
-    Route::resource('order-status-email-template', 'OrderStatusEmailTemplateController', ['names' => [
-        'index'     => 'hideyo.order-status-email-template.index',
-        'create'    => 'hideyo.order-status-email-template.create',
-        'store'     => 'hideyo.order-status-email-template.store',
-        'edit'      => 'hideyo.order-status-email-template.edit',
-        'update'    => 'hideyo.order-status-email-template.update',
-        'destroy'   => 'hideyo.order-status-email-template.destroy'
-    ]]);
+    generateCrud('redirect', 'RedirectController');
 
-    Route::resource('redirect', 'RedirectController', ['names' => [
-        'index'     => 'hideyo.redirect.index',
-        'create'    => 'hideyo.redirect.create',
-        'store'     => 'hideyo.redirect.store',
-        'edit'      => 'hideyo.redirect.edit',
-        'update'    => 'hideyo.redirect.update',
-        'destroy'   => 'hideyo.redirect.destroy'
-    ]]);
+    generateCrud('tax-rate', 'TaxRateController');
 
+    generateCrud('general-setting', 'GeneralSettingController');
 
+    generateCrud('sending-method', 'SendingMethodController');
 
+    generateCrud('payment-method', 'PaymentMethodController');
 
-    Route::resource('tax-rate', 'TaxRateController', ['names' => [
-        'index'     => 'hideyo.tax-rate.index',
-        'create'    => 'hideyo.tax-rate.create',
-        'store'     => 'hideyo.tax-rate.store',
-        'edit'      => 'hideyo.tax-rate.edit',
-        'update'    => 'hideyo.tax-rate.update',
-        'destroy'   => 'hideyo.tax-rate.destroy'
-    ]]);
+    generateCrud('sending-payment-method-related', 'SendingPaymentMethodRelatedController');
 
+    generateCrud('error', 'ErrorController');
 
-
-    Route::resource('general-setting', 'GeneralSettingController', ['names' => [
-        'index'     => 'hideyo.general-setting.index',
-        'create'    => 'hideyo.general-setting.create',
-        'store'     => 'hideyo.general-setting.store',
-        'edit'      => 'hideyo.general-setting.edit',
-        'update'    => 'hideyo.general-setting.update',
-        'destroy'   => 'hideyo.general-setting.destroy'
-    ]]);
-
-
-
-
-    Route::resource('sending-method', 'SendingMethodController', ['names' => [
-        'index'     => 'hideyo.sending-method.index',
-        'create'    => 'hideyo.sending-method.create',
-        'store'     => 'hideyo.sending-method.store',
-        'edit'      => 'hideyo.sending-method.edit',
-        'update'    => 'hideyo.sending-method.update',
-        'destroy'   => 'hideyo.sending-method.destroy'
-    ]]);
-    
-    Route::resource('payment-method', 'PaymentMethodController', ['names' => [
-        'index'     => 'hideyo.payment-method.index',
-        'create'    => 'hideyo.payment-method.create',
-        'store'     => 'hideyo.payment-method.store',
-        'edit'      => 'hideyo.payment-method.edit',
-        'update'    => 'hideyo.payment-method.update',
-        'destroy'   => 'hideyo.payment-method.destroy'
-    ]]);
-
-
-    Route::resource('sending-payment-method-related', 'SendingPaymentMethodRelatedController', ['names' => [
-        'index'     => 'hideyo.sending-payment-method-related.index',
-        'create'    => 'hideyo.sending-payment-method-related.create',
-        'store'     => 'hideyo.sending-payment-method-related.store',
-        'edit'      => 'hideyo.sending-payment-method-related.edit',
-        'update'    => 'hideyo.sending-payment-method-related.update',
-        'destroy'   => 'hideyo.sending-payment-method-related.destroy'
-    ]]);
-
-    
-
-
-    Route::resource('error', 'ErrorController', ['names' => [
-        'index'     => 'hideyo.error.index',
-        'create'    => 'hideyo.error.create',
-        'store'     => 'hideyo.error.store',
-        'edit'      => 'hideyo.error.edit',
-        'update'    => 'hideyo.error.update',
-        'destroy'   => 'hideyo.error.destroy'
-    ]]);
-
-
-
-
-
-
-    Route::resource('content/{contentId}/images', 'ContentImageController', ['names' => [
-        'index'     => 'hideyo.content-image.index',
-        'create'    => 'hideyo.content-image.create',
-        'store'     => 'hideyo.content-image.store',
-        'edit'      => 'hideyo.content-image.edit',
-        'update'    => 'hideyo.content-image.update',
-        'destroy'   => 'hideyo.content-image.destroy'
-    ]]);
+    generateCrud('content/{contentId}/images', 'ContentImageController');
 
  
-
     Route::get('content/edit/{contentId}/seo', array('as' => 'hideyo.content.edit_seo', 'uses' => 'ContentController@editSeo'));
 
 
-    Route::resource('content', 'ContentController', ['names' => [
-        'index'     => 'hideyo.content.index',
-        'create'    => 'hideyo.content.create',
-        'store'     => 'hideyo.content.store',
-        'edit'      => 'hideyo.content.edit',
-        'update'    => 'hideyo.content.update',
-        'destroy'   => 'hideyo.content.destroy'
-    ]]);
+    generateCrud('content', 'ContentController');
 
+ 
+    generateCrud('content-group', 'ContentGroupController');
 
-    Route::resource('content-group', 'ContentGroupController', ['names' => [
-        'index'     => 'hideyo.content-group.index',
-        'create'    => 'hideyo.content-group.create',
-        'store'     => 'hideyo.content-group.store',
-        'edit'      => 'hideyo.content-group.edit',
-        'update'    => 'hideyo.content-group.update',
-        'destroy'   => 'hideyo.content-group.destroy'
-    ]]);
-
-
+ 
     Route::get('content-group/edit/{contentGroupId}/seo', array('as' => 'hideyo.content-group.edit_seo', 'uses' => 'ContentGroupController@editSeo'));
 
 

@@ -3,7 +3,7 @@
 /**
  * CouponController
  *
- * This is the controller of the contents of the shop
+ * This is the controller of the content groups of the shop
  * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
  * @version 1.0
  */
