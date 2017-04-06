@@ -5,8 +5,11 @@
 
 Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web','auth.hideyo.backend']], function () {
  
+    Route::get('/', array('as' => 'hideyo.index', 'uses' => 'DashboardController@index'));
+   
  
     Route::resource('dashboard', 'DashboardController', ['names' => [
+
         'index'     => 'hideyo.dashboard.index',
         'create'    => 'hideyo.dashboard.create',
         'store'     => 'hideyo.dashboard.store',
