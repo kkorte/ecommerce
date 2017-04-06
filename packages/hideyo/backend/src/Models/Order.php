@@ -20,7 +20,6 @@ class Order extends Model
     public function __construct(array $attributes = array())
     {
         $this->table = config()->get('hideyo.db_prefix').$this->table;
-        
         parent::__construct($attributes);
     }
 
@@ -135,7 +134,6 @@ class Order extends Model
         return number_format($this->total_discount, 2, '.', '');
     }
 
-
     public function getPriceWithTaxNumberFormat()
     {
         return number_format($this->price_with_tax, 2, '.', '');
@@ -146,14 +144,10 @@ class Order extends Model
         return $this->price_with_tax;
     }
 
-
-
     public function getBrowserDetectArray()
     {
         return unserialize($this->browser_detect);
     }
-
-
 
     public function getPriceWithoutTaxNumberFormat()
     {

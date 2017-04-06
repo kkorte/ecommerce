@@ -20,13 +20,12 @@ class OrderSendingMethod extends Model
     public function __construct(array $attributes = array())
     {
         $this->table = config()->get('hideyo.db_prefix').$this->table;
-        
         parent::__construct($attributes);
     }
 
     public function order()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Order');
+        return $this->belongsTo('Hideyo\Backend\Models\Order');
     }
 
     public function getPriceWithTaxNumberFormat()
