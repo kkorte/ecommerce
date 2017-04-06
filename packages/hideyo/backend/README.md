@@ -20,6 +20,17 @@ Before you run the migration you may want to take a look at `config/hideyo.php` 
 php artisan migrate
 ```
 
+----
+
+go to /resources/vendor/hideyobackend in command line and fire:
+
+npm install
+bower update
+gulp 
+
+---
+
+
 Before you can login in the backend you need a user connected to a shop. Seeding will help you 
 ```bash
 php artisan db:seed 
