@@ -36,7 +36,7 @@ class ExtraFieldDefaultValueRepository implements ExtraFieldDefaultValueReposito
         if ($validator->fails()) {
             return $validator;
         } else {
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             $this->model->fill($attributes);
             $this->model->save();
             return $this->model;
@@ -52,7 +52,7 @@ class ExtraFieldDefaultValueRepository implements ExtraFieldDefaultValueReposito
             return $validator;
         } else {
             $this->model = $this->find($id);
-            $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             return $this->updateEntity($attributes);
         }
     }

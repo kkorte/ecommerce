@@ -1,18 +1,18 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-tabs', array('productExtraFieldValue' => true))
+        @include('hideyo_backend::_partials.product-tabs', array('productExtraFieldValue' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">extra fields</li>
         </ol>
 
@@ -22,7 +22,7 @@
         {!! Notification::showAll() !!}
 
         @if($extraFields)
-        {!! Form::open(array('route' => array('admin.product.{productId}.product-extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('hideyo.product.{productId}.product-extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
         <table class="table">

@@ -1,18 +1,18 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.coupon.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.coupon.create') }}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.coupon.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.coupon.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.coupon.index') }}">Coupons</a></li>  
+            <li><a href="{{ URL::route('hideyo.coupon.index') }}">Coupons</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::open(array('route' => array('admin.coupon.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('hideyo.coupon.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
             <div class="form-group">
                 {!! Form::label('coupon_group_id', 'Group', array('class' => 'col-sm-3 control-label')) !!}
@@ -128,7 +128,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                    <a href="{!! URL::route('admin.coupon.index') !!}" class="btn btn-large">Cancel</a>
+                    <a href="{!! URL::route('hideyo.coupon.index') !!}" class="btn btn-large">Cancel</a>
                 </div>
             </div>
 

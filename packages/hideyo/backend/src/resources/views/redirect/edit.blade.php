@@ -1,29 +1,29 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.redirect.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.redirect.create') }}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.redirect.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.redirect.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.redirect.index') !!}">redirect</a></li>  
+            <li><a href="{!! URL::route('hideyo.redirect.index') !!}">redirect</a></li>  
             <li class="active">edit</li>
         </ol>
 
-        <a href="{!! URL::route('admin.redirect.index') !!}" class="btn btn-danger pull-right">Back to overview<i class="entypo-back"></i></a>
+        <a href="{!! URL::route('hideyo.redirect.index') !!}" class="btn btn-danger pull-right">Back to overview<i class="entypo-back"></i></a>
 
         <h2>Content <small>edit</small></h2>
         <br/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($redirect, array('method' => 'put', 'route' => array('admin.redirect.update', $redirect->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($redirect, array('method' => 'put', 'route' => array('hideyo.redirect.update', $redirect->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
             <div class="form-group">
                 {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                    <a href="{!! URL::route('admin.redirect.index') !!}" class="btn btn-large">Cancel</a>
+                    <a href="{!! URL::route('hideyo.redirect.index') !!}" class="btn btn-large">Cancel</a>
                 </div>
             </div>
 

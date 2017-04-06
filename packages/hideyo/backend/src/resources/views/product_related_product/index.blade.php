@@ -1,21 +1,21 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-tabs', array('productRelated' => true))
+        @include('hideyo_backend::_partials.product-tabs', array('productRelated' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 		<ol class="breadcrumb">
 		  <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-		  <li><a href="{{ URL::route('admin.product.index') }}">Product</a></li>
-		  <li><a href="{{ URL::route('admin.product.edit', $product->id) }}">{{ $product->title }}</a></li>
+		  <li><a href="{{ URL::route('hideyo.product.index') }}">Product</a></li>
+		  <li><a href="{{ URL::route('hideyo.product.edit', $product->id) }}">{{ $product->title }}</a></li>
 		  <li class="active">related</li>
 		</ol>
 
-		<a href="{{ URL::route('admin.product.{productId}.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.{productId}.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>related products</small></h2>
         <hr/>

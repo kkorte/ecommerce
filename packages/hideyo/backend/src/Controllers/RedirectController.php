@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\RedirectRepositoryInterface;
-use Dutchbridge\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\RedirectRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 
 use \Session;
 use \Apiclient;
@@ -52,14 +52,14 @@ class RedirectController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.redirect.index')->with('redirect', $this->redirect->selectAll());
+            return view('hideyo_backend::redirect.index')->with('redirect', $this->redirect->selectAll());
         }
     }
 
     public function create()
     {
         $shops = $this->shop->selectAll()->lists('title', 'id')->toArray();
-        return view('admin.redirect.create')->with(array('shops' => $shops));
+        return view('hideyo_backend::redirect.create')->with(array('shops' => $shops));
     }
 
     public function store()
@@ -82,7 +82,7 @@ class RedirectController extends Controller
     public function edit($id)
     {
                 $shops = $this->shop->selectAll()->lists('title', 'id');
-        return view('admin.redirect.edit')->with(array(
+        return view('hideyo_backend::redirect.edit')->with(array(
             'redirect' => $this->redirect->find($id),
             'shops' => $shops
         ));
@@ -90,7 +90,7 @@ class RedirectController extends Controller
 
     public function getImport()
     {
-        return view('admin.redirect.import')->with(array());
+        return view('hideyo_backend::redirect.import')->with(array());
     }
 
     public function postImport()
@@ -102,7 +102,7 @@ class RedirectController extends Controller
               $results = $reader->get();
 
             if ($results->count()) {
-                $result = $this->redirect->importCsv($results, \Auth::guard('admin')->user()->selected_shop_id);
+                $result = $this->redirect->importCsv($results, \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
                 \Notification::success('The redirects are imported.');
        

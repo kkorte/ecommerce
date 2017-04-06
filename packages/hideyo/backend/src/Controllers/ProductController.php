@@ -243,7 +243,7 @@ class ProductController extends Controller
 
             ->leftJoin('brand', 'brand.id', '=', 'product.brand_id')
 
-            ->where('product.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
 
             $datatables = \Datatables::of($product)
@@ -296,14 +296,14 @@ class ProductController extends Controller
 
     public function reDirectoryAllImages()
     {    
-        $this->productImage->reDirectoryAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
-        return redirect()->route('admin.product.index');
+        $this->productImage->reDirectoryAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
+        return redirect()->route('hideyo.product.index');
     }
 
     public function refactorAllImages()
     {
-        $this->productImage->refactorAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
-        return redirect()->route('admin.product.index');
+        $this->productImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
+        return redirect()->route('hideyo.product.index');
     }
 
     public function create()
@@ -317,7 +317,7 @@ class ProductController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The product was inserted.');
-            return redirect()->route('admin.product.index');
+            return redirect()->route('hideyo.product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -411,7 +411,7 @@ class ProductController extends Controller
 
 
         \Notification::success('The product export is completed.');
-        return redirect()->route('admin.product.index');
+        return redirect()->route('hideyo.product.index');
     }
 
     public function copy($productId)
@@ -447,7 +447,7 @@ class ProductController extends Controller
             }
 
             \Notification::success('The product copy is inserted.');
-            return redirect()->route('admin.product.index');
+            return redirect()->route('hideyo.product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -475,16 +475,16 @@ class ProductController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('Product seo was updated.');
-                return redirect()->route('admin.product.edit_seo', $productId);
+                return redirect()->route('hideyo.product.edit_seo', $productId);
             } elseif ($this->request->get('price')) {
                 Notification::success('Product price was updated.');
-                return redirect()->route('admin.product.edit_price', $productId);
+                return redirect()->route('hideyo.product.edit_price', $productId);
             } elseif ($this->request->get('product-combination')) {
                 Notification::success('Product combination leading attribute group was updated.');
-                return redirect()->route('admin.product.{productId}.product-combination.index', $productId);
+                return redirect()->route('hideyo.product.{productId}.product-combination.index', $productId);
             } else {
                 Notification::success('Product was updated.');
-                return redirect()->route('admin.product.index');
+                return redirect()->route('hideyo.product.index');
             }
         }
 
@@ -501,7 +501,7 @@ class ProductController extends Controller
 
         if ($result) {
             Notification::success('The product was deleted.');
-            return redirect()->route('admin.product.index');
+            return redirect()->route('hideyo.product.index');
         }
     }
 }

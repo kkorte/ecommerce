@@ -1,16 +1,16 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-category-tabs', array('productCategoryEdit' => true))
+        @include('hideyo_backend::_partials.product-category-tabs', array('productCategoryEdit' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product-category.index') !!}">Product categories</a></li>  
-            <li><a href="{!! URL::route('admin.product-category.edit', $productCategory->id) !!}">edit</a></li>
-            <li class="active"><a href="{!! URL::route('admin.product-category.edit', $productCategory->id) !!}">{!! $productCategory->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.product-category.index') !!}">Product categories</a></li>  
+            <li><a href="{!! URL::route('hideyo.product-category.edit', $productCategory->id) !!}">edit</a></li>
+            <li class="active"><a href="{!! URL::route('hideyo.product-category.edit', $productCategory->id) !!}">{!! $productCategory->title !!}</a></li>
             <li class="active">general</li>
             
         </ol>
@@ -19,7 +19,7 @@
         {!! Notification::showAll() !!}
         <div class="row">
             <div class="col-md-12">
-                {!! Form::model($productCategory, array('method' => 'put', 'route' => array('admin.product-category.update', $productCategory->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+                {!! Form::model($productCategory, array('method' => 'put', 'route' => array('hideyo.product-category.update', $productCategory->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
 
                 <div class="form-group">
                     {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}
@@ -95,7 +95,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-5">
                         {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                        <a href="{!! URL::route('admin.product-category.index') !!}" class="btn btn-large">Cancel</a>
+                        <a href="{!! URL::route('hideyo.product-category.index') !!}" class="btn btn-large">Cancel</a>
                     </div>
                 </div>
                 {!! Form::close() !!}
@@ -117,7 +117,7 @@
 
         $(".parent_id, .redirect_product_category_id").select2({
           ajax: {
-            url: "{!! URL::route('admin.product-category.ajax_categories') !!}",
+            url: "{!! URL::route('hideyo.product-category.ajax_categories') !!}",
             dataType: 'json',
             delay: 250,
             data: function (params) {

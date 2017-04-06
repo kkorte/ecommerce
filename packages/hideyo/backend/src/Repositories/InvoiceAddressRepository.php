@@ -15,7 +15,7 @@ class InvoiceAddressRepository implements InvoiceAddressRepositoryInterface
   
     public function create(array $attributes, $orderId)
     {
-        $userId = \Auth::guard('admin')->user()->id;
+        $userId = \Auth::guard('hideyobackend')->user()->id;
         $attributes['modified_by_user_id'] = $userId;
         $attributes['order_id'] = $orderId;
   
@@ -27,7 +27,7 @@ class InvoiceAddressRepository implements InvoiceAddressRepositoryInterface
 
     public function updateById(array $attributes, $orderId, $id)
     {
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model = $this->find($id);
         return $this->updateEntity($attributes);
     }
@@ -56,7 +56,7 @@ class InvoiceAddressRepository implements InvoiceAddressRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectAllByShopId($shopId)

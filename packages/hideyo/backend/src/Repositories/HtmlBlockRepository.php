@@ -37,14 +37,14 @@ class HtmlBlockRepository implements HtmlBlockRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;            
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;            
       
         $this->model->fill($attributes);
         $this->model->save();
@@ -115,14 +115,14 @@ class HtmlBlockRepository implements HtmlBlockRepositoryInterface
     {
 
         $product =  $this->find($htmlBlockId);
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
    
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
 
         $this->model->sluggify();
         $this->model->fill($attributes);
@@ -168,7 +168,7 @@ class HtmlBlockRepository implements HtmlBlockRepositoryInterface
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model = $this->find($id);
         return $this->updateEntity($attributes);
     }
@@ -176,7 +176,7 @@ class HtmlBlockRepository implements HtmlBlockRepositoryInterface
     public function updateEntity(array $attributes = array())
     {
 
-        $shopId = \Auth::guard('admin')->user()->selected_shop_id;
+        $shopId = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
 
         if (count($attributes) > 0) {
@@ -250,12 +250,12 @@ class HtmlBlockRepository implements HtmlBlockRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectOneById($id)
     {
-        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $id)->get();
+        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $id)->get();
         
         if ($result->isEmpty()) {
             return false;

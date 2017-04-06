@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\NewsRepositoryInterface;
+use Hideyo\Backend\Repositories\NewsRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -32,7 +32,7 @@ class NewsGroupController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'news_group.id',
                 'news_group.title']
-            )->where('news_group.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('news_group.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
@@ -45,13 +45,13 @@ class NewsGroupController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.news_group.index')->with('newsGroup', $this->news->selectAll());
+            return view('hideyo_backend::news_group.index')->with('newsGroup', $this->news->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.news_group.create')->with(array());
+        return view('hideyo_backend::news_group.create')->with(array());
     }
 
     public function store()
@@ -72,7 +72,7 @@ class NewsGroupController extends Controller
 
     public function edit($id)
     {
-        return view('admin.news_group.edit')->with(array('newsGroup' => $this->news->findGroup($id)));
+        return view('hideyo_backend::news_group.edit')->with(array('newsGroup' => $this->news->findGroup($id)));
     }
 
     public function update($newsGroupId)

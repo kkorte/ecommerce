@@ -36,7 +36,7 @@ class ClientOrderController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id', 'created_at', 'generated_custom_order_id', 'order_status_id', 'client_id', 'delivery_order_address_id', 'bill_order_address_id',
                 'price_with_tax']
-            )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->where('client_id', '=', $clientId);
+            )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('client_id', '=', $clientId);
             
             
             $datatables = \Datatables::of($order)
@@ -103,7 +103,7 @@ class ClientOrderController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id', 'order_status_id',
                 'price_with_tax']
-            )->with(array('orderStatus'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->where('client_id', '=', $clientId);
+            )->with(array('orderStatus'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('client_id', '=', $clientId);
             
             
             $datatables = \Datatables::of($order)
@@ -131,7 +131,7 @@ class ClientOrderController extends Controller
 
 
         } else {
-            return view('admin.client_order.index')->with(array('client' => $client));
+            return view('hideyo_backend::client_order.index')->with(array('client' => $client));
         }
     }   
 }

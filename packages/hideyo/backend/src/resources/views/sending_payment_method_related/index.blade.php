@@ -1,17 +1,17 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('admin.sending-payment-method-related.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Overview <span class="sr-only">(current)</span></a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.sending-payment-method-related.index') }}">Order templates</a></li>  
+            <li><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Order templates</a></li>  
             <li class="active">overview</li>
         </ol>
 

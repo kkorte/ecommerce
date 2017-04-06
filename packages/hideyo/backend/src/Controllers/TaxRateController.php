@@ -52,7 +52,7 @@ class TaxRateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The tax rate was inserted.');
-            return redirect()->route('admin.tax-rate.index');
+            return redirect()->route('hideyo.tax-rate.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -72,7 +72,7 @@ class TaxRateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The tax rate was updated.');
-            return redirect()->route('admin.tax-rate.index');
+            return redirect()->route('hideyo.tax-rate.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -86,7 +86,7 @@ class TaxRateController extends Controller
         $result  = $this->taxRate->destroy($id);
         if ($result) {
             Notification::error('The tax_rate was deleted.');
-            return redirect()->route('admin.tax-rate.index');
+            return redirect()->route('hideyo.tax-rate.index');
         }
     }
 }

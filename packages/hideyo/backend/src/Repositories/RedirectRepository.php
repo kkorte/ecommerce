@@ -151,7 +151,7 @@ class RedirectRepository implements RedirectRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
     }
 
     public function selectNewRedirects()

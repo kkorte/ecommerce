@@ -1,7 +1,7 @@
 <?php
 
 use dutchbridge\validators\UserLogValidator;
-use dutchbridge\repositories\UserLogRepositoryInterface;
+use Hideyo\Backend\Repositories\UserLogRepositoryInterface;
 
 class UserLogController extends BaseController
 {

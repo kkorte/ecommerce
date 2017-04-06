@@ -1,21 +1,21 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.html-block.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.html-block.create') }}">Edit</a></li>
+            <li><a href="{{ URL::route('hideyo.html-block.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.html-block.create') }}">Edit</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.html-block.index') !!}">Html block</a></li>
-            <li><a href="{!! URL::route('admin.html-block.edit', $htmlBlock->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.html-block.edit', $htmlBlock->id) !!}">{!! $htmlBlock->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.html-block.index') !!}">Html block</a></li>
+            <li><a href="{!! URL::route('hideyo.html-block.edit', $htmlBlock->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.html-block.edit', $htmlBlock->id) !!}">{!! $htmlBlock->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -24,7 +24,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($htmlBlock, array('method' => 'put', 'route' => array('admin.html-block.update', $htmlBlock->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($htmlBlock, array('method' => 'put', 'route' => array('hideyo.html-block.update', $htmlBlock->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
             <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
             <div class="form-group">
@@ -152,7 +152,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                    <a href="{!! URL::route('admin.html-block.index') !!}" class="btn btn-large">Cancel</a>
+                    <a href="{!! URL::route('hideyo.html-block.index') !!}" class="btn btn-large">Cancel</a>
                 </div>
             </div>            
     </div>

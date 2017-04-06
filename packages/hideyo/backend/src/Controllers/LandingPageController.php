@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\LandingPageRepositoryInterface;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\LandingPageRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -36,7 +36,7 @@ class LandingPageController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'landing_page.id', 'landing_page.file', 'landing_page.active',
                 'landing_page.title', 'landing_page.slug']
-            )->where('landing_page.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('landing_page.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
 
@@ -58,7 +58,7 @@ class LandingPageController extends Controller
             ->addColumn('action', function ($query) {
                 $delete = \Form::deleteajax('/admin/landing-page/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                 
-                $externalLink = '<a href="'.\Auth::guard('admin')->user()->shop->url.'/landing/' . $query->slug. '" target="_blank" class="btn btn-sm btn-info">link</a>';
+                $externalLink = '<a href="'.\Auth::guard('hideyobackend')->user()->shop->url.'/landing/' . $query->slug. '" target="_blank" class="btn btn-sm btn-info">link</a>';
 
                 $link = $externalLink.'<a href="/admin/landing-page/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>'.$delete;
             
@@ -69,14 +69,14 @@ class LandingPageController extends Controller
 
 
         } else {
-            return view('admin.landing-page.index')->with('landingPage', $this->landingPage->selectAll());
+            return view('hideyo_backend::landing-page.index')->with('landingPage', $this->landingPage->selectAll());
         }
     }
 
     public function create()
     {
         $products = $this->product->selectAll()->lists('title', 'id');
-        return view('admin.landing-page.create')->with(array('products' => $products));
+        return view('hideyo_backend::landing-page.create')->with(array('products' => $products));
     }
 
     public function store()
@@ -104,27 +104,27 @@ class LandingPageController extends Controller
     public function edit($id)
     {
         $products = $this->product->selectAll()->lists('title', 'id');
-        return view('admin.landing-page.edit')->with(array('products' => $products, 'landingPage' => $this->landingPage->find($id)));
+        return view('hideyo_backend::landing-page.edit')->with(array('products' => $products, 'landingPage' => $this->landingPage->find($id)));
     }
 
 
     public function reDirectoryAllImages()
     {
-        $this->landingPage->reDirectoryAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->landingPage->reDirectoryAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         return \Redirect::route('admin.landing-page.index');
     }
 
     public function refactorAllImages()
     {
-        $this->landingPage->refactorAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->landingPage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
         return \Redirect::route('admin.landing-page.index');
     }
 
     public function editSeo($id)
     {
-        return view('admin.landing-page.edit_seo')->with(array('landingPage' => $this->landingPage->find($id)));
+        return view('hideyo_backend::landing-page.edit_seo')->with(array('landingPage' => $this->landingPage->find($id)));
     }
 
     public function update($landingPageId)

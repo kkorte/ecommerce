@@ -84,7 +84,7 @@ class PaymentMethodController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The payment method was inserted.');
-            return redirect()->route('admin.payment-method.index');
+            return redirect()->route('hideyo.payment-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -111,7 +111,7 @@ class PaymentMethodController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The payment method was updated.');
-            return redirect()->route('admin.payment-method.index');
+            return redirect()->route('hideyo.payment-method.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);

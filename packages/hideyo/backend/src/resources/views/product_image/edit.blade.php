@@ -1,22 +1,22 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-tabs', array('productImage' => true))
+        @include('hideyo_backend::_partials.product-tabs', array('productImage' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
-            <li><a href="{!! URL::route('admin.product.{productId}.images.index', $product->id) !!}">images</a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.product.{productId}.images.index', $product->id) !!}">images</a></li>
                       <li class="active">upload image</li> 
         </ol>
-<a href="{!! URL::route('admin.product.{productId}.images.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
+<a href="{!! URL::route('hideyo.product.{productId}.images.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
 
 <h2>Product  <small>images - upload</small></h2>
 <hr/>
@@ -29,7 +29,7 @@
             <div class="panel-body">    
 
                     <div class="col-md-12">
-						{!! Form::model($productImage, array('method' => 'put', 'route' => array('admin.product.{productId}.images.update', $product->id, $productImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+						{!! Form::model($productImage, array('method' => 'put', 'route' => array('hideyo.product.{productId}.images.update', $product->id, $productImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 
 					 <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
@@ -69,7 +69,7 @@
 					        <div class="form-group">
 					            <div class="col-sm-offset-3 col-sm-5">
 					                {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-					                <a href="{!! URL::route('admin.product.{productId}.images.store', $product->id) !!}" class="btn btn-large">Cancel</a>
+					                <a href="{!! URL::route('hideyo.product.{productId}.images.store', $product->id) !!}" class="btn btn-large">Cancel</a>
 					            </div>
 					        </div>
 

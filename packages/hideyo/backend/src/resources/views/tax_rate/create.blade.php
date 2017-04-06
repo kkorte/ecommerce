@@ -1,17 +1,17 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.tax-rate.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.tax-rate.create') }}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.tax-rate.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.tax-rate.index') }}">Tax rates</a></li>  
+            <li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Tax rates</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-    {!! Form::open(array('route' => array('admin.tax-rate.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+    {!! Form::open(array('route' => array('hideyo.tax-rate.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
  
 
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        @include('admin._fields.buttons', array('cancelRoute' => 'admin.tax-rate.index'))
+        @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.tax-rate.index'))
 
 
     {!! Form::close() !!}

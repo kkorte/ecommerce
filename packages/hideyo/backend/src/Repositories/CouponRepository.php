@@ -53,7 +53,7 @@ class CouponRepository implements CouponRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
 
         $validator = \Validator::make($attributes, $this->rules());
 
@@ -61,7 +61,7 @@ class CouponRepository implements CouponRepositoryInterface
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
         
@@ -87,14 +87,14 @@ class CouponRepository implements CouponRepositoryInterface
   
     public function createGroup(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rulesGroup());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
             
         $this->modelGroup->fill($attributes);
         $this->modelGroup->save();
@@ -106,7 +106,7 @@ class CouponRepository implements CouponRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        $attributes['shop_id'] = \Auth::guard('admin')->user()->selected_shop_id;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
 
         $validator = \Validator::make($attributes, $this->rules($id));
 
@@ -114,7 +114,7 @@ class CouponRepository implements CouponRepositoryInterface
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
 
         return $this->updateEntity($attributes);
     }
@@ -162,7 +162,7 @@ class CouponRepository implements CouponRepositoryInterface
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('admin')->user()->id;
+        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->modelGroup = $this->findGroup($id);
         return $this->updateGroupEntity($attributes);
     }
@@ -198,13 +198,13 @@ class CouponRepository implements CouponRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
     
 
     public function selectAllGroups()
     {
-        return $this->modelGroup->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->get();
+        return $this->modelGroup->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
 

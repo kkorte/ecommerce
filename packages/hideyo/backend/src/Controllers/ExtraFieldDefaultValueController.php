@@ -1,5 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
-
+<?php namespace Hideyo\Backend\Controllers;
 /**
  * ProductWeightTypeController
  *
@@ -9,8 +8,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ExtraFieldDefaultValueRepositoryInterface;
-use Dutchbridge\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldDefaultValueRepositoryInterface;
+use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -46,13 +45,13 @@ class ExtraFieldDefaultValueController extends Controller
             return $datatables->make(true);
 
         } else {
-            return \View::make('admin.extra-field-default-value.index')->with('extraField', $this->extraField->find($extraFieldId));
+            return view('hideyo_backend::extra-field-default-value.index')->with('extraField', $this->extraField->find($extraFieldId));
         }
     }
 
     public function create($extraFieldId)
     {
-        return \View::make('admin.extra-field-default-value.create')->with(array('extraField' =>  $this->extraField->find($extraFieldId)));
+        return view('hideyo_backend::extra-field-default-value.create')->with(array('extraField' =>  $this->extraField->find($extraFieldId)));
     }
 
     public function store($extraFieldId)
@@ -73,7 +72,7 @@ class ExtraFieldDefaultValueController extends Controller
 
     public function edit($extraFieldId, $id)
     {
-        return \View::make('admin.extra-field-default-value.edit')->with(array('extraFieldDefaultValue' => $this->extraFieldDefaultValue->find($id)));
+        return view('hideyo_backend::extra-field-default-value.edit')->with(array('extraFieldDefaultValue' => $this->extraFieldDefaultValue->find($id)));
     }
 
     public function update($extraFieldId, $id)

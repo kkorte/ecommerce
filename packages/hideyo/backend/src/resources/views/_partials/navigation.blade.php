@@ -71,8 +71,8 @@
 					<ul class="dropdown-menu">
 								<li><a href="/admin/news">News</a></li>
 						<li><a href="/admin/news-group">News group</a></li>
-						<li><a href="/admin/content">Static content</a></li>
-						<li><a href="/admin/content-group">Static content groups</a></li>
+						<li><a href="{{ URL::route('hideyo.content.index') }}">Static content</a></li>
+						<li><a href="{{ URL::route('hideyo.content-group.index') }}">Static content groups</a></li>
 						<li><a href="/admin/html-block">HTML blocks</a></li>
 						<li><a href="/admin/faq">Faq items</a></li>
 						<li><a href="/admin/landing-page">Landingpages</a></li>

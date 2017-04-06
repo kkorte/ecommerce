@@ -9,10 +9,10 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\NewsRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
-use Dutchbridge\Repositories\NewsGroupRepositoryInterface;
+use Hideyo\Backend\Repositories\NewsRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\NewsGroupRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -34,7 +34,7 @@ class NewsController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'news.id',
                 'news.title', 'news_group_id', 'news_group.title as newstitle']
-            )->where('news.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)
+            )->where('news.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 
 
             ->with(array('newsGroup'))        ->leftJoin('news_group', 'news_group.id', '=', 'news.news_group_id');
@@ -63,13 +63,13 @@ class NewsController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.news.index')->with('news', $this->news->selectAll());
+            return view('hideyo_backend::news.index')->with('news', $this->news->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.news.create')->with(array('groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
+        return view('hideyo_backend::news.create')->with(array('groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
     }
 
     public function store()
@@ -78,7 +78,7 @@ class NewsController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The news was inserted.');
-            return redirect()->route('admin.news.index');
+            return redirect()->route('hideyo.news.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -91,26 +91,26 @@ class NewsController extends Controller
     public function edit($id)
     {
     
-        return view('admin.news.edit')->with(array('news' => $this->news->find($id), 'groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
+        return view('hideyo_backend::news.edit')->with(array('news' => $this->news->find($id), 'groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
     }
 
     public function reDirectoryAllImages()
     {
-        $this->newsImage->reDirectoryAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->newsImage->reDirectoryAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
-        return redirect()->route('admin.news.index');
+        return redirect()->route('hideyo.news.index');
     }
 
     public function refactorAllImages()
     {
-        $this->newsImage->refactorAllImagesByShopId(\Auth::guard('admin')->user()->selected_shop_id);
+        $this->newsImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
-        return redirect()->route('admin.news.index');
+        return redirect()->route('hideyo.news.index');
     }
 
     public function editSeo($id)
     {
-        return view('admin.news.edit_seo')->with(array('news' => $this->news->find($id)));
+        return view('hideyo_backend::news.edit_seo')->with(array('news' => $this->news->find($id)));
     }
     
     public function update($id)
@@ -119,7 +119,7 @@ class NewsController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The news was updated.');
-            return redirect()->route('admin.news.index');
+            return redirect()->route('hideyo.news.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -136,7 +136,7 @@ class NewsController extends Controller
 
         if ($result) {
             Notification::success('The news was deleted.');
-            return redirect()->route('admin.news.index');
+            return redirect()->route('hideyo.news.index');
         }
     }
 }

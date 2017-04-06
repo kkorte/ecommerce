@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\HtmlBlockRepositoryInterface;
+use Hideyo\Backend\Repositories\HtmlBlockRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -33,7 +33,7 @@ class HtmlBlockController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'html_block.id', 'html_block.active',
                 'html_block.title', 'html_block.image_file_name', 'html_block.position']
-            )->where('html_block.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('html_block.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
 
@@ -62,13 +62,13 @@ class HtmlBlockController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.html-block.index')->with('htmlBlock', $this->htmlBlock->selectAll());
+            return view('hideyo_backend::html-block.index')->with('htmlBlock', $this->htmlBlock->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.html-block.create')->with(array());
+        return view('hideyo_backend::html-block.create')->with(array());
     }
 
     public function copy($htmlBlockId)
@@ -76,7 +76,7 @@ class HtmlBlockController extends Controller
         $htmlBlock = $this->htmlBlock->find($htmlBlockId);
 
 
-        return view('admin.html-block.copy')->with(
+        return view('hideyo_backend::html-block.copy')->with(
             array(
             'htmlBlock' => $htmlBlock
             )
@@ -90,7 +90,7 @@ class HtmlBlockController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The htmlBlock copy is inserted.');
-            return redirect()->route('admin.html-block.index');
+            return redirect()->route('hideyo.html-block.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -106,7 +106,7 @@ class HtmlBlockController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The html block was inserted.');
-            return redirect()->route('admin.html-block.index');
+            return redirect()->route('hideyo.html-block.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -128,12 +128,12 @@ class HtmlBlockController extends Controller
 
     public function edit($id)
     {
-        return view('admin.html-block.edit')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
+        return view('hideyo_backend::html-block.edit')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
     }
 
     public function editSeo($id)
     {
-        return view('admin.html-block.edit_seo')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
+        return view('hideyo_backend::html-block.edit_seo')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
     }
 
     public function update($htmlBlockId)
@@ -143,13 +143,13 @@ class HtmlBlockController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('HtmlBlock seo was updated.');
-                return redirect()->route('admin.html-block.edit_seo', $htmlBlockId);
+                return redirect()->route('hideyo.html-block.edit_seo', $htmlBlockId);
             } elseif ($this->request->get('htmlBlock-combination')) {
                 Notification::success('HtmlBlock combination leading attribute group was updated.');
-                return redirect()->route('admin.html-block.{htmlBlockId}.htmlBlock-combination.index', $htmlBlockId);
+                return redirect()->route('hideyo.html-block.{htmlBlockId}.htmlBlock-combination.index', $htmlBlockId);
             } else {
                 Notification::success('HtmlBlock was updated.');
-                return redirect()->route('admin.html-block.edit', $htmlBlockId);
+                return redirect()->route('hideyo.html-block.edit', $htmlBlockId);
             }
         }
 
@@ -167,7 +167,7 @@ class HtmlBlockController extends Controller
 
         if ($result) {
             Notification::success('The html block was deleted.');
-            return redirect()->route('admin.html-block.index');
+            return redirect()->route('hideyo.html-block.index');
         }
     }
 }

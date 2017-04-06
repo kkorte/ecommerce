@@ -45,7 +45,7 @@ class ProductExtraFieldValueController extends Controller
             }
         }
    
-        return view('admin.product-extra-field-value.index')->with(
+        return view('hideyo_backend::product-extra-field-value.index')->with(
             array(
                 'extraFields' =>  $this->extraField->selectAllByAllProductsAndProductCategoryId($product->product_category_id),
                 'product' => $this->product->find($productId),
@@ -60,7 +60,7 @@ class ProductExtraFieldValueController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product extra fields are updated.');
-            return redirect()->route('admin.product.{productId}.product-extra-field-value.index', $productId);
+            return redirect()->route('hideyo.product.{productId}.product-extra-field-value.index', $productId);
         }
           
         return redirect()->back()->withInput();
@@ -69,7 +69,7 @@ class ProductExtraFieldValueController extends Controller
     public function edit($productId, $id)
     {
         $product = $this->product->find($productId);
-        return view('admin.product-extra-field-value.edit')->with(array('productExtraFieldValue' => $this->productExtraFieldValue->find($id), 'product' => $product));
+        return view('hideyo_backend::product-extra-field-value.edit')->with(array('productExtraFieldValue' => $this->productExtraFieldValue->find($id), 'product' => $product));
     }
 
     public function update($productId, $id)
@@ -81,7 +81,7 @@ class ProductExtraFieldValueController extends Controller
         }
         
         Notification::success('The product image is updated.');
-        return redirect()->route('admin.product.{productId}.images.index', $productId);
+        return redirect()->route('hideyo.product.{productId}.images.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -90,7 +90,7 @@ class ProductExtraFieldValueController extends Controller
 
         if ($result) {
             Notification::success('The product image is deleted.');
-            return redirect()->route('admin.product.{productId}.images.index', $productId);
+            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
         }
     }
 }

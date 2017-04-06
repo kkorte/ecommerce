@@ -88,7 +88,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('admin.dashboard.ajax-payment-method-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChartPaymentMethod' => $revenueChartPaymentMethod));
+        return view('hideyo_backend::dashboard.ajax-payment-method-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChartPaymentMethod' => $revenueChartPaymentMethod));
     }
 
 
@@ -116,7 +116,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('admin.dashboard.ajax-revenue-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChart));
+        return view('hideyo_backend::dashboard.ajax-revenue-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChart));
     }
 
 
@@ -144,7 +144,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('admin.dashboard.ajax-order-average-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueAverageChart' => $revenueChart));
+        return view('hideyo_backend::dashboard.ajax-order-average-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueAverageChart' => $revenueChart));
     }
 
 
@@ -175,7 +175,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('admin.dashboard.ajax-total-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChartTotal));
+        return view('hideyo_backend::dashboard.ajax-total-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChartTotal));
     }
 
 
@@ -207,7 +207,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('admin.dashboard.ajax-browser-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChart));
+        return view('hideyo_backend::dashboard.ajax-browser-by-year')->with(array('selectedYear' => $year, 'years' => $monthlyRevenueYears, 'revenueChart' => $revenueChart));
     }
 
 

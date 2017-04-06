@@ -18,11 +18,14 @@ use Notification;
 
 class ClientAddressController extends Controller
 {
-    public function __construct(Request $request, ClientAddressRepositoryInterface $clientAddress, ClientRepositoryInterface $client)
+    public function __construct(
+        Request $request, 
+        ClientAddressRepositoryInterface $clientAddress, 
+        ClientRepositoryInterface $client)
     {
-        $this->clientAddress = $clientAddress;
-        $this->client = $client;
-        $this->request = $request;
+        $this->clientAddress    = $clientAddress;
+        $this->client           = $client;
+        $this->request          = $request;
     }
 
     public function index($clientId)
@@ -62,15 +65,15 @@ class ClientAddressController extends Controller
                 }
             })
             ->addColumn('action', function ($addresses) use ($clientId) {
-                $delete = \Form::deleteajax('/admin/client/'.$clientId.'/addresses/'. $addresses->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/client/'.$clientId.'/addresses/'.$addresses->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.client-address.destroy', array('clientId' => $clientId, 'clientAddressId' => $addresses->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.client-address.edit', array('clientId' => $clientId, 'clientAddressId' => $addresses->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             });
 
             return $datatables->make(true);
         } else {
-            return \View::make('admin.client_address.index')->with(array('client' => $client));
+            return view('hideyo_backend::client_address.index')->with(array('client' => $client));
         }
     }
 
@@ -78,7 +81,7 @@ class ClientAddressController extends Controller
     {
         $client = $this->client->find($clientId);
 
-        return \View::make('admin.client_address.create')->with(array('client' => $client));
+        return view('hideyo_backend::client_address.create')->with(array('client' => $client));
     }
 
     public function store($clientId)
@@ -88,7 +91,7 @@ class ClientAddressController extends Controller
  
         if ($result->id) {
             Notification::success('The client address is inserted.');
-            return redirect()->route('admin.client.{clientId}.addresses.index', $clientId);
+            return redirect()->route('hideyo.client-address.index', $clientId);
         } else {
             Notification::error('field are required');
         }
@@ -99,7 +102,7 @@ class ClientAddressController extends Controller
     public function edit($clientId, $id)
     {
         $client = $this->client->find($clientId);
-        return \View::make('admin.client_address.edit')->with(array('clientAddress' => $this->clientAddress->find($id), 'client' => $client));
+        return view('hideyo_backend::client_address.edit')->with(array('clientAddress' => $this->clientAddress->find($id), 'client' => $client));
     }
 
     public function update($clientId, $id)
@@ -111,7 +114,7 @@ class ClientAddressController extends Controller
             return redirect()->back()->withInput()->withErrors($result->errors()->all());
         } else {
             Notification::success('The client address is updated.');
-            return redirect()->route('admin.client.{clientId}.addresses.index', $clientId);
+            return redirect()->route('hideyo.client-address.index', $clientId);
         }
     }
 
@@ -121,7 +124,7 @@ class ClientAddressController extends Controller
 
         if ($result) {
             Notification::success('The client address is deleted.');
-            return redirect()->route('admin.client.{clientId}.addresses.index', $clientId);
+            return redirect()->route('hideyo.client-address.index', $clientId);
         }
     }
 }

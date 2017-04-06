@@ -1,18 +1,18 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.coupon-group-tabs', array('couponGroupEdit' => true))
+        @include('hideyo_backend::_partials.coupon-group-tabs', array('couponGroupEdit' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.coupon-group.index') !!}">couponGroup</a></li>
-            <li><a href="{!! URL::route('admin.coupon-group.edit', $couponGroup->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.coupon-group.edit', $couponGroup->id) !!}">{!! $couponGroup->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.coupon-group.index') !!}">couponGroup</a></li>
+            <li><a href="{!! URL::route('hideyo.coupon-group.edit', $couponGroup->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.coupon-group.edit', $couponGroup->id) !!}">{!! $couponGroup->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($couponGroup, array('method' => 'put', 'route' => array('admin.coupon-group.update', $couponGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($couponGroup, array('method' => 'put', 'route' => array('hideyo.coupon-group.update', $couponGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
             <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
             <div class="form-group">
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                    <a href="{!! URL::route('admin.coupon-group.index') !!}" class="btn btn-large">Cancel</a>
+                    <a href="{!! URL::route('hideyo.coupon-group.index') !!}" class="btn btn-large">Cancel</a>
                 </div>
             </div>            
     </div>

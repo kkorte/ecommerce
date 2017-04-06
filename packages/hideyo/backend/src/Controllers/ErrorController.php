@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use Dutchbridge\Repositories\ExceptionRepositoryInterface;
+use Hideyo\Backend\Repositories\ExceptionRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -37,7 +37,7 @@ class ErrorController extends Controller
             return $datatables->make(true);
 
         } else {
-            return \View::make('admin.error.index')->with('error', $this->error->selectAll());
+            return view('hideyo_backend::error.index')->with('error', $this->error->selectAll());
         }
     }
 }

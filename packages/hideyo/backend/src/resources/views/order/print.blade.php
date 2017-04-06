@@ -1,28 +1,28 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('admin.order.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.order.index') }}">Overview <span class="sr-only">(current)</span></a></li>
 
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.order.index') }}">Order</a></li>  
+            <li><a href="{{ URL::route('hideyo.order.index') }}">Order</a></li>  
             <li class="active">print</li>
         </ol>
 
-        <a href="{{ URL::route('admin.order.index') }}" class="btn btn-danger pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-return" aria-hidden="true"></span> Back to overview</a>
+        <a href="{{ URL::route('hideyo.order.index') }}" class="btn btn-danger pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-return" aria-hidden="true"></span> Back to overview</a>
 
         <h2>Order <small>print</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 
-     	{!! Form::open(array('route' => array('admin.order.print'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate print-form', "data-url" => "/admin/order/print/products")) !!}
+     	{!! Form::open(array('route' => array('hideyo.order.print'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate print-form', "data-url" => "/admin/order/print/products")) !!}
 
 
 
@@ -51,7 +51,7 @@
 
          {!! Form::close() !!}
 
-     	{!! Form::open(array('route' => array('admin.order.download.print'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+     	{!! Form::open(array('route' => array('hideyo.order.download.print'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
         <div class="form-group">   
             {!! Form::label('type', 'Print type', array('class' => 'col-sm-3 control-label')) !!}
@@ -89,7 +89,7 @@
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
 				{!! Form::submit('Print all', array('class' => 'print-subbmit btn btn-default')) !!}
-                <a href="{!! URL::route('admin.order.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('hideyo.order.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 

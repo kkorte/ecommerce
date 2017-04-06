@@ -29,14 +29,31 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::post('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@postExport'));
     Route::get('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@getExport'));
     
-    Route::get('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@getActivate'));    
-    Route::post('client/{clientId}/activate', array('as' => 'admin.client.activate', 'uses' => 'ClientController@postActivate'));
+    Route::get('client/{clientId}/activate', array('as' => 'hideyo.client.activate', 'uses' => 'ClientController@getActivate'));    
+    Route::post('client/{clientId}/activate', array('as' => 'hideyo.client.activate', 'uses' => 'ClientController@postActivate'));
     
-    Route::get('client/{clientId}/de-activate', array('as' => 'admin.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
-    Route::post('client/{clientId}/de-activate', array('as' => 'admin.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
+    Route::get('client/{clientId}/de-activate', array('as' => 'hideyo.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
+    Route::post('client/{clientId}/de-activate', array('as' => 'hideyo.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
 
-    Route::resource('client/{clientId}/addresses', 'ClientAddressController');
-    Route::resource('client/{clientId}/order', 'ClientOrderController');
+
+
+    Route::resource('client/{clientId}/order', 'ClientOrderController', ['names' => [
+        'index'     => 'hideyo.client-order.index',
+        'create'    => 'hideyo.client-order.create',
+        'store'     => 'hideyo.client-order.store',
+        'edit'      => 'hideyo.client-order.edit',
+        'update'    => 'hideyo.client-order.update',
+        'destroy'   => 'hideyo.client-order.destroy'
+    ]]);
+
+    Route::resource('client/{clientId}/addresses', 'ClientAddressController', ['names' => [
+        'index'     => 'hideyo.client-address.index',
+        'create'    => 'hideyo.client-address.create',
+        'store'     => 'hideyo.client-address.store',
+        'edit'      => 'hideyo.client-address.edit',
+        'update'    => 'hideyo.client-address.update',
+        'destroy'   => 'hideyo.client-address.destroy'
+    ]]);
 
     Route::resource('client', 'ClientController', ['names' => [
         'index'     => 'hideyo.client.index',
@@ -157,14 +174,42 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('error', 'ErrorController');
 
 
+
+    Route::resource('content/{contentId}/images', 'ContentImageController', ['names' => [
+        'index'     => 'hideyo.content-image.index',
+        'create'    => 'hideyo.content-image.create',
+        'store'     => 'hideyo.content-image.store',
+        'edit'      => 'hideyo.content-image.edit',
+        'update'    => 'hideyo.content-image.update',
+        'destroy'   => 'hideyo.content-image.destroy'
+    ]]);
+
  
 
-    Route::resource('content/{contentId}/images', 'ContentImageController');
-    Route::get('content/edit/{contentId}/seo', array('as' => 'admin.content.edit_seo', 'uses' => 'ContentController@editSeo'));
+    Route::get('content/edit/{contentId}/seo', array('as' => 'hideyo.content.edit_seo', 'uses' => 'ContentController@editSeo'));
 
-    Route::resource('content', 'ContentController');
-    Route::resource('content-group', 'ContentGroupController');
-    Route::get('content-group/edit/{contentGroupId}/seo', array('as' => 'admin.content-group.edit_seo', 'uses' => 'ContentGroupController@editSeo'));
+
+    Route::resource('content', 'ContentController', ['names' => [
+        'index'     => 'hideyo.content.index',
+        'create'    => 'hideyo.content.create',
+        'store'     => 'hideyo.content.store',
+        'edit'      => 'hideyo.content.edit',
+        'update'    => 'hideyo.content.update',
+        'destroy'   => 'hideyo.content.destroy'
+    ]]);
+
+
+    Route::resource('content-group', 'ContentGroupController', ['names' => [
+        'index'     => 'hideyo.content-group.index',
+        'create'    => 'hideyo.content-group.create',
+        'store'     => 'hideyo.content-group.store',
+        'edit'      => 'hideyo.content-group.edit',
+        'update'    => 'hideyo.content-group.update',
+        'destroy'   => 'hideyo.content-group.destroy'
+    ]]);
+
+
+    Route::get('content-group/edit/{contentGroupId}/seo', array('as' => 'hideyo.content-group.edit_seo', 'uses' => 'ContentGroupController@editSeo'));
 
 
     Route::get('news/refactor-images', array('as' => 'news.refactor.images', 'uses' => 'NewsController@refactorAllImages'));

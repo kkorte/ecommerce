@@ -20,114 +20,58 @@ use Notification;
 use Mail;
 use Excel;
 use Auth;
-use Notification;
 
 class ClientController extends Controller
 {
-    public function __construct(Request $request, ClientRepositoryInterface $client, ClientAddressRepositoryInterface $clientAddress)
+    public function __construct(
+        Request $request, ClientRepositoryInterface $client, 
+        ClientAddressRepositoryInterface $clientAddress)
     {
-        $this->client = $client;
-        $this->clientAddress = $clientAddress;
-        $this->request = $request;
+        $this->client           = $client;
+        $this->clientAddress    = $clientAddress;
+        $this->request          = $request;
     }
 
     public function index()
     {
         $shop  = Auth::guard('hideyobackend')->user()->shop;
 
-        if ($shop->wholesale) {
-
-            if ($this->request->wantsJson()) {
-
-                $shop  = Auth::guard('hideyobackend')->user()->shop();
-                $clients = $this->client->getModel()->select(
-                    [
-                    \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                    'id', 'company', 'bill_client_address_id', 'vat_number', 'debtor_number', 'active', 'confirmed', 'iban_number', 'chamber_of_commerce_number',
-                    'email', 'last_login']
-                )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
-                
-                $datatables = \Datatables::of($clients)
-
-                ->addColumn('last_login', function ($clients) {
-                    return date('d F H:i', strtotime($clients->last_login));
-                })
+        if ($this->request->wantsJson()) {
+            $shop  = Auth::guard('hideyobackend')->user()->shop();
+            $clients = $this->client->getModel()->select(
+                [
+                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                'id', 'confirmed', 'active',
+                'email', 'last_login']
+            )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
+            
+            $datatables = \Datatables::of($clients)
 
 
-                ->addColumn('company', function ($clients) {
+            ->addColumn('last_login', function ($clients) {
+                return date('d F H:i', strtotime($clients->last_login));
+            })
 
-                    if ($clients->clientBillAddress and $clients->clientBillAddress->company) {
-                        return $clients->clientBillAddress->company;
-                    } else {
-                        return $clients->company;
-                    }
-                })
+            ->addColumn('action', function ($clients) {
+                $delete = \Form::deleteajax(url()->route('hideyo.client.destroy', $clients->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.client.edit', $clients->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$delete;
+            
+                if (!$clients->active || !$clients->confirmed) {
+                    $link .= ' <a href="'.url()->route('hideyo.client.activate', $clients->id).'" class="btn btn-default btn-sm btn-info">activate</a>';
+                } else {
+                    $link .= ' <a href="'.url()->route('hideyo.client.de-activate', $clients->id).'" class="btn btn-default btn-sm btn-info">block</a>';
+                }
 
+                return $link;
+            });
 
-                ->addColumn('chamber_of_commerce_number', function ($clients) {
-                    return '<a href="https://www.kvk.nl/orderstraat/bedrijf-kiezen/?q='.$clients->chamber_of_commerce_number.'" target="_blank">'.$clients->chamber_of_commerce_number.'</a>';
-                })
-
-
-                ->addColumn('action', function ($clients) {
-                    $delete = \Form::deleteajax('/admin/client/'. $clients->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                    $link = '<a href="/admin/client/'.$clients->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$delete;
-                    if (!$clients->active || !$clients->confirmed) {
-                        $link .= ' <a href="/admin/client/'.$clients->id.'/activate" class="btn btn-default btn-sm btn-info">activate</a>';
-                    } else {
-                        $link .= ' <a href="/admin/client/'.$clients->id.'/de-activate" class="btn btn-default btn-sm btn-info">block</a>';
-                    }
-
-                    return $link;
-                });
-
-                return $datatables->make(true);
+            return $datatables->make(true);
 
 
-
-
-            } else {
-                return view('hideyo_backend::client.index-wholesale')->with('client', $this->client->selectAll());
-            }
         } else {
-
-
-            if ($this->request->wantsJson()) {
-                $shop  = Auth::guard('hideyobackend')->user()->shop();
-                $clients = $this->client->getModel()->select(
-                    [
-                    \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                    'id', 'confirmed', 'active',
-                    'email', 'last_login']
-                )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
-                
-                $datatables = \Datatables::of($clients)
-
-
-                ->addColumn('last_login', function ($clients) {
-                    return date('d F H:i', strtotime($clients->last_login));
-                })
-
-                ->addColumn('action', function ($clients) {
-                    $delete = \Form::deleteajax('/admin/client/'. $clients->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                    $link = '<a href="/admin/client/'.$clients->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$delete;
-                
-                    if (!$clients->active || !$clients->confirmed) {
-                        $link .= ' <a href="/admin/client/'.$clients->id.'/activate" class="btn btn-default btn-sm btn-info">activate</a>';
-                    } else {
-                        $link .= ' <a href="/admin/client/'.$clients->id.'/de-activate" class="btn btn-default btn-sm btn-info">block</a>';
-                    }
-
-                    return $link;
-                });
-
-                return $datatables->make(true);
-
-
-            } else {
-                return view('hideyo_backend::client.index')->with('client', $this->client->selectAll());
-            }
+            return view('hideyo_backend::client.index')->with('client', $this->client->selectAll());
         }
+    
     }
 
     public function create()
@@ -138,13 +82,13 @@ class ClientController extends Controller
     public function getActivate($id)
     {
 
-        return view('hideyo_backend::client.activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
+        return view('hideyo_backend::client.activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->pluck('firstname', 'id')));
     }
 
     public function getDeActivate($id)
     {
 
-        return view('hideyo_backend::client.de-activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->lists('firstname', 'id')));
+        return view('hideyo_backend::client.de-activate')->with(array('client' => $this->client->find($id), 'addresses' => $this->clientAddress->selectAllByClientId($id)->pluck('firstname', 'id')));
     }
 
 
@@ -176,7 +120,7 @@ class ClientController extends Controller
         }
 
         Notification::success('The client was activate.');
-        return redirect()->route('admin.client.index');
+        return redirect()->route('hideyo.client.index');
     }
 
 
@@ -184,7 +128,7 @@ class ClientController extends Controller
     {
         $result  = $this->client->deactivate($id);
         Notification::success('The client was deactivate.');
-        return redirect()->route('admin.client.index');
+        return redirect()->route('hideyo.client.index');
     }
 
     public function store()
@@ -194,7 +138,7 @@ class ClientController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The client was inserted.');
-            return redirect()->route('admin.client.index');
+            return redirect()->route('hideyo.client.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -273,7 +217,7 @@ class ClientController extends Controller
 
 
         Notification::success('The product export is completed.');
-        return redirect()->route('admin.product.index');
+        return redirect()->route('hideyo.product.index');
     }
 
 
@@ -308,7 +252,7 @@ class ClientController extends Controller
 
 
             Notification::success('The client was updated.');
-            return redirect()->route('admin.client.index');
+            return redirect()->route('hideyo.client.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -323,7 +267,7 @@ class ClientController extends Controller
 
         if ($result) {
             Notification::success('The client was deleted.');
-            return redirect()->route('admin.client.index');
+            return redirect()->route('hideyo.client.index');
         }
     }
 }

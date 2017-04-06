@@ -1,29 +1,29 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-tabs', array('productCombination' => true))
+        @include('hideyo_backend::_partials.product-tabs', array('productCombination' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 		<ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">combinations</li>
 		</ol>
 
-		<a href="{{ URL::route('admin.product.{productId}.product-combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.{productId}.product-combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>combinations</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($product, array('method' => 'put', 'route' => array('admin.product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($product, array('method' => 'put', 'route' => array('hideyo.product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::getToken() !!}">     
         {!! Form::hidden('product-combination', 1) !!}                      
             
@@ -64,7 +64,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('admin.product.{productId}.product-combination.index', $product->id) }}",
+                   "ajax": "{{ URL::route('hideyo.product.{productId}.product-combination.index', $product->id) }}",
 
                  columns: [
 

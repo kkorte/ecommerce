@@ -19,6 +19,7 @@ class ClientAddress extends Model
 
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
 
@@ -27,14 +28,13 @@ class ClientAddress extends Model
         return $this->belongsTo('Client');
     }
 
-
     public function clientDeliveryAddress()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Client', 'id', 'delivery_client_address_id');
+        return $this->belongsTo('Hideyo\Backend\Models\Client', 'id', 'delivery_client_address_id');
     }
 
     public function clientBillAddress()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Client', 'id', 'bill_client_address_id');
+        return $this->belongsTo('Hideyo\Backend\Models\Client', 'id', 'bill_client_address_id');
     }
 }

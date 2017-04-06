@@ -1,28 +1,28 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.news-tabs', array('newsImages' => true))
+        @include('hideyo_backend::_partials.news-tabs', array('newsImages' => true))
     </div>
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
           <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-          <li><a href="{!! URL::route('admin.news.index') !!}">News</a></li>
-            <li><a href="{!! URL::route('admin.news.edit', $news->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
-            <li><a href="{!! URL::route('admin.news.{newsId}.images.index', $news->id) !!}">images</a></li>
+          <li><a href="{!! URL::route('hideyo.news.index') !!}">News</a></li>
+            <li><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.news.{newsId}.images.index', $news->id) !!}">images</a></li>
           <li class="active">edit image</li> 
         </ol>
 
-        <a href="{!! URL::route('admin.news.{newsId}.images.index', $news->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
+        <a href="{!! URL::route('hideyo.news.{newsId}.images.index', $news->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
 
         <h2>News <small>images edit</small></h2>
         {!! Notification::showAll() !!}
         <hr/>
-        {!! Form::model($newsImage, array('method' => 'put', 'route' => array('admin.news.{newsId}.images.update', $news->id, $newsImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($newsImage, array('method' => 'put', 'route' => array('hideyo.news.{newsId}.images.update', $news->id, $newsImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
 
@@ -44,7 +44,7 @@
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('admin.news.{newsId}.images.store', $news->id) !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('hideyo.news.{newsId}.images.store', $news->id) !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 

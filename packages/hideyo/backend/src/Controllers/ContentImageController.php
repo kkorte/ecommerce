@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * ProductController
@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ContentRepositoryInterface;
+use Hideyo\Backend\Repositories\ContentRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -48,14 +48,14 @@ class ContentImageController extends Controller
 
             return $datatables->make(true);
         } else {
-            return \View::make('admin.content_image.index')->with(array('content' => $content));
+            return view('hideyo_backend::content_image.index')->with(array('content' => $content));
         }
     }
 
     public function create($contentId)
     {
         $content = $this->content->find($contentId);
-        return \View::make('admin.content_image.create')->with(array('content' => $content));
+        return view('hideyo_backend::content_image.create')->with(array('content' => $content));
     }
 
     public function store($contentId)
@@ -64,7 +64,7 @@ class ContentImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The content image was inserted.');
-            return redirect()->route('admin.content.{contentId}.images.index', $contentId);
+            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -76,7 +76,7 @@ class ContentImageController extends Controller
     public function edit($contentId, $id)
     {
         $content = $this->content->find($contentId);
-        return \View::make('admin.content_image.edit')->with(array('contentImage' => $this->content->findImage($id), 'content' => $content));
+        return view('hideyo_backend::content_image.edit')->with(array('contentImage' => $this->content->findImage($id), 'content' => $content));
     }
 
     public function update($contentId, $id)
@@ -85,7 +85,7 @@ class ContentImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The content image was updated.');
-            return redirect()->route('admin.content.{contentId}.images.index', $contentId);
+            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -100,7 +100,7 @@ class ContentImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('admin.content.{contentId}.images.index', $contentId);
+            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
         }
     }
 }

@@ -1,7 +1,7 @@
         <ul class="nav nav-sidebar"><!-- available classes "right-aligned" -->
 
             <li>
-                <a href="{!! URL::route('admin.news.index', $news->id) !!}">
+                <a href="{!! URL::route('hideyo.news.index', $news->id) !!}">
                     Overview
                 </a>
             </li>
@@ -10,7 +10,7 @@
             @else
             <li>
             @endif
-                <a href="{{ URL::route('admin.news.edit', $news->id) }}">
+                <a href="{{ URL::route('hideyo.news.edit', $news->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Edit</span>
                 </a>
@@ -21,7 +21,7 @@
             @else
             <li>
             @endif
-                <a href="{{ URL::route('admin.news.edit_seo', $news->id) }}">
+                <a href="{{ URL::route('hideyo.news.edit_seo', $news->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Seo</span>
                 </a>
@@ -32,7 +32,7 @@
             @else
             <li>
             @endif
-                <a href="{!! URL::route('admin.news.{newsId}.images.index', $news->id) !!}">
+                <a href="{!! URL::route('hideyo.news.{newsId}.images.index', $news->id) !!}">
                     <span class="visible-xs"><i class="entypo-user"></i></span>
                     <span class="hidden-xs">Images</span>
                 </a>

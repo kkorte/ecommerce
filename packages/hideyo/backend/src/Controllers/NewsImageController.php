@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\NewsRepositoryInterface;
+use Hideyo\Backend\Repositories\NewsRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -54,14 +54,14 @@ class NewsImageController extends Controller
 
 
         } else {
-            return view('admin.news_image.index')->with(array('news' => $news));
+            return view('hideyo_backend::news_image.index')->with(array('news' => $news));
         }
     }
 
     public function create($newsId)
     {
         $news = $this->news->find($newsId);
-        return view('admin.news_image.create')->with(array('news' => $news));
+        return view('hideyo_backend::news_image.create')->with(array('news' => $news));
     }
 
     public function store($newsId)
@@ -71,7 +71,7 @@ class NewsImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The news image was inserted.');
-            return redirect()->route('admin.news.{newsId}.images.index', $newsId);
+            return redirect()->route('hideyo.news.{newsId}.images.index', $newsId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
@@ -83,7 +83,7 @@ class NewsImageController extends Controller
     public function edit($newsId, $id)
     {
         $news = $this->news->find($newsId);
-        return view('admin.news_image.edit')->with(array('newsImage' => $this->news->findImage($id), 'news' => $news));
+        return view('hideyo_backend::news_image.edit')->with(array('newsImage' => $this->news->findImage($id), 'news' => $news));
     }
 
     public function update($newsId, $id)
@@ -92,7 +92,7 @@ class NewsImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The news image was updated.');
-            return redirect()->route('admin.news.{newsId}.images.index', $newsId);
+            return redirect()->route('hideyo.news.{newsId}.images.index', $newsId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
@@ -107,7 +107,7 @@ class NewsImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('admin.news.{newsId}.images.index', $newsId);
+            return redirect()->route('hideyo.news.{newsId}.images.index', $newsId);
         }
     }
 }

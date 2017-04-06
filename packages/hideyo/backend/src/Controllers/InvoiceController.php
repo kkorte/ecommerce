@@ -9,9 +9,9 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\InvoiceRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\InvoiceRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -39,7 +39,7 @@ class InvoiceController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id', 'generated_custom_invoice_id', 'order_id',
                 'price_with_tax']
-            )->with(array('Order'))->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->with(array('Order'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             
             $datatables = \Datatables::of($invoice)
@@ -63,13 +63,13 @@ class InvoiceController extends Controller
 
 
         } else {
-            return \View::make('admin.invoice.index')->with('invoice', $this->invoice->selectAll());
+            return view('hideyo_backend::invoice.index')->with('invoice', $this->invoice->selectAll());
         }
     }
 
     public function show($id)
     {
-        return \View::make('admin.invoice.show')->with('invoice', $this->invoice->find($id));
+        return view('hideyo_backend::invoice.show')->with('invoice', $this->invoice->find($id));
     }
 
     public function download($id)
@@ -82,7 +82,7 @@ class InvoiceController extends Controller
 
     public function create()
     {
-        return \View::make('admin.invoice.create')->with(array(
+        return view('hideyo_backend::invoice.create')->with(array(
             'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
             'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id')
         ));
@@ -103,7 +103,7 @@ class InvoiceController extends Controller
 
     public function edit($id)
     {
-        return \View::make('admin.invoice.edit')->with(array(
+        return view('hideyo_backend::invoice.edit')->with(array(
             'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
             'invoice' => $this->invoice->find($id),
             'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id'),

@@ -1,7 +1,7 @@
 <ul class="nav nav-sidebar"><!-- available classes "right-aligned" -->
 
     <li>
-        <a href="{!! URL::route('admin.product-category.index', $productCategory->id) !!}">
+        <a href="{!! URL::route('hideyo.product-category.index', $productCategory->id) !!}">
             Back to overview
         </a>
     </li>
@@ -10,7 +10,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('admin.product-category.edit', $productCategory->id) !!}">
+        <a href="{!! URL::route('hideyo.product-category.edit', $productCategory->id) !!}">
             <span class="visible-xs"><i class="entypo-gauge"></i></span>
             <span class="hidden-xs">Edit</span>
         </a>
@@ -20,7 +20,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('admin.product-category.edit_seo', $productCategory->id) !!}">
+        <a href="{!! URL::route('hideyo.product-category.edit_seo', $productCategory->id) !!}">
             <span class="visible-xs"><i class="entypo-gauge"></i></span>
             <span class="hidden-xs">Seo</span>
         </a>
@@ -30,7 +30,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('admin.product-category.{productCategoryId}.images.index', $productCategory->id) !!}">
+        <a href="{!! URL::route('hideyo.product-category.{productCategoryId}.images.index', $productCategory->id) !!}">
             <span class="visible-xs"><i class="entypo-user"></i></span>
             <span class="hidden-xs">Images</span>
         </a>
@@ -42,7 +42,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('admin.product-category.edit.hightlight', $productCategory->id) !!}">
+        <a href="{!! URL::route('hideyo.product-category.edit.hightlight', $productCategory->id) !!}">
             <span class="visible-xs"><i class="entypo-user"></i></span>
             <span class="hidden-xs">Highlight</span>
         </a>

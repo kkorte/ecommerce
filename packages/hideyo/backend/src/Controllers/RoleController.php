@@ -1,7 +1,7 @@
 <?php
 
 use dutchbridge\validators\RoleValidator;
-use dutchbridge\repositories\RoleRepositoryInterface;
+use Hideyo\Backend\Repositories\RoleRepositoryInterface;
 
 class RoleController extends BaseController
 {

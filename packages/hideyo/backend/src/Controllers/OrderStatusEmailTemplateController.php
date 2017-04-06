@@ -64,7 +64,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The template was inserted.');
-            return redirect()->route('admin.order-status-email-template.index');
+            return redirect()->route('hideyo.order-status-email-template.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -90,7 +90,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('template was updated.');
-            return redirect()->route('admin.order-status-email-template.index');
+            return redirect()->route('hideyo.order-status-email-template.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -106,7 +106,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if ($result) {
             Notification::success('template was deleted.');
-            return redirect()->route('admin.order-status-email-template.index');
+            return redirect()->route('hideyo.order-status-email-template.index');
         }
     }
 }

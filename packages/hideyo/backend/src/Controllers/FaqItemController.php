@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * CouponController
@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\FaqItemRepositoryInterface;
+use Hideyo\Backend\Repositories\FaqItemRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -36,7 +36,7 @@ class FaqItemController extends Controller
             )
             ->with(array('faqItemGroup'))
             ->leftJoin('faq_item_group', 'faq_item_group.id', '=', 'faq_item.faq_item_group_id')
-            ->where('faq_item.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('faq_item.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = \Datatables::of($query)
             ->addColumn('faqitemgroup', function ($query) {
@@ -52,14 +52,14 @@ class FaqItemController extends Controller
             return $datatables->make(true);
 
         } else {
-            return \View::make('admin.faq-item.index')->with('faq', $this->faq->selectAll());
+            return view('hideyo_backend::faq-item.index')->with('faq', $this->faq->selectAll());
         }
     }
 
     public function create()
     {
         $groups = $this->faq->selectAllGroups()->lists('title', 'id')->toArray();
-        return \View::make('admin.faq-item.create')->with(array('groups' => $groups));
+        return view('hideyo_backend::faq-item.create')->with(array('groups' => $groups));
     }
 
     public function store()
@@ -68,7 +68,7 @@ class FaqItemController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The faq was inserted.');
-            return redirect()->route('admin.faq.index');
+            return redirect()->route('hideyo.faq.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -82,12 +82,12 @@ class FaqItemController extends Controller
     {
 
         $groups = $this->faq->selectAllGroups()->lists('title', 'id')->toArray();
-        return \View::make('admin.faq-item.edit')->with(array('faq' => $this->faq->find($id), 'groups' => $groups));
+        return view('hideyo_backend::faq-item.edit')->with(array('faq' => $this->faq->find($id), 'groups' => $groups));
     }
 
     public function editSeo($id)
     {
-        return \View::make('admin.faq-item.edit_seo')->with(array('faq' => $this->faq->find($id)));
+        return view('hideyo_backend::faq-item.edit_seo')->with(array('faq' => $this->faq->find($id)));
     }
 
     public function update($faqId)
@@ -97,13 +97,13 @@ class FaqItemController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('FaqItem seo was updated.');
-                return redirect()->route('admin.faq.edit_seo', $faqId);
+                return redirect()->route('hideyo.faq.edit_seo', $faqId);
             } elseif ($this->request->get('faq-combination')) {
                 Notification::success('FaqItem combination leading attribute group was updated.');
-                return redirect()->route('admin.faq.{faqId}.faq-combination.index', $faqId);
+                return redirect()->route('hideyo.faq.{faqId}.faq-combination.index', $faqId);
             } else {
                 Notification::success('FaqItem was updated.');
-                return redirect()->route('admin.faq.edit', $faqId);
+                return redirect()->route('hideyo.faq.edit', $faqId);
             }
         }
 
@@ -121,7 +121,7 @@ class FaqItemController extends Controller
 
         if ($result) {
             Notification::success('The faq was deleted.');
-            return redirect()->route('admin.faq.index');
+            return redirect()->route('hideyo.faq.index');
         }
     }
 }

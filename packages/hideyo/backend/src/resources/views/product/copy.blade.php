@@ -1,11 +1,11 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('admin.product.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
             <li class="active"><a href="#">Copy</a></li>
         </ul>
     </div>
@@ -13,7 +13,7 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Products</a></li>  
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Products</a></li>  
             <li class="active">copy</li>
         </ol>
 
@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            @include('admin._fields.buttons', array('cancelRoute' => 'admin.product.index'))          
+            @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.product.index'))          
     </div>
 </div>
 @stop

@@ -53,7 +53,7 @@ class ProductImageController extends Controller
 
 
         } else {
-            return view('admin.product_image.index')->with(array('product' => $product));
+            return view('hideyo_backend::product_image.index')->with(array('product' => $product));
         }
     }
 
@@ -61,7 +61,7 @@ class ProductImageController extends Controller
     {
         $product = $this->product->find($productId);
         $lists = $this->generateAttributeLists($product);
-        return view('admin.product_image.create')->with(array('attributesList' => $lists['attributesList'], 'productAttributesList' => $lists['productAttributesList'], 'product' => $product));
+        return view('hideyo_backend::product_image.create')->with(array('attributesList' => $lists['attributesList'], 'productAttributesList' => $lists['productAttributesList'], 'product' => $product));
     }
 
     public function store($productId)
@@ -70,7 +70,7 @@ class ProductImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product image is inserted.');
-            return redirect()->route('admin.product.{productId}.images.index', $productId);
+            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -101,7 +101,7 @@ class ProductImageController extends Controller
             }
         }
 
-        return view('admin.product_image.edit')->with(array('selectedAttributes' => $selectedAttributes, 'selectedProductAttributes' => $selectedProductAttributes, 'attributesList' => $lists['attributesList'], 'productAttributesList' => $lists['productAttributesList'], 'productImage' => $productImage, 'product' => $product));
+        return view('hideyo_backend::product_image.edit')->with(array('selectedAttributes' => $selectedAttributes, 'selectedProductAttributes' => $selectedProductAttributes, 'attributesList' => $lists['attributesList'], 'productAttributesList' => $lists['productAttributesList'], 'productImage' => $productImage, 'product' => $product));
     }
 
     public function generateAttributeLists($product)
@@ -143,7 +143,7 @@ class ProductImageController extends Controller
         }
         
         Notification::success('The product image is updated.');
-        return redirect()->route('admin.product.{productId}.images.index', $productId);
+        return redirect()->route('hideyo.product.{productId}.images.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -152,7 +152,7 @@ class ProductImageController extends Controller
 
         if ($result) {
             Notification::success('The product image is deleted.');
-            return redirect()->route('admin.product.{productId}.images.index', $productId);
+            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
         }
     }
 }

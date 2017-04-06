@@ -1,4 +1,4 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.faq.index') !!}">Faq item</a></li>
-            <li><a href="{!! URL::route('admin.faq.edit', $faq->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.faq.edit', $faq->id) !!}">{!! $faq->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.faq.index') !!}">Faq item</a></li>
+            <li><a href="{!! URL::route('hideyo.faq.edit', $faq->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.faq.edit', $faq->id) !!}">{!! $faq->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($faq, array('method' => 'put', 'route' => array('admin.faq.update', $faq->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::model($faq, array('method' => 'put', 'route' => array('hideyo.faq.update', $faq->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
             <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
 
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            @include('admin._fields.buttons', array('cancelRoute' => 'admin.faq.index')) 
+            @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.faq.index')) 
           
     </div>
 </div>

@@ -1,26 +1,26 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li ><a href="{{ URL::route('admin.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li ><a href="{{ URL::route('hideyo.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
             <li>
-                <a href="{{ URL::route('admin.client.edit', $client->id) }}">
+                <a href="{{ URL::route('hideyo.client.edit', $client->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Edit</span>
                 </a>
             </li>
 
             <li class="active">
-                <a href="{!! URL::route('admin.client.{clientId}.addresses.index', $client->id) !!}">
+                <a href="{!! URL::route('hideyo.client-address.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Adressess</span>
                 </a>
             </li>
 
             <li>
-                <a href="{!! URL::route('admin.client.{clientId}.order.index', $client->id) !!}">
+                <a href="{!! URL::route('hideyo.client-order.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Orders</span>
                 </a>
@@ -32,9 +32,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.client.index') }}">Client</a></li>
-            <li><a href="{{ URL::route('admin.client.edit', $client->id) }}">{!! $client->email !!}</a></li>
-            <li class="active"><a href="{{ URL::route('admin.client.{clientId}.addresses.index', $client->id) }}">addresses</a></li>
+            <li><a href="{{ URL::route('hideyo.client.index') }}">Client</a></li>
+            <li><a href="{{ URL::route('hideyo.client.edit', $client->id) }}">{!! $client->email !!}</a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.client-address.index', $client->id) }}">addresses</a></li>
                 <li class="active">edit</li>
 
         </ol>
@@ -43,12 +43,9 @@
         {!! Notification::showAll() !!}     
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-primary tab-content">
 
-            <div class="panel-body">    
-                <div class="col-md-12">
 
-					    {{ Form::open(array('route' => array('admin.client.{clientId}.addresses.store', $client->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) }}
+					    {{ Form::open(array('route' => array('hideyo.client-address.store', $client->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) }}
 						    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
                             <div class="form-group">
@@ -140,14 +137,12 @@
 					        <div class="form-group">
 					            <div class="col-sm-offset-3 col-sm-5">
 					                {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
-					                <a href="{{ URL::route('admin.client.{clientId}.addresses.store', $client->id) }}" class="btn btn-large">Cancel</a>
+					                <a href="{{ URL::route('hideyo.client-address.store', $client->id) }}" class="btn btn-large">Cancel</a>
 					            </div>
 					        </div>
 
 					    {{ Form::close() }}
-				</div>
-			</div>
-		</div>
+	
 	</div>
 </div>
 @stop

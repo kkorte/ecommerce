@@ -1,21 +1,21 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.content-tabs', array('contentImages' => true))
+        @include('hideyo_backend::_partials.content-tabs', array('contentImages' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin/dashboard">Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.content.index') !!}">Content</a></li>  
-            <li><a href="{!! URL::route('admin.content.edit', $content->id) !!}">edit</a></li>
-            <li class="active"><a href="{!! URL::route('admin.content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.content.index') !!}">Content</a></li>  
+            <li><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">edit</a></li>
+            <li class="active"><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
             <li class="active">images</li>           
         </ol>
 
-        <a href="{{ URL::route('admin.content.{contentId}.images.create', $content->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
+        <a href="{{ URL::route('hideyo.content-image.create', $content->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
 
         <h2>Content <small>images</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('admin.content.{contentId}.images.index', $content->id) }}",
+                   "ajax": "{{ URL::route('hideyo.content-image.index', $content->id) }}",
 
                  columns: [
               {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

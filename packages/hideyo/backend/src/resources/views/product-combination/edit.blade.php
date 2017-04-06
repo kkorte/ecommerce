@@ -1,22 +1,22 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
 	<div class="col-sm-3 col-md-2 sidebar">
-		@include('admin._partials.product-tabs', array('productCombination' => true))
+		@include('hideyo_backend::_partials.product-tabs', array('productCombination' => true))
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-			<li><a href="{!! URL::route('admin.product.index') !!}">Product</a></li>
-			<li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">edit</a></li>
-			<li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
-			<li><a href="{!! URL::route('admin.product.{productId}.images.index', $product->id) !!}">combinations</a></li>
+			<li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
+			<li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
+			<li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+			<li><a href="{!! URL::route('hideyo.product.{productId}.images.index', $product->id) !!}">combinations</a></li>
 			<li class="active">create combination</li> 
 		</ol>
-		<a href="{!! URL::route('admin.product.{productId}.product-combination.index', $product->id) !!}" class="btn btn-danger btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
+		<a href="{!! URL::route('hideyo.product.{productId}.product-combination.index', $product->id) !!}" class="btn btn-danger btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
 
 		<h2>Product combinations  <small>edit</small></h2>
 		<hr/>
@@ -30,7 +30,7 @@
 
 						<div class="col-md-12">
 
-							{!! Form::model($productCombination, array('method' => 'put', 'route' => array('admin.product.{productId}.product-combination.update', $product->id, $productCombination->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+							{!! Form::model($productCombination, array('method' => 'put', 'route' => array('hideyo.product.{productId}.product-combination.update', $product->id, $productCombination->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 							<input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 							<input type="hidden" name="default_attribute_group_id" class="default_attribute_group_id" value="{!! key($attributeGroups->toArray()) !!}">
@@ -146,7 +146,7 @@
 				                </div>
 				            </div>
 
-            				@include('admin._fields.buttons', array('cancelRoute' => 'admin.product.{productId}.product-combination.index', 'cancelRouteParameters' => $product->id))
+            				@include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.product.{productId}.product-combination.index', 'cancelRouteParameters' => $product->id))
 
 
 
@@ -158,7 +158,7 @@
 
 								$( ".attribute_group_id" ).on( "change", function() {
 									hasBeenClicked = true;
-									$.getJSON( "{{ URL::route('admin.product.{productId}.product-combination.create', $product->id) }}", { attribute_group_id: this.value } )
+									$.getJSON( "{{ URL::route('hideyo.product.{productId}.product-combination.create', $product->id) }}", { attribute_group_id: this.value } )
 									.done(function( data ) {
 
 										//clear the current content of the select
@@ -175,7 +175,7 @@
 
 									var defaultValue = $( ".default_attribute_group_id" ).val();
 
-									$.getJSON( "{{ URL::route('admin.product.{productId}.product-combination.create', $product->id) }}", { attribute_group_id: defaultValue } )
+									$.getJSON( "{{ URL::route('hideyo.product.{productId}.product-combination.create', $product->id) }}", { attribute_group_id: defaultValue } )
 									.done(function( data ) {
 										//clear the current content of the select
 										$select.html('');

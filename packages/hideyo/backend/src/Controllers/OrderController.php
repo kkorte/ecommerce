@@ -418,7 +418,7 @@ class OrderController extends Controller
         if ($text) {
             $pdfText = $this->replaceTags($text->pdf_text, $order);
         }
-        $pdf = \PDF::loadView('admin.order.pdf', array('order' => $order, 'pdfText' => $pdfText));
+        $pdf = \PDF::loadview('hideyo_backend::order.pdf', array('order' => $order, 'pdfText' => $pdfText));
 
         return $pdf->download('order-'.$order->generated_custom_order_id.'.pdf');
     }

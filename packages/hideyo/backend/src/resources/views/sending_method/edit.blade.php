@@ -1,17 +1,17 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('admin.sending-method.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('admin.sending-method.create') }}">Edit</a></li>
+            <li><a href="{{ URL::route('hideyo.sending-method.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.sending-method.create') }}">Edit</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.sending-method.index') }}">Sending methods</a></li>  
+            <li><a href="{{ URL::route('hideyo.sending-method.index') }}">Sending methods</a></li>  
             <li class="active">edit</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($sendingMethod, array('method' => 'put', 'route' => array('admin.sending-method.update', $sendingMethod->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($sendingMethod, array('method' => 'put', 'route' => array('hideyo.sending-method.update', $sendingMethod->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
             <div class="form-group">
                 {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}
@@ -114,7 +114,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                    <a href="{!! URL::route('admin.sending-method.index') !!}" class="btn btn-large">Cancel</a>
+                    <a href="{!! URL::route('hideyo.sending-method.index') !!}" class="btn btn-large">Cancel</a>
                 </div>
             </div>
 

@@ -1,18 +1,18 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.content-tabs', array('contentEdit' => true))
+        @include('hideyo_backend::_partials.content-tabs', array('contentEdit' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.content.index') !!}">Content</a></li>
-            <li><a href="{!! URL::route('admin.content.edit', $content->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.content.index') !!}">Content</a></li>
+            <li><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($content, array('method' => 'put', 'route' => array('admin.content.update', $content->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::model($content, array('method' => 'put', 'route' => array('hideyo.content.update', $content->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
             <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
             <div class="form-group">
@@ -65,7 +65,7 @@
             </div>
 
 
-            @include('admin._fields.buttons', array('cancelRoute' => 'admin.content.index'))           
+            @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.content.index'))           
     </div>
 </div>
 @stop

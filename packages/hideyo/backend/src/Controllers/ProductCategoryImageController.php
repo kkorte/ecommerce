@@ -55,7 +55,7 @@ class ProductCategoryImageController extends Controller
 
 
         } else {
-            return view('admin.product_category_image.index')->with(array('productCategory' => $productCategory));
+            return view('hideyo_backend::product_category_image.index')->with(array('productCategory' => $productCategory));
         }
     }
 
@@ -63,7 +63,7 @@ class ProductCategoryImageController extends Controller
     {
         $productCategory = $this->productCategory->find($productCategoryId);
 
-        return view('admin.product_category_image.create')->with(array('productCategory' => $productCategory));
+        return view('hideyo_backend::product_category_image.create')->with(array('productCategory' => $productCategory));
     }
 
     public function store(Request $request, $productCategoryId)
@@ -73,7 +73,7 @@ class ProductCategoryImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The category image was inserted.');
-            return redirect()->route('admin.product-category.{productCategoryId}.images.index', $productCategoryId);
+            return redirect()->route('hideyo.product-category.{productCategoryId}.images.index', $productCategoryId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -85,7 +85,7 @@ class ProductCategoryImageController extends Controller
     public function edit(Request $request, $productCategoryId, $id)
     {
         $productCategory = $this->productCategory->find($productCategoryId);
-        return view('admin.product_category_image.edit')->with(array('productCategoryImage' => $this->productCategory->findImage($id), 'productCategory' => $productCategory));
+        return view('hideyo_backend::product_category_image.edit')->with(array('productCategoryImage' => $this->productCategory->findImage($id), 'productCategory' => $productCategory));
     }
 
     public function update(Request $request, $productCategoryId, $id)
@@ -94,7 +94,7 @@ class ProductCategoryImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The category image was updated.');
-            return redirect()->route('admin.product-category.{productCategoryId}.images.index', $productCategoryId);
+            return redirect()->route('hideyo.product-category.{productCategoryId}.images.index', $productCategoryId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -109,7 +109,7 @@ class ProductCategoryImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('admin.product-category.{productCategoryId}.images.index', $productCategoryId);
+            return redirect()->route('hideyo.product-category.{productCategoryId}.images.index', $productCategoryId);
         }
     }
 }

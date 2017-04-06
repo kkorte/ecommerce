@@ -1,27 +1,27 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li ><a href="{{ URL::route('admin.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li ><a href="{{ URL::route('hideyo.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
             <li>
-                <a href="{{ URL::route('admin.client.edit', $client->id) }}">
+                <a href="{{ URL::route('hideyo.client.edit', $client->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Edit</span>
                 </a>
             </li>
 
             <li class="active">
-                <a href="{!! URL::route('admin.client.{clientId}.addresses.index', $client->id) !!}">
+                <a href="{!! URL::route('hideyo.client-address.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Adressess</span>
                 </a>
             </li>
 
             <li>
-                <a href="{!! URL::route('admin.client.{clientId}.order.index', $client->id) !!}">
+                <a href="{!! URL::route('hideyo.client-order.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Orders</span>
                 </a>
@@ -33,13 +33,13 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.client.index') }}">Client</a></li>
-            <li><a href="{{ URL::route('admin.client.edit', $client->id) }}">{!! $client->email !!}</a></li>
-            <li class="active"><a href="{{ URL::route('admin.client.{clientId}.addresses.index', $client->id) }}">addresses</a></li>
+            <li><a href="{{ URL::route('hideyo.client.index') }}">Client</a></li>
+            <li><a href="{{ URL::route('hideyo.client.edit', $client->id) }}">{!! $client->email !!}</a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.client-address.index', $client->id) }}">addresses</a></li>
 
         </ol>
 
-        <a href="{{ URL::route('admin.client.{clientId}.addresses.create', $client->id) }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('hideyo.client-address.create', $client->id) }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
 
           <h2>Client <small>addresses</small></h2>
@@ -70,7 +70,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('admin.client.{clientId}.addresses.index', $client->id) }}",
+                   "ajax": "{{ URL::route('hideyo.client-address.index', $client->id) }}",
 
                  columns: [
                         {data: 'firstname', name: 'firstname'},

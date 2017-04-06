@@ -105,7 +105,7 @@ class ProductCategoryController extends Controller
     
         $this->productCategoryImage->reDirectoryAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
-        return redirect()->route('admin.product-category.index');
+        return redirect()->route('hideyo.product-category.index');
     }
 
 
@@ -113,7 +113,7 @@ class ProductCategoryController extends Controller
     {
         $this->productCategoryImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
 
-        return redirect()->route('admin.product-category.index');
+        return redirect()->route('hideyo.product-category.index');
     }
 
     public function tree()
@@ -163,7 +163,7 @@ class ProductCategoryController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The product category was inserted.');
-            return redirect()->route('admin.product-category.index');
+            return redirect()->route('hideyo.product-category.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -199,13 +199,13 @@ class ProductCategoryController extends Controller
         if (isset($result->id)) {
             if ($request->get('seo')) {
                 Notification::success('Category seo was updated.');
-                return redirect()->route('admin.product-category.edit_seo', $id);
+                return redirect()->route('hideyo.product-category.edit_seo', $id);
             } elseif ($request->get('highlight')) {
                 Notification::success('Highlight was updated.');
-                return redirect()->route('admin.product-category.edit.hightlight', $id);
+                return redirect()->route('hideyo.product-category.edit.hightlight', $id);
             } else {
                 Notification::success('Category was updated.');
-                return redirect()->route('admin.product-category.edit', $id);
+                return redirect()->route('hideyo.product-category.edit', $id);
             }
         }
 
@@ -222,7 +222,7 @@ class ProductCategoryController extends Controller
 
         if ($result) {
             Notification::success('Category was deleted.');
-            return redirect()->route('admin.product-category.index');
+            return redirect()->route('hideyo.product-category.index');
         }
     }
 

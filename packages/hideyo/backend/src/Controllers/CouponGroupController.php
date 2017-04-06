@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Hideyo\Backend\Controllers;
 
 /**
  * CouponController
@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\CouponRepositoryInterface;
+use Hideyo\Backend\Repositories\CouponRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -29,7 +29,7 @@ class CouponGroupController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->coupon->getGroupModel()->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'coupon_group.id', 'coupon_group.title'])
-            ->where('coupon_group.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            ->where('coupon_group.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
@@ -41,13 +41,13 @@ class CouponGroupController extends Controller
 
             return $datatables->make(true);
         } else {
-            return view('admin.coupon-group.index')->with('couponGroup', $this->coupon->selectAll());
+            return view('hideyo_backend::coupon-group.index')->with('couponGroup', $this->coupon->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.coupon-group.create')->with(array());
+        return view('hideyo_backend::coupon-group.create')->with(array());
     }
 
     public function store()
@@ -56,7 +56,7 @@ class CouponGroupController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The coupon was inserted.');
-            return redirect()->route('admin.coupon-group.index');
+            return redirect()->route('hideyo.coupon-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -68,7 +68,7 @@ class CouponGroupController extends Controller
 
     public function edit($id)
     {
-        return view('admin.coupon-group.edit')->with(array('couponGroup' => $this->coupon->findGroup($id)));
+        return view('hideyo_backend::coupon-group.edit')->with(array('couponGroup' => $this->coupon->findGroup($id)));
     }
 
     public function update($couponGroupId)
@@ -79,13 +79,13 @@ class CouponGroupController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('CouponGroup seo was updated.');
-                return redirect()->route('admin.coupon-group.edit_seo', $couponGroupId);
+                return redirect()->route('hideyo.coupon-group.edit_seo', $couponGroupId);
             } elseif ($this->request->get('coupon-combination')) {
                 Notification::success('CouponGroup combination leading attribute group was updated.');
-                return redirect()->route('admin.coupon-group.{couponId}.coupon-combination.index', $couponGroupId);
+                return redirect()->route('hideyo.coupon-group.{couponId}.coupon-combination.index', $couponGroupId);
             } else {
                 Notification::success('CouponGroup was updated.');
-                return redirect()->route('admin.coupon-group.edit', $couponGroupId);
+                return redirect()->route('hideyo.coupon-group.edit', $couponGroupId);
             }
         }
 
@@ -103,7 +103,7 @@ class CouponGroupController extends Controller
 
         if ($result) {
             Notification::success('The coupon was deleted.');
-            return redirect()->route('admin.coupon-group.index');
+            return redirect()->route('hideyo.coupon-group.index');
         }
     }
 }

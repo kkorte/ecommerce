@@ -3,13 +3,11 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Content extends Model implements SluggableInterface
+class Content extends Model
 {
-
-    use SluggableTrait;
+    use Sluggable;
 
     protected $table = 'content';
 
@@ -22,8 +20,18 @@ class Content extends Model implements SluggableInterface
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'active', 'content_group_id', 'title', 'content', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id'];
 
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
 
@@ -55,12 +63,12 @@ class Content extends Model implements SluggableInterface
 
     public function contentGroup()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ContentGroup');
+        return $this->belongsTo('Hideyo\Backend\Models\ContentGroup');
     }
 
     public function contentImages()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ContentImage');
+        return $this->hasMany('Hideyo\Backend\Models\ContentImage');
     }
 
 

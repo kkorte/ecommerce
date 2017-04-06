@@ -1,22 +1,22 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        @include('admin._partials.product-tabs', array('productAmountSeries' => true))
+        @include('hideyo_backend::_partials.product-tabs', array('productAmountSeries' => true))
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 		<ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('admin.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('admin.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">amount series</li>
 		</ol>
 
-		<a href="{{ URL::route('admin.product.{productId}.product-amount-series.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount series<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.{productId}.product-amount-series.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount series<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>amount series</small></h2>
         <hr/>
@@ -25,7 +25,7 @@
 
         <h3>Create Quick</h3>
 
-                        {!! Form::open(array('route' => array('admin.product.{productId}.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+                        {!! Form::open(array('route' => array('hideyo.product.{productId}.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                             <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
 
                             <input type="hidden" name="active" value="1">
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-5">
                                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                                    <a href="{!! URL::route('admin.product.{productId}.product-amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
+                                    <a href="{!! URL::route('hideyo.product.{productId}.product-amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('admin.product.{productId}.product-amount-series.index', $product->id) }}",
+                   "ajax": "{{ URL::route('hideyo.product.{productId}.product-amount-series.index', $product->id) }}",
 
                  columns: [
                         {data: 'active', name: 'active'},

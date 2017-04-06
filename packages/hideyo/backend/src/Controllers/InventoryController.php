@@ -9,9 +9,9 @@
  */
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\ProductRepositoryInterface;
-use Dutchbridge\Repositories\TaxRateRepositoryInterface;
-use Dutchbridge\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -45,7 +45,7 @@ class InventoryController extends Controller
 
             ->leftJoin('product_category', 'product_category.id', '=', 'product.product_category_id')
 
-            ->where('product.shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id)->orderBy('amount');
+            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('amount');
             
 
 

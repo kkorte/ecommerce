@@ -60,7 +60,7 @@ class BrandImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The brand image was inserted.');
-            return redirect()->route('admin.brand.{brandId}.images.index', $brandId);
+            return redirect()->route('hideyo.brand.{brandId}.images.index', $brandId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
@@ -81,7 +81,7 @@ class BrandImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The brand image was updated.');
-            return redirect()->route('admin.brand.{brandId}.images.index', $brandId);
+            return redirect()->route('hideyo.brand.{brandId}.images.index', $brandId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
@@ -96,7 +96,7 @@ class BrandImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('admin.brand.{brandId}.images.index', $brandId);
+            return redirect()->route('hideyo.brand.{brandId}.images.index', $brandId);
         }
     }
 }

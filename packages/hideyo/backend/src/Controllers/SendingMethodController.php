@@ -64,7 +64,7 @@ class SendingMethodController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The sending method was inserted.');
-            return redirect()->route('admin.sending-method.index');
+            return redirect()->route('hideyo.sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -89,7 +89,7 @@ class SendingMethodController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The sending method was updated.');
-            return redirect()->route('admin.sending-method.index');
+            return redirect()->route('hideyo.sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -105,7 +105,7 @@ class SendingMethodController extends Controller
 
         if ($result) {
             Notification::success('The sending method was deleted.');
-            return redirect()->route('admin.sending-method.index');
+            return redirect()->route('hideyo.sending-method.index');
         }
     }
 }

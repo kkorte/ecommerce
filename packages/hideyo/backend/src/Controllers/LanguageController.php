@@ -9,7 +9,7 @@
  */
 
 
-use dutchbridge\repositories\LanguageRepositoryInterface;
+use Hideyo\Backend\Repositories\LanguageRepositoryInterface;
 
 class LanguageController extends BaseController
 {

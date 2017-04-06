@@ -1,26 +1,26 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('admin.redirect.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('admin.redirect.create') }}">Create</a></li>
-            <li><a href="{{ URL::route('admin.redirect.export') }}">Export</a></li>
-            <li><a href="{{ URL::route('admin.redirect.import') }}">Import</a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.redirect.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('hideyo.redirect.create') }}">Create</a></li>
+            <li><a href="{{ URL::route('hideyo.redirect.export') }}">Export</a></li>
+            <li><a href="{{ URL::route('hideyo.redirect.import') }}">Import</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.redirect.index') }}">Redirect</a></li>  
+            <li><a href="{{ URL::route('hideyo.redirect.index') }}">Redirect</a></li>  
             <li class="active">overview</li>
         </ol>
         <div class="btn-group pull-right">
-            <a href="{{ URL::route('admin.redirect.create') }}" class="btn btn-default btn-success btn-icon icon-left">Create redirect<i class="entypo-plus"></i></a> 
-            <a href="{{ URL::route('admin.redirect.export') }}" class="btn btn-default btn-info btn-icon icon-left">Export redirects<i class="entypo-plus"></i></a>
+            <a href="{{ URL::route('hideyo.redirect.create') }}" class="btn btn-default btn-success btn-icon icon-left">Create redirect<i class="entypo-plus"></i></a> 
+            <a href="{{ URL::route('hideyo.redirect.export') }}" class="btn btn-default btn-info btn-icon icon-left">Export redirects<i class="entypo-plus"></i></a>
         </div>
 
         <h2>Redirect <small>overview</small></h2>

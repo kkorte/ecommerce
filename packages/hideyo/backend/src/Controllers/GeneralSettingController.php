@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Dutchbridge\Repositories\GeneralSettingRepositoryInterface;
+use Hideyo\Backend\Repositories\GeneralSettingRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -24,7 +24,7 @@ class GeneralSettingController extends Controller
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                 'id',
                 'name', 'value']
-            )->where('shop_id', '=', \Auth::guard('admin')->user()->selected_shop_id);
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
                 $delete = \Form::deleteajax('/admin/general-setting/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
@@ -36,13 +36,13 @@ class GeneralSettingController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('admin.general-setting.index')->with('generalSetting', $this->generalSetting->selectAll());
+            return view('hideyo_backend::general-setting.index')->with('generalSetting', $this->generalSetting->selectAll());
         }
     }
 
     public function create()
     {
-        return view('admin.general-setting.create')->with(array());
+        return view('hideyo_backend::general-setting.create')->with(array());
     }
 
     public function store()
@@ -51,7 +51,7 @@ class GeneralSettingController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The general setting was inserted.');
-            return redirect()->route('admin.general-setting.index');
+            return redirect()->route('hideyo.general-setting.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -62,7 +62,7 @@ class GeneralSettingController extends Controller
 
     public function edit($id)
     {
-        return view('admin.general-setting.edit')->with(array('generalSetting' => $this->generalSetting->find($id)));
+        return view('hideyo_backend::general-setting.edit')->with(array('generalSetting' => $this->generalSetting->find($id)));
     }
 
     public function update($id)
@@ -71,7 +71,7 @@ class GeneralSettingController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The general setting was updated.');
-            return redirect()->route('admin.general-setting.index');
+            return redirect()->route('hideyo.general-setting.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -85,7 +85,7 @@ class GeneralSettingController extends Controller
         $result  = $this->generalSetting->destroy($id);
         if ($result) {
             Notification::error('The general setting was deleted.');
-            return redirect()->route('admin.general-setting.index');
+            return redirect()->route('hideyo.general-setting.index');
         }
     }
 }

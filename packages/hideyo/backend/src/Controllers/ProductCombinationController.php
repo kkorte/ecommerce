@@ -141,7 +141,7 @@ class ProductCombinationController extends Controller
 
 
         } else {
-            return view('admin.product-combination.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-combination.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
         }
     }
 
@@ -158,7 +158,7 @@ class ProductCombinationController extends Controller
                 }
             }
         } else {
-            return view('admin.product-combination.create')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-combination.create')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
         }
     }
 
@@ -211,7 +211,7 @@ class ProductCombinationController extends Controller
                 }
             }
         } else {
-            return view('admin.product-combination.edit')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productCombination' => $productCombination, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-combination.edit')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productCombination' => $productCombination, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
         }
     }
 

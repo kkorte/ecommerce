@@ -1,22 +1,22 @@
-@extends('admin._layouts.default')
+@extends('hideyo_backend::_layouts.default')
 
 @section('main')
 
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('admin.coupon.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('admin.coupon.create') }}">Create</a></li>
+            <li class="active"><a href="{{ URL::route('hideyo.coupon.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('hideyo.coupon.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin">Dashboard</a></li>
-            <li><a href="{{ URL::route('admin.coupon.index') }}">Coupons</a></li>  
+            <li><a href="{{ URL::route('hideyo.coupon.index') }}">Coupons</a></li>  
             <li class="active">overview</li>
         </ol>
 
-        <a href="{{ URL::route('admin.coupon.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('hideyo.coupon.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
         <h2>Coupons <small>overview</small></h2>
         <hr/>

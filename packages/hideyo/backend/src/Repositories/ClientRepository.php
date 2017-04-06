@@ -17,8 +17,6 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function __construct(Client $model, ShopRepositoryInterface $shop, ClientAddressRepositoryInterface $clientAddress)
     {
-
-
         $this->model = $model;
         $this->shop = $shop;
         $this->clientAddress = $clientAddress;
@@ -28,25 +26,25 @@ class ClientRepository implements ClientRepositoryInterface
     {
         if ($id) {
             $rules = array(
-            'email' => 'required|email|unique_with:client, shop_id'
+                'email' => 'required|email|unique_with:client, shop_id'
             );
         } else {
             $rules = array(
-            'email' => 'required|email|unique_with:client, shop_id',
-            'gender' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'street' => 'required',
-            'housenumber' => 'required',
-            'zipcode' => 'required',
-            'city' => 'required',
-            'country' => 'required'
+                'email' => 'required|email|unique_with:'.$this->model->getTable().', shop_id',
+                'gender' => 'required',
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'street' => 'required',
+                'housenumber' => 'required|integer',
+                'zipcode' => 'required',
+                'city' => 'required',
+                'country' => 'required'
             );
         }
 
 
         if ($id) {
-            $rules['email'] =   'required|email|unique_with:client, shop_id, '.$id.' = id';
+            $rules['email'] =   'required|email|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;
