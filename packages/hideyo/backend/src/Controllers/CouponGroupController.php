@@ -28,8 +28,8 @@ class CouponGroupController extends Controller
     {
         if ($this->request->wantsJson()) {
 
-            $query = $this->coupon->getGroupModel()->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'coupon_group.id', 'coupon_group.title'])
-            ->where('coupon_group.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            $query = $this->coupon->getGroupModel()->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'title'])
+            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {

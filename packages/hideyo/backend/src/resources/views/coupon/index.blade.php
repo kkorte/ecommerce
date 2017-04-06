@@ -40,7 +40,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "/admin/coupon",
+                     "ajax": "{{ URL::route('hideyo.coupon.index') }}",
 
                  columns: [
                         {data: 'active', name: 'active', bVisible: true, bSearchable: false},

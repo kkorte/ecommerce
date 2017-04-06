@@ -38,12 +38,11 @@ class CouponController extends Controller
             $query = $this->coupon->getModel()->select(
                 [
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                'coupon.id', 'coupon.active', 'coupon.code',
-                'coupon.title', 'coupon_group_id', 'coupon_group.title as coupontitle']
-            )->where('coupon.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
+                $this->coupon->getGroupModel()->getTable().'.title as coupontitle']
+            )->where($this->coupon->getModel()->getTable().'.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 
 
-            ->with(array('couponGroup'))        ->leftJoin('coupon_group', 'coupon_group.id', '=', 'coupon.coupon_group_id');
+            ->with(array('couponGroup'))        ->leftJoin($this->coupon->getGroupModel()->getTable(), $this->coupon->getGroupModel()->getTable().'.id', '=', $this->coupon->getModel()->getTable().'.coupon_group_id');
             
             
             $datatables = \Datatables::of($query)
