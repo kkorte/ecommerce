@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\ProductAmountSeries;
+use Hideyo\Backend\Models\ProductAmountSeries;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  

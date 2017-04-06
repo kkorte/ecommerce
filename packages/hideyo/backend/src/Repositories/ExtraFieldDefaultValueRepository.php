@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\ExtraFieldDefaultValue;
+use Hideyo\Backend\Models\ExtraFieldDefaultValue;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  

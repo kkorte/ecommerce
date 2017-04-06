@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\Language;
+use Hideyo\Backend\Models\Language;
  
 class LanguageRepository implements LanguageRepositoryInterface
 {

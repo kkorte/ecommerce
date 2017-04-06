@@ -1,7 +1,7 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\Role;
+use Hideyo\Backend\Models\Role;
  
 class RoleRepository implements RoleRepositoryInterface
 {

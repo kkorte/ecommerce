@@ -1,5 +1,5 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
 use Hideyo\Backend\Models\News;
 use Hideyo\Backend\Models\NewsImage;

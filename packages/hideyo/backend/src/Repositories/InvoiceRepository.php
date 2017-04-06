@@ -1,11 +1,11 @@
 <?php
-namespace Hideyo\Repositories;
+namespace Hideyo\Backend\Repositories;
  
-use App\Invoice;
-use App\InvoiceRule;
-use App\InvoiceAddress;
-use App\InvoiceSendingMethod;
-use App\InvoicePaymentMethod;
+use Hideyo\Backend\Models\Invoice;
+use Hideyo\Backend\Models\InvoiceRule;
+use Hideyo\Backend\Models\InvoiceAddress;
+use Hideyo\Backend\Models\InvoiceSendingMethod;
+use Hideyo\Backend\Models\InvoicePaymentMethod;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Hideyo\Repositories\OrderRepositoryInterface;

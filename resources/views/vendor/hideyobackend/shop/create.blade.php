@@ -15,7 +15,7 @@
             <li class="active">create</li>
         </ol>
 
-        <h2>Shop <small>create</small></h2>
+        <h2>Shop <small>crlleate</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 

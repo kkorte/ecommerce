@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\ProductRelatedProduct;
+use Hideyo\Backend\Models\ProductRelatedProduct;
 use Product;
 use Hideyo\Repositories\ProductRepositoryInterface;
  

@@ -1,7 +1,7 @@
 <?php
 namespace Hideyo\Backend\Repositories;
  
-use App\ProductWaitingList;
+use Hideyo\Backend\Models\ProductWaitingList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
  
