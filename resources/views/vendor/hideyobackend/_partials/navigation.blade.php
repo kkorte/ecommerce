@@ -75,7 +75,6 @@
 						<li><a href="{{ URL::route('hideyo.content-group.index') }}">Static content groups</a></li>
 						<li><a href="{{ URL::route('hideyo.html-block.index') }}">HTML blocks</a></li>
 						<li><a href="{{ URL::route('hideyo.faq.index') }}">Faq items</a></li>
-						<li><a href="{{ URL::route('hideyo.landing-page.index') }}">Landingpages</a></li>
 					</ul>
 				</li>
 

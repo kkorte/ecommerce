@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                     "ajax": "{{ URL::route('hideyo.content-group.index') }}",
+                    "ajax": "{{ URL::route('hideyo.content-group.index') }}",
 
                  columns: [
                         {data: 'title', name: 'title'},

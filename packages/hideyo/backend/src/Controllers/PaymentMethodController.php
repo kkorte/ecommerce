@@ -72,8 +72,8 @@ class PaymentMethodController extends Controller
     {
         return view('hideyo_backend::payment_method.create')->with(
             array(
-                'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
-                'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')                
+                'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
+                'orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')                
             )
         );
     }
@@ -99,8 +99,8 @@ class PaymentMethodController extends Controller
         return view('hideyo_backend::payment_method.edit')->with(
             array(
                 'paymentMethod' => $this->paymentMethod->find($id),
-                'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
-                'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')
+                'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
+                'orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')
             )
         );
     }

@@ -39,7 +39,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "/admin/general-setting",
+                    "ajax": "{{ URL::route('hideyo.general-setting.index') }}",
 
                  columns: [
                         {data: 'id', name: 'id'},

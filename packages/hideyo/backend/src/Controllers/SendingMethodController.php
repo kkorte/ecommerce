@@ -53,8 +53,8 @@ class SendingMethodController extends Controller
     public function create()
     {
         return view('hideyo_backend::sending_method.create')->with(array(
-            'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
-            'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id')
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
+            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id')
         ));
     }
 
@@ -77,9 +77,9 @@ class SendingMethodController extends Controller
     public function edit($id)
     {    
         return view('hideyo_backend::sending_method.edit')->with(array(
-            'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
             'sendingMethod' => $this->sendingMethod->find($id),
-            'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id'),
+            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id'),
             ));
     }
 

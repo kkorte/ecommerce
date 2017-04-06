@@ -134,17 +134,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     generateCrud('html-block', 'HtmlBlockController');
 
-    Route::get('landing-page/refactor-images', array('as' => 'landing.page.refactor.images', 'uses' => 'LandingPageController@refactorAllImages'));
- 
-    Route::get('landing-page/re-directory-images', array('as' => 'landing.page.re.directory.images', 'uses' => 'LandingPageController@reDirectoryAllImages'));
- 
-
-    generateCrud('landing-page', 'LandingPageController');
-
-
-
-    Route::get('landing-page/change-active/{landingPageId}', array('as' => 'admin.landing-page.change-active', 'uses' => 'LandingPageController@changeActive'));
-
     generateCrud('coupon-group', 'CouponGroupController');
 
     generateCrud('coupon', 'CouponController');
