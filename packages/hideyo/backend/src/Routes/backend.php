@@ -36,10 +36,6 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     generateCrud('shop', 'ShopController');
 
-
- 
-
-
     Route::post('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@postExport'));
     Route::get('client/export', array('as' => 'hideyo.client.export', 'uses' => 'ClientController@getExport'));
     
@@ -49,36 +45,14 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('client/{clientId}/de-activate', array('as' => 'hideyo.client.deactivate', 'uses' => 'ClientController@getDeActivate'));
     Route::post('client/{clientId}/de-activate', array('as' => 'hideyo.client.de-activate', 'uses' => 'ClientController@postDeActivate'));
 
+    generateCrud('client/{clientId}/order', 'ClientOrderController');
 
 
+    generateCrud('client/{clientId}/addresses', 'ClientAddressController');
 
 
-    Route::resource('client/{clientId}/order', 'ClientOrderController', ['names' => [
-        'index'     => 'hideyo.client-order.index',
-        'create'    => 'hideyo.client-order.create',
-        'store'     => 'hideyo.client-order.store',
-        'edit'      => 'hideyo.client-order.edit',
-        'update'    => 'hideyo.client-order.update',
-        'destroy'   => 'hideyo.client-order.destroy'
-    ]]);
+    generateCrud('client', 'ClientController');
 
-    Route::resource('client/{clientId}/addresses', 'ClientAddressController', ['names' => [
-        'index'     => 'hideyo.client-address.index',
-        'create'    => 'hideyo.client-address.create',
-        'store'     => 'hideyo.client-address.store',
-        'edit'      => 'hideyo.client-address.edit',
-        'update'    => 'hideyo.client-address.update',
-        'destroy'   => 'hideyo.client-address.destroy'
-    ]]);
-
-    Route::resource('client', 'ClientController', ['names' => [
-        'index'     => 'hideyo.client.index',
-        'create'    => 'hideyo.client.create',
-        'store'     => 'hideyo.client.store',
-        'edit'      => 'hideyo.client.edit',
-        'update'    => 'hideyo.client.update',
-        'destroy'   => 'hideyo.client.destroy'
-    ]]);
 
  
     Route::get('redirect/export', array('as' => 'admin.redirect.export', 'uses' => 'RedirectController@getExport'));
@@ -141,38 +115,15 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     Route::get('news/edit/{newsId}/seo', array('as' => 'admin.news.edit_seo', 'uses' => 'NewsController@editSeo'));
 
-    Route::resource('news', 'NewsController', ['names' => [
-        'index'     => 'hideyo.news.index',
-        'create'    => 'hideyo.news.create',
-        'store'     => 'hideyo.news.store',
-        'edit'      => 'hideyo.news.edit',
-        'update'    => 'hideyo.news.update',
-        'destroy'   => 'hideyo.news.destroy'
-    ]]);
 
+    generateCrud('news', 'NewsController');
 
-    Route::resource('news-group', 'NewsGroupController', ['names' => [
-        'index'     => 'hideyo.news-group.index',
-        'create'    => 'hideyo.news-group.create',
-        'store'     => 'hideyo.news-group.store',
-        'edit'      => 'hideyo.news-group.edit',
-        'update'    => 'hideyo.news-group.update',
-        'destroy'   => 'hideyo.news-group.destroy'
-    ]]);
+    generateCrud('news-group', 'NewsGroupController');
 
 
     Route::get('news-group/edit/{newsGroupId}/seo', array('as' => 'admin.news-group.edit_seo', 'uses' => 'NewsGroupController@editSeo'));
 
-    Route::resource('faq', 'FaqItemController', ['names' => [
-        'index'     => 'hideyo.faq.index',
-        'create'    => 'hideyo.faq.create',
-        'store'     => 'hideyo.faq.store',
-        'edit'      => 'hideyo.faq.edit',
-        'update'    => 'hideyo.faq.update',
-        'destroy'   => 'hideyo.faq.destroy'
-    ]]);
-
-
+    generateCrud('faq', 'FaqItemController');
 
     Route::resource('html-block/{htmlBlockId}/copy', 'HtmlBlockController@copy');
     Route::get('html-block/change-active/{htmlBlockId}', array('as' => 'admin.html.block.change-active', 'uses' => 'HtmlBlockController@changeActive'));
@@ -180,52 +131,23 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     Route::post('html-block/{htmlBlockId}/copy', array('as' => 'html.block.store.copy', 'uses' => 'HtmlBlockController@storeCopy'));
  
-    Route::resource('html-block', 'HtmlBlockController', ['names' => [
-        'index'     => 'hideyo.html-block.index',
-        'create'    => 'hideyo.html-block.create',
-        'store'     => 'hideyo.html-block.store',
-        'edit'      => 'hideyo.html-block.edit',
-        'update'    => 'hideyo.html-block.update',
-        'destroy'   => 'hideyo.html-block.destroy'
-    ]]);
 
-
+    generateCrud('html-block', 'HtmlBlockController');
 
     Route::get('landing-page/refactor-images', array('as' => 'landing.page.refactor.images', 'uses' => 'LandingPageController@refactorAllImages'));
  
     Route::get('landing-page/re-directory-images', array('as' => 'landing.page.re.directory.images', 'uses' => 'LandingPageController@reDirectoryAllImages'));
  
 
-    Route::resource('landing-page', 'LandingPageController', ['names' => [
-        'index'     => 'hideyo.landing-page.index',
-        'create'    => 'hideyo.landing-page.create',
-        'store'     => 'hideyo.landing-page.store',
-        'edit'      => 'hideyo.landing-page.edit',
-        'update'    => 'hideyo.landing-page.update',
-        'destroy'   => 'hideyo.landing-page.destroy'
-    ]]);
+    generateCrud('landing-page', 'LandingPageController');
+
 
 
     Route::get('landing-page/change-active/{landingPageId}', array('as' => 'admin.landing-page.change-active', 'uses' => 'LandingPageController@changeActive'));
 
-    Route::resource('coupon-group', 'CouponGroupController', ['names' => [
-        'index'     => 'hideyo.coupon-group.index',
-        'create'    => 'hideyo.coupon-group.create',
-        'store'     => 'hideyo.coupon-group.store',
-        'edit'      => 'hideyo.coupon-group.edit',
-        'update'    => 'hideyo.coupon-group.update',
-        'destroy'   => 'hideyo.coupon-group.destroy'
-    ]]);
+    generateCrud('coupon-group', 'CouponGroupController');
 
-    Route::resource('coupon', 'CouponController', ['names' => [
-        'index'     => 'hideyo.coupon.index',
-        'create'    => 'hideyo.coupon.create',
-        'store'     => 'hideyo.coupon.store',
-        'edit'      => 'hideyo.coupon.edit',
-        'update'    => 'hideyo.coupon.update',
-        'destroy'   => 'hideyo.coupon.destroy'
-    ]]);
-
+    generateCrud('coupon', 'CouponController');
 
 
     Route::post('order/update-status/{orderId}', array('as' => 'order.update-status', 'uses' => 'OrderController@updateStatus'));
@@ -261,39 +183,15 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('invoice', 'InvoiceController');
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
+    generateCrud('attribute-group/{attributeGroupId}/attributes', 'AttributeController');
 
 
-    Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController', ['names' => [
-        'index'     => 'hideyo.attribute.index',
-        'create'    => 'hideyo.attribute.create',
-        'store'     => 'hideyo.attribute.store',
-        'edit'      => 'hideyo.attribute.edit',
-        'update'    => 'hideyo.attribute.update',
-        'destroy'   => 'hideyo.attribute.destroy'
-    ]]);
-
-  
-    Route::resource('attribute-group', 'AttributeGroupController', ['names' => [
-        'index'     => 'hideyo.attribute-group.index',
-        'create'    => 'hideyo.attribute-group.create',
-        'store'     => 'hideyo.attribute-group.store',
-        'edit'      => 'hideyo.attribute-group.edit',
-        'update'    => 'hideyo.attribute-group.update',
-        'destroy'   => 'hideyo.attribute-group.destroy'
-    ]]);
-
+    generateCrud('attribute-group', 'AttributeGroupController');
 
     Route::resource('extra-field/{extraFieldId}/values', 'ExtraFieldDefaultValueController');
     
-    Route::resource('extra-field', 'ExtraFieldController', ['names' => [
-        'index'     => 'hideyo.extra-field.index',
-        'create'    => 'hideyo.extra-field.create',
-        'store'     => 'hideyo.extra-field.store',
-        'edit'      => 'hideyo.extra-field.edit',
-        'update'    => 'hideyo.extra-field.update',
-        'destroy'   => 'hideyo.extra-field.destroy'
-    ]]);
 
+    generateCrud('extra-field', 'ExtraFieldController');
 
     Route::get('product/refactor-images', array('as' => 'product.refactor-images', 'uses' => 'ProductController@refactorAllImages'));
     Route::get('product/re-directory-images', array('as' => 'product.re-directory-images', 'uses' => 'ProductController@reDirectoryAllImages'));
@@ -307,16 +205,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product/rank', array('as' => 'hideyo.product.ranking', 'uses' => 'ProductController@getRank'));
 
 
-
-    Route::resource('product', 'ProductController', ['names' => [
-        'index'     => 'hideyo.product.index',
-        'create'    => 'hideyo.product.create',
-        'store'     => 'hideyo.product.store',
-        'edit'      => 'hideyo.product.edit',
-        'update'    => 'hideyo.product.update',
-        'destroy'   => 'hideyo.product.destroy'
-    ]]);
-
+    generateCrud('product', 'ProductController');
 
 
 
@@ -347,28 +236,13 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));
 
 
-    Route::resource('brand/{brandId}/images', 'BrandImageController', ['names' => [
-        'index'     => 'hideyo.brand-image.index',
-        'create'    => 'hideyo.brand-image.create',
-        'store'     => 'hideyo.brand-image.store',
-        'edit'      => 'hideyo.brand-image.edit',
-        'update'    => 'hideyo.brand-image.update',
-        'destroy'   => 'hideyo.brand-image.destroy'
-    ]]);
 
-
+    generateCrud('brand/{brandId}/images', 'BrandImageController');
  
     Route::get('brand/edit/{brandId}/seo', array('as' => 'hideyo.brand.edit_seo', 'uses' => 'BrandController@editSeo'));
  
+    generateCrud('brand', 'BrandController');
 
-    Route::resource('brand', 'BrandController', ['names' => [
-        'index'     => 'hideyo.brand.index',
-        'create'    => 'hideyo.brand.create',
-        'store'     => 'hideyo.brand.store',
-        'edit'      => 'hideyo.brand.edit',
-        'update'    => 'hideyo.brand.update',
-        'destroy'   => 'hideyo.brand.destroy'
-    ]]);
 
 
     Route::get('product-category/change-active/{productCategoryId}', array('as' => 'hideyo.product-category.change-active', 'uses' => 'ProductCategoryController@changeActive'));
@@ -390,35 +264,11 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('product_category/tree', array('as' => 'hideyo.product-category.tree', 'uses' => 'ProductCategoryController@tree'));
 
 
-    Route::resource('product-category', 'ProductCategoryController', ['names' => [
-        'index'     => 'hideyo.product-category.index',
-        'create'    => 'hideyo.product-category.create',
-        'store'     => 'hideyo.product-category.store',
-        'edit'      => 'hideyo.product-category.edit',
-        'update'    => 'hideyo.product-category.update',
-        'destroy'   => 'hideyo.product-category.destroy'
-    ]]);
+    generateCrud('product-category', 'ProductCategoryController');
 
+    generateCrud('product-tag-group', 'ProductTagGroupController');
 
-    Route::resource('product-tag-group', 'ProductTagGroupController', ['names' => [
-        'index'     => 'hideyo.product-tag-group.index',
-        'create'    => 'hideyo.product-tag-group.create',
-        'store'     => 'hideyo.product-tag-group.store',
-        'edit'      => 'hideyo.product-tag-group.edit',
-        'update'    => 'hideyo.product-tag-group.update',
-        'destroy'   => 'hideyo.product-tag-group.destroy'
-    ]]);
-
-
-    Route::resource('user', 'UserController', ['names' => [
-        'index'     => 'hideyo.user.index',
-        'create'    => 'hideyo.user.create',
-        'store'     => 'hideyo.user.store',
-        'edit'      => 'hideyo.user.edit',
-        'update'    => 'hideyo.user.update',
-        'destroy'   => 'hideyo.user.destroy'
-    ]]);
-
+    generateCrud('user', 'UserController');
 
     Route::get('profile/shop/change/{shopId}', array('as' => 'change.language.profile', 'uses' => 'UserController@changeShopProfile'));
     Route::get('profile', array('as' => 'edit.profile', 'uses' => 'UserController@editProfile'));
@@ -430,8 +280,5 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web']], function () {
     Route::get('/security/login', 'AuthController@getLogin');
     Route::post('/security/login', 'AuthController@postLogin');
-    Route::get('/security/logout', 'AuthController@getLogout');
+    Route::get('/security/logout', array('as' => 'hideyo.security.logout', 'uses' => 'AuthController@getLogout'));
 });
-
-
-

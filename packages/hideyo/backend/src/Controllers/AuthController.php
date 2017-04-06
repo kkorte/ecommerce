@@ -37,7 +37,7 @@ class AuthController extends Controller
     {
         Auth::guard('hideyobackend')->logout();
 
-        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+            return redirect()->intended('/hideyo/admin');
     }
 
     /**

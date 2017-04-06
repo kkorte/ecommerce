@@ -92,7 +92,8 @@
 						<li><a href="{{ URL::route('hideyo.redirect.index') }}">Redirects</a></li>
 					</ul>
 				</li>
-				<li><a href="/admin/security/logout">Log-out</a></li>
+
+				<li><a href="{{ URL::route('hideyo.security.logout') }}">Log-out</a></li>
 			</ul>
 
 		</div>
