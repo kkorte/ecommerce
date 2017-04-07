@@ -28,7 +28,7 @@ class FaqItemsTable extends Migration
             $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
             $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
-            $table->unique(array('title','shop_id'), 'unique_news_group_title');
+            $table->unique(array('title','shop_id'), 'unique_faq_item_group_title');
             $table->timestamps();
         });
 
@@ -49,7 +49,7 @@ class FaqItemsTable extends Migration
             $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
             $table->timestamps();
 
-            $table->unique(array('question','shop_id'), 'unique_faq_title');
+            $table->unique(array('question','shop_id'), 'unique_faq_item_title');
         });
     }
 

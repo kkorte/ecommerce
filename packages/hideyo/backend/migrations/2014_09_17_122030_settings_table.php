@@ -21,7 +21,7 @@ class SettingsTable extends Migration
             $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
             $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
-            $table->unique(array('name','shop_id'), 'unique_product_title');
+            $table->unique(array('name','shop_id'), 'unique_general_setting_title');
             $table->timestamps();
         });
     }

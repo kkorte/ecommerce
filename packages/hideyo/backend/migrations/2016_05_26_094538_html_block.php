@@ -15,7 +15,6 @@ class HtmlBlock extends Migration
         Schema::create(config('hideyo.db_prefix').'html_block', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
-
             $table->string('title')->nullable();
             $table->string('button_title')->nullable();
             $table->string('short_title')->nullable();
