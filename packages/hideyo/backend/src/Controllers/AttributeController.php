@@ -16,12 +16,21 @@ use Notification;
 
 class AttributeController extends Controller
 {
-    public function __construct(AttributeRepositoryInterface $attribute, AttributeGroupRepositoryInterface $attributeGroup)
+    public function __construct(
+        AttributeRepositoryInterface $attribute, 
+        AttributeGroupRepositoryInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
         $this->attribute = $attribute;
     }
 
+
+    /**
+     * Shows a list of attributes in datatables
+     * @param  \Illuminate\Http\Request  $request
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @return view of json output
+     */
     public function index(Request $request, $attributeGroupId)
     {
         if ($request->wantsJson()) {
@@ -44,6 +53,11 @@ class AttributeController extends Controller
         }
     }
 
+    /**
+     * Create a attribute
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @return view
+     */
     public function create($attributeGroupId)
     {
         return view('hideyo_backend::attribute.create')->with(array('attributeGroup' =>  $this->attributeGroup->find($attributeGroupId)));

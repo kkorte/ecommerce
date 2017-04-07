@@ -9,7 +9,9 @@ use Notification;
 
 class BrandController extends Controller
 {
-    public function __construct(Request $request, BrandRepositoryInterface $brand)
+    public function __construct(
+        Request $request, 
+        BrandRepositoryInterface $brand)
     {
         $this->brand = $brand;
         $this->request = $request;

@@ -19,7 +19,8 @@ use Form;
 
 class AttributeGroupController extends Controller
 {
-    public function __construct(AttributeGroupRepositoryInterface $attributeGroup)
+    public function __construct(
+        AttributeGroupRepositoryInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }
