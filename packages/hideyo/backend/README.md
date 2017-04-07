@@ -35,6 +35,16 @@ php artisan vendor:publish --provider="Hideyo\Backend\BackendServiceProvider"
 Before you run the migration you may want to take a look at `config/hideyo.php` and change the `table` property to a table name that you would like to use. After that run the migration 
 ```bash
 php artisan migrate
+
+put in database/seeds/DatabaseSeerder.php this:
+
+$this->call(ShopTableSeeder::class);
+$this->call(UserTableSeeder::class);
+
+after:
+
+Model::unguard();
+
 ```
 
 ----

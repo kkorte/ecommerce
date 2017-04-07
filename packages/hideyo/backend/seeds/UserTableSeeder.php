@@ -28,9 +28,5 @@ class UserTableSeeder extends Seeder
         } else {
             Log::info('Created user "'.$user->email.'" <'.$user->email.'>');
         }
-
-
-
-
     }
 }

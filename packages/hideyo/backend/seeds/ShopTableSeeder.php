@@ -18,13 +18,11 @@ class ShopTableSeeder extends Seeder
         $shop->active = 1;
         $shop->description = "description";
         $shop->currency_code = "EUR";
-
-
+        
         if (! $shop->save()) {
             Log::info('Unable to create shop '.$shop->title, (array)$shop->errors());
         } else {
             Log::info('Created shop "'.$shop->title);
         }
-
     }
 }

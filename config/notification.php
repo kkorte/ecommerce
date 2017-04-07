@@ -74,7 +74,6 @@ return array(
     | :message - message text.
     |
     */
-    'format'                                => array(),
 
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +114,15 @@ return array(
     | :message - message text.
     |
     */
-    'formats'                       => array(),
+    'formats'                       => array(
+        'foundation' => array(
+            'info'                  => '<div class="callout primary">:message</div>',
+            'success'               => '<div class="callout success">:message</div>',
+            'warning'               => '<div class="callout warning">:message</div>',
+            'error'                 => '<div class="callout alert">:message</div>',
+
+        )
+
+    ),
 
 );

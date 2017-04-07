@@ -14,8 +14,6 @@ class UserTableSeeder extends Seeder
 
     public function run()
     {
-
-
         $user = new User;
 
         DB::table($user->getTable())->delete();
