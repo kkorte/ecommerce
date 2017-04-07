@@ -13,9 +13,8 @@ use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
 use Hideyo\Backend\Repositories\ProductCategoryRepositoryInterface;
 
-use \Request;
-use \Notification;
-use \Redirect;
+use Request;
+use Notification;
 
 class ExtraFieldController extends Controller
 {
@@ -48,8 +47,9 @@ class ExtraFieldController extends Controller
                 }
             })
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/extra-field/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/extra-field/'.$query->id.'/values" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->values->count().' values</a> <a href="/admin/extra-field/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
+                $delete = \Form::deleteajax(url()->route('hideyo.extra-field.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.extra-field-values.index', $query->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->values->count().' values</a>
+                 <a href="'.url()->route('hideyo.extra-field.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
                 '.$delete;
             
                 return $link;
@@ -74,14 +74,14 @@ class ExtraFieldController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The extra field was inserted.');
-            return \Redirect::route('admin.extra-field.index');
+            return redirect()->route('hideyo.extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function edit($id)
@@ -95,14 +95,14 @@ class ExtraFieldController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The extra field was updated.');
-            return \Redirect::route('admin.extra-field.index');
+            return redirect()->route('hideyo.extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 \Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function destroy($id)
@@ -111,7 +111,7 @@ class ExtraFieldController extends Controller
 
         if ($result) {
             Notification::success('Extra field was deleted.');
-            return Redirect::route('admin.extra-field.index');
+            return redirect()->route('hideyo.extra-field.index');
         }
     }
 }

@@ -21,7 +21,7 @@ class ExtraField extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\ProductCategory', 'extra_field_related_product_category');
+        return $this->belongsToMany('Hideyo\Backend\Models\ProductCategory', config()->get('hideyo.db_prefix').'extra_field_related_product_category');
     }
 
     public function productCategory()

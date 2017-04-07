@@ -18,12 +18,12 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
     public function rules($id = false)
     {
         $rules = array(
-            'title' => 'required|between:4,65|unique_with:extra_field, shop_id'
+            'title' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
 
             );
         
         if ($id) {
-            $rules['title'] =   'required|between:4,65|unique_with:extra_field, shop_id, '.$id.' = id';
+            $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;

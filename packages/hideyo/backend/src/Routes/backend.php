@@ -144,7 +144,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     generateCrud('attribute-group', 'AttributeGroupController');
 
-    Route::resource('extra-field/{extraFieldId}/values', 'ExtraFieldDefaultValueController');
+    generateCrud('extra-field/{extraFieldId}/values', 'ExtraFieldDefaultValueController', 'extra-field-values');
     
     generateCrud('extra-field', 'ExtraFieldController');
 

@@ -6,7 +6,7 @@
         <ul class="nav nav-sidebar">
             <li><a href="{!! URL::route('hideyo.extra-field.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
             <li class="active"><a href="{!! URL::route('hideyo.extra-field.edit', $extraField->id) !!}">Edit</a></li>
-            <li><a href="{!! URL::route('hideyo.extra-field.{extraFieldId}.values.index', $extraField->id) !!}">Values</a></li>
+            <li><a href="{!! URL::route('hideyo.extra-field-values.index', $extraField->id) !!}">Values</a></li>
 
         </ul>
     </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             {!! Form::label('categories', 'Categories', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
-                {!! Form::multiselect2('categories[]', $productCategories->toArray(), $extraField->categories->lists('id')->toArray()) !!}
+                {!! Form::multiselect2('categories[]', $productCategories->toArray(), $extraField->categories->pluck('id')->toArray()) !!}
             </div>
         </div>
 
