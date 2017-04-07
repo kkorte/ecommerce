@@ -77,10 +77,6 @@ class BackendServiceProvider extends ServiceProvider
             'Hideyo\Repositories\ProductExtraFieldValueRepository'
         );
 
-        $this->app->bind(
-            'Hideyo\Repositories\ExtraFieldDefaultValueRepositoryInterface',
-            'Hideyo\Repositories\ExtraFieldDefaultValueRepository'
-        );
 
         $this->app->bind(
             'Hideyo\Repositories\ExtraFieldRepositoryInterface',

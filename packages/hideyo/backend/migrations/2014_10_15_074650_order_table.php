@@ -193,11 +193,6 @@ class OrderTable extends Migration
             $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
             $table->timestamps();
         });
-
-
-
-        
-
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace Hideyo\Backend\Repositories;
 
 use Hideyo\Backend\Models\ExtraField;
+use Hideyo\Backend\Models\ExtraFieldDefaultValue;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,23 +11,38 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
 
     protected $model;
 
-    public function __construct(ExtraField $model)
+    public function __construct(
+        ExtraField $model, 
+        ExtraFieldDefaultValue $modelValue)
     {
         $this->model = $model;
+        $this->modelValue = $modelValue;
     }
 
     public function rules($id = false)
     {
         $rules = array(
             'title' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
-
-            );
+        );
         
         if ($id) {
             $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;
+    }
+
+    public function rulesValue($id = false)
+    {
+        if ($id) {
+            return [
+                'value' => 'required|unique_with:'.$this->modelValue->getTable().',extra_field_id,'.$id,
+            ];
+        } else {
+            return [
+                'value' => 'required|unique_with:'.$this->modelValue->getTable().',extra_field_id'
+            ];
+        }
     }
 
 
@@ -48,6 +64,22 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         
         return $this->model;
     }
+
+    public function createValue(array $attributes, $extraFieldId)
+    {
+        $attributes['extra_field_id'] = $extraFieldId;
+        $validator = \Validator::make($attributes, $this->rulesValue());
+
+        if ($validator->fails()) {
+            return $validator;
+        } else {
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
+            $this->modelValue->fill($attributes);
+            $this->modelValue->save();
+            return $this->modelValue;
+        }
+    }
+
 
     public function updateById(array $attributes, $id)
     {
@@ -80,6 +112,32 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         return $this->model;
     }
 
+
+    public function updateValueById(array $attributes, $extraFieldId, $id)
+    {
+        $attributes['extra_field_id'] = $extraFieldId;
+        $validator = \Validator::make($attributes, $this->rulesValue($id));
+
+        if ($validator->fails()) {
+            return $validator;
+        } else {
+            $this->modelValue = $this->findValue($id);
+            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
+            return $this->updateValueEntity($attributes);
+        }
+    }
+
+    public function updateValueEntity(array $attributes = array())
+    {
+        if (count($attributes) > 0) {
+            $this->modelValue->fill($attributes);
+            $this->modelValue->save();
+        }
+
+        return $this->modelValue;
+    }
+
+
     public function destroy($id)
     {
         $this->model = $this->find($id);
@@ -88,22 +146,14 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         return $this->model->delete();
     }
 
-    public function selectAllByAllProductsAndProductCategoryId($productCategoryId)
+    public function destroyValue($id)
     {
-        return $this->model->select('extra_field.*')
-        ->leftJoin('product_category_related_extra_field', 'extra_field.id', '=', 'product_category_related_extra_field.extra_field_id')
-        
-        ->where(function ($query) use ($productCategoryId) {
+        $this->modelValue = $this->findValue($id);
+        $this->modelValue->save();
 
-            $query->where('all_products', '=', 1)
-            ->orWhereHas('categories', function ($query) use ($productCategoryId) {
-
-                $query->where('product_category_id', '=', $productCategoryId);
-            });
-        })
-
-        ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->modelValue->delete();
     }
+
 
     public function selectAll()
     {
@@ -115,10 +165,20 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         return $this->model->find($id);
     }
 
+    public function findValue($id)
+    {
+        return $this->modelValue->find($id);
+    }
 
     public function getModel()
     {
         return $this->model;
     }
+
+    public function getValueModel()
+    {
+        return $this->modelValue;
+    }
+
     
 }
