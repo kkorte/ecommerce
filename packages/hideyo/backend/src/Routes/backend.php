@@ -1,14 +1,18 @@
 <?php
 
-function generateCrud($name, $controllerName) {
+function generateCrud($path, $controllerName, $routeName = false) {
 
-    Route::resource($name, $controllerName, ['names' => [
-        'index'     => 'hideyo.'.$name.'.index',
-        'create'    => 'hideyo.'.$name.'.create',
-        'store'     => 'hideyo.'.$name.'.store',
-        'edit'      => 'hideyo.'.$name.'.edit',
-        'update'    => 'hideyo.'.$name.'.update',
-        'destroy'   => 'hideyo.'.$name.'.destroy'
+    if(!$routeName) {
+        $routeName = $path;
+    }
+
+    Route::resource($path, $controllerName, ['names' => [
+        'index'     => 'hideyo.'.$routeName.'.index',
+        'create'    => 'hideyo.'.$routeName.'.create',
+        'store'     => 'hideyo.'.$routeName.'.store',
+        'edit'      => 'hideyo.'.$routeName.'.edit',
+        'update'    => 'hideyo.'.$routeName.'.update',
+        'destroy'   => 'hideyo.'.$routeName.'.destroy'
     ]]);
 }
 
@@ -136,7 +140,7 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::resource('invoice', 'InvoiceController');
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
-    generateCrud('attribute-group/{attributeGroupId}/attributes', 'AttributeController');
+    generateCrud('attribute-group/{attributeGroupId}/attributes', 'AttributeController', 'attribute');
 
     generateCrud('attribute-group', 'AttributeGroupController');
 

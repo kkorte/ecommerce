@@ -40,7 +40,8 @@ class AttributeController extends Controller
             ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','value'])
             ->where('attribute_group_id', '=', $attributeGroupId);
             
-            $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($attributeGroupId) {
+            $datatables = \Datatables::of($query)
+            ->addColumn('action', function ($query) use ($attributeGroupId) {
                 $delete = \Form::deleteajax(url()->route('hideyo.attribute.destroy', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                 $link = ' <a href="'.url()->route('hideyo.attribute.edit', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>'.$delete;
             
@@ -50,7 +51,8 @@ class AttributeController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('hideyo_backend::attribute.index')->with('attributeGroup', $this->attributeGroup->find($attributeGroupId));
+            return view('hideyo_backend::attribute.index')
+            ->with('attributeGroup', $this->attributeGroup->find($attributeGroupId));
         }
     }
 
@@ -94,7 +96,9 @@ class AttributeController extends Controller
      */
     public function edit($attributeGroupId, $id)
     {
-        return view('hideyo_backend::attribute.edit')->with(array('attribute' => $this->attribute->find($id)));
+        return view('hideyo_backend::attribute.edit')->with(
+            array('attribute' => $this->attribute->find($id))
+        );
     }
 
     /**
@@ -132,7 +136,7 @@ class AttributeController extends Controller
 
         if ($result) {
             Notification::success('Extra field was deleted.');
-            return Redirect::route('hideyo.attribute.index', $attributeGroupId);
+            return redirect()->route('hideyo.attribute.index', $attributeGroupId);
         }
     }
 }
