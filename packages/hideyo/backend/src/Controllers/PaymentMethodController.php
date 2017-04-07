@@ -127,7 +127,7 @@ class PaymentMethodController extends Controller
 
         if ($result) {
             Notification::success('The payment method was deleted.');
-            return Redirect::route('admin.payment-method.index');
+            return redirect()->route('admin.payment-method.index');
         }
     }
 }

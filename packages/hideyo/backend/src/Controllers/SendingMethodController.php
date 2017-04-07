@@ -63,12 +63,12 @@ class SendingMethodController extends Controller
         $result  = $this->sendingMethod->create($this->request->all());
 
         if (isset($result->id)) {
-            \Notification::success('The sending method was inserted.');
+            Notification::success('The sending method was inserted.');
             return redirect()->route('hideyo.sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -88,12 +88,12 @@ class SendingMethodController extends Controller
         $result  = $this->sendingMethod->updateById($this->request->all(), $id);
 
         if (isset($result->id)) {
-            \Notification::success('The sending method was updated.');
+            Notification::success('The sending method was updated.');
             return redirect()->route('hideyo.sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();

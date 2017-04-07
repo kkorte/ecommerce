@@ -73,11 +73,11 @@ class ExtraFieldController extends Controller
         $result  = $this->extraField->create(Request::all());
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was inserted.');
+            Notification::success('The extra field was inserted.');
             return redirect()->route('hideyo.extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 
@@ -94,11 +94,11 @@ class ExtraFieldController extends Controller
         $result  = $this->extraField->updateById(Request::all(), $id);
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was updated.');
+            Notification::success('The extra field was updated.');
             return redirect()->route('hideyo.extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 

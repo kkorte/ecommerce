@@ -13,9 +13,8 @@ use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\ProductTagGroupRepositoryInterface;
 use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 
-use \Request;
-use \Notification;
-use \Redirect;
+use Request;
+use Notification;
 
 class ProductTagGroupController extends Controller
 {
@@ -62,15 +61,15 @@ class ProductTagGroupController extends Controller
         $result  = $this->productTagGroup->create(\Request::all());
 
         if (isset($result->id)) {
-            \Notification::success('The product group tag was inserted.');
-            return \Redirect::route('admin.product-tag-group.index');
+            Notification::success('The product group tag was inserted.');
+            return redirect()->route('admin.product-tag-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function edit($id)
@@ -87,15 +86,15 @@ class ProductTagGroupController extends Controller
         $result  = $this->productTagGroup->updateById(\Request::all(), $id);
 
         if (isset($result->id)) {
-            \Notification::success('The product group tag was updated.');
-            return \Redirect::route('admin.product-tag-group.index');
+            Notification::success('The product group tag was updated.');
+            return redirect()->route('admin.product-tag-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function destroy($id)
@@ -104,7 +103,7 @@ class ProductTagGroupController extends Controller
 
         if ($result) {
             Notification::success('The product group tag was deleted.');
-            return Redirect::route('admin.product-tag-group.index');
+            return redirect()->route('admin.product-tag-group.index');
         }
     }
 }

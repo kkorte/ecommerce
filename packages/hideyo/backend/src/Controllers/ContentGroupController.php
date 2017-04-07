@@ -57,12 +57,12 @@ class ContentGroupController extends Controller
         $result  = $this->content->createGroup($this->request->all());
 
         if (isset($result->id)) {
-            \Notification::success('The content was inserted.');
+            Notification::success('The content was inserted.');
             return redirect()->route('hideyo.content-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -96,7 +96,7 @@ class ContentGroupController extends Controller
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }        
        
         return redirect()->back()->withInput();

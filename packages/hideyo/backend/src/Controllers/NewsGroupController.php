@@ -11,9 +11,8 @@
 use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\NewsRepositoryInterface;
 
-use \Request;
-use \Notification;
-use \Redirect;
+use Request;
+use Notification;
 
 class NewsGroupController extends Controller
 {
@@ -59,15 +58,15 @@ class NewsGroupController extends Controller
         $result  = $this->news->create(\Request::all());
 
         if (isset($result->id)) {
-            \Notification::success('The news was inserted.');
-            return \Redirect::route('admin.news-group.index');
+            Notification::success('The news was inserted.');
+            return redirect()->route('admin.news-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function edit($id)
@@ -82,21 +81,21 @@ class NewsGroupController extends Controller
         if (isset($result->id)) {
             if (Request::get('seo')) {
                 Notification::success('NewsGroup seo was updated.');
-                return Redirect::route('admin.news-group.edit_seo', $newsGroupId);
+                return redirect()->route('admin.news-group.edit_seo', $newsGroupId);
             } elseif (Request::get('news-combination')) {
                 Notification::success('NewsGroup combination leading attribute group was updated.');
-                return Redirect::route('admin.news-group.{newsId}.news-combination.index', $newsGroupId);
+                return redirect()->route('admin.news-group.{newsId}.news-combination.index', $newsGroupId);
             } else {
                 Notification::success('NewsGroup was updated.');
-                return Redirect::route('admin.news-group.edit', $newsGroupId);
+                return redirect()->route('admin.news-group.edit', $newsGroupId);
             }
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }        
        
-        return Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function destroy($id)
@@ -105,7 +104,7 @@ class NewsGroupController extends Controller
 
         if ($result) {
             Notification::success('The news group was deleted.');
-            return Redirect::route('admin.news-group.index');
+            return redirect()->route('admin.news-group.index');
         }
     }
 }

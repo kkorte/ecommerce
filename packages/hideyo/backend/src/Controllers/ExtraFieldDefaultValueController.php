@@ -10,9 +10,8 @@
 use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
 
-use \Request;
-use \Notification;
-use \Redirect;
+use Request;
+use Notification;
 
 class ExtraFieldDefaultValueController extends Controller
 {
@@ -57,15 +56,15 @@ class ExtraFieldDefaultValueController extends Controller
         $result  = $this->extraField->createValue(Request::all(), $extraFieldId);
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was inserted.');
-            return \Redirect::route('hideyo.extra-field-values.index', $extraFieldId);
+            Notification::success('The extra field was inserted.');
+            return redirect()->route('hideyo.extra-field-values.index', $extraFieldId);
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function edit($extraFieldId, $id)
@@ -78,15 +77,15 @@ class ExtraFieldDefaultValueController extends Controller
         $result  = $this->extraField->updateValueById(Request::all(), $extraFieldId, $id);
 
         if (isset($result->id)) {
-            \Notification::success('The extra field was updated.');
-            return \Redirect::route('hideyo.extra-field-values.index', $extraFieldId);
+            Notification::success('The extra field was updated.');
+            return redirect()->route('hideyo.extra-field-values.index', $extraFieldId);
         } else {
             foreach ($result->errors()->all() as $error) {
-                \Notification::error($error);
+                Notification::error($error);
             }
         }
 
-        return \Redirect::back()->withInput();
+        return redirect()->back()->withInput();
     }
 
     public function destroy($extraFieldId, $id)

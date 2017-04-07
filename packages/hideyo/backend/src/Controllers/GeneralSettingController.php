@@ -55,7 +55,7 @@ class GeneralSettingController extends Controller
         }
             
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }
@@ -75,7 +75,7 @@ class GeneralSettingController extends Controller
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }

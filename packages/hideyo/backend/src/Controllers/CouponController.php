@@ -87,12 +87,12 @@ class CouponController extends Controller
         $result  = $this->coupon->create($this->request->all());
  
         if (isset($result->id)) {
-            \Notification::success('The coupon was inserted.');
+            Notification::success('The coupon was inserted.');
             return redirect()->route('hideyo.coupon.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }
@@ -116,12 +116,12 @@ class CouponController extends Controller
         $result  = $this->coupon->updateById($this->request->all(), $id);
 
         if (isset($result->id)) {
-            \Notification::success('The coupon method was updated.');
+            Notification::success('The coupon method was updated.');
             return redirect()->route('hideyo.coupon.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         return redirect()->back()->withInput();
     }

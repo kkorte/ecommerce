@@ -89,12 +89,12 @@ class HtmlBlockController extends Controller
         $result  = $this->htmlBlock->createCopy($this->request->all(), $htmlBlockId);
 
         if (isset($result->id)) {
-            \Notification::success('The htmlBlock copy is inserted.');
+            Notification::success('The htmlBlock copy is inserted.');
             return redirect()->route('hideyo.html-block.index');
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -105,12 +105,12 @@ class HtmlBlockController extends Controller
         $result  = $this->htmlBlock->create($this->request->all());
 
         if (isset($result->id)) {
-            \Notification::success('The html block was inserted.');
+            Notification::success('The html block was inserted.');
             return redirect()->route('hideyo.html-block.index');
         }
         
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -154,7 +154,7 @@ class HtmlBlockController extends Controller
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
        
