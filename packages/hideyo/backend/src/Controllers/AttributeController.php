@@ -26,10 +26,11 @@ class AttributeController extends Controller
 
 
     /**
-     * Shows a list of attributes in datatables
+     * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request
      * @param  integer $attributeGroupId for relation with attributeGroup
-     * @return view of json output
+     * @return View
+     * @return datatables
      */
     public function index(Request $request, $attributeGroupId)
     {
@@ -54,7 +55,7 @@ class AttributeController extends Controller
     }
 
     /**
-     * Create a attribute
+     * Show the form for creating a new resource.
      * @param  integer $attributeGroupId for relation with attributeGroup
      * @return view
      */
@@ -63,6 +64,12 @@ class AttributeController extends Controller
         return view('hideyo_backend::attribute.create')->with(array('attributeGroup' =>  $this->attributeGroup->find($attributeGroupId)));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @return Redirect
+     */
     public function store(Request $request, $attributeGroupId)
     {
         $result  = $this->attribute->create($request->all(), $attributeGroupId);
@@ -79,11 +86,24 @@ class AttributeController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @param  int  $id
+     * @return Redirect
+     */
     public function edit($attributeGroupId, $id)
     {
         return view('hideyo_backend::attribute.edit')->with(array('attribute' => $this->attribute->find($id)));
     }
 
+    /**
+     * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @param  int  $id
+     * @return Redirect
+     */
     public function update(Request $request, $attributeGroupId, $id)
     {
         $result  = $this->attribute->updateById($request->all(), $attributeGroupId, $id);
@@ -100,6 +120,12 @@ class AttributeController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * Remove the specified resource from storage
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @param  int  $id
+     * @return Redirect
+     */
     public function destroy($attributeGroupId, $id)
     {
         $result  = $this->attribute->destroy($id);
