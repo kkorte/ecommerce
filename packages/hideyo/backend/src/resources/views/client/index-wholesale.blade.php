@@ -26,16 +26,16 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.active') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.confirmed') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.company') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.email') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.vat-number') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.iban-number') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.chamber-of-commerce-number') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.last_login') }}}</th>
-                    <th class="col-md-4">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.active') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.confirmed') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.company') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.email') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.vat-number') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.iban-number') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.chamber-of-commerce-number') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.last_login') }}}</th>
+                    <th class="col-md-4">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

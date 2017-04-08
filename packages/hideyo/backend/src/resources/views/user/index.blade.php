@@ -25,10 +25,10 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-3">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.email') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.username') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.email') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.username') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

@@ -25,13 +25,13 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.active') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.image') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.products') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.parent') }}}</th>                    
-                    <th class="col-md-3">{{{ trans('table.redirect') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.title') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.active') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.image') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.products') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.parent') }}}</th>                    
+                    <th class="col-md-3">{{{ trans('hideyo::table.redirect') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.title') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

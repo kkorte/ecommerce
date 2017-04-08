@@ -25,9 +25,9 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-3">{{{ trans('table.question') }}}</th>
-   <th class="col-md-3">{{{ trans('table.group') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.question') }}}</th>
+   <th class="col-md-3">{{{ trans('hideyo::table.group') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

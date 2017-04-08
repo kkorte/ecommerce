@@ -53,13 +53,13 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-2">{{{ trans('table.firstname') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.lastname') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.street') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.housenumber') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.delivery-address') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.bill-address') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.firstname') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.lastname') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.street') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.housenumber') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.delivery-address') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.bill-address') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

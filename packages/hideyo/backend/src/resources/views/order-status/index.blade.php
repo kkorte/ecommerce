@@ -25,8 +25,8 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-5">{{{ trans('table.title') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-5">{{{ trans('hideyo::table.title') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

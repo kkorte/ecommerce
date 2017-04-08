@@ -27,14 +27,14 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.active') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.amount') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.price') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.image') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.category') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.reference-code') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.title') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.active') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.amount') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.price') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.image') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.category') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.reference-code') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.title') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

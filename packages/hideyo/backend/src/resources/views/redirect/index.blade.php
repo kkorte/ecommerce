@@ -30,11 +30,11 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>  
-                    <th class="col-md-2">{{{ trans('table.active') }}}</th> 
-                    <th class="col-md-3">{{{ trans('table.url') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.redirect_url') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.clicks') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.active') }}}</th> 
+                    <th class="col-md-3">{{{ trans('hideyo::table.url') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.redirect_url') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.clicks') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

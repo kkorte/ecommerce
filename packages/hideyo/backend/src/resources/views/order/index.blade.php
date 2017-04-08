@@ -34,14 +34,14 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.created-at') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.client') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.status') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.payment-method') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.sending-method') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.price') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.created-at') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.client') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.status') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.payment-method') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.sending-method') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.price') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

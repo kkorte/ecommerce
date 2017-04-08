@@ -22,11 +22,11 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-3">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.order-id') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.price') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.order-id') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.price') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

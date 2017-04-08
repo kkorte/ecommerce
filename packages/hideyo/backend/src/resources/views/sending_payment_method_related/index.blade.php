@@ -22,12 +22,12 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-3">{{{ trans('table.payment-method') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.sending-method') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.pdf-text') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.payment-text') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.payment-confirmed-text') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.payment-method') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.sending-method') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.pdf-text') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.payment-text') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.payment-confirmed-text') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

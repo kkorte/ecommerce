@@ -3,13 +3,12 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class NewsGroup extends Model implements SluggableInterface
+class NewsGroup extends Model
 {
+    use Sluggable;
 
-    use SluggableTrait;
 
     protected $table = 'news_group';
 
@@ -22,11 +21,20 @@ class NewsGroup extends Model implements SluggableInterface
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'active', 'title', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id'];
 
-    public function __construct(array $attributes = array())
+    public function sluggable()
     {
-        parent::__construct($attributes);
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
+    public function __construct(array $attributes = array())
+    {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
+        parent::__construct($attributes);
+    }
     public function news()
     {
         return $this->hasMany('Hideyo\Backend\Models\News');

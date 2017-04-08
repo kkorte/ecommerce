@@ -49,6 +49,8 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/Resources/views/', 'hideyo_backend');
 
+        $this->loadTranslationsFrom(__DIR__.'/Resources/translations', 'hideyo');
+
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         
     }

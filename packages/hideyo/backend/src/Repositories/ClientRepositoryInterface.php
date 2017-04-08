@@ -34,7 +34,7 @@ interface ClientRepositoryInterface
 
     public function resetPasswordByConfirmationCodeAndEmail(array $attributes, $shopId);
 
-    public function oldPasswordCheck(array $attributes);
+
 
     public function activate($id);
 

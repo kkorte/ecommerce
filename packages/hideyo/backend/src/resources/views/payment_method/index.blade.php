@@ -25,12 +25,12 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.title') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.orderconfirmed') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.paymentcompleted') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.paymentfailed') }}}</th>
-                    <th class="col-md-2">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.title') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.orderconfirmed') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.paymentcompleted') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.paymentfailed') }}}</th>
+                    <th class="col-md-2">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

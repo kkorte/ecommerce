@@ -7,7 +7,7 @@ use Hideyo\Backend\Models\NewsGroup;
 use Carbon\Carbon;
 use Image;
 use File;
-use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 
 class NewsRepository implements NewsRepositoryInterface
 {

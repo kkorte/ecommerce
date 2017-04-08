@@ -26,10 +26,10 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-3">{{{ trans('table.id') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.amount') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.default_on') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.id') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.amount') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.default_on') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

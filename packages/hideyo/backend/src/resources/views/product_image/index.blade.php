@@ -24,10 +24,10 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.image') }}}</th>
-                    <th class="col-md-8">{{{ trans('table.file') }}}</th>
-                    <th class="col-md-8">{{{ trans('table.rank') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.image') }}}</th>
+                    <th class="col-md-8">{{{ trans('hideyo::table.file') }}}</th>
+                    <th class="col-md-8">{{{ trans('hideyo::table.rank') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>

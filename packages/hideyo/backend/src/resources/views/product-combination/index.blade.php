@@ -48,12 +48,12 @@
         <table id="datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="col-md-1">{{{ trans('table.amount') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.price') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.reference-code') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.combinations') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.default-on') }}}</th>
-                    <th class="col-md-1">{{{ trans('table.actions') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.amount') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.price') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.reference-code') }}}</th>
+                    <th class="col-md-3">{{{ trans('hideyo::table.combinations') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.default-on') }}}</th>
+                    <th class="col-md-1">{{{ trans('hideyo::table.actions') }}}</th>
                 </tr>
             </thead>
         </table>
