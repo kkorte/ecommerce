@@ -39,7 +39,7 @@
                     "processing": true,
                     "serverSide": true,
                     "stateSave": true,
-                   "ajax": "/admin/news",
+                    "ajax": "{{ URL::route('hideyo.news.index') }}",
 
                  columns: [
                         {data: 'title', name: 'title'},

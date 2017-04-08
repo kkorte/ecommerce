@@ -22,12 +22,12 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
    
     generateCrud('dashboard', 'DashboardController');
 
-    Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));
-    Route::get('dashboard/stats/order-average-by-year/{year}', array('as' => 'admin.dashboard.stats.average', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsOrderAverageByYear'));
-    Route::get('dashboard/stats/browser-by-year/{year}', array('as' => 'admin.dashboard.stats.browser', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsBrowserByYear'));
-    Route::get('dashboard/stats/totals-by-year/{year}', array('as' => 'admin.dashboard.stats.total', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsTotalsByYear'));
-    Route::get('dashboard/stats/payment-method-by-year/{year}', array('as' => 'admin.dashboard.stats.payment.method', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsPaymentMethodByYear'));
-    Route::get('dashboard/stats', array('as' => 'admin.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@showStats'));
+    Route::get('dashboard/stats/revenue-by-year/{year}', array('as' => 'hideyo.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsRevenueByYear'));
+    Route::get('dashboard/stats/order-average-by-year/{year}', array('as' => 'hideyo.dashboard.stats.average', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsOrderAverageByYear'));
+    Route::get('dashboard/stats/browser-by-year/{year}', array('as' => 'hideyo.dashboard.stats.browser', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsBrowserByYear'));
+    Route::get('dashboard/stats/totals-by-year/{year}', array('as' => 'hideyo.dashboard.stats.total', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsTotalsByYear'));
+    Route::get('dashboard/stats/payment-method-by-year/{year}', array('as' => 'hideyo.dashboard.stats.payment.method', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@getStatsPaymentMethodByYear'));
+    Route::get('dashboard/stats', array('as' => 'hideyo.dashboard.stats', 'uses' => 'Hideyo\Shop\Controllers\Backend\DashboardController@showStats'));
     
     generateCrud('shop', 'ShopController');
 
@@ -46,9 +46,9 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
 
     generateCrud('client', 'ClientController');
 
-    Route::get('redirect/export', array('as' => 'admin.redirect.export', 'uses' => 'RedirectController@getExport'));
-    Route::get('redirect/import', array('as' => 'admin.redirect.import', 'uses' => 'RedirectController@getImport'));
-    Route::post('redirect/import', array('as' => 'admin.redirect.import', 'uses' => 'RedirectController@postImport'));
+    Route::get('redirect/export', array('as' => 'hideyo.redirect.export', 'uses' => 'RedirectController@getExport'));
+    Route::get('redirect/import', array('as' => 'hideyo.redirect.import', 'uses' => 'RedirectController@getImport'));
+    Route::post('redirect/import', array('as' => 'hideyo.redirect.import', 'uses' => 'RedirectController@postImport'));
 
     Route::get('order/print/products', array('as' => 'hideyo.order.print.products', 'uses' => 'OrderController@getPrintOrders'));
     
@@ -93,20 +93,21 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
  
     Route::get('news/re-directory-images', array('as' => 'news.re.directory.images', 'uses' => 'NewsController@reDirectoryAllImages'));
  
-    Route::resource('news/{newsId}/images', 'NewsImageController');
 
-    Route::get('news/edit/{newsId}/seo', array('as' => 'admin.news.edit_seo', 'uses' => 'NewsController@editSeo'));
+    generateCrud('news/{newsId}/images', 'NewsImageController', 'news-images');
+
+    Route::get('news/edit/{newsId}/seo', array('as' => 'hideyo.news.edit_seo', 'uses' => 'NewsController@editSeo'));
 
     generateCrud('news', 'NewsController');
 
     generateCrud('news-group', 'NewsGroupController');
 
-    Route::get('news-group/edit/{newsGroupId}/seo', array('as' => 'admin.news-group.edit_seo', 'uses' => 'NewsGroupController@editSeo'));
+    Route::get('news-group/edit/{newsGroupId}/seo', array('as' => 'hideyo.news-group.edit_seo', 'uses' => 'NewsGroupController@editSeo'));
 
     generateCrud('faq', 'FaqItemController');
 
     Route::resource('html-block/{htmlBlockId}/copy', 'HtmlBlockController@copy');
-    Route::get('html-block/change-active/{htmlBlockId}', array('as' => 'admin.html.block.change-active', 'uses' => 'HtmlBlockController@changeActive'));
+    Route::get('html-block/change-active/{htmlBlockId}', array('as' => 'hideyo.html.block.change-active', 'uses' => 'HtmlBlockController@changeActive'));
  
     Route::post('html-block/{htmlBlockId}/copy', array('as' => 'html.block.store.copy', 'uses' => 'HtmlBlockController@storeCopy'));
  
@@ -127,13 +128,13 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
     Route::get('order/update-billing-address/{addressId}', array('as' => 'order.update.billing.address', 'uses' => 'OrderController@updateClientBillAddress'));
     Route::get('order/update-delivery-address/{addressId}', array('as' => 'order.update.delivery.address', 'uses' => 'OrderController@updateClientDeliveryAddress'));
 
-    Route::post('order/add-client', array('as' => 'admin.order.add-client', 'uses' => 'OrderController@addClient'));
+    Route::post('order/add-client', array('as' => 'hideyo.order.add-client', 'uses' => 'OrderController@addClient'));
 
-    Route::post('order/add-product', array('as' => 'admin.order.add-product', 'uses' => 'OrderController@addProduct'));
+    Route::post('order/add-product', array('as' => 'hideyo.order.add-product', 'uses' => 'OrderController@addProduct'));
 
-    Route::get('order/update-amount-product/{productId}/{amount}', array('as' => 'admin.order.update.amount.product', 'uses' => 'OrderController@updateAmountProduct'));
+    Route::get('order/update-amount-product/{productId}/{amount}', array('as' => 'hideyo.order.update.amount.product', 'uses' => 'OrderController@updateAmountProduct'));
  
-    Route::get('order/change-product-combination/{productId}/{newProductId}', array('as' => 'admin.order.change.product.combination', 'uses' => 'OrderController@changeProductCombination'));
+    Route::get('order/change-product-combination/{productId}/{newProductId}', array('as' => 'hideyo.order.change.product.combination', 'uses' => 'OrderController@changeProductCombination'));
 
     Route::get('order/delete-product/{productId}', array('as' => 'order.delete-product', 'uses' => 'OrderController@deleteProduct'));
 

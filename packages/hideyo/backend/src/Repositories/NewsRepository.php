@@ -33,15 +33,15 @@ class NewsRepository implements NewsRepositoryInterface
     {
         if (isset($attributes['seo'])) {
             $rules = array(
-                'meta_title'                 => 'required|between:4,65|unique_with:news, shop_id'
+                'meta_title'                 => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
             );
         } else {
             $rules = array(
-                'title'                 => 'required|between:4,65|unique:news'
+                'title'                 => 'required|between:4,65|unique:'.$this->model->getTable().''
             );
             
             if ($id) {
-                $rules['title'] =   'required|between:4,65|unique:news,title,'.$id;
+                $rules['title'] =   'required|between:4,65|unique:'.$this->model->getTable().',title,'.$id;
             }
         }
 
@@ -52,15 +52,15 @@ class NewsRepository implements NewsRepositoryInterface
     {
         if (isset($attributes['seo'])) {
             $rules = array(
-                'meta_title'                 => 'required|between:4,65|unique_with:news_group, shop_id'
+                'meta_title'                 => 'required|between:4,65|unique_with:'.$this->modelGroup->getTable().', shop_id'
             );
         } else {
             $rules = array(
-                'title'                 => 'required|between:4,65|unique:news_group'
+                'title'                 => 'required|between:4,65|unique:'.$this->modelGroup->getTable()
             );
             
             if ($id) {
-                $rules['title'] =   'required|between:4,65|unique:news_group,title,'.$id;
+                $rules['title'] =   'required|between:4,65|unique:'.$this->modelGroup->getTable().',title,'.$id;
             }
         }
 
@@ -79,7 +79,6 @@ class NewsRepository implements NewsRepositoryInterface
 
         $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
-        $this->model->sluggify();
         $this->model->save();
         
         if (isset($attributes['subcategories'])) {
@@ -304,7 +303,7 @@ class NewsRepository implements NewsRepositoryInterface
 
     public function destroyGroup($id)
     {
-        $this->modelGroup = $this->find($id);
+        $this->modelGroup = $this->findGroup($id);
         $this->modelGroup->save();
 
         return $this->modelGroup->delete();
@@ -333,113 +332,6 @@ class NewsRepository implements NewsRepositoryInterface
     {
         return $this->model->get();
     }
-
-    public function selectAllGroups()
-    {
-       return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
-    }
-
-
-
-
-    function selectAllByShopIdAndPaginate($shopId, $totalPage, $filters = false)
-    {
-
-
-        $dt = Carbon::now('Europe/Amsterdam');
-
-           $result = $this->model
-           ->where('shop_id', '=', $shopId)
-           ->where('published_at', '<=', $dt->toDateString('Y-m-d'));
-
-            return array(
-                'totals' => $result->get()->count(),
-                'totalPages' => ceil($result->get()->count() / $totalPage),
-                'result' => $result->paginate($totalPage),
-                'totalOnPage' => $totalPage
-            );
-    }
-
-
-    function selectByGroupAndByShopIdAndPaginate($shopId, $newsGroupSlug, $totalPage, $filters = false)
-    {
-
-
-        $dt = Carbon::now('Europe/Amsterdam');
-
-           $result = $this->model
-           ->where('shop_id', '=', $shopId)
-           ->where('published_at', '<=', $dt->toDateString('Y-m-d'))
-           ->whereHas('newsGroup', function ($query) use ($newsGroupSlug) {
-            $query->where('slug', '=', $newsGroupSlug);
-           });
-
-            return array(
-                'totals' => $result->get()->count(),
-                'totalPages' => ceil($result->get()->count() / $totalPage),
-                'result' => $result->paginate($totalPage),
-                'totalOnPage' => $totalPage
-            );
-    }
-
-
-
-    public function selectAllByBlogParentId($newsParentId)
-    {
-        return $this->model->where('news_parent_id', '=', $newsParentId)->get();
-    }
-
-    function selectOneBySlug($shopId, $slug)
-    {
-        $dt = Carbon::now('Europe/Amsterdam');
-        return $this->model->where('slug', '=', $slug)->where('published_at', '<=', $dt->toDateString('Y-m-d'))->get()->first();
-    }
-
-    function selectAllByBlogCategoryId($newsCategoryId)
-    {
-           return $this->model->with(array('extraFields' => function ($query) {
-           }, 'taxRate', 'newsCategory',  'relatedBlogs' => function ($query) {
-            $query->with('newsImages')->orderBy('rank', 'asc');
-           }, 'newsImages' => function ($query) {
-            $query->orderBy('rank', 'asc');
-           }))->where('active', '=', 1)->where('news_category_id', '=', $newsCategoryId)->get();
-    }
-
-    function selectOneById($shopId, $slug)
-    {
-        $dt = Carbon::now('Europe/Amsterdam');
-        $result = $this->model->with(array('newsCategory', 'relatedBlogs', 'newsImages' => function ($query) {
-            $query->orderBy('rank', 'asc');
-        }))->where('published_at', '<=', $dt->toDateString('Y-m-d'))->where('active', '=', 1)->where('id', '=', $id)->get()->first();
-        return $result;
-    }
-    
-    function selectHomepageBlog($limit)
-    {
-           return $this->model->with(array('newsCategory', 'newsImages' => function ($query) {
-            $query->orderBy('rank', 'asc');
-           }))->where('active', '=', 1)->where('homepage', '=', 1)->orderBy('rank', 'asc')->limit($limit)->get();
-    }
-
-
-
-    function selectAllActiveGroupsByShopId($shopId)
-    {
-         return $this->modelGroup->where('shop_id', '=', $shopId)->where('active', '=', 1)->get();
-    }
-
-
-
-    function selectOneGroupByShopIdAndSlug($shopId, $slug)
-    {
-        $result = $this->modelGroup->where('shop_id', '=', $shopId)->where('slug', '=', $slug)->get();
-        
-        if ($result->isEmpty()) {
-            return false;
-        }
-        return $result->first();
-    }
-
 
     public function find($id)
     {

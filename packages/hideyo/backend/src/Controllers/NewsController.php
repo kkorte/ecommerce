@@ -32,12 +32,14 @@ class NewsController extends Controller
             $query = $this->news->getModel()->select(
                 [
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                'news.id',
-                'news.title', 'news_group_id', 'news_group.title as newstitle']
-            )->where('news.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
+                $this->news->getModel()->getTable().'.id',
+                $this->news->getModel()->getTable().'.title',
+
+                $this->news->getGroupModel()->getTable().'.title as newsgroup']
+            )->where($this->news->getModel()->getTable().'.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 
 
-            ->with(array('newsGroup'))        ->leftJoin('news_group', 'news_group.id', '=', 'news.news_group_id');
+            ->with(array('newsGroup'))        ->leftJoin($this->news->getGroupModel()->getTable(), $this->news->getGroupModel()->getTable().'.id', '=', 'news_group_id');
             
             $datatables = \Datatables::of($query)
             ->filterColumn('title', function ($query, $keyword) {
@@ -54,8 +56,8 @@ class NewsController extends Controller
             })
 
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/news/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $query->title);
-                $link = '<a href="/admin/news/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.news.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.news.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             });
@@ -69,7 +71,7 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('hideyo_backend::news.create')->with(array('groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
+        return view('hideyo_backend::news.create')->with(array('groups' => $this->news->selectAllGroups()->pluck('title', 'id')->toArray()));
     }
 
     public function store()
@@ -91,7 +93,7 @@ class NewsController extends Controller
     public function edit($id)
     {
     
-        return view('hideyo_backend::news.edit')->with(array('news' => $this->news->find($id), 'groups' => $this->news->selectAllGroups()->lists('title', 'id')->toArray()));
+        return view('hideyo_backend::news.edit')->with(array('news' => $this->news->find($id), 'groups' => $this->news->selectAllGroups()->pluck('title', 'id')->toArray()));
     }
 
     public function reDirectoryAllImages()

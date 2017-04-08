@@ -64,12 +64,12 @@ class News extends Model
 
     public function newsImages()
     {
-        return $this->hasMany('Hideyo\Shop\Models\NewsImage');
+        return $this->hasMany('Hideyo\Backend\Models\NewsImage');
     }
 
     public function newsGroup()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\NewsGroup');
+        return $this->belongsTo('Hideyo\Backend\Models\NewsGroup');
     }
 
     public function setNewsGroupIdAttribute($value)

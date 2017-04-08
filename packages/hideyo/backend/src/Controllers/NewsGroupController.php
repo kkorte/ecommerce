@@ -29,17 +29,18 @@ class NewsGroupController extends Controller
             $query = $this->news->getGroupModel()->select(
                 [
                 \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-                'news_group.id',
-                'news_group.title']
-            )->where('news_group.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+                'id',
+                'title']
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/news-group/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/news-group/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.news-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.news-group.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             });
+
 
             return $datatables->make(true);
 
@@ -55,11 +56,11 @@ class NewsGroupController extends Controller
 
     public function store()
     {
-        $result  = $this->news->create(\Request::all());
+        $result  = $this->news->createGroup(\Request::all());
 
         if (isset($result->id)) {
             Notification::success('The news was inserted.');
-            return redirect()->route('admin.news-group.index');
+            return redirect()->route('hideyo.news-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -81,13 +82,13 @@ class NewsGroupController extends Controller
         if (isset($result->id)) {
             if (Request::get('seo')) {
                 Notification::success('NewsGroup seo was updated.');
-                return redirect()->route('admin.news-group.edit_seo', $newsGroupId);
+                return redirect()->route('hideyo.news-group.edit_seo', $newsGroupId);
             } elseif (Request::get('news-combination')) {
                 Notification::success('NewsGroup combination leading attribute group was updated.');
-                return redirect()->route('admin.news-group.{newsId}.news-combination.index', $newsGroupId);
+                return redirect()->route('hideyo.news-group.{newsId}.news-combination.index', $newsGroupId);
             } else {
                 Notification::success('NewsGroup was updated.');
-                return redirect()->route('admin.news-group.edit', $newsGroupId);
+                return redirect()->route('hideyo.news-group.edit', $newsGroupId);
             }
         }
 
@@ -104,7 +105,7 @@ class NewsGroupController extends Controller
 
         if ($result) {
             Notification::success('The news group was deleted.');
-            return redirect()->route('admin.news-group.index');
+            return redirect()->route('hideyo.news-group.index');
         }
     }
 }

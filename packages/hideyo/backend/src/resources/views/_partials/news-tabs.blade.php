@@ -32,7 +32,7 @@
             @else
             <li>
             @endif
-                <a href="{!! URL::route('hideyo.news.{newsId}.images.index', $news->id) !!}">
+                <a href="{!! URL::route('hideyo.news-images.index', $news->id) !!}">
                     <span class="visible-xs"><i class="entypo-user"></i></span>
                     <span class="hidden-xs">Images</span>
                 </a>
