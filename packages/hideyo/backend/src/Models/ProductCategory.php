@@ -69,11 +69,6 @@ class ProductCategory extends Node
         return $list instanceof Collection ? $list->all() : $list;
     }
 
-    public function beforeValidate()
-    {
-        $this->sluggify();
-    }
-
     public static function boot()
     {
         parent::boot();
@@ -89,7 +84,7 @@ class ProductCategory extends Node
 
     public function refProductCategory()
     {
-        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory', 'redirect_product_category_id');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory', config()->get('hideyo.db_prefix').'redirect_product_category_id');
     }
 
     public function productCategoryImages()
@@ -99,12 +94,12 @@ class ProductCategory extends Node
 
     public function productCategoryHighlightProduct()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', config()->get('hideyo.db_prefix').'product_category_highlight_product', 'product_category_id', 'product_id');
     }
 
     public function productCategoryHighlightProductActive()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', config()->get('hideyo.db_prefix').'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
     }
 
     public function products()

@@ -195,7 +195,9 @@ Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namesp
  
     Route::get('product_category/edit/{productCategoryId}/hightlight', array('as' => 'hideyo.product-category.edit.hightlight', 'uses' => 'ProductCategoryController@editHighlight'));
 
-    Route::resource('product-category/{productCategoryId}/images', 'ProductCategoryImageController');
+    generateCrud('product-category/{productCategoryId}/images', 'ProductCategoryImageController', 'product-category-images');
+
+
     Route::get('product_category/edit/{productCategoryId}/seo', array('as' => 'hideyo.product-category.edit_seo', 'uses' => 'ProductCategoryController@editSeo'));
 
     Route::get('product_category/ajax-root-tree', array('as' => 'hideyo.product-category.ajax-root-tree', 'uses' => 'ProductCategoryController@ajaxRootTree'));

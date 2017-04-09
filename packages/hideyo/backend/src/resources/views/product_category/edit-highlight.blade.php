@@ -36,7 +36,7 @@
 		        <div class="form-group">
 		            {!! Form::label('highlightProducts', 'Products', array('class' => 'col-sm-3 control-label')) !!}
 		            <div class="col-sm-5">
-		                {!! Form::multiselect2('highlightProducts[]', $products->toArray(), $productCategory->productCategoryHighlightProduct()->lists('product_id')->toArray()) !!}
+		                {!! Form::multiselect2('highlightProducts[]', $products->toArray(), $productCategory->productCategoryHighlightProduct()->pluck('product_id')->toArray()) !!}
 		            </div>
 		        </div>
 

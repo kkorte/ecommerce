@@ -308,7 +308,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('hideyo_backend::product.create')->with(array('brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->pluck('title', 'id')));
+        return view('hideyo_backend::product.create')->with(array('brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(), 'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'), 'productCategories' => $this->productCategory->selectAllProductPullDown()->pluck('title', 'id')));
     }
 
     public function store()

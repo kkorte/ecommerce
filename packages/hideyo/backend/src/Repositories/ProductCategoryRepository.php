@@ -171,22 +171,22 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         $result = $this->updateEntity($attributes);
 
 
-        if (isset($attributes['title']) AND $oldTitle != $attributes['title']) {
-            $url = $result->shop->url.route('product-category', ['slug' => $oldSlug], null);
+        // if (isset($attributes['title']) AND $oldTitle != $attributes['title']) {
+        //     $url = $result->shop->url.route('product-category', ['slug' => $oldSlug], null);
            
-            if ($result->active) {
-                $this->redirect->destroyByUrl($url);
-            }
+        //     if ($result->active) {
+        //         $this->redirect->destroyByUrl($url);
+        //     }
 
-            $newUrl = $result->shop->url.route('product-category', ['slug' => $result->slug], null);
-            $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $result->shop_id));
-        }
+        //     $newUrl = $result->shop->url.route('product-category', ['slug' => $result->slug], null);
+        //     $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $result->shop_id));
+        // }
 
-        if (!$result->active) {
-            $url = $result->shop->url.route('product-category', ['slug' => $result->slug], null);
-            $productCategoryUrl = $result->shop->url;
-            $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $productCategoryUrl, 'shop_id' => $result->shop_id));
-        }
+        // if (!$result->active) {
+        //     $url = $result->shop->url.route('product-category', ['slug' => $result->slug], null);
+        //     $productCategoryUrl = $result->shop->url;
+        //     $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $productCategoryUrl, 'shop_id' => $result->shop_id));
+        // }
 
 
 
@@ -202,7 +202,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
         if (count($attributes) > 0) {
             $this->model->fill($attributes);
-            $this->model->sluggify();
+            
 
             if (isset($attributes['highlightProducts'])) {
                 $this->model->productCategoryHighlightProduct()->sync($attributes['highlightProducts']);
@@ -238,9 +238,9 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
     {
         $this->model = $this->find($id);
 
-        $url = $this->model->shop->url.route('product-category', ['slug' => $this->model->slug], null);
-        $newUrl = $this->model->shop->url;
-        $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $this->model->shop_id));
+        // $url = $this->model->shop->url.route('hideyo.product-category', ['slug' => $this->model->slug], null);
+        // $newUrl = $this->model->shop->url;
+        // $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $newUrl, 'shop_id' => $this->model->shop_id));
 
         if ($this->model->productCategoryImages()->count()) {
             foreach ($this->model->productCategoryImages()->get() as $image) {
@@ -478,17 +478,17 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
             $this->model->fill($attributes);
 
-            $this->model->sluggify();
+            
 
 
-            if (!$this->model->active) {
-                $url = $this->model->shop->url.route('product-category', ['slug' => $this->model->slug], null);
-                $productCategoryUrl = $this->model->shop->url;
-                $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $productCategoryUrl, 'shop_id' => $this->model->shop_id));
-            } else {
-                $url = $this->model->shop->url.route('product-category', ['slug' => $this->model->slug], null);
-                $this->redirect->destroyByUrl($url);
-            }
+            // if (!$this->model->active) {
+            //     $url = $this->model->shop->url.route('product-category', ['slug' => $this->model->slug], null);
+            //     $productCategoryUrl = $this->model->shop->url;
+            //     $redirectResult = $this->redirect->create(array('active' => 1, 'url' => $url, 'redirect_url' => $productCategoryUrl, 'shop_id' => $this->model->shop_id));
+            // } else {
+            //     $url = $this->model->shop->url.route('product-category', ['slug' => $this->model->slug], null);
+            //     $this->redirect->destroyByUrl($url);
+            // }
 
 
             return $this->model->save();
