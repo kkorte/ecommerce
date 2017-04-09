@@ -102,6 +102,11 @@ class ContentGroupController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * Remove the specified resource from storage
+     * @param  int  $id
+     * @return Redirect
+     */
     public function destroy($id)
     {
         $result  = $this->content->destroyGroup($id);

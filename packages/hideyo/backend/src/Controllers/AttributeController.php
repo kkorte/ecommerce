@@ -24,7 +24,6 @@ class AttributeController extends Controller
         $this->attribute = $attribute;
     }
 
-
     /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request

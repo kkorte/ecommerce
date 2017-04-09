@@ -25,6 +25,13 @@ class AttributeGroupController extends Controller
         $this->attributeGroup = $attributeGroup;
     }
 
+    /**
+     * Display a listing of the resource.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  integer $attributeGroupId for relation with attributeGroup
+     * @return View
+     * @return datatables
+     */
     public function index(Request $request)
     {
         if ($request->wantsJson()) {
@@ -48,11 +55,20 @@ class AttributeGroupController extends Controller
         }
     }
 
+    /**
+     * Show the form for creating a new resource.
+     * @return view
+     */
     public function create()
     {
         return view('hideyo_backend::attribute-group.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @return Redirect
+     */
     public function store(Request $request)
     {
         $result  = $this->attributeGroup->create($request->all());
@@ -69,6 +85,11 @@ class AttributeGroupController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * @param  int  $id
+     * @return Redirect
+     */
     public function edit($id)
     {
         return view('hideyo_backend::attribute-group.edit')
@@ -79,6 +100,12 @@ class AttributeGroupController extends Controller
         );
     }
 
+    /**
+     * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return Redirect
+     */
     public function update(Request $request, $id)
     {
         $result  = $this->attributeGroup->updateById($request->all(), $id);
@@ -95,6 +122,11 @@ class AttributeGroupController extends Controller
         return redirect()->back()->withInput();
     }
 
+    /**
+     * Remove the specified resource from storagep
+     * @param  int  $id
+     * @return Redirect
+     */
     public function destroy($id)
     {
         $result  = $this->attributeGroup->destroy($id);
