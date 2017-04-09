@@ -8,7 +8,6 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class HtmlBlock extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
 
     /**

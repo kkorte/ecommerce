@@ -18,6 +18,7 @@ class ProductExtraFieldValue extends Model
 
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
 
