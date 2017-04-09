@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AttributeGroup extends Model
 {
-
-    public static $rules = array(
-        'title' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'attribute_group';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

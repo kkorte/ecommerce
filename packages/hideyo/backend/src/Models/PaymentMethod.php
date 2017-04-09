@@ -7,7 +7,11 @@ use Carbon\Carbon;
 
 class PaymentMethod extends Model
 {
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'payment_method';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

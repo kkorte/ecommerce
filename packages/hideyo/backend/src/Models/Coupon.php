@@ -7,11 +7,11 @@ use Carbon\Carbon;
 
 class Coupon extends Model
 {
-
-    public static $rules = array(
-        'title' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'coupon';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
@@ -90,7 +90,6 @@ class Coupon extends Model
             return null;
         }
     }
-
 
     public function setCouponGroupIdAttribute($value)
     {

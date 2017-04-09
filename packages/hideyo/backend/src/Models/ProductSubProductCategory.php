@@ -8,7 +8,11 @@ use Carbon\Carbon;
 
 class ProductSubProductCategory extends Model
 {
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_sub_product_category';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

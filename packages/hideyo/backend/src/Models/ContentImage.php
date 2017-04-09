@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContentImage extends Model
 {
-    public static $rules = array(
-        'file'      => 'required|',
-        'extension' => 'required',
-        'size'      => 'required',
-    );
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'content_image';
 
     protected $guarded =  array('file');
@@ -22,18 +22,5 @@ class ContentImage extends Model
     {
         $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($model) {
-            foreach ($model->toArray() as $key => $value) {
-                    $model->{$key} = empty($value) ? null : $value;
-            }
-
-            return true;
-        });
     }
 }

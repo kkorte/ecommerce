@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Redirect extends Model
 {
-    
-
-    public static $rules = array(
-        'url' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'redirect';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

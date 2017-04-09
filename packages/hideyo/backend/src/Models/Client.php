@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client extends Authenticatable
 {
-
-    public static $rules = array(
-        'email' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'client';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

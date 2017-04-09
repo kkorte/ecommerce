@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsImage extends Model
 {
-
-    public static $rules = array(
-        'news_id'    => 'required',
-        'file'          => 'required',
-        'extension'     => 'required',
-        'size'          => 'required',
-    );
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */        
     protected $table = 'news_image';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
@@ -20,7 +18,6 @@ class NewsImage extends Model
 
     public function __construct(array $attributes = array())
     {
-
         parent::__construct($attributes);
     }
 

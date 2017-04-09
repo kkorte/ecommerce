@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderAddress extends Model
 {
-
-    public static $rules = array(
-        'firstname' => 'required',
-        'lastname' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'order_address';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

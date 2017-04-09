@@ -8,16 +8,14 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class FaqItemGroup extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'faq_item_group';
-
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'title', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id'];

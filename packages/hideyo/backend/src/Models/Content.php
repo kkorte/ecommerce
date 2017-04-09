@@ -9,6 +9,11 @@ class Content extends Model
 {
     use Sluggable;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'content';
 
     protected $sluggable = array(
@@ -70,7 +75,6 @@ class Content extends Model
     {
         return $this->hasMany('Hideyo\Backend\Models\ContentImage');
     }
-
 
     public function setContentGroupIdAttribute($value)
     {

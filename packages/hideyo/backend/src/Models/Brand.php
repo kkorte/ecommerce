@@ -8,9 +8,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Brand extends Model
 {
-
     use Sluggable;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'brand';
 
     protected $scoped = array('shop_id');
@@ -20,8 +24,7 @@ class Brand extends Model
 
     public function __construct(array $attributes = array())
     {
-        $this->table = config()->get('hideyo.db_prefix').$this->table;
-        
+        $this->table = config()->get('hideyo.db_prefix').$this->table; 
         parent::__construct($attributes);
     }
 
@@ -34,18 +37,15 @@ class Brand extends Model
         ];
     }
 
-
     public function beforeValidate()
     {
         $this->sluggify();
     }
 
-
     public function products()
     {
         return $this->hasMany('Hideyo\Backend\Models\Product');
     }
-
 
     public function brandImages()
     {

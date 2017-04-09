@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductWaitingList extends Model
 {
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */        
     protected $table = 'product_waiting_list';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

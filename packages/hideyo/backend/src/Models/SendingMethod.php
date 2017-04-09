@@ -7,11 +7,11 @@ use Carbon\Carbon;
 
 class SendingMethod extends Model
 {
-
-    public static $rules = array(
-        'title' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'sending_method';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

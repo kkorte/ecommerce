@@ -11,13 +11,12 @@ class FaqItem extends Model implements SluggableInterface
 
     use SluggableTrait;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'faq_item';
-
-    protected $sluggable = array(
-        'build_from'        => 'question',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'faq_item_group_id', 'question', 'answer', 'slug', 'shop_id'];

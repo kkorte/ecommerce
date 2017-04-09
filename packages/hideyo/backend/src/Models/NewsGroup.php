@@ -9,14 +9,12 @@ class NewsGroup extends Model
 {
     use Sluggable;
 
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'news_group';
-
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'active', 'title', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id'];

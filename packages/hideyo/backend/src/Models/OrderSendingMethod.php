@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderSendingMethod extends Model
 {
-
-    public static $rules = array(
-        'order_id' => 'required',
-        'title' => 'required'
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'order_sending_method';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

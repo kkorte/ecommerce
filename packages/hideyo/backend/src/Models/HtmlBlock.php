@@ -11,6 +11,11 @@ class HtmlBlock extends Model implements SluggableInterface
 
     use SluggableTrait;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'html_block';
 
     protected $sluggable = array(
@@ -24,6 +29,7 @@ class HtmlBlock extends Model implements SluggableInterface
 
     public function __construct(array $attributes = array())
     {
+        $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
 }

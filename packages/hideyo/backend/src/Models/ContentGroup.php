@@ -9,6 +9,11 @@ class ContentGroup extends Model
 {
     use Sluggable;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'content_group';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
@@ -28,7 +33,6 @@ class ContentGroup extends Model
         $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
-
 
     public function contents()
     {

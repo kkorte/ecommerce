@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClientToken extends Model
 {
-
     protected $table = 'client_token';
 
     protected $fillable = ['api_token', 'client', 'client_id', 'expires_on'];

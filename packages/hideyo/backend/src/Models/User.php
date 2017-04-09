@@ -8,10 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-
-
-
-
     /**
      * The database table used by the model.
      *
@@ -33,19 +29,12 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token'];
 
-
-
     public function __construct(array $attributes = array())
     {
         $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
     }
     
-
-
-
-
-
     public function getUserProfileData()
     {
         return $this->hasMany('Hideyo\Backend\Models\UserProfileData');
@@ -55,7 +44,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo('Hideyo\Backend\Models\Shop', 'selected_shop_id', 'id');
     }
-
-
-
 }

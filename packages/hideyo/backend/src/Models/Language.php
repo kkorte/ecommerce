@@ -4,11 +4,8 @@ namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model  {
-
-    public static $rules = array(
-        'language' => 'required',
-    );
+class Language extends Model  
+{
 
     protected $table = 'language';
 

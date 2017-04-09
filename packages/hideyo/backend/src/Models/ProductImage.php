@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
-
-    public static $rules = array(
-        'product_id'    => 'required',
-        'file'          => 'required',
-        'extension'     => 'required',
-        'size'          => 'required',
-    );
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_image';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

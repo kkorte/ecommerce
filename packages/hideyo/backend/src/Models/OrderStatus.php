@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderStatus extends Model
 {
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'order_status';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

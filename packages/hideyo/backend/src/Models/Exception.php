@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exception extends Model
 {
-
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'exception';
-
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'class'];

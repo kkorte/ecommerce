@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductExtraFieldValue extends Model
 {
-
-    public static $rules = array(
-        'value' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_extra_field_value';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

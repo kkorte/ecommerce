@@ -6,12 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvoiceRule extends Model
 {
-
-    public static $rules = array(
-        'firstname' => 'required',
-        'lastname' => 'required',
-    );
-
     protected $table = 'invoice_rule';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCategoryImage extends Model
 {
-
-    public static $rules = array(
-        'file'      => 'required|',
-        'extension' => 'required',
-        'size'      => 'required',
-    );
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_category_image';
 
     protected $guarded =  array('file');

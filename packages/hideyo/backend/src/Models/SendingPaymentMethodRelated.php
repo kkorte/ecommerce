@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class SendingPaymentMethodRelated extends Model
 {
-
-    public static $rules = array(
-
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'sending_payment_method_related';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

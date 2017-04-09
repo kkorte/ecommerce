@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductAttributeCombination extends Model
 {
-
-    public static $rules = array(
-        'product_id' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_attribute_combination';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtraFieldRelatedProductCategory extends Model
 {
-
-    public static $rules = array(
-        'extra_field_id' => 'required',
-        'product_category_id' => 'required',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'extra_field_related_product_category';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
@@ -20,17 +19,6 @@ class ExtraFieldRelatedProductCategory extends Model
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
-    }
-
-    public static function boot()
-    {
-        static::saving(function ($model) {
-            foreach ($model->toArray() as $key => $value) {
-                    $model->{$key} = empty($value) ? null : $value;
-            }
-
-            return true;
-        });
     }
 
     public function extraField()

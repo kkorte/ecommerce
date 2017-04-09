@@ -11,10 +11,11 @@ class Shop extends Model
 
     use Sluggable;
 
-    public static $rules = array(
-        'title' => 'required'
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'shop';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

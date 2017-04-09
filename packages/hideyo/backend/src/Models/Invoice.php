@@ -7,12 +7,11 @@ use Carbon\Carbon;
 
 class Invoice extends Model
 {
-
-    public static $rules = array(
-        'client_id' => 'required',
-        'order_id' => 'required|unique'
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'invoice';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCategoryHighlightProduct extends Model
 {
-
-
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_category_highlight_product';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.

@@ -12,12 +12,12 @@ class ProductCategory extends Node
 {
     use Sluggable;
 
-    public static $rules = array(
-        'title' => 'required|between:4,65|unique_with:product_category, shop_id',
-    );
-
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */    
     protected $table = 'product_category';
-
 
     protected $scoped = array('shop_id');
 
