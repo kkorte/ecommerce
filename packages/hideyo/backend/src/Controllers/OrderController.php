@@ -66,7 +66,7 @@ class OrderController extends Controller
 
                 $order = $this->order->getModel()->select(
                     [
-                    \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                    
                     'order.id',
                     'order.created_at',
                     'order.generated_custom_order_id',
@@ -183,7 +183,7 @@ class OrderController extends Controller
                     ->select(
                     [
 
-                    \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                    
                     'order.id',
                     'order.created_at',
                     'order.generated_custom_order_id',

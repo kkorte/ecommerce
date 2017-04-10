@@ -33,7 +33,7 @@ class ProductRelatedProductController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->productRelatedProduct->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','related_product_id', 'product_id'])
+            ->select(['id','related_product_id', 'product_id'])
             ->where('product_id', '=', $productId);
             
             $datatables = \Datatables::of($query)

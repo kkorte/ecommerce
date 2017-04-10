@@ -42,7 +42,7 @@ class ProductAmountSeriesController extends Controller
 
             $query = $this->productAmountSeries->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'series_start', 'series_value', 'active',
                 'series_max']
             )->where('product_id', '=', $productId);

@@ -37,7 +37,7 @@ class CouponController extends Controller
         if ($this->request->wantsJson()) {
             $query = $this->coupon->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 $this->coupon->getGroupModel()->getTable().'.title as coupontitle']
             )->where($this->coupon->getModel()->getTable().'.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)
 

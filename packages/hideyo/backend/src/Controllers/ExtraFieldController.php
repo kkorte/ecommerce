@@ -31,7 +31,7 @@ class ExtraFieldController extends Controller
         if (Request::wantsJson()) {
 
             $query = $this->extraField->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id', 'all_products','title'])
+            ->select(['id', 'all_products','title'])
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)

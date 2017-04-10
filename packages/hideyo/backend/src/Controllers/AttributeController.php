@@ -36,7 +36,7 @@ class AttributeController extends Controller
         if ($request->wantsJson()) {
 
             $query = $this->attribute->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','value'])
+            ->select(['id','value'])
             ->where('attribute_group_id', '=', $attributeGroupId);
             
             $datatables = \Datatables::of($query)

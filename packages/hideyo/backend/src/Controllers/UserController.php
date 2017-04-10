@@ -42,7 +42,7 @@ class UserController extends Controller
 
             $query = $this->user->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'email', 'username']
             );

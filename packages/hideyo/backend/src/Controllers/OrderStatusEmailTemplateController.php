@@ -33,7 +33,7 @@ class OrderStatusEmailTemplateController extends Controller
 
             $query = $this->orderHtmlTemplate->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'title', 'subject']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             

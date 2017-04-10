@@ -30,7 +30,7 @@ class HtmlBlockController extends Controller
 
             $query = $this->htmlBlock->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'html_block.id', 'html_block.active',
                 'html_block.title', 'html_block.image_file_name', 'html_block.position']
             )->where('html_block.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);

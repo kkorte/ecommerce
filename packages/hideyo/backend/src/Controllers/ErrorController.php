@@ -22,7 +22,7 @@ class ErrorController extends Controller
 
             $query = $this->error->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'class', 'file' , 'status_code', 'line', 'message', 'url', 'method']
             );

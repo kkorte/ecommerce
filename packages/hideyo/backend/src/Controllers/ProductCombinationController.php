@@ -45,7 +45,7 @@ class ProductCombinationController extends Controller
 
             $query = $this->productCombination->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'tax_rate_id', 'amount', 'price', 'product_id', 'reference_code',
                 'default_on']
             )->where('product_id', '=', $productId);

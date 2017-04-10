@@ -34,7 +34,7 @@ class SendingMethodController extends Controller
     {
         if ($this->request->wantsJson()) {
             $query = $this->sendingMethod->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','title'])
+            ->select(['id','title'])
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {

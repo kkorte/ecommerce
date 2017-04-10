@@ -21,7 +21,7 @@ class GeneralSettingController extends Controller
 
             $query = $this->generalSetting->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'name', 'value']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);

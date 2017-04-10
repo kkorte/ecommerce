@@ -28,7 +28,7 @@ class NewsGroupController extends Controller
 
             $query = $this->news->getGroupModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'title']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);

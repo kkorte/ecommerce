@@ -32,7 +32,7 @@ class ContentController extends Controller
 
             $content = $this->content->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 $this->content->getModel()->getTable().'.id',
                 $this->content->getModel()->getTable().'.title', $this->content->getModel()->getTable().'.content_group_id', $this->content->getGroupModel()->getTable().'.title as contenttitle']
             )->where($this->content->getModel()->getTable().'.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)

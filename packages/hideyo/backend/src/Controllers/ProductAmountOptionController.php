@@ -44,7 +44,7 @@ class ProductAmountOptionController extends Controller
 
             $query = $this->productAmountOption->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'amount',
                 'default_on']
             )->where('product_id', '=', $productId);

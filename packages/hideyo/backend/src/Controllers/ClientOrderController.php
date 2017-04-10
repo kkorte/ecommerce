@@ -33,7 +33,7 @@ class ClientOrderController extends Controller
 
             $order = $this->order->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'created_at', 'generated_custom_order_id', 'order_status_id', 'client_id', 'delivery_order_address_id', 'bill_order_address_id',
                 'price_with_tax']
             )->with(array('orderStatus', 'orderPaymentMethod', 'orderSendingMethod', 'products', 'client', 'orderBillAddress', 'orderDeliveryAddress'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('client_id', '=', $clientId);
@@ -100,7 +100,7 @@ class ClientOrderController extends Controller
 
             $order = Order::select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'order_status_id',
                 'price_with_tax']
             )->with(array('orderStatus'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('client_id', '=', $clientId);

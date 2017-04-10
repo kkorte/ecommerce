@@ -37,7 +37,7 @@ class InventoryController extends Controller
 
            $product = $this->inventory->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'product.id', 'product.shop_id', 'amount', 'price',
                 'product.active', 'product_category_id',
                 'product.title', 'product_category.title as categorytitle', 'product.meta_title', 'product.meta_description']

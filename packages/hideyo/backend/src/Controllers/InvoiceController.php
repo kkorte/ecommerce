@@ -36,7 +36,7 @@ class InvoiceController extends Controller
 
             $invoice = $this->invoice->getModel->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'generated_custom_invoice_id', 'order_id',
                 'price_with_tax']
             )->with(array('Order'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);

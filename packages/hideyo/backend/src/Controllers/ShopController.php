@@ -29,7 +29,7 @@ class ShopController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->shop->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'id', 'title', 'logo_file_name']);
+            ->select(['id', 'title', 'logo_file_name']);
 
             $datatables = Datatables::of($query)
 

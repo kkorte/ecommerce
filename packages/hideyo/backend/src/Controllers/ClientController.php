@@ -40,7 +40,7 @@ class ClientController extends Controller
             $shop  = Auth::guard('hideyobackend')->user()->shop();
             $clients = $this->client->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'confirmed', 'active',
                 'email', 'last_login']
             )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);

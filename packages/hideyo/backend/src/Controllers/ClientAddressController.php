@@ -35,7 +35,7 @@ class ClientAddressController extends Controller
 
             $addresses = $this->clientAddress->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'firstname',
                 'street',

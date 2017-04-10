@@ -54,7 +54,7 @@ class ProductController extends Controller
 
             $product = $this->product->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 config()->get('hideyo.db_prefix').'product.*', 
                 'brand.title as brandtitle', 
                 'product_category.title as categorytitle']
@@ -233,7 +233,7 @@ class ProductController extends Controller
 
             $product = $this->product->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'product.id', 'product.rank', 'product.brand_id', 'product.reference_code', 'product.shop_id', 'product.tax_rate_id', 'product.amount', 'product.price',
                 'product.active', 'product.brand_id', 'brand.title as brandtitle', 'product.product_category_id', 'product.discount_value',
                 'product.title', 'product_category.title as categorytitle', 'product.meta_title', 'product.meta_description']

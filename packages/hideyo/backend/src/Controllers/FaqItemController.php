@@ -30,7 +30,7 @@ class FaqItemController extends Controller
 
             $query = $this->faq->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'faq_item.id', 'faq_item.faq_item_group_id',
                 'faq_item.question', 'faq_item.answer', 'faq_item_group.title as grouptitle']
             )

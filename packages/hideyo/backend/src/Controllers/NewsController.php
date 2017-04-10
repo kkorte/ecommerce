@@ -31,7 +31,7 @@ class NewsController extends Controller
 
             $query = $this->news->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 $this->news->getModel()->getTable().'.id',
                 $this->news->getModel()->getTable().'.title',
 

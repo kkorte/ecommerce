@@ -26,7 +26,7 @@ class ExtraFieldDefaultValueController extends Controller
 
             $query = $this->extraField->getValueModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'value']
             )->where('extra_field_id', '=', $extraFieldId);

@@ -31,7 +31,7 @@ class ProductTagGroupController extends Controller
         if (Request::wantsJson()) {
 
             $query = $this->productTagGroup->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','tag'])
+            ->select(['id','tag'])
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {

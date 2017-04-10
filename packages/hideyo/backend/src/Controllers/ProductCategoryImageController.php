@@ -29,7 +29,7 @@ class ProductCategoryImageController extends Controller
 
             $image = $this->productCategory->getImageModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'file', 'product_category_id']
             )->where('product_category_id', '=', $productCategoryId);

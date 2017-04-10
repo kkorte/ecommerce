@@ -21,7 +21,7 @@ class TaxRateController extends Controller
         if ($this->request->wantsJson()) {
             $query = $this->taxRate->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'rate',
                 'title']

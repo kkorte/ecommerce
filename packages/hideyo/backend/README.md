@@ -51,7 +51,7 @@ Model::unguard();
 
 ----
 
-go to /resources/vendor/hideyobackend in command line and fire:
+go to /resources/assets/vendor/hideyobackend in command line and fire:
 
 npm install
 bower update

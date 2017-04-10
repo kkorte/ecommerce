@@ -34,7 +34,7 @@ class OrderStatusController extends Controller
 
             $query = $this->orderStatus->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'color',
                 'title']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);

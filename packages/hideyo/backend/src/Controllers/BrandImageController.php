@@ -28,7 +28,7 @@ class BrandImageController extends Controller
         if ($this->request->wantsJson()) {
 
             $image = $this->brand->getModelImage()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id','file', 'brand_id'])
+            ->select(['id','file', 'brand_id'])
             ->where('brand_id', '=', $brandId);
             
             $datatables = \Datatables::of($image)

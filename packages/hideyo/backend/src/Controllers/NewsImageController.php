@@ -29,7 +29,7 @@ class NewsImageController extends Controller
 
             $image = $this->news->getImageModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'file', 'news_id']
             )->where('news_id', '=', $newsId);

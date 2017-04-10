@@ -32,7 +32,7 @@ class ProductCategoryController extends Controller
 
             $productCategory = $this->productCategory->getModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id', 'active',
                 'shop_id',
                 'parent_id', 'redirect_product_category_id',

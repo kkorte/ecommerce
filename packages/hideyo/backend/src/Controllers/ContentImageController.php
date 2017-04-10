@@ -29,7 +29,7 @@ class ContentImageController extends Controller
 
             $image = $this->content->getImageModel()->select(
                 [
-                \DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                
                 'id',
                 'file', 'content_id']
             )->where('content_id', '=', $contentId);

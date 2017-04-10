@@ -21,7 +21,7 @@ class BrandController extends Controller
     {
         if ($this->request->wantsJson()) {
             $brand = $this->brand->getModel()
-            ->select([\DB::raw('@rownum  := @rownum  + 1 AS rownum'),'id', 'rank','title'])
+            ->select(['id', 'rank','title'])
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($brand)->addColumn('action', function ($query) {
