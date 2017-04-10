@@ -30,7 +30,6 @@ class ShopController extends Controller
 
             $query = $this->shop->getModel()
             ->select(['id', 'title', 'logo_file_name']);
-
             $datatables = Datatables::of($query)
 
             ->addColumn('action', function ($query) {

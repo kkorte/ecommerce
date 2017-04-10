@@ -41,7 +41,7 @@
                     "processing": true,
                     "serverSide": true,
                     "stateSave": true,
-                   "ajax": "/admin/html-block",
+               "ajax": "{{ URL::route('hideyo.html-block.index') }}",
 
                  columns: [
                         {data: 'active', name: 'active'},

@@ -53,9 +53,7 @@ class ProductController extends Controller
         if ($this->request->wantsJson()) {
 
             $product = $this->product->getModel()->select(
-                [
-                
-                config()->get('hideyo.db_prefix').'product.*', 
+                [config()->get('hideyo.db_prefix').'product.*', 
                 'brand.title as brandtitle', 
                 'product_category.title as categorytitle']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))

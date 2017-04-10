@@ -44,15 +44,9 @@ class ProductCombinationController extends Controller
 
 
             $query = $this->productCombination->getModel()->select(
-                [
-                
-                'id', 'tax_rate_id', 'amount', 'price', 'product_id', 'reference_code',
+                ['id', 'tax_rate_id', 'amount', 'price', 'product_id', 'reference_code',
                 'default_on']
             )->where('product_id', '=', $productId);
-           
-
-
-
 
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($productId) {
                 $delete = \Form::deleteajax('/admin/product/'.$productId.'/product-combination/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));

@@ -29,11 +29,9 @@ class HtmlBlockController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->htmlBlock->getModel()->select(
-                [
-                
-                'html_block.id', 'html_block.active',
-                'html_block.title', 'html_block.image_file_name', 'html_block.position']
-            )->where('html_block.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+                ['id', 'active',
+                'title', 'image_file_name', 'position']
+            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)
 
@@ -50,11 +48,11 @@ class HtmlBlockController extends Controller
                 }
             })
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/html-block/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $delete = \Form::deleteajax(url()->route('hideyo.html-block.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                 
                 $copy = '<a href="/admin/html-block/'.$query->id.'/copy" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
 
-                $link = '<a href="/admin/html-block/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> '.$copy.' '.$delete;
+                $link = '<a href="'.url()->route('hideyo.html-block.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> '.$copy.' '.$delete;
             
                 return $link;
             });

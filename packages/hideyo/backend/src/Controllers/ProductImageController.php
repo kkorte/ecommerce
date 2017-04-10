@@ -29,16 +29,11 @@ class ProductImageController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->product->getImageModel()->select(
-                [
-                
-                'id',
-                'file', 'rank', 'product_id']
+                ['id','file', 'rank', 'product_id']
             )->where('product_id', '=', $productId);
             
             $datatables = \Datatables::of($query)
             ->addColumn('thumb', function ($query) use ($productId) {
-
-
                 return '<img src="/files/product/100x100/'.$query->product_id.'/'.$query->file.'"  />';
             })
 

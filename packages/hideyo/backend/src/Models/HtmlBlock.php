@@ -3,12 +3,11 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class HtmlBlock extends Model implements SluggableInterface
+class HtmlBlock extends Model
 {
-    use SluggableTrait;
+    use Sluggable;
 
     /**
      * The database table used by the model.
@@ -17,14 +16,18 @@ class HtmlBlock extends Model implements SluggableInterface
      */
     protected $table = 'html_block';
 
-    protected $sluggable = array(
-        'build_from'        => 'title',
-        'save_to'           => 'slug',
-        'on_update'         => true,
-    );
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'active', 'title', 'short_title', 'button_title', 'position', 'url', 'content', 'template', 'thumbnail_height', 'thumbnail_width', 'image_file_name', 'image_file_path', 'image_file_extension', 'image_file_size', 'shop_id'];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function __construct(array $attributes = array())
     {

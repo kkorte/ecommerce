@@ -33,10 +33,7 @@ class OrderStatusController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->orderStatus->getModel()->select(
-                [
-                
-                'id', 'color',
-                'title']
+                ['id', 'color','title']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)

@@ -65,9 +65,7 @@ class OrderController extends Controller
             if (Request::wantsJson()) {
 
                 $order = $this->order->getModel()->select(
-                    [
-                    
-                    'order.id',
+                    ['order.id',
                     'order.created_at',
                     'order.generated_custom_order_id',
                     'order.order_status_id',

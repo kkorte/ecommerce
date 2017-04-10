@@ -28,10 +28,7 @@ class ProductCategoryImageController extends Controller
         if ($request->wantsJson()) {
 
             $image = $this->productCategory->getImageModel()->select(
-                [
-                
-                'id',
-                'file', 'product_category_id']
+                ['id','file', 'product_category_id']
             )->where('product_category_id', '=', $productCategoryId);
             
             $datatables = \Datatables::of($image)

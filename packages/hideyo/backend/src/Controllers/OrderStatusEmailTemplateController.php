@@ -32,9 +32,7 @@ class OrderStatusEmailTemplateController extends Controller
         if ($this->request->wantsJson()) {
 
             $query = $this->orderHtmlTemplate->getModel()->select(
-                [
-                
-                'id', 'title', 'subject']
+                ['id', 'title', 'subject']
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)

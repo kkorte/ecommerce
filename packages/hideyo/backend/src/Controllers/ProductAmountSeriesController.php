@@ -41,16 +41,10 @@ class ProductAmountSeriesController extends Controller
 
 
             $query = $this->productAmountSeries->getModel()->select(
-                [
-                
-                'id', 'series_start', 'series_value', 'active',
-                'series_max']
+                ['id', 'series_start', 'series_value', 'active','series_max']
             )->where('product_id', '=', $productId);
             
-
-
             $datatables = \Datatables::of($query)
-
 
             ->addColumn('active', function ($query) {
                 if ($query->active) {

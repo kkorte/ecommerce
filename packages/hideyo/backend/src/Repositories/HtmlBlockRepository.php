@@ -5,7 +5,7 @@ use Hideyo\Backend\Models\HtmlBlock;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use File;
-use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Backend\Repositories\ShopRepositoryInterface;
 use Image;
 
 class HtmlBlockRepository implements HtmlBlockRepositoryInterface

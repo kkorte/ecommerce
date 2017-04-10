@@ -39,7 +39,7 @@
                     "processing": true,
                     "serverSide": true,
                     "stateSave": true,
-                    "ajax": "/admin/faq",
+               "ajax": "{{ URL::route('hideyo.faq.index') }}",
 
                  columns: [
                         {data: 'question', name: 'question'},    

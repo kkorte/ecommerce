@@ -3,12 +3,11 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class FaqItemGroup extends Model implements SluggableInterface
+class FaqItemGroup extends Model
 {
-    use SluggableTrait;
+    use Sluggable;
 
     /**
      * The database table used by the model.
@@ -19,6 +18,15 @@ class FaqItemGroup extends Model implements SluggableInterface
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
     protected $fillable = ['id', 'title', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id'];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function __construct(array $attributes = array())
     {
