@@ -290,7 +290,6 @@ class BackendServiceProvider extends ServiceProvider
     protected function registerRequiredProviders()
     {
         $this->app->register(SluggableServiceProvider::class);
-        $this->app->register(BrowserDetectService::class);
         $this->app->register(HtmlServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(DatatablesServiceProvider::class);
