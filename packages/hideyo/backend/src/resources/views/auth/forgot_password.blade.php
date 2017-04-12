@@ -33,7 +33,7 @@
         <div class="alert">{{{ Session::get('notice') }}}</div>
     @endif
     <form method="POST" action="{{ URL::to('/security/forgot_password') }}" accept-charset="UTF-8">
-    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
 

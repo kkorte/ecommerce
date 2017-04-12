@@ -70,10 +70,8 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = $this->role->getModel()->lists('name', 'id');
-        $languages = $this->language->getModel()->lists('language', 'id');
-        $shops = $this->shop->selectAll()->lists('title', 'id');
-        return view('hideyo_backend::user.create', array('roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+        $shops = $this->shop->selectAll()->pluck('title', 'id');
+        return view('hideyo_backend::user.create', array('shops' => $shops));
     }
 
     public function selectNumber($id)
@@ -115,9 +113,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $roles = $this->role->getModel()->lists('name', 'id');
-        $languages = $this->language->getModel()->lists('language', 'id');
-        $shops = $this->shop->selectAll()->lists('title', 'id');
+        $roles = $this->role->getModel()->pluck('name', 'id');
+        $languages = $this->language->getModel()->pluck('language', 'id');
+        $shops = $this->shop->selectAll()->pluck('title', 'id');
         return view('hideyo_backend::user.edit')->with(array('user' => $this->user->find($id), 'roles' => $roles, 'languages' => $languages, 'shops' => $shops));
     }
 
@@ -127,8 +125,8 @@ class UserController extends Controller
             $id = Auth::id();
         }
 
-        $shops = $this->shop->selectAll()->lists('title', 'id');
-        $languages = $this->language->getModel()->lists('language', 'id');
+        $shops = $this->shop->selectAll()->pluck('title', 'id');
+        $languages = $this->language->getModel()->pluck('language', 'id');
         return view('hideyo_backend::user.profile')->with(array('user' => User::find($id), 'languages' => $languages, 'shops' => $shops));
     }
 

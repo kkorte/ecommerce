@@ -20,7 +20,7 @@
         {!! Notification::showAll() !!}
 
     {!! Form::open(array('route' => array('hideyo.tax-rate.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
-        <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
  
 
             <div class="form-group">

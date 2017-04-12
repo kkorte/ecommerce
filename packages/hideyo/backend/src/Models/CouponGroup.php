@@ -3,9 +3,12 @@
 namespace Hideyo\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class CouponGroup extends Model
 {
+    use Sluggable;
+
     /**
      * The database table used by the model.
      *
@@ -20,6 +23,16 @@ class CouponGroup extends Model
     {
         $this->table = config()->get('hideyo.db_prefix').$this->table;
         parent::__construct($attributes);
+    }
+
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
     public function coupon()

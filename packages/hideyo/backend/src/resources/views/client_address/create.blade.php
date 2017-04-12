@@ -46,7 +46,7 @@
 
 
 					    {{ Form::open(array('route' => array('hideyo.client-address.store', $client->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) }}
-						    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                             <div class="form-group">
                                 {!! Form::label('company', 'Company', array('class' => 'col-sm-3 control-label')) !!}

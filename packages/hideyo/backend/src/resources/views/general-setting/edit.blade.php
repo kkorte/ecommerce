@@ -11,11 +11,11 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.general-setting.index') }}">Tax rates</a></li>  
+            <li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>  
             <li class="active">edit</li>
         </ol>
 
-        <h2>Tax rate <small>edit</small></h2>
+        <h2>General setting <small>edit</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 

@@ -62,7 +62,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
 
     public function selectAll()
     {
-        return $this->model->select('sending_payment_method_related.*')->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('payment_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('payment_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectAllActiveByShopId($shopId)

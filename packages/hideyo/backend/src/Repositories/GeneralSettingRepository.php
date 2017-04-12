@@ -18,12 +18,12 @@ class GeneralSettingRepository implements GeneralSettingRepositoryInterface
     public function rules($id = false)
     {
         $rules = array(
-            'name' => 'required|between:4,65|unique_with:general_setting, shop_id'
+            'name' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id'
 
         );
         
         if ($id) {
-            $rules['name'] =   'required|between:4,65|unique_with:general_setting, shop_id, '.$id.' = id';
+            $rules['name'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;

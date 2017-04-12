@@ -22,7 +22,7 @@
         {!! Notification::showAll() !!}
 
     {!! Form::open(array('route' => array('hideyo.extra-field-values.store', $extraField->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
  
         <div class="form-group">   
             {!! Form::label('value', 'Value', array('class' => 'col-sm-3 control-label')) !!}

@@ -13,6 +13,7 @@ use Hideyo\Backend\Repositories\CouponRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
+use Form;
 
 class CouponGroupController extends Controller
 {
@@ -33,9 +34,8 @@ class CouponGroupController extends Controller
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/coupon-group/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/coupon-group/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
-            
+                $delete = Form::deleteajax(url()->route('hideyo.coupon-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.coupon-group.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$delete;
                 return $link;
             });
 
@@ -52,7 +52,7 @@ class CouponGroupController extends Controller
 
     public function store()
     {
-        $result  = $this->coupon->create($this->request->all());
+        $result  = $this->coupon->createGroup($this->request->all());
 
         if (isset($result->id)) {
             Notification::success('The coupon was inserted.');

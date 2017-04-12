@@ -21,15 +21,15 @@ class CouponRepository implements CouponRepositoryInterface
     public function rules($id = false)
     {
         $rules = array(
-            'title' => 'required|between:4,65|unique_with:coupon, shop_id',
-            'code' => 'required|between:4,65|unique_with:coupon, shop_id',
+            'title' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id',
+            'code' => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id',
             'product_id' => 'integer',
             'product_category_id' => 'integer'
         );
         
         if ($id) {
-            $rules['title'] =   'required|between:4,65|unique_with:coupon, shop_id, '.$id.' = id';
-            $rules['code'] =   'required|between:4,65|unique_with:coupon, shop_id, '.$id.' = id';
+            $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
+            $rules['code'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
         }
 
         return $rules;
@@ -39,11 +39,11 @@ class CouponRepository implements CouponRepositoryInterface
     {
 
         $rules = array(
-            'title'                 => 'required|between:4,65|unique_with:coupon_group, shop_id'
+            'title'                 => 'required|between:4,65|unique_with:'.$this->modelGroup->getTable().', shop_id'
         );
         
         if ($id) {
-            $rules['title'] =   'required|between:4,65|unique_with:coupon_group, shop_id, '.$id.' = id';
+            $rules['title'] =   'required|between:4,65|unique_with:'.$this->modelGroup->getTable().', shop_id, '.$id.' = id';
         }
         
 

@@ -15,6 +15,7 @@ use Hideyo\Backend\Repositories\OrderStatusRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
+use Form;
 
 class PaymentMethodController extends Controller
 {
@@ -56,11 +57,11 @@ class PaymentMethodController extends Controller
                 }
             })
             ->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/payment-method/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/payment-method/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
-            
+                $delete = Form::deleteajax(url()->route('hideyo.payment-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.payment-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$delete;
                 return $link;
             });
+
 
             return $datatables->make(true);
         } else {
@@ -127,7 +128,7 @@ class PaymentMethodController extends Controller
 
         if ($result) {
             Notification::success('The payment method was deleted.');
-            return redirect()->route('admin.payment-method.index');
+            return redirect()->route('hideyo.payment-method.index');
         }
     }
 }
