@@ -15,6 +15,9 @@ use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
+use Form;
+use Datatables;
+use Auth;
 
 class SendingMethodController extends Controller
 {
@@ -33,14 +36,11 @@ class SendingMethodController extends Controller
     public function index()
     {
         if ($this->request->wantsJson()) {
-            $query = $this->sendingMethod->getModel()
-            ->select(['id','title'])
-            ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
-            
-            $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/sending-method/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/sending-method/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
-            
+            $query = $this->sendingMethod->getModel()->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
+
+            $datatables = Datatables::of($query)->addColumn('action', function ($query) {
+                $delete = Form::deleteajax(url()->route('hideyo.sending-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.sending-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$delete;
                 return $link;
             });
 
@@ -76,11 +76,13 @@ class SendingMethodController extends Controller
 
     public function edit($id)
     {    
-        return view('hideyo_backend::sending_method.edit')->with(array(
-            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
-            'sendingMethod' => $this->sendingMethod->find($id),
-            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id'),
-            ));
+        return view('hideyo_backend::sending_method.edit')->with(
+            array(
+                'taxRates'          => $this->taxRate->selectAll()->pluck('title', 'id'),
+                'sendingMethod'     => $this->sendingMethod->find($id),
+                'paymentMethods'    => $this->paymentMethod->selectAll()->pluck('title', 'id'),
+            )
+        );
     }
 
     public function update($id)

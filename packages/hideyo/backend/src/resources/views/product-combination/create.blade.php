@@ -31,7 +31,7 @@
                     <div class="col-md-12">
 
 					    {!! Form::open(array('route' => array('hideyo.product.{productId}.product-combination.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-						    <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 						    <input type="hidden" name="default_attribute_group_id" class="default_attribute_group_id" value="{!! key($attributeGroups->toArray()) !!}">
 					        <div class="form-group">
 					            {!! Form::label('attribute_group_id', 'Attribute group', array('class' => 'col-sm-3 control-label')) !!}

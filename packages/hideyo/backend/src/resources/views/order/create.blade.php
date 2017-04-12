@@ -41,7 +41,7 @@ $(document).ready(function(){
             <div class="col-md-4">
 
                 {!! Form::open(array('route' => array('hideyo.order.add-product'), 'files' => true, 'class' => 'form-inline validate')) !!}
-                <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+                <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                 <h3>Add products</h3>
                 <div class="form-group">
@@ -207,7 +207,7 @@ $(document).ready(function(){
 
 
         {!! Form::open(array('route' => array('order.add-client'), 'files' => true, 'class' => 'form-inline  validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
             <div class="form-group">

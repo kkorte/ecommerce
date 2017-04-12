@@ -23,7 +23,7 @@
         {!! Notification::showAll() !!}
         <hr/>
         {!! Form::model($productCategoryImage, array('method' => 'put', 'route' => array('hideyo.product-category.{productCategoryId}.images.update', $productCategory->id, $productCategoryImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
         <div class="form-group">

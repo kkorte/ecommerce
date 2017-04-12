@@ -32,7 +32,7 @@
 						{!! Form::model($productImage, array('method' => 'put', 'route' => array('hideyo.product.{productId}.images.update', $product->id, $productImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 
-					 <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+					 <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
                             <div class="form-group">

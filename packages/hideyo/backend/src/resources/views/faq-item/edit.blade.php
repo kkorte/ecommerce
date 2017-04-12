@@ -22,7 +22,7 @@
 
 
         {!! Form::model($faq, array('method' => 'put', 'route' => array('hideyo.faq.update', $faq->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
             <div class="form-group">

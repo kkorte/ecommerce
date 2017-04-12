@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::model($product, array('method' => 'put', 'route' => array('hideyo.product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">     
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('price', 1) !!}                      
             
             <div class="form-group">

@@ -103,7 +103,7 @@
                 {!! Form::label('payment_methods', 'Payment methods', array('class' => 'col-sm-3 control-label')) !!}
                 <div class="col-sm-5">             
                     @if( $sendingMethod->relatedPaymentMethods)
-                    {!! Form::select('payment_methods[]', $paymentMethods->toArray(), $sendingMethod->relatedPaymentMethods->lists('id')->toArray(), array('multiple' => 'multiple', 'class' => 'select2 form-control')) !!}
+                    {!! Form::select('payment_methods[]', $paymentMethods->toArray(), $sendingMethod->relatedPaymentMethods->pluck('id')->toArray(), array('multiple' => 'multiple', 'class' => 'select2 form-control')) !!}
 
                     @else
                     {!! Form::select('payment_methods[]', $paymentMethods->toArray(), null, array('multiple' => 'multiple', 'class' => 'select2 form-control')) !!}

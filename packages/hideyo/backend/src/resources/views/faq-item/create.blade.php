@@ -20,7 +20,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::open(array('route' => array('hideyo.faq.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
                 {!! Form::label('faq_item_group_id', 'Group', array('class' => 'col-sm-3 control-label')) !!}

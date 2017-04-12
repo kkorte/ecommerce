@@ -16,7 +16,19 @@ function generateCrud($path, $controllerName, $routeName = false) {
     ]]);
 }
 
-Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web','auth.hideyo.backend']], function () {
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function ()    {
+        // Uses Auth Middleware
+    });
+
+    Route::get('user/profile', function () {
+        // Uses Auth Middleware
+    });
+});
+
+
+Route::group(['middleware' => ['web','auth.hideyo.backend'], 'prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers'], function () {
  
     Route::get('/', array('as' => 'hideyo.index', 'uses' => 'DashboardController@index'));
    

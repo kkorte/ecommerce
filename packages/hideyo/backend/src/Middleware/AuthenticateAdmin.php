@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hideyo\Backend\Middleware;
 
 use Closure;

@@ -25,7 +25,7 @@
 
 
         {!! Form::model($htmlBlock, array('method' => 'put', 'route' => array('hideyo.html-block.update', $htmlBlock->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
                 {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}

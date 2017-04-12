@@ -22,7 +22,7 @@
 
 
         {!! Form::model($couponGroup, array('method' => 'put', 'route' => array('hideyo.coupon-group.update', $couponGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
                 {!! Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) !!}

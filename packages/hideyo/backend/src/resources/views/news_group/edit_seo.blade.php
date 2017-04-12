@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::model($newsGroup, array('method' => 'put', 'route' => array('hideyo.news-group.update', $newsGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">     
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
         <div class="form-group">

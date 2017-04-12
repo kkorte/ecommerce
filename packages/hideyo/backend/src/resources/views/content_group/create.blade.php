@@ -20,7 +20,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::open(array('route' => array('hideyo.content-group.store'), 'files' => true, 'class' => 'form-horizontal')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
                 {!! Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) !!}

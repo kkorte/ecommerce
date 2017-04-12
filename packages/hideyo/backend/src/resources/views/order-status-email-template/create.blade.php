@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-8">
     {!! Form::open(array('route' => array('hideyo.order-status-email-template.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
         <div class="form-group">   
             {!! Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) !!}

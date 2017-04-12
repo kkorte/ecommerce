@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::model($brand, array('method' => 'put', 'route' => array('hideyo.brand.update', $brand->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">     
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
         @include('hideyo_backend::_fields.seo-fields')

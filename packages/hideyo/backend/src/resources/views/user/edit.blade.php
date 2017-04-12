@@ -20,7 +20,7 @@
         {!! Notification::showAll() !!}
 
            {!! Form::model($user, array('method' => 'put', 'route' => array('hideyo.user.update', $user->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-                     <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+                     <input type="hidden" name="_token" value="{!! Session::token() !!}">
                      <div class="form-group">
                         {!! Form::label('username', 'Username', array('class' => 'col-sm-3 control-label')) !!}
 

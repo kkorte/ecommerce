@@ -23,7 +23,7 @@
         {!! Notification::showAll() !!}
         <hr/>
         {!! Form::model($newsImage, array('method' => 'put', 'route' => array('hideyo.news.{newsId}.images.update', $news->id, $newsImage->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
         <div class="form-group">

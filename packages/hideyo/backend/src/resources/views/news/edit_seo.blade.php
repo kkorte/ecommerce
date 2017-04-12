@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
         {!! Form::model($news, array('method' => 'put', 'route' => array('hideyo.news.update', $news->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">     
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
         @include('hideyo_backend::_fields.seo-fields')

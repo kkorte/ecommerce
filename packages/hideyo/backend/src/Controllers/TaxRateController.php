@@ -5,6 +5,9 @@ use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
+use Form;
+use Datatables;
+use Auth;
 
 class TaxRateController extends Controller
 {
@@ -19,18 +22,10 @@ class TaxRateController extends Controller
     public function index()
     {
         if ($this->request->wantsJson()) {
-            $query = $this->taxRate->getModel()->select(
-                [
-                
-                'id',
-                'rate',
-                'title']
-            )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
-            
-            $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/tax-rate/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/tax-rate/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
-            
+            $query = $this->taxRate->getModel()->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
+            $datatables = Datatables::of($query)->addColumn('action', function ($query) {
+                $delete = Form::deleteajax(url()->route('hideyo.tax-rate.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.tax-rate.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$delete;
                 return $link;
             });
 

@@ -24,7 +24,7 @@
 
         
         {!! Form::open(array('route' => array('hideyo.product.export'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
         
         @include('hideyo_backend::_fields.buttons', array('cancelRoute' => 'hideyo.product.index'))
         

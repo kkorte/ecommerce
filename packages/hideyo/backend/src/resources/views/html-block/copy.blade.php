@@ -20,7 +20,7 @@
 		{!! Notification::showAll() !!}
 
 		{!! Form::model($htmlBlock, array('route' => array('html.block.store.copy', $htmlBlock->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-			<input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+			<input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
 

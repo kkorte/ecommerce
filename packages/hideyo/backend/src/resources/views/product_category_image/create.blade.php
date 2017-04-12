@@ -27,7 +27,7 @@
 
                     {!! Notification::showAll() !!}
     			    {!! Form::open(array('route' => array('hideyo.product-category.{productCategoryId}.images.store', $productCategory->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-    				    <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+    				    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
     			        <div class="form-group">
     			            {!! Form::label('file', 'File', array('class' => 'col-sm-3 control-label')) !!}

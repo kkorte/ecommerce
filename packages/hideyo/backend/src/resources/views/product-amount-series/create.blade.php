@@ -31,7 +31,7 @@
                     <div class="col-md-12">
 
 					    {!! Form::open(array('route' => array('hideyo.product.{productId}.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-						    <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 				            <div class="form-group">
 				                {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}

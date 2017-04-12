@@ -21,9 +21,8 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
+        $this->loadRoutesFrom(__DIR__.'/Routes/backend.php');
 
-        $router->middleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
-    
         $router->middlewareGroup('hideyobackend', array(
                 \App\Http\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -34,6 +33,10 @@ class BackendServiceProvider extends ServiceProvider
                 \Krucas\Notification\Middleware\NotificationMiddleware::class
             )
         );
+
+        $router->aliasMiddleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
+    
+
 
         $this->publishes([
             __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
@@ -52,6 +55,9 @@ class BackendServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/Resources/translations', 'hideyo');
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
+
+
+
         
     }
 
@@ -65,7 +71,7 @@ class BackendServiceProvider extends ServiceProvider
 
        $this->registerRequiredProviders();
 
-        include __DIR__.'/Routes/backend.php';
+
 
         $this->app->bind(
             'Hideyo\Backend\Repositories\BrandRepositoryInterface',

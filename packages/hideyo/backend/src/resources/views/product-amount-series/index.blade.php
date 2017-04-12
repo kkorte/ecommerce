@@ -26,7 +26,7 @@
         <h3>Create Quick</h3>
 
                         {!! Form::open(array('route' => array('hideyo.product.{productId}.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-                            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+                            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                             <input type="hidden" name="active" value="1">
 

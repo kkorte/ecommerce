@@ -21,7 +21,7 @@
 
 
         {!! Form::model($news, array('method' => 'put', 'route' => array('hideyo.news.update', $news->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-            <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+            <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
                 {!! Form::label('news_group_id', 'Group', array('class' => 'col-sm-3 control-label')) !!}

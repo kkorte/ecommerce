@@ -24,7 +24,7 @@
 
         
         {!! Form::open(array('route' => array('hideyo.client.export'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
-        <input type="hidden" name="_token" value="{!! Session::getToken() !!}">
+        <input type="hidden" name="_token" value="{!! Session::token() !!}">
         
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
