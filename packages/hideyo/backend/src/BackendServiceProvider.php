@@ -34,6 +34,8 @@ class BackendServiceProvider extends ServiceProvider
             )
         );
 
+
+
         $router->aliasMiddleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
     
 
@@ -70,6 +72,9 @@ class BackendServiceProvider extends ServiceProvider
     {
 
        $this->registerRequiredProviders();
+
+
+
 
 
 
