@@ -22,7 +22,7 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {  
-        $this->loadRoutesFrom(__DIR__.'/Routes/backend.php');
+
 
         $router->middlewareGroup('hideyobackend', array(
                 \App\Http\Middleware\EncryptCookies::class,
@@ -34,7 +34,8 @@ class BackendServiceProvider extends ServiceProvider
                 \Krucas\Notification\Middleware\NotificationMiddleware::class
             )
         );
-
+        
+        $this->loadRoutesFrom(__DIR__.'/Routes/backend.php');
         $router->aliasMiddleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
     
         $this->publishes([

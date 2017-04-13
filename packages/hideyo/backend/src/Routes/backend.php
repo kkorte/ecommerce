@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::group(['middleware' => ['web','auth.hideyo.backend'], 'prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers'], function () {
+Route::group(['middleware' => ['hideyobackend','auth.hideyo.backend'], 'prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers'], function () {
  
     Route::get('/', array('as' => 'hideyo.index', 'uses' => 'DashboardController@index'));
    
@@ -233,7 +233,7 @@ Route::group(['middleware' => ['web','auth.hideyo.backend'], 'prefix' => config(
     Route::post('profile_language', array('as' => 'update.language', 'uses' => 'UserController@updateLanguage'));
 });
 
-Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['web']], function () {
+Route::group(['prefix' => config()->get('hideyo.route_prefix').'/admin', 'namespace' => 'Hideyo\Backend\Controllers', 'middleware' => ['hideyobackend']], function () {
     Route::get('/security/login', 'AuthController@getLogin');
     Route::post('/security/login', 'AuthController@postLogin');
     Route::get('/security/logout', array('as' => 'hideyo.security.logout', 'uses' => 'AuthController@getLogout'));
