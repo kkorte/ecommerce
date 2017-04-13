@@ -4,7 +4,7 @@
 /vendor
 /packages/hideyo/shop/vendor
 /resources/assets/vendor
-/resources/view/vendor
+/resources/views/vendor
 /.idea
 Homestead.json
 Homestead.yaml
