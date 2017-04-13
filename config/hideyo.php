@@ -13,4 +13,11 @@ return [
     'db_prefix' => 'hideyo_',
     'route_prefix' => 'hideyo',
 
+    'husers' => [
+        'driver' => 'eloquent',
+        'model' => Hideyo\Backend\Models\User::class,
+    ]
+    
+
+
 ];

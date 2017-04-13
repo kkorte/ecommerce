@@ -11,6 +11,7 @@ use Hideyo\Backend\Services\HtmlServiceProvider as CustomHtmlServiceProvider;
 use Krucas\Notification\NotificationServiceProvider;
 use Yajra\Datatables\DatatablesServiceProvider;
 use Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider;
+use Auth;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -21,7 +22,11 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {
+
+  
         $this->loadRoutesFrom(__DIR__.'/Routes/backend.php');
+
+
 
         $router->middlewareGroup('hideyobackend', array(
                 \App\Http\Middleware\EncryptCookies::class,
@@ -34,12 +39,8 @@ class BackendServiceProvider extends ServiceProvider
             )
         );
 
-
-
         $router->aliasMiddleware('auth.hideyo.backend', '\Hideyo\Backend\Middleware\AuthenticateAdmin::class');
     
-
-
         $this->publishes([
             __DIR__.'/config/hideyo.php' => config_path('hideyo.php'),
             __DIR__.'/../seeds' => database_path('seeds/'),            
@@ -56,12 +57,22 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/Resources/translations', 'hideyo');
 
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../migrations'); 
+  
 
 
-
-        
     }
+
+    
+    private function mergeConfig()
+    {  
+        $this->mergeConfigFrom(__DIR__ . '/Config/provider.php', 'auth.providers');
+
+        $this->mergeConfigFrom(__DIR__ . '/Config/guard.php', 'auth.guards');
+
+    }
+
+
 
     /**
      * Register the application services.
@@ -71,23 +82,20 @@ class BackendServiceProvider extends ServiceProvider
     public function register()
     {
 
-       $this->registerRequiredProviders();
+       $this->mergeConfig();
 
-
-
-
-
+        $this->registerRequiredProviders();
 
         $this->app->bind(
             'Hideyo\Backend\Repositories\BrandRepositoryInterface',
             'Hideyo\Backend\Repositories\BrandRepository'
         );
-        
+
         $this->app->bind(
             'Hideyo\Backend\Repositories\BlogRepositoryInterface',
             'Hideyo\Backend\Repositories\BlogRepository'
         );
-        
+
         $this->app->bind(
             'Hideyo\Backend\Repositories\RedirectRepositoryInterface',
             'Hideyo\Backend\Repositories\RedirectRepository'
@@ -294,6 +302,9 @@ class BackendServiceProvider extends ServiceProvider
         );
 
     }
+
+
+
 
     /**
      * Register 3rd party providers.
