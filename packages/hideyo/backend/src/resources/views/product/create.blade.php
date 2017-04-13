@@ -47,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('product_category_id', 'Category', array('class' => 'col-sm-3 control-label')) !!}
+              {!! Form::label('product_category_id', 'Category', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
   
                 {!! Form::select('product_category_id', $productCategories, null, array('class' => 'form-control')) !!}

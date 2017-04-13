@@ -17,7 +17,7 @@ Because its not a live package and i have no fix for the dependencies writen in 
 
 ## Installation
 
-First install laravel: https://laravel.com/docs/5.4/installation
+First install and have a database connection running up laravel: https://laravel.com/docs/5.4/installation
 
 Install via [composer](https://getcomposer.org/) - In the terminal:
 ```bash

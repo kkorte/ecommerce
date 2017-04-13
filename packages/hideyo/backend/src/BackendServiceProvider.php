@@ -21,12 +21,8 @@ class BackendServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot(\Illuminate\Routing\Router $router)
-    {
-
-  
+    {  
         $this->loadRoutesFrom(__DIR__.'/Routes/backend.php');
-
-
 
         $router->middlewareGroup('hideyobackend', array(
                 \App\Http\Middleware\EncryptCookies::class,
@@ -58,21 +54,14 @@ class BackendServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/Resources/translations', 'hideyo');
 
         $this->loadMigrationsFrom(__DIR__.'/../migrations'); 
-  
-
-
     }
-
     
     private function mergeConfig()
-    {  
+    {
+        //merge provider and guard, reducing installation guide  
         $this->mergeConfigFrom(__DIR__ . '/Config/provider.php', 'auth.providers');
-
         $this->mergeConfigFrom(__DIR__ . '/Config/guard.php', 'auth.guards');
-
     }
-
-
 
     /**
      * Register the application services.
@@ -302,9 +291,6 @@ class BackendServiceProvider extends ServiceProvider
         );
 
     }
-
-
-
 
     /**
      * Register 3rd party providers.

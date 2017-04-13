@@ -74,11 +74,11 @@ class CouponController extends Controller
     public function create()
     {
         return view('hideyo_backend::coupon.create')->with(array(
-            'products'          => $this->product->selectAll()->lists('title', 'id'),
-            'productCategories' => $this->productCategory->selectAll()->lists('title', 'id'),
-            'groups'            => $this->coupon->selectAllGroups()->lists('title', 'id')->toArray(),
-            'sendingMethods'    => $this->sendingMethod->selectAll()->lists('title', 'id'),
-            'paymentMethods'    => $this->paymentMethod->selectAll()->lists('title', 'id')
+            'products'          => $this->product->selectAll()->pluck('title', 'id'),
+            'productCategories' => $this->productCategory->selectAll()->pluck('title', 'id'),
+            'groups'            => $this->coupon->selectAllGroups()->pluck('title', 'id')->toArray(),
+            'sendingMethods'    => $this->sendingMethod->selectAll()->pluck('title', 'id'),
+            'paymentMethods'    => $this->paymentMethod->selectAll()->pluck('title', 'id')
         ));
     }
 
@@ -102,11 +102,11 @@ class CouponController extends Controller
         return view('hideyo_backend::coupon.edit')->with(
             array(
             'coupon' => $this->coupon->find($id),
-            'products' => $this->product->selectAll()->lists('title', 'id'),
-            'groups' => $this->coupon->selectAllGroups()->lists('title', 'id')->toArray(),
-            'productCategories' => $this->productCategory->selectAll()->lists('title', 'id'),
-            'sendingMethods' => $this->sendingMethod->selectAll()->lists('title', 'id'),
-            'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id'),
+            'products' => $this->product->selectAll()->pluck('title', 'id'),
+            'groups' => $this->coupon->selectAllGroups()->pluck('title', 'id')->toArray(),
+            'productCategories' => $this->productCategory->selectAll()->pluck('title', 'id'),
+            'sendingMethods' => $this->sendingMethod->selectAll()->pluck('title', 'id'),
+            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id'),
             )
         );
     }

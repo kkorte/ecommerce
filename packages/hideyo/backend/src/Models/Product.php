@@ -19,7 +19,7 @@ class Product extends Model
     protected $table = 'product';
 
     // Add the 'avatar' attachment to the fillable array so that it's mass-assignable on this model.
-    protected $fillable = ['active', 'discount_promotion', 'discount_type', 'discount_value', 'discount_start_date', 'discount_end_date', 'title', 'brand_id', 'product_category_id', 'reference_code', 'ean_code', 'mpn_code', 'short_description', 'description', 'ingredients', 'price', 'commercial_price', 'tax_rate_id', 'amount', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id', 'modified_by_user_id', 'weight', 'leading_atrribute_group_id', 'weight_title'];
+    protected $fillable = ['active', 'discount_promotion', 'discount_type', 'discount_value', 'discount_start_date', 'discount_end_date', 'title', 'brand_id', 'product_category_id', 'reference_code', 'ean_code', 'mpn_code', 'short_description', 'description', 'ingredients', 'price', 'commercial_price', 'tax_rate_id', 'amount', 'meta_title', 'meta_description', 'meta_keywords', 'shop_id', 'modified_by_user_id', 'weight', 'leading_atrribute_group_id'];
 
     public function sluggable()
     {
@@ -236,12 +236,12 @@ class Product extends Model
 
     public function subcategories()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\ProductCategory', 'product_sub_product_category');
+        return $this->belongsToMany('Hideyo\Backend\Models\ProductCategory', config()->get('hideyo.db_prefix').'product_sub_product_category');
     }
 
     public function relatedProducts()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_related_product', 'product_id', 'related_product_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_related_product', 'product_id', config()->get('hideyo.db_prefix').'related_product_id');
     }
 
     public function relatedProductsActive()

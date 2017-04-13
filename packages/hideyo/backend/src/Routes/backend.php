@@ -182,7 +182,7 @@ Route::group(['middleware' => ['web','auth.hideyo.backend'], 'prefix' => config(
     Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController');
     Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController');
 
-    Route::resource('product/{productId}/copy', 'ProductController@copy');
+    Route::get('product/{productId}/copy', array('as' => 'hideyo.product.copy', 'users' => 'ProductController@copy'));
 
     Route::resource('product/{productId}/product-combination', 'ProductCombinationController');
 

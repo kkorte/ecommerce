@@ -42,7 +42,7 @@ class ProductRepository implements ProductRepositoryInterface
             );
         } else {
             $rules = array(
-                'title'                 => 'required|between:4,65|unique_with:product, shop_id',
+                'title'                 => 'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id',
                 'amount'                => 'integer|required',
                 'product_category_id'   => 'required|integer',
                 'tax_rate_id'           => 'integer',
@@ -50,7 +50,7 @@ class ProductRepository implements ProductRepositoryInterface
             );
             
             if ($id) {
-                $rules['title'] =   'required|between:4,65|unique_with:product, shop_id, '.$id.' = id';
+                $rules['title'] =   'required|between:4,65|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
             }
         }
 
@@ -74,7 +74,7 @@ class ProductRepository implements ProductRepositoryInterface
             $attributes['discount_value'] = null;
         }
 
-        $this->model->sluggify();
+        
         $this->model->fill($attributes);
 
         $this->model->save();
@@ -102,7 +102,7 @@ class ProductRepository implements ProductRepositoryInterface
             $attributes['discount_value'] = null;
         }
 
-        $this->model->sluggify();
+        
         $this->model->fill($attributes);
         $this->model->save();
         if (isset($attributes['subcategories'])) {
@@ -281,7 +281,7 @@ class ProductRepository implements ProductRepositoryInterface
         
         if (count($attributes) > 0) {
             $this->model->fill($attributes);
-            $this->model->sluggify();
+
             if (isset($attributes['subcategories'])) {
                 $this->model->subcategories()->sync($attributes['subcategories']);
             } else {
@@ -840,7 +840,7 @@ class ProductRepository implements ProductRepositoryInterface
 
                 $this->model->fill($attributes);
 
-                $this->model->sluggify();
+    
 
                 $this->model->save();
             }
@@ -865,7 +865,7 @@ class ProductRepository implements ProductRepositoryInterface
 
                 $this->model->fill($attributes);
 
-                $this->model->sluggify();
+    
 
                 $this->model->save();
             }
@@ -890,7 +890,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             $this->model->fill($attributes);
 
-            $this->model->sluggify();
+
 
             if (!$this->model->active) {
                 $url = $this->model->shop->url.route('product.item', ['productId' => $this->model->id, 'productSlug' => $this->model->slug, 'categorySlug' => $this->model->productCategory->slug], null);
@@ -921,7 +921,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             $this->model->fill($attributes);
 
-            $this->model->sluggify();
+
 
             return $this->model->save();
         }
@@ -942,7 +942,7 @@ class ProductRepository implements ProductRepositoryInterface
 
             $this->model->fill($attributes);
 
-            $this->model->sluggify();
+
 
             return $this->model->save();
         }

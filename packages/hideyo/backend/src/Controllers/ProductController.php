@@ -137,6 +137,8 @@ class ProductController extends Controller
                 }
             })
             ->addColumn('price', function ($product) {
+
+                $result = "";
                 if ($product->price) {
                     if (isset($product->taxRate->rate)) {
                         $taxRate = $product->taxRate->rate;
@@ -208,10 +210,10 @@ class ProductController extends Controller
 
 
             ->addColumn('action', function ($product) {
-                $delete = \Form::deleteajax('/admin/product/'. $product->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $product->title);
-                $copy = '<a href="/admin/product/'.$product->id.'/copy" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
+                $delete = \Form::deleteajax(url()->route('hideyo.product.destroy', $product->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $product->title);
+                $copy = '<a href="'.url()->route('hideyo.product.copy', $product->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
 
-                $link = '<a href="/admin/product/'.$product->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$copy.' '.$delete;
+                $link = '<a href="'.url()->route('hideyo.product.edit', $product->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$copy.' '.$delete;
 
                 return $link;
             });
@@ -353,7 +355,7 @@ class ProductController extends Controller
             'product' => $product,
             'brands' => $this->brand->selectAll()->pluck('title', 'id')->toArray(),
             'productCategories' => $this->productCategory->selectAllProductPullDown()->pluck('title', 'id'),
-            'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id')
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id')
             )
         );
     }
@@ -462,7 +464,7 @@ class ProductController extends Controller
 
     public function editPrice($id)
     {
-        return view('hideyo_backend::product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAllOrder()->pluck('title', 'id')));
+        return view('hideyo_backend::product.edit_price')->with(array('product' => $this->product->find($id), 'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id')));
     }
 
     public function update($productId)

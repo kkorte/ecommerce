@@ -299,7 +299,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function selectAllProductPullDown()
     {
-        return $this->model->whereNotNull('parent_id')->whereNull('redirect_product_category_id')->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
+        return $this->model->whereNull('redirect_product_category_id')->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
     }
 
     public function ajaxSearchByTitle($query)
