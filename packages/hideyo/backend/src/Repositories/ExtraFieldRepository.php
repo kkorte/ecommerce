@@ -180,5 +180,22 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         return $this->modelValue;
     }
 
+    public function selectAllByAllProductsAndProductCategoryId($productCategoryId)
+    {
+        return $this->model->select(config()->get('hideyo.db_prefix').'extra_field.*')
+        ->leftJoin(config()->get('hideyo.db_prefix').'product_category_related_extra_field', config()->get('hideyo.db_prefix').'extra_field.id', '=', config()->get('hideyo.db_prefix').'product_category_related_extra_field.extra_field_id')
+        
+        ->where(function ($query) use ($productCategoryId) {
+
+            $query->where('all_products', '=', 1)
+            ->orWhereHas('categories', function ($query) use ($productCategoryId) {
+
+                $query->where('product_category_id', '=', $productCategoryId);
+            });
+        })
+
+        ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+    }
+
     
 }

@@ -15,7 +15,7 @@
 		  <li class="active">related</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.{productId}.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>related products</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "/admin/product/{!! $product->id !!}/related-product",
+            "ajax": "{{ URL::route('hideyo.product.related-product.index', $product->id) }}",
 
                  columns: [
                         {data: 'id', name: 'id'},

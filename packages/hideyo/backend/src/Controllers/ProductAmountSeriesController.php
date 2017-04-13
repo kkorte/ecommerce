@@ -63,7 +63,7 @@ class ProductAmountSeriesController extends Controller
             return $datatables->make(true);
 
         } else {
-            return view('hideyo_backend::product-amount-series.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-amount-series.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
         }
     }
 
@@ -80,7 +80,7 @@ class ProductAmountSeriesController extends Controller
                 }
             }
         } else {
-            return view('hideyo_backend::product-amount-series.create')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-amount-series.create')->with(array('taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
         }
     }
 
@@ -111,7 +111,7 @@ class ProductAmountSeriesController extends Controller
         $selectedAttributes = array();
         $attributes = array();
 
-        return view('hideyo_backend::product-amount-series.edit')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productAmountSeries' => $productAmountSeries, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::product-amount-series.edit')->with(array('taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productAmountSeries' => $productAmountSeries, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
     }
 
     public function update($productId, $id)

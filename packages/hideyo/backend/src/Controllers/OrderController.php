@@ -291,7 +291,7 @@ class OrderController extends Controller
 
     public function getPrint()
     {
-        return view('hideyo_backend::order.print')->with(array('orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::order.print')->with(array('orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')));
     }
     
     public function postDownloadPrint()
@@ -393,7 +393,7 @@ class OrderController extends Controller
     {
         $order = $this->order->find($id);
 
-        return view('hideyo_backend::order.show')->with(array('order' => $order, 'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::order.show')->with(array('order' => $order, 'orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')));
     }
 
     public function updateStatus($orderId)
@@ -516,7 +516,7 @@ class OrderController extends Controller
                 'paymentMethodsList' => $paymentMethodsList,
                 'totals' => $totals,
                 'clientAddresses' => $clientAddresses,
-                'orderStatuses' => $this->orderStatus->selectAll()->lists('title', 'id')
+                'orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')
                 )
         );
     }
@@ -716,7 +716,7 @@ class OrderController extends Controller
         if (isset($sendingMethod->id)) {
             $sendingMethodArray = $sendingMethod->toArray();
             $sendingMethodArray['price_details'] = $sendingMethod->getPriceDetails();
-            $sendingMethodArray['related_payment_methods_list'] = $sendingMethod->relatedPaymentMethods->lists('title', 'id');
+            $sendingMethodArray['related_payment_methods_list'] = $sendingMethod->relatedPaymentMethods->pluck('title', 'id');
         }
 
         $this->assembleOrder->updateSendingMethod($sendingMethodArray);

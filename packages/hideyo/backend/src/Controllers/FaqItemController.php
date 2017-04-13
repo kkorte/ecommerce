@@ -58,7 +58,7 @@ class FaqItemController extends Controller
 
     public function create()
     {
-        $groups = $this->faq->selectAllGroups()->lists('title', 'id')->toArray();
+        $groups = $this->faq->selectAllGroups()->pluck('title', 'id')->toArray();
         return view('hideyo_backend::faq-item.create')->with(array('groups' => $groups));
     }
 
@@ -81,7 +81,7 @@ class FaqItemController extends Controller
     public function edit($id)
     {
 
-        $groups = $this->faq->selectAllGroups()->lists('title', 'id')->toArray();
+        $groups = $this->faq->selectAllGroups()->pluck('title', 'id')->toArray();
         return view('hideyo_backend::faq-item.edit')->with(array('faq' => $this->faq->find($id), 'groups' => $groups));
     }
 

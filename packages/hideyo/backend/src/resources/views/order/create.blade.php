@@ -108,7 +108,7 @@ $(document).ready(function(){
                   
 
                             <td>
-                                {!! Form::select('sending_method_id', array('0' => '-- selecteer --') + $sendingMethodsList->lists('title', 'id'), $totals['sending_method_id'], array("data-url" => "/order/update-sending-method", "class" => "form-control custom-selectbox sending_method_id")) !!}
+                                {!! Form::select('sending_method_id', array('0' => '-- selecteer --') + $sendingMethodsList->pluck('title', 'id'), $totals['sending_method_id'], array("data-url" => "/order/update-sending-method", "class" => "form-control custom-selectbox sending_method_id")) !!}
                             </td>
 
                             <td>

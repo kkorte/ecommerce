@@ -83,28 +83,28 @@
         <div class="form-group">
             {!! Form::label('product_categories', 'Product categories', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
-                {!! Form::multiselect2('product_categories[]', $productCategories->toArray(), $coupon->productCategories->lists('id')->toArray()) !!}
+                {!! Form::multiselect2('product_categories[]', $productCategories->toArray(), $coupon->productCategories->pluck('id')->toArray()) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('products', 'Products', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
-                {!! Form::multiselect2('products[]', $products->toArray(), $coupon->products->lists('id')->toArray()) !!}
+                {!! Form::multiselect2('products[]', $products->toArray(), $coupon->products->pluck('id')->toArray()) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('sending_methods', 'Sending methods', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
-                {!! Form::multiselect2('sending_methods[]', $sendingMethods->toArray(), $coupon->sendingMethods->lists('id')->toArray()) !!}
+                {!! Form::multiselect2('sending_methods[]', $sendingMethods->toArray(), $coupon->sendingMethods->pluck('id')->toArray()) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('payment_methods', 'Payment methods', array('class' => 'col-sm-3 control-label')) !!}
             <div class="col-sm-5">
-                {!! Form::multiselect2('payment_methods[]', $paymentMethods->toArray(), $coupon->paymentMethods->lists('id')->toArray()) !!}
+                {!! Form::multiselect2('payment_methods[]', $paymentMethods->toArray(), $coupon->paymentMethods->pluck('id')->toArray()) !!}
             </div>
         </div>
 

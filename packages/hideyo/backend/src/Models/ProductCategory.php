@@ -63,7 +63,7 @@ class ProductCategory extends Node
         }
 
         // get a list of all matching slugs
-        $list = $query->lists($save_to, $this->getKeyName())->toArray();
+        $list = $query->pluck($save_to, $this->getKeyName())->toArray();
 
         // Laravel 5.0/5.1 check
         return $list instanceof Collection ? $list->all() : $list;

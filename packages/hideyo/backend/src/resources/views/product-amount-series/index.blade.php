@@ -16,7 +16,7 @@
             <li class="active">amount series</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.{productId}.product-amount-series.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount series<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.amount-series.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount series<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>amount series</small></h2>
         <hr/>
@@ -25,7 +25,7 @@
 
         <h3>Create Quick</h3>
 
-                        {!! Form::open(array('route' => array('hideyo.product.{productId}.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+                        {!! Form::open(array('route' => array('hideyo.product.amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                             <input type="hidden" name="active" value="1">
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-5">
                                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                                    <a href="{!! URL::route('hideyo.product.{productId}.product-amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
+                                    <a href="{!! URL::route('hideyo.product.amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.product.{productId}.product-amount-series.index', $product->id) }}",
+                   "ajax": "{{ URL::route('hideyo.product.amount-series.index', $product->id) }}",
 
                  columns: [
                         {data: 'active', name: 'active'},

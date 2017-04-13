@@ -40,7 +40,7 @@ class RoleController extends BaseController
 
     public function create()
     {
-        $roles = DB::table('roles')->lists('name', 'id');
+        $roles = DB::table('roles')->pluck('name', 'id');
 
         return \View::make('role.create', array('roles' => $roles));
     }
@@ -62,7 +62,7 @@ class RoleController extends BaseController
 
     public function edit($id)
     {
-        $roles = DB::table('roles')->lists('name', 'id');
+        $roles = DB::table('roles')->pluck('name', 'id');
         return \View::make('role.edit')->with(array('role' => Role::find($id), 'roles' => $roles));
     }
 

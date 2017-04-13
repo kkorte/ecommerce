@@ -2,8 +2,8 @@
 namespace Hideyo\Backend\Repositories;
  
 use Hideyo\Backend\Models\ProductRelatedProduct;
-use Product;
-use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Backend\Models\Product;
+use Hideyo\Backend\Repositories\ProductRepositoryInterface;
  
 class ProductRelatedProductRepository implements ProductRelatedProductRepositoryInterface
 {

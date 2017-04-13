@@ -60,7 +60,7 @@ class ProductRelatedProductController extends Controller
     public function create($productId)
     {
         $product = $this->product->find($productId);
-        $products = $this->product->selectAll()->lists('title', 'id');
+        $products = $this->product->selectAll()->pluck('title', 'id');
 
         return view('hideyo_backend::product_related_product.create')->with(array('products' => $products, 'product' => $product));
     }
@@ -73,7 +73,7 @@ class ProductRelatedProductController extends Controller
 
     public function edit($id)
     {
-        return view('hideyo_backend::product_related_product.edit')->with(array('productRelatedProduct' => ProductImage::find($id), 'categories' => $this->productRelatedProduct->selectAll()->lists('title', 'id')));
+        return view('hideyo_backend::product_related_product.edit')->with(array('productRelatedProduct' => ProductImage::find($id), 'categories' => $this->productRelatedProduct->selectAll()->pluck('title', 'id')));
     }
 
     public function update($id)

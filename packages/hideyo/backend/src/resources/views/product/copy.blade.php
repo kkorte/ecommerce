@@ -56,7 +56,7 @@
             <div class="form-group">
                 {!! Form::label('subcategories', 'Subcategories', array('class' => 'col-sm-3 control-label')) !!}
                 <div class="col-sm-5">
-                    {!! Form::multiselect2('subcategories[]', $productCategories->toArray(), $product->subcategories->lists('id')->toArray()) !!}
+                    {!! Form::multiselect2('subcategories[]', $productCategories->toArray(), $product->subcategories->pluck('id')->toArray()) !!}
                 </div>
             </div>
 

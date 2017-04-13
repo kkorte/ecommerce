@@ -57,7 +57,7 @@ class ProductAmountOptionController extends Controller
 
 
         } else {
-            return view('hideyo_backend::product-amount-option.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-amount-option.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
         }
     }
 
@@ -74,7 +74,7 @@ class ProductAmountOptionController extends Controller
                 }
             }
         } else {
-            return view('hideyo_backend::product-amount-option.create')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+            return view('hideyo_backend::product-amount-option.create')->with(array('taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'), 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
         }
     }
 
@@ -106,7 +106,7 @@ class ProductAmountOptionController extends Controller
         $selectedAttributes = array();
         $attributes = array();
 
-          return view('hideyo_backend::product-amount-option.edit')->with(array('taxRates' => $this->taxRate->selectAll()->lists('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productAmountOption' => $productAmountOption, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->lists('title', 'id')));
+          return view('hideyo_backend::product-amount-option.edit')->with(array('taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'), 'selectedAttributes' => $selectedAttributes, 'attributes' => $attributes, 'productAmountOption' => $productAmountOption, 'product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
     }
 
     public function update($productId, $id)

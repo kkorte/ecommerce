@@ -58,7 +58,7 @@ class RedirectController extends Controller
 
     public function create()
     {
-        $shops = $this->shop->selectAll()->lists('title', 'id')->toArray();
+        $shops = $this->shop->selectAll()->pluck('title', 'id')->toArray();
         return view('hideyo_backend::redirect.create')->with(array('shops' => $shops));
     }
 
@@ -81,7 +81,7 @@ class RedirectController extends Controller
 
     public function edit($id)
     {
-                $shops = $this->shop->selectAll()->lists('title', 'id');
+                $shops = $this->shop->selectAll()->pluck('title', 'id');
         return view('hideyo_backend::redirect.edit')->with(array(
             'redirect' => $this->redirect->find($id),
             'shops' => $shops

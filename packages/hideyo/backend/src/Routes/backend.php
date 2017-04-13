@@ -178,19 +178,22 @@ Route::group(['middleware' => ['web','auth.hideyo.backend'], 'prefix' => config(
     Route::get('product/change-rank/{productId}/{rank}', array('as' => 'hideyo.product.change-rank', 'uses' => 'ProductController@changeRank'));
   
     Route::get('product/edit/{productId}/seo', array('as' => 'hideyo.product.edit_seo', 'uses' => 'ProductController@editSeo'));
-    Route::resource('product/{productId}/images', 'ProductImageController');
-    Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController');
-    Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController');
+    generateCrud('product/{productId}/images', 'ProductImageController', 'product.image');
+    generateCrud('product/{productId}/product-amount-option', 'ProductAmountOptionController', 'product.amount-option');
+    generateCrud('product/{productId}/product-amount-series', 'ProductAmountSeriesController', 'product.amount-series');
 
     Route::get('product/{productId}/copy', array('as' => 'hideyo.product.copy', 'users' => 'ProductController@copy'));
 
-    Route::resource('product/{productId}/product-combination', 'ProductCombinationController');
+    generateCrud('product/{productId}/product-combination', 'ProductCombinationController', 'product.combination');
 
     Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount}', array('as' => 'hideyo.product.change-amount', 'uses' => 'ProductCombinationController@changeAmount'));
  
     Route::post('product/{productId}/copy', array('as' => 'product.store-copy', 'uses' => 'ProductController@storeCopy'));
-    Route::resource('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController');
-    Route::resource('product/{productId}/related-product', 'ProductRelatedProductController');
+    
+    generateCrud('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController', 'product.extra-field-value');
+
+    generateCrud('product/{productId}/related-product', 'ProductRelatedProductController', 'product.related-product');
+
     Route::get('product-category/refactor-images', array('as' => 'product-category.refactor-images', 'uses' => 'ProductCategoryController@refactorAllImages'));
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));
 

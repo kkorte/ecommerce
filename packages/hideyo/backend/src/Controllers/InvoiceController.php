@@ -83,8 +83,8 @@ class InvoiceController extends Controller
     public function create()
     {
         return view('hideyo_backend::invoice.create')->with(array(
-            'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
-            'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id')
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
+            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id')
         ));
     }
 
@@ -104,9 +104,9 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         return view('hideyo_backend::invoice.edit')->with(array(
-            'taxRates' => $this->taxRate->selectAll()->lists('title', 'id'),
+            'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
             'invoice' => $this->invoice->find($id),
-            'paymentMethods' => $this->paymentMethod->selectAll()->lists('title', 'id'),
+            'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id'),
         ));
     }
 

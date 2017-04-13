@@ -16,7 +16,7 @@
             <li class="active">combinations</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.{productId}.product-combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('hideyo.product.combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>combinations</small></h2>
         <hr/>
@@ -64,7 +64,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.product.{productId}.product-combination.index', $product->id) }}",
+                   "ajax": "{{ URL::route('hideyo.product.combination.index', $product->id) }}",
 
                  columns: [
 

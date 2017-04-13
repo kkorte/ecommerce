@@ -92,7 +92,7 @@ class OrderStatusController extends Controller
             array(
             'orderStatus' => $orderStatus,
             'populatedData' => $populatedData,
-            'templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('hideyobackend')->user()->selected_shop_id)->lists('title', 'id')
+            'templates' => $this->orderStatusEmailTemplate->selectAllByShopId(Auth::guard('hideyobackend')->user()->selected_shop_id)->pluck('title', 'id')
             )
         );
     }

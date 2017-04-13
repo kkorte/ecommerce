@@ -36,7 +36,7 @@
                 @else
                 <li>
                     @endif
-                    <a href="{{ URL::route('hideyo.product.{productId}.product-extra-field-value.index', $product->id) }}">
+                    <a href="{{ URL::route('hideyo.product.extra-field-value.index', $product->id) }}">
                         <span class="visible-xs"><i class="entypo-gauge"></i></span>
                         <span class="hidden-xs">Extra fields</span>
                     </a>
@@ -47,7 +47,7 @@
                     @else
                     <li>
                         @endif
-                        <a href="{{ URL::route('hideyo.product.{productId}.product-combination.index', $product->id) }}">
+                        <a href="{{ URL::route('hideyo.product.combination.index', $product->id) }}">
                             <span class="visible-xs"><i class="entypo-gauge"></i></span>
                             <span class="hidden-xs">Combinations</span>
                         </a>
@@ -59,7 +59,7 @@
                         @else
                         <li>
                             @endif
-                            <a href="{{ URL::route('hideyo.product.{productId}.product-amount-option.index', $product->id) }}">
+                            <a href="{{ URL::route('hideyo.product.amount-option.index', $product->id) }}">
                                 <span class="visible-xs"><i class="entypo-gauge"></i></span>
                                 <span class="hidden-xs">Amount options</span>
                             </a>
@@ -71,7 +71,7 @@
                         @else
                         <li>
                             @endif
-                            <a href="{{ URL::route('hideyo.product.{productId}.product-amount-series.index', $product->id) }}">
+                            <a href="{{ URL::route('hideyo.product.amount-series.index', $product->id) }}">
                                 <span class="visible-xs"><i class="entypo-gauge"></i></span>
                                 <span class="hidden-xs">Amount series</span>
                             </a>
@@ -96,7 +96,7 @@
                                 @else
                                 <li>
                                     @endif
-                                    <a href="{{ URL::route('hideyo.product.{productId}.images.index', $product->id) }}">
+                                    <a href="{{ URL::route('hideyo.product.image.index', $product->id) }}">
                                         <span class="visible-xs"><i class="entypo-user"></i></span>
                                         <span class="hidden-xs">Images</span>
                                     </a>
@@ -107,7 +107,7 @@
                                     @else
                                     <li>
                                         @endif
-                                        <a href="{{ URL::route('hideyo.product.{productId}.related-product.index', $product->id) }}">
+                                        <a href="{{ URL::route('hideyo.product.related-product.index', $product->id) }}">
                                             <span class="visible-xs"><i class="entypo-user"></i></span>
                                             <span class="hidden-xs">Related products</span>
                                         </a>
