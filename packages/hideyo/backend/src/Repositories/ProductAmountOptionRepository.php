@@ -16,6 +16,11 @@ class ProductAmountOptionRepository implements ProductAmountOptionRepositoryInte
         $this->product = $product;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(

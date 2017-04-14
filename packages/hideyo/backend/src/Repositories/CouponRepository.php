@@ -18,6 +18,11 @@ class CouponRepository implements CouponRepositoryInterface
         $this->modelGroup = $couponGroup;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(

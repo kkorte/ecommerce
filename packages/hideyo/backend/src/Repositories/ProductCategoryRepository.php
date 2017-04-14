@@ -16,6 +16,11 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     protected $model;
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {

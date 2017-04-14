@@ -15,6 +15,11 @@ class PaymentMethodRepository implements PaymentMethodRepositoryInterface
         $this->model = $model;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(

@@ -16,6 +16,11 @@ class ProductAmountSeriesRepository implements ProductAmountSeriesRepositoryInte
         $this->product = $product;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(
@@ -24,11 +29,10 @@ class ProductAmountSeriesRepository implements ProductAmountSeriesRepositoryInte
 
         );
         
-
         return $rules;
     }
 
-  
+
     public function create(array $attributes, $productId)
     {
         $product = $this->product->find($productId);

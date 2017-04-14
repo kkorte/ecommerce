@@ -36,7 +36,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         $this->sendingMethod = $sendingMethod;
     }
 
-
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(

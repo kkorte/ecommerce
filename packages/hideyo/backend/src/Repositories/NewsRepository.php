@@ -29,6 +29,11 @@ class NewsRepository implements NewsRepositoryInterface
         $this->modelGroup = $modelGroup;
     }
   
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {

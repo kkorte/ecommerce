@@ -14,9 +14,13 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
         $this->model = $model;
     }
   
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
-
         $rules = array(
             'title' => 'required|between:1,65|unique_with:'.$this->model->getTable().', shop_id'
         );
@@ -28,6 +32,11 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
         return $rules;
     }
 
+    /**
+     * Validate and fill the model with attributes and save in the database.
+     *
+     * @return model
+     */
     public function create(array $attributes)
     {
         $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;

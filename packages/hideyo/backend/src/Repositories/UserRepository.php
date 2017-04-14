@@ -16,21 +16,22 @@ class UserRepository implements UserRepositoryInterface
         $this->model = $model;
     }
 
-
-
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false, $attributes = false)
     {
-
         $rules = array(
-            'email'                 => 'required|between:4,65|unique_with:user',
-            'username'                 => 'required|between:4,65|unique_with:user'
+            'email'         => 'required|between:4,65|unique_with:user',
+            'username'      => 'required|between:4,65|unique_with:user'
         );
         
         if ($id) {
-            $rules['email'] =   'required|between:4,65|unique_with:user, '.$id.' = id';
-            $rules['username'] =   'required|between:4,65|unique_with:user, '.$id.' = id';
+            $rules['email']     =   'required|between:4,65|unique_with:user, '.$id.' = id';
+            $rules['username']  =   'required|between:4,65|unique_with:user, '.$id.' = id';
         }
-
 
         return $rules;
     }

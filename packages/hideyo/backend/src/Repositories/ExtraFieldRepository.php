@@ -19,6 +19,11 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
         $this->modelValue = $modelValue;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         $rules = array(

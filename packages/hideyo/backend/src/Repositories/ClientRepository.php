@@ -22,6 +22,11 @@ class ClientRepository implements ClientRepositoryInterface
         $this->clientAddress = $clientAddress;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false)
     {
         if ($id) {

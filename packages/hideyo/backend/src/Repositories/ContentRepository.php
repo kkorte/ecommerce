@@ -23,6 +23,11 @@ class ContentRepository implements ContentRepositoryInterface
         $this->shop = $shop;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {
@@ -42,6 +47,12 @@ class ContentRepository implements ContentRepositoryInterface
         return $rules;
     }
 
+
+    /**
+     * The validation rules for the modelGroup.
+     *
+     * @return array
+     */
     public function rulesGroup($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {

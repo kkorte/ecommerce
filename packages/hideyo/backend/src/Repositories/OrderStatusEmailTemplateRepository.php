@@ -13,6 +13,11 @@ class OrderStatusEmailTemplateRepository implements OrderStatusEmailTemplateRepo
         $this->model = $model;
     }
 
+    /**
+     * The validation rules for the model.
+     *
+     * @return array
+     */
     public function rules($id = false, $attributes = false)
     {
         $rules = array(
