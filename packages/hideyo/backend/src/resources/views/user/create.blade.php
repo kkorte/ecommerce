@@ -58,25 +58,13 @@
             </div>
 
             <div class="form-group">
-                {!! Form::label('role', 'Role', array('class' => 'col-sm-3 control-label')) !!}
-                <div class="col-sm-5">
-               {!! Form::select('role', $roles, null, array('class' => 'form-control')) !!}
-                </div>
-            </div>
-
-            <div class="form-group">
                 {!! Form::label('selected_shop_id', 'Selected shop', array('class' => 'col-sm-3 control-label')) !!}
                 <div class="col-sm-5">
                 {!! Form::select('selected_shop_id', $shops, null, array('class' => 'form-control')) !!}
                 </div>
             </div>
 
-            <div class="form-group">
-                {!! Form::label('language_id', 'Language', array('class' => 'col-sm-3 control-label')) !!}
-                <div class="col-sm-5">
-               {!! Form::select('language_id', $languages, null, array('class' => 'form-control')) !!}
-                </div>
-            </div>
+
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">

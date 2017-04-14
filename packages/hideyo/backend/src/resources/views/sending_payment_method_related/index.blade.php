@@ -38,7 +38,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "/admin/sending-payment-method-related",
+                 "ajax": "{{ URL::route('hideyo.sending-payment-method-related.index') }}",
 
                  columns: [          
                         {data: 'payment_method', name: 'payment_method', orderable: false, searchable: false},

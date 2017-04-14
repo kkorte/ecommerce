@@ -25,9 +25,11 @@ class SendingPaymentMethodRelatedController extends Controller
     {
         if (Request::wantsJson()) {
 
-            $query = DB::table('sending_payment_method_related')->join('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->join('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')
-                ->select(['payment_method.title as payment_method_title', 'sending_method.title as sending_method_title', 'sending_payment_method_related.id', 'sending_payment_method_related.pdf_text', 'sending_payment_method_related.payment_text', 'sending_payment_method_related.payment_confirmed_text', 'sending_payment_method_related.sending_method_id', 'sending_payment_method_related.payment_method_id'])
-               ->where('sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            $query = DB::table(config()->get('hideyo.db_prefix').'sending_payment_method_related')->join(config()->get('hideyo.db_prefix').'sending_method', config()->get('hideyo.db_prefix').'sending_payment_method_related.sending_method_id', '=', config()->get('hideyo.db_prefix').'sending_method.id')->join(config()->get('hideyo.db_prefix').'payment_method', config()->get('hideyo.db_prefix').'sending_payment_method_related.payment_method_id', '=', config()->get('hideyo.db_prefix').'payment_method.id')
+                ->select([config()->get('hideyo.db_prefix').'payment_method.title as payment_method_title', 
+                    config()->get('hideyo.db_prefix').'sending_method.title as sending_method_title', 
+                    config()->get('hideyo.db_prefix').'sending_payment_method_related.*'])
+               ->where(config()->get('hideyo.db_prefix').'sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             $datatables = \Datatables::of($query)
 
             ->addColumn('payment_method', function ($query) {
@@ -72,7 +74,7 @@ class SendingPaymentMethodRelatedController extends Controller
 
 
             ->addColumn('action', function ($query) {
-                $link = '<a href="/admin/sending-payment-method-related/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>';
+                $link = '<a href="'.url()->route('hideyo.sending-payment-method-related.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>';
             
                 return $link;
             });
@@ -81,7 +83,7 @@ class SendingPaymentMethodRelatedController extends Controller
 
 
         } else {
-            return view('hideyo_backend::sending_payment_method_related.index')->with('sendingMethod', $this->sendingPaymentMethodRelated->selectAll());
+            return view('hideyo_backend::sending_payment_method_related.index');
         }
     }
 
@@ -98,7 +100,7 @@ class SendingPaymentMethodRelatedController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The order template was updated.');
-            return \Redirect::route('admin.sending-payment-method-related.index');
+            return \Redirect::route('hideyo.sending-payment-method-related.index');
         }
         
         \Notification::error($result->errors()->all());

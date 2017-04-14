@@ -48,8 +48,8 @@ class UserController extends Controller
             );
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
-                $delete = \Form::deleteajax('/admin/user/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/user/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.user.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.user.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             });
@@ -86,7 +86,7 @@ class UserController extends Controller
         $result  = $this->userNumber->create(Request::all(), $user_id);
  
         if ($result->user_id) {
-            return Redirect::route('admin.user.numbers', $user_id);
+            return Redirect::route('hideyo.user.numbers', $user_id);
         } else {
             Notification::error('field are required');
         }
@@ -101,7 +101,7 @@ class UserController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The user was inserted.');
-            return Redirect::route('admin.user.index');
+            return Redirect::route('hideyo.user.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -113,10 +113,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $roles = $this->role->getModel()->pluck('name', 'id');
-        $languages = $this->language->getModel()->pluck('language', 'id');
         $shops = $this->shop->selectAll()->pluck('title', 'id');
-        return view('hideyo_backend::user.edit')->with(array('user' => $this->user->find($id), 'roles' => $roles, 'languages' => $languages, 'shops' => $shops));
+        return view('hideyo_backend::user.edit')->with(array('user' => $this->user->find($id), 'shops' => $shops));
     }
 
     public function editProfile()
@@ -188,7 +186,7 @@ class UserController extends Controller
         } else {
             // $this->userLog->create('info', 'Profile '.$result->email.' updated', $result->id);
             Notification::success('The user was updated.');
-            return Redirect::route('admin.user.edit', $result->id);
+            return Redirect::route('hideyo.user.edit', $result->id);
         }
     }
 
@@ -198,7 +196,7 @@ class UserController extends Controller
 
         if ($result) {
             Notification::success('The user was deleted.');
-            return Redirect::route('admin.user.index');
+            return Redirect::route('hideyo.user.index');
         }
     }
 }

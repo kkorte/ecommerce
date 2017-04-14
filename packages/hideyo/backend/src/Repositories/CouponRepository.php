@@ -21,6 +21,7 @@ class CouponRepository implements CouponRepositoryInterface
     /**
      * The validation rules for the model.
      *
+     * @param  integer  $id id attribute model    
      * @return array
      */
     public function rules($id = false)

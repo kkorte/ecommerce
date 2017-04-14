@@ -4,6 +4,7 @@ namespace Hideyo\Backend\Repositories;
 use Hideyo\Backend\Models\AttributeGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
  
 class AttributeGroupRepository implements AttributeGroupRepositoryInterface
 {
@@ -17,6 +18,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     /**
      * The validation rules for the model.
      *
+     * @param  integer  $id id attribute model    
      * @return array
      */
     public function rules($id = false)
@@ -40,7 +42,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     public function create(array $attributes)
     {
         $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
-        $validator = \Validator::make($attributes, $this->rules());
+        $validator = Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
@@ -55,7 +57,7 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
-        $validator = \Validator::make($attributes, $this->rules($id));
+        $validator = Validator::make($attributes, $this->rules($id));
         if ($validator->fails()) {
             return $validator;
         } else {

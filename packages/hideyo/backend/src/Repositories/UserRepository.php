@@ -19,18 +19,19 @@ class UserRepository implements UserRepositoryInterface
     /**
      * The validation rules for the model.
      *
+     * @param  integer  $id id attribute model    
      * @return array
      */
     public function rules($id = false, $attributes = false)
     {
         $rules = array(
-            'email'         => 'required|between:4,65|unique_with:user',
-            'username'      => 'required|between:4,65|unique_with:user'
+            'email'         => 'required|between:4,65|unique_with:'.$this->model->getTable(),
+            'username'      => 'required|between:4,65|unique_with:'.$this->model->getTable()
         );
         
         if ($id) {
-            $rules['email']     =   'required|between:4,65|unique_with:user, '.$id.' = id';
-            $rules['username']  =   'required|between:4,65|unique_with:user, '.$id.' = id';
+            $rules['email']     =   'required|between:4,65|unique_with:'.$this->model->getTable().', '.$id.' = id';
+            $rules['username']  =   'required|between:4,65|unique_with:'.$this->model->getTable().', '.$id.' = id';
         }
 
         return $rules;
@@ -167,10 +168,8 @@ class UserRepository implements UserRepositoryInterface
 
 
         if (count($attributes) > 0) {
-            $role = $attributes['role'];
             $this->model->username = array_get($attributes, 'username');
             $this->model->email    = array_get($attributes, 'email');
-            $this->model->language_id    = array_get($attributes, 'language_id');
             $this->model->password = Hash::make(array_get($attributes, 'password'));
             $this->model->selected_shop_id    = array_get($attributes, 'selected_shop_id');
             $this->model->confirmed = array_get($attributes, 'confirmed');
