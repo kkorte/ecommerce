@@ -111,12 +111,12 @@ class ProductAttribute extends Model
 
     public function taxRate()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
+        return $this->belongsTo('Hideyo\Backend\Models\TaxRate');
     }
 
     public function product()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Product');
+        return $this->belongsTo('Hideyo\Backend\Models\Product');
     }
 
 

@@ -24,11 +24,11 @@ class ProductCategoryHighlightProduct extends Model
 
     public function product()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Product', 'product_id');
+        return $this->belongsTo('Hideyo\Backend\Models\Product', 'product_id');
     }
 
     public function productCategory()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductCategory', 'product_category_id');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductCategory', 'product_category_id');
     }
 }

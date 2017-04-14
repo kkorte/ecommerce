@@ -4,7 +4,7 @@
  * AttributeGroupController
  *
  * This is the controller of the attributes groups used by products of the shop
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 

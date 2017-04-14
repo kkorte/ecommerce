@@ -53,13 +53,13 @@ class Invoice extends Model
 
     public function client()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Client');
+        return $this->belongsTo('Hideyo\Backend\Models\Client');
     }
 
 
     public function order()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Order');
+        return $this->belongsTo('Hideyo\Backend\Models\Order');
     }
 
 

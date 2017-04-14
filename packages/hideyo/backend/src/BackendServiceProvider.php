@@ -22,8 +22,6 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot(\Illuminate\Routing\Router $router)
     {  
-
-
         $router->middlewareGroup('hideyobackend', array(
                 \App\Http\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -72,7 +70,7 @@ class BackendServiceProvider extends ServiceProvider
     public function register()
     {
 
-       $this->mergeConfig();
+        $this->mergeConfig();
 
         $this->registerRequiredProviders();
 

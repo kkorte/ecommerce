@@ -29,11 +29,11 @@ class ProductImage extends Model
 
     public function relatedProductAttributes()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\ProductAttribute', 'product_attribute_image', 'product_image_id', 'product_attribute_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\ProductAttribute', config()->get('hideyo.db_prefix').'product_attribute_image', config()->get('hideyo.db_prefix').'product_image_id', config()->get('hideyo.db_prefix').'product_attribute_id');
     }
 
     public function relatedAttributes()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\Attribute', 'product_image_attribute', 'product_image_id', 'attribute_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Attribute', config()->get('hideyo.db_prefix').'product_image_attribute', config()->get('hideyo.db_prefix').'product_image_id', config()->get('hideyo.db_prefix').'attribute_id');
     }
 }

@@ -4,7 +4,7 @@
  * PaymentMethodController
  *
  * This is the controller for the shop payment methods
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 use App\Http\Controllers\Controller;

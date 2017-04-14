@@ -8,7 +8,7 @@ class Cart
     /**
      * Service: Cart
      * Note: please keep logic in services or repositories. Put logic not in models
-     * @author     Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+     * @author     Matthijs Neijenhuijs <matthijs@hideyo.io>
      * @copyright  DutchBridge - dont share/steel!
      */
 

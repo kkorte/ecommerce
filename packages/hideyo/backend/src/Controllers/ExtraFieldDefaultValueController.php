@@ -3,7 +3,7 @@
  * ProductWeightTypeController
  *
  * This is the controller of the product weight types of the shop
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 

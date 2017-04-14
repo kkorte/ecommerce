@@ -9,7 +9,7 @@ class BackendServiceProvider extends ServiceProvider
     /**
      * Note: please keep logic in this repository. Put logic not in models,
      * Information about models in Laravel: http://laravel.com/docs/5.1/eloquent
-     * @author     Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+     * @author     Matthijs Neijenhuijs <matthijs@hideyo.io>
      * @copyright  DutchBridge - dont share/steel!
      */
     

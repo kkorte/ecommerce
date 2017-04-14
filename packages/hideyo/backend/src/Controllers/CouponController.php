@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
  * ClientController
  *
  * This is the controller for the shop clients
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 

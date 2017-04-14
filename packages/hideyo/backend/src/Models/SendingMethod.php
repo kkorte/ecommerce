@@ -28,10 +28,8 @@ class SendingMethod extends Model
         return $this->belongsToMany('Hideyo\Backend\Models\PaymentMethod', config()->get('hideyo.db_prefix').'sending_payment_method_related');
     }
 
-
     public function getPriceDetails()
     {
-
         if (isset($this->taxRate->rate)) {
             $taxRate = $this->taxRate->rate;
             $price_inc = (($this->taxRate->rate / 100) * $this->price) + $this->price;
@@ -48,19 +46,19 @@ class SendingMethod extends Model
             'tax_rate' => $taxRate,
             'tax_value' => $price_inc - $this->price,
             'tax_value_number_format' => number_format(($price_inc - $this->price), 2, '.', ''),
-            'currency' => $this->Shop->currency_code,
+            'currency' => $this->shop->currency_code,
 
         );
     }
 
     public function taxRate()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\TaxRate');
+        return $this->belongsTo('Hideyo\Backend\Models\TaxRate');
     }
 
     public function shop()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Shop');
+        return $this->belongsTo('Hideyo\Backend\Models\Shop');
     }
 
 

@@ -149,8 +149,7 @@ Route::group(['middleware' => ['hideyobackend','auth.hideyo.backend'], 'prefix' 
     Route::get('order/change-product-combination/{productId}/{newProductId}', array('as' => 'hideyo.order.change.product.combination', 'uses' => 'OrderController@changeProductCombination'));
 
     Route::get('order/delete-product/{productId}', array('as' => 'order.delete-product', 'uses' => 'OrderController@deleteProduct'));
-
-    Route::resource('invoice', 'InvoiceController');
+    generateCrud('invoice', 'InvoiceController');
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
     generateCrud('attribute-group/{attributeGroupId}/attributes', 'AttributeController', 'attribute');

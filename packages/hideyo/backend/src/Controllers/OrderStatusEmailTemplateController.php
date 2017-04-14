@@ -4,7 +4,7 @@
  * OrderStatusEmailTemplateController
  *
  * This is the controller of the content weight types of the shop
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 

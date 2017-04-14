@@ -24,11 +24,11 @@ class ProductWaitingList extends Model
     
     public function product()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Product');
+        return $this->belongsTo('Hideyo\Backend\Models\Product');
     }
 
     public function productAttribute()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductAttribute');
     }
 }

@@ -67,12 +67,12 @@ class Order extends Model
 
     public function client()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Client');
+        return $this->belongsTo('Hideyo\Backend\Models\Client');
     }
 
     public function orderStatus()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\OrderStatus');
+        return $this->belongsTo('Hideyo\Backend\Models\OrderStatus');
     }
 
     public function orderPaymentLog()
@@ -87,13 +87,13 @@ class Order extends Model
 
     public function shop()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Shop');
+        return $this->belongsTo('Hideyo\Backend\Models\Shop');
     }
 
 
     public function coupon()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Coupon');
+        return $this->belongsTo('Hideyo\Backend\Models\Coupon');
     }
 
 

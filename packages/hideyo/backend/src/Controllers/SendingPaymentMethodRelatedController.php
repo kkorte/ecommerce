@@ -4,7 +4,7 @@
  * CouponController
  *
  * This is the controller of the sending methods of the shop
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 use App\Http\Controllers\Controller;

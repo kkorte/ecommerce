@@ -18,6 +18,6 @@ class ClientToken extends Model
 
     public function client()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\Client', 'client_id');
+        return $this->belongsTo('Hideyo\Backend\Models\Client', 'client_id');
     }
 }

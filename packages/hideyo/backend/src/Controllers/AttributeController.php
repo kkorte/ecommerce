@@ -4,7 +4,7 @@
  * AttributeController
  *
  * This is the controller of the attributes of a attribute group
- * @author Matthijs Neijenhuijs <matthijs@dutchbridge.nl>
+ * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
  * @version 1.0
  */
 

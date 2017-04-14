@@ -82,6 +82,6 @@ class OrderProduct extends Model
 
     public function productAttribute()
     {
-        return $this->belongsTo('Hideyo\Shop\Models\ProductAttribute');
+        return $this->belongsTo('Hideyo\Backend\Models\ProductAttribute');
     }
 }
