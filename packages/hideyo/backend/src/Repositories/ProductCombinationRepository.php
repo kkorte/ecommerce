@@ -10,9 +10,10 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
 
     protected $model;
 
-    public function __construct(ProductAttribute $model, ProductRepositoryInterface $product)
+    public function __construct(ProductAttribute $model, ProductAttributeCombination $modelAttributeCombination, ProductRepositoryInterface $product)
     {
         $this->model = $model;
+        $this->modelAttributeCombination = $modelAttributeCombination;
         $this->product = $product;
     }
   
@@ -21,12 +22,12 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
         $product = $this->product->find($productId);
 
         if (isset($attributes['selected_attribute_ids'])) {
-            $check = ProductAttributeCombination::leftJoin('product_attribute', 'product_attribute.id', '=', 'product_attribute_combination.product_attribute_id')
-            ->where('product_attribute.product_id', '=', $productId);
+            $check = ProductAttributeCombination::leftJoin($this->model->getTable(), $this->model->getTable().'.id', '=', $this->modelAttributeCombination->getTable().'.product_attribute_id')
+            ->where($this->model->getTable().'.product_id', '=', $productId);
 
             if (isset($attributes['selected_attribute_ids'])) {
                 $check->where(function ($query) use ($attributes) {
-                    $query->whereIn('product_attribute_combination.attribute_id', $attributes['selected_attribute_ids']);
+                    $query->whereIn($this->modelAttributeCombination->getTable().'.attribute_id', $attributes['selected_attribute_ids']);
                 });
             }
 
@@ -96,12 +97,12 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
             $this->model->combinations()->delete();
 
 
-            $check = ProductAttributeCombination::leftJoin('product_attribute', 'product_attribute.id', '=', 'product_attribute_combination.product_attribute_id')
-            ->where('product_attribute.product_id', '=', $attributes['product_id']);
+            $check = ProductAttributeCombination::leftJoin($this->model->getTable(), $this->model->getTable().'.id', '=', $this->modelAttributeCombination->getTable().'.product_attribute_id')
+            ->where($this->model->getTable().'.product_id', '=', $attributes['product_id']);
 
             if (isset($attributes['selected_attribute_ids'])) {
                 $check->where(function ($query) use ($attributes) {
-                    $query->whereIn('product_attribute_combination.attribute_id', $attributes['selected_attribute_ids']);
+                    $query->whereIn($this->modelAttributeCombination->getTable().'.attribute_id', $attributes['selected_attribute_ids']);
                 });
             }
 

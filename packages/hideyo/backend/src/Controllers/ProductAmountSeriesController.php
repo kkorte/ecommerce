@@ -17,7 +17,6 @@ use Hideyo\Backend\Repositories\TaxRateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
-use Redirect;
 use Response;
 use Datatables;
 use Form;

@@ -62,7 +62,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->hasMany('Hideyo\Shop\Models\OrderProduct');
+        return $this->hasMany('Hideyo\Backend\Models\OrderProduct');
     }
 
     public function client()
@@ -77,12 +77,12 @@ class Order extends Model
 
     public function orderPaymentLog()
     {
-        return $this->hasMany('Hideyo\Shop\Models\OrderPaymentLog');
+        return $this->hasMany('Hideyo\Backend\Models\OrderPaymentLog');
     }
 
     public function orderAddress()
     {
-        return $this->hasMany('Hideyo\Shop\Models\OrderAddress');
+        return $this->hasMany('Hideyo\Backend\Models\OrderAddress');
     }
 
     public function shop()
@@ -100,27 +100,27 @@ class Order extends Model
 
     public function invoice()
     {
-        return $this->hasOne('Hideyo\Shop\Models\Invoice');
+        return $this->hasOne('Hideyo\Backend\Models\Invoice');
     }
 
     public function orderDeliveryAddress()
     {
-        return $this->hasOne('Hideyo\Shop\Models\OrderAddress', 'id', 'delivery_order_address_id');
+        return $this->hasOne('Hideyo\Backend\Models\OrderAddress', 'id', 'delivery_order_address_id');
     }
 
     public function orderBillAddress()
     {
-        return $this->hasOne('Hideyo\Shop\Models\OrderAddress', 'id', 'bill_order_address_id');
+        return $this->hasOne('Hideyo\Backend\Models\OrderAddress', 'id', 'bill_order_address_id');
     }
 
     public function orderSendingMethod()
     {
-        return $this->hasOne('Hideyo\Shop\Models\OrderSendingMethod');
+        return $this->hasOne('Hideyo\Backend\Models\OrderSendingMethod');
     }
 
     public function orderPaymentMethod()
     {
-        return $this->hasOne('Hideyo\Shop\Models\OrderPaymentMethod');
+        return $this->hasOne('Hideyo\Backend\Models\OrderPaymentMethod');
     }
 
 

@@ -77,18 +77,18 @@ class ProductAttribute extends Model
 
     public function combinations()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeCombination');
+        return $this->hasMany('Hideyo\Backend\Models\ProductAttributeCombination');
     }
 
     public function images()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeImage');
+        return $this->hasMany('Hideyo\Backend\Models\ProductAttributeImage');
     }
 
 
     public function productAttributeCombinations()
     {
-        return $this->hasMany('Hideyo\Shop\Models\ProductAttributeCombination');
+        return $this->hasMany('Hideyo\Backend\Models\ProductAttributeCombination');
     }
 
     public function setAmountAttribute($value)

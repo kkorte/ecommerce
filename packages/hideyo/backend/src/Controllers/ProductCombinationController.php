@@ -49,8 +49,8 @@ class ProductCombinationController extends Controller
             )->where('product_id', '=', $productId);
 
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($productId) {
-                $delete = \Form::deleteajax('/admin/product/'.$productId.'/product-combination/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/product/'.$productId.'/product-combination/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.product.combination.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.product.combination.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             })
@@ -169,7 +169,7 @@ class ProductCombinationController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product extra fields are updated.');
-            return Redirect::route('admin.product.{productId}.product-combination.index', $productId);
+            return Redirect::route('hideyo.product.combination.index', $productId);
         }
 
         if ($result) {
@@ -195,7 +195,6 @@ class ProductCombinationController extends Controller
             $attributes[$row->attribute->id]['value'] = $row->attribute->value;
         }
 
-
         if (Request::wantsJson()) {
             $input = Request::all();
             $attributeGroup = $this->attributeGroup->find($input['attribute_group_id']);
@@ -219,7 +218,7 @@ class ProductCombinationController extends Controller
         }
         
         Notification::success('The product combination is updated.');
-        return Redirect::route('admin.product.{productId}.product-combination.index', $productId);
+        return Redirect::route('hideyo.product.combination.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -228,7 +227,7 @@ class ProductCombinationController extends Controller
 
         if ($result) {
             Notification::success('The product combination is deleted.');
-            return Redirect::route('admin.product.{productId}.product-combination.index', $productId);
+            return Redirect::route('hideyo.product.combination.index', $productId);
         }
     }
 }
