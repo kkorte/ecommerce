@@ -28,9 +28,7 @@ class ProductImageController extends Controller
            $product = $this->product->find($productId);
         if ($this->request->wantsJson()) {
 
-            $query = $this->product->getImageModel()->select(
-                ['id','file', 'rank', 'product_id']
-            )->where('product_id', '=', $productId);
+            $query = $this->product->getImageModel()->where('product_id', '=', $productId);
             
             $datatables = \Datatables::of($query)
             ->addColumn('thumb', function ($query) use ($productId) {
@@ -45,8 +43,6 @@ class ProductImageController extends Controller
             });
 
             return $datatables->make(true);
-
-
         } else {
             return view('hideyo_backend::product_image.index')->with(array('product' => $product));
         }

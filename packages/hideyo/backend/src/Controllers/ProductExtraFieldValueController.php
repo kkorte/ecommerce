@@ -16,8 +16,8 @@ use Hideyo\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
 use Hideyo\Backend\Repositories\ProductRepositoryInterface;
 use Hideyo\Backend\Repositories\ExtraFieldRepositoryInterface;
 
-use \Request;
-use \Notification;
+use Illuminate\Http\Request;
+use Notification;
 
 class ProductExtraFieldValueController extends Controller
 {
@@ -54,13 +54,13 @@ class ProductExtraFieldValueController extends Controller
         );
     }
 
-    public function store($productId)
+    public function store($productId, Request $request)
     {
-        $result  = $this->productExtraFieldValue->create(Request::all(), $productId);
+        $result  = $this->productExtraFieldValue->create($request->all(), $productId);
  
         if (isset($result->id)) {
             Notification::success('The product extra fields are updated.');
-            return redirect()->route('hideyo.product.{productId}.product-extra-field-value.index', $productId);
+            return redirect()->route('hideyo.product.extra-field-value.index', $productId);
         }
           
         return redirect()->back()->withInput();
@@ -72,9 +72,9 @@ class ProductExtraFieldValueController extends Controller
         return view('hideyo_backend::product-extra-field-value.edit')->with(array('productExtraFieldValue' => $this->productExtraFieldValue->find($id), 'product' => $product));
     }
 
-    public function update($productId, $id)
+    public function update(Request $request, $productId, $id)
     {
-        $result  = $this->productExtraFieldValue->updateById(Request::all(), $productId, $id);
+        $result  = $this->productExtraFieldValue->updateById($request->all(), $productId, $id);
 
         if (isset($result->id)) {
             return redirect()->back()->withInput()->withErrors($result->errors()->all());

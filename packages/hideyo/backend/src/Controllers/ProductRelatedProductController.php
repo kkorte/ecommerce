@@ -22,9 +22,9 @@ class ProductRelatedProductController extends Controller
 {
     public function __construct(Request $request, ProductRelatedProductRepositoryInterface $productRelatedProduct, ProductRepositoryInterface $product)
     {
-        $this->productRelatedProduct = $productRelatedProduct;
-        $this->product = $product;
-        $this->request = $request;
+        $this->productRelatedProduct    = $productRelatedProduct;
+        $this->product                  = $product;
+        $this->request                  = $request;
     }
 
     public function index($productId)
@@ -32,9 +32,7 @@ class ProductRelatedProductController extends Controller
            $product = $this->product->find($productId);
         if ($this->request->wantsJson()) {
 
-            $query = $this->productRelatedProduct->getModel()
-            ->select(['id','related_product_id', 'product_id'])
-            ->where('product_id', '=', $productId);
+            $query = $this->productRelatedProduct->getModel()->where('product_id', '=', $productId);
             
             $datatables = \Datatables::of($query)
                 ->addColumn('related', function ($query) use ($productId) {
@@ -50,8 +48,6 @@ class ProductRelatedProductController extends Controller
                 });
 
                 return $datatables->make(true);
-
-
         } else {
             return view('hideyo_backend::product_related_product.index')->with(array('product' => $product));
         }
@@ -78,7 +74,6 @@ class ProductRelatedProductController extends Controller
 
     public function update($id)
     {
-
         $result  = $this->productRelatedProduct->updateById($this->generateInput(), $id);
 
         if (!$result->id) {

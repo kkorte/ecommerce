@@ -16,8 +16,6 @@
             <li class="active">amount series</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.amount-series.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount series<i class="entypo-plus"></i></a>
-
 		<h2>Product <small>amount series</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
