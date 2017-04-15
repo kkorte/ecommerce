@@ -23,7 +23,7 @@ class ExceptionRepository implements ExceptionRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false)
+    private function rules($id = false)
     {
         $rules = array(
             'name' => 'required|between:4,65|unique_with:general_setting, shop_id'
@@ -65,7 +65,7 @@ class ExceptionRepository implements ExceptionRepositoryInterface
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);

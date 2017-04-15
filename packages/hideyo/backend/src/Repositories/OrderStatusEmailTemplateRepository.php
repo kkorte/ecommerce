@@ -19,7 +19,7 @@ class OrderStatusEmailTemplateRepository implements OrderStatusEmailTemplateRepo
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false, $attributes = false)
+    private function rules($id = false, $attributes = false)
     {
         $rules = array(
             'title' => 'required|unique_with:order_status_email_template, shop_id',
@@ -64,7 +64,7 @@ class OrderStatusEmailTemplateRepository implements OrderStatusEmailTemplateRepo
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);

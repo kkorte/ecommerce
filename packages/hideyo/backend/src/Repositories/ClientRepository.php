@@ -29,7 +29,7 @@ class ClientRepository implements ClientRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false)
+    private function rules($id = false)
     {
         if ($id) {
             $rules = array(
@@ -120,7 +120,7 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);

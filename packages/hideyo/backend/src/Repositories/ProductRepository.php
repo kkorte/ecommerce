@@ -32,7 +32,7 @@ class ProductRepository implements ProductRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false, $attributes = false)
+    private function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {
             $rules = array(
@@ -274,7 +274,7 @@ class ProductRepository implements ProductRepositoryInterface
         return $result;
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
 
         if (empty($attributes['leading_atrribute_group_id'])) {

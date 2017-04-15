@@ -42,7 +42,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false)
+    private function rules($id = false)
     {
         $rules = array(
             'order_id' => 'required|unique:invoice',
@@ -223,7 +223,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);

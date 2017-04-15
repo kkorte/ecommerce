@@ -23,7 +23,7 @@ class RedirectRepository implements RedirectRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false)
+    private function rules($id = false)
     {
         $rules = array(
             'url' => 'required|unique_with:'.$this->model->getTable().', shop_id'
@@ -110,7 +110,7 @@ class RedirectRepository implements RedirectRepositoryInterface
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             if (isset($attributes['logo'])) {

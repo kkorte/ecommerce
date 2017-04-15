@@ -29,7 +29,7 @@ class BrandRepository implements BrandRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false, $attributes = false)
+    private function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {
             $rules = array(
@@ -143,7 +143,7 @@ class BrandRepository implements BrandRepositoryInterface
         return $result;
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);
@@ -160,7 +160,7 @@ class BrandRepository implements BrandRepositoryInterface
         return $this->updateImageEntity($attributes);
     }
 
-    public function updateImageEntity(array $attributes = array())
+    private function updateImageEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->modelImage->fill($attributes);
@@ -190,8 +190,8 @@ class BrandRepository implements BrandRepositoryInterface
         $shopId = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
 
-        if (\File::exists($filename)) {
-            \File::delete($filename);
+        if (File::exists($filename)) {
+            File::delete($filename);
             if ($shop->square_thumbnail_sizes) {
                 $sizes = explode(',', $shop->square_thumbnail_sizes);
                 if ($sizes) {

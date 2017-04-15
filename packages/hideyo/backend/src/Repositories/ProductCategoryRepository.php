@@ -22,7 +22,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false, $attributes = false)
+    private function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {
             $rules = array(
@@ -200,7 +200,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         return $result;
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (!isset($attributes['parent_id'])) {
             $attributes['parent_id'] = null;

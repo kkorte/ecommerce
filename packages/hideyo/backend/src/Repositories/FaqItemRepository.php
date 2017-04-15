@@ -23,7 +23,7 @@ class FaqItemRepository implements FaqItemRepositoryInterface
      * @param  integer  $id id attribute model    
      * @return array
      */
-    public function rules($id = false, $attributes = false)
+    private function rules($id = false, $attributes = false)
     {
         if (isset($attributes['seo'])) {
             $rules = array(
@@ -76,7 +76,7 @@ class FaqItemRepository implements FaqItemRepositoryInterface
         return $this->updateEntity($attributes);
     }
 
-    public function updateEntity(array $attributes = array())
+    private function updateEntity(array $attributes = array())
     {
         if (count($attributes) > 0) {
             $this->model->fill($attributes);
