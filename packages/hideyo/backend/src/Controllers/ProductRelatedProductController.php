@@ -6,7 +6,7 @@
  *
  * This is the controller of the product weight types of the shop
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 use App\Http\Controllers\Controller;
@@ -44,7 +44,7 @@ class ProductRelatedProductController extends Controller
                     return $query->Product->title;
                 })
                 ->addColumn('action', function ($query) use ($productId) {
-                    $delete = \Form::deleteajax('/admin/product/'.$productId.'/related-product/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                    $delete = \Form::deleteajax(url()->route('hideyo.product.related-product.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                     
                     return $delete;
                 });
@@ -68,7 +68,7 @@ class ProductRelatedProductController extends Controller
     public function store($productId)
     {
         $result  = $this->productRelatedProduct->create($this->request->all(), $productId);
-        return redirect()->route('hideyo.product.{productId}.related-product.index', $productId);
+        return redirect()->route('hideyo.product.related-product.index', $productId);
     }
 
     public function edit($id)
@@ -95,7 +95,7 @@ class ProductRelatedProductController extends Controller
 
         if ($result) {
             Notification::success('The related product is deleted.');
-            return redirect()->route('hideyo.product.{productId}.related-product.index', $productId);
+            return redirect()->route('hideyo.product.related-product.index', $productId);
         }
     }
 }

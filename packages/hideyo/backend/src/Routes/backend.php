@@ -196,7 +196,7 @@ Route::group(['middleware' => ['hideyobackend','auth.hideyo.backend'], 'prefix' 
     Route::get('product-category/refactor-images', array('as' => 'product-category.refactor-images', 'uses' => 'ProductCategoryController@refactorAllImages'));
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));
 
-    generateCrud('brand/{brandId}/images', 'BrandImageController');
+    generateCrud('brand/{brandId}/images', 'BrandImageController', 'brand-image');
  
     Route::get('brand/edit/{brandId}/seo', array('as' => 'hideyo.brand.edit_seo', 'uses' => 'BrandController@editSeo'));
  

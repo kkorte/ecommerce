@@ -87,7 +87,6 @@
 						<li><a href="{{ URL::route('hideyo.user.index') }}">Users</a></li>
 						<li><a href="{{ URL::route('hideyo.sending-payment-method-related.index') }}">Order templates</a></li>
 						<li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>
-						<li><a href="{{ URL::route('hideyo.error.index') }}">Errors</a></li>
 						<li><a href="{{ URL::route('hideyo.redirect.index') }}">Redirects</a></li>
 					</ul>
 				</li>

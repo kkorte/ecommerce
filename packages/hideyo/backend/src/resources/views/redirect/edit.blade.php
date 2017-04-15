@@ -19,7 +19,7 @@
 
         <a href="{!! URL::route('hideyo.redirect.index') !!}" class="btn btn-danger pull-right">Back to overview<i class="entypo-back"></i></a>
 
-        <h2>Content <small>edit</small></h2>
+        <h2>Redirect <small>edit</small></h2>
         <br/>
         {!! Notification::showAll() !!}
 

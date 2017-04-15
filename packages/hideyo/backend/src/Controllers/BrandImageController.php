@@ -4,7 +4,7 @@
  *
  * This is the controller of the brand images of the shop
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 use App\Http\Controllers\Controller;

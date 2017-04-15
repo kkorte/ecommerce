@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
  *
  * This is the controller for the shop clients
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 

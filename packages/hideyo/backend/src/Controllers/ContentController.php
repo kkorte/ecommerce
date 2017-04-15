@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
  *
  * This is the controller of the contents of the shop
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 use Hideyo\Backend\Repositories\ContentRepositoryInterface;

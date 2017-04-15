@@ -11,11 +11,11 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.product-tag-group.index') }}">Sending methods</a></li>  
+            <li><a href="{{ URL::route('hideyo.product-tag-group.index') }}">Product tag group</a></li>  
             <li class="active">edit</li>
         </ol>
 
-        <h2>Sending method <small>edit</small></h2>
+        <h2>Product tag group<small>edit</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 

@@ -241,7 +241,7 @@ class Product extends Model
 
     public function relatedProducts()
     {
-        return $this->belongsToMany('Hideyo\Backend\Models\Product', 'product_related_product', 'product_id', config()->get('hideyo.db_prefix').'related_product_id');
+        return $this->belongsToMany('Hideyo\Backend\Models\Product', config()->get('hideyo.db_prefix').'product_related_product', 'product_id', 'related_product_id');
     }
 
     public function relatedProductsActive()

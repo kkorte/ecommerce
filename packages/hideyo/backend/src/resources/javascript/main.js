@@ -1,7 +1,3 @@
-
-
-
-
 function recalculate(el){
 
     var si = $('.tax-rate :selected').text();
@@ -37,7 +33,7 @@ $(document).ready(function() {
     
     $.fn.validator.Constructor.FOCUS_OFFSET = '0px';
 
-  $('.counter').maxlength({
+    $('.counter').maxlength({
         alwaysShow: true,
         threshold: 10,
         warningClass: "label label-success",
@@ -45,11 +41,8 @@ $(document).ready(function() {
     });
 
 
-
-
     $("body").on("submit", ".delete-button", function(e){
         event.preventDefault();
-        
         var $this = $(this);
 
         swal({
@@ -68,233 +61,148 @@ $(document).ready(function() {
     });
 
 
+    $("body").on("change", ".print-input-select, .print-input-date", function(e){
+       $('body .print-form').submit();
+    });
 
-$("body").on("change", ".stats-revenue", function(e){
-    e.preventDefault();
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-    $.get(url, {}, function(data){
-        if(data) {
-           $('.stats-revenue-container').html(data);
-        }   
-    }, 'html');
-});
-
-$("body").on("change", ".stats-totals", function(e){
-    e.preventDefault();
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-    $.get(url, {}, function(data){
-        if(data) {
-           $('.stats-totals-container').html(data);
-        }   
-    }, 'html');
-});
-
-$("body").on("change", ".stats-average-order", function(e){
-    e.preventDefault();
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-    $.get(url, {}, function(data){
-        if(data) {
-           $('.stats-average-container').html(data);
-        }   
-    }, 'html');
-});
+    $("body").on("submit", ".print-form", function(e){
+        var $this = $(this);
+        e.preventDefault();
+        var url = $(this).attr('data-url');
+        $.post($this.attr('action'), $this.serialize(), function (data) {
 
 
+            $.ajax({
+                url: url,
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $('.selected-orders').html(data);
+              
+                }
+
+            });
+        });
+    });
 
 
-$("body").on("change", ".stats-browser", function(e){
-    e.preventDefault();
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-    $.get(url, {}, function(data){
-        if(data) {
-           $('.stats-browser-container').html(data);
-        }   
-    }, 'html');
-});
+    if($( ".load-order-status-template" )) {
+        var template = $( ".load-order-status-template" );
+        var url = template.attr('data-url');
 
+        if(url) {
+            var orderStatusEmailTemplateId = $( ".order_status_email_template_id" );
 
-$("body").on("change", ".stats-payment-method", function(e){
-    e.preventDefault();
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-    $.get(url, {}, function(data){
-        if(data) {
-           $('.stats-payment-method-container').html(data);
-        }   
-    }, 'html');
-});
+            $.get(url + orderStatusEmailTemplateId.val(), {
+          
+            }, function(data){
+                template.html(data.content);
+            }, 'json');
+
+        }
+
+    }
+
+    $("body").on("change", ".order_status_email_template_id", function(e){
+        var template = $( ".load-order-status-template" );
+        var url = template.attr('data-url');
+
+        if(url) {
+            var orderStatusEmailTemplateId = $( ".order_status_email_template_id" );
 
 
 
+        $.get(url + orderStatusEmailTemplateId.val(), {
+          
+        }, function(data){
+            template.html(data.content);
+        }, 'json');
+
+        }
+
+    });
+
+    $("body").on("click", ".change-active", function(e){
+     
+        var $this = $(this);
+        var url = $(this).attr('data-url');
 
 
-$("body").on("change", ".print-input-select, .print-input-date", function(e){
-   $('body .print-form').submit();
-});
-
-$("body").on("submit", ".print-form", function(e){
-    var $this = $(this);
-    e.preventDefault();
-    var url = $(this).attr('data-url');
-    $.post($this.attr('action'), $this.serialize(), function (data) {
-
-
-  $.ajax({
-    url: url,
-    type: 'get',
-    dataType: 'html',
-    success: function (data) {
-        $('.selected-orders').html(data);
-      
-  }
-
-   });
-
-
+        $.get(url, {
+          
+        }, function(data){
+        $('#datatable').DataTable().ajax.reload();
+        }, 'html');
 
     });
 
 
-});
+    $("body").on("change", ".change-amount", function(e){
+     
+        var $this = $(this);
+
+        if ($(this).val() == '') {
+          return false;
+        }
+
+        var amount = $(this).val();
+
+        var url = $(this).attr('data-url') + '/' + amount;
+        $.get(url, {
+          
+        }, function(data){
+        $('#datatable').DataTable().ajax.reload();
+        }, 'html');
+
+    });
+
+
+    $("body").on("change", ".change-rank", function(e){
+     
+        var $this = $(this);
+
+        if ($(this).val() == '') {
+          return false;
+        }
+
+        var amount = $(this).val();
+
+        var url = $(this).attr('data-url') + '/' + amount;
+        $.get(url, {
+          
+        }, function(data){
+        $('#datatable').DataTable().ajax.reload(null, false);
+        }, 'html');
+
+    });
 
 
 
+    $("body").on("change", ".change-amount-product-attribute", function(e){
+     
+        var $this = $(this);
 
+        if ($(this).val() == '') {
+          return false;
+        }
 
+        var amount = $(this).val();
 
-if($( ".load-order-status-template" )) {
-    var template = $( ".load-order-status-template" );
-    var url = template.attr('data-url');
+        var url = $(this).attr('data-url') + '/' + amount;
+        $.get(url, {
+          
+        }, function(data){
+        $('#datatable').DataTable().ajax.reload();
+        }, 'html');
 
-    if(url) {
-        var orderStatusEmailTemplateId = $( ".order_status_email_template_id" );
-
-
-
-    $.get(url + orderStatusEmailTemplateId.val(), {
-      
-    }, function(data){
-        template.html(data.content);
-    }, 'json');
-
-    }
-
-}
-
-$("body").on("change", ".order_status_email_template_id", function(e){
-    var template = $( ".load-order-status-template" );
-    var url = template.attr('data-url');
-
-    if(url) {
-        var orderStatusEmailTemplateId = $( ".order_status_email_template_id" );
-
-
-
-    $.get(url + orderStatusEmailTemplateId.val(), {
-      
-    }, function(data){
-        template.html(data.content);
-    }, 'json');
-
-    }
-
-});
-
-
-
-$("body").on("click", ".change-active", function(e){
- 
-    var $this = $(this);
-    var url = $(this).attr('data-url');
-
-
-    $.get(url, {
-      
-    }, function(data){
-    $('#datatable').DataTable().ajax.reload();
-    }, 'html');
-
-});
-
-
-$("body").on("change", ".change-amount", function(e){
- 
-    var $this = $(this);
-
-
-
-    if ($(this).val() == '') {
-      return false;
-    }
-
-    var amount = $(this).val();
-
-    var url = $(this).attr('data-url') + '/' + amount;
-    $.get(url, {
-      
-    }, function(data){
-    $('#datatable').DataTable().ajax.reload();
-    }, 'html');
-
-});
-
-
-$("body").on("change", ".change-rank", function(e){
- 
-    var $this = $(this);
-
-
-
-    if ($(this).val() == '') {
-      return false;
-    }
-
-    var amount = $(this).val();
-
-    var url = $(this).attr('data-url') + '/' + amount;
-    $.get(url, {
-      
-    }, function(data){
-    $('#datatable').DataTable().ajax.reload(null, false);
-    }, 'html');
-
-});
-
-
-
-$("body").on("change", ".change-amount-product-attribute", function(e){
- 
-    var $this = $(this);
-
-
-
-    if ($(this).val() == '') {
-      return false;
-    }
-
-    var amount = $(this).val();
-
-    var url = $(this).attr('data-url') + '/' + amount;
-    $.get(url, {
-      
-    }, function(data){
-    $('#datatable').DataTable().ajax.reload();
-    }, 'html');
-
-});
-
-
+    });
 
 
     if(document.getElementById('codeeditor')){
-    var editords = CodeMirror.fromTextArea(document.getElementById('codeeditor'), {
+        var editords = CodeMirror.fromTextArea(document.getElementById('codeeditor'), {
         lineNumbers: true
-    });
-}
+        });
+    }
 
 
     $('.summernote').summernote({
@@ -306,166 +214,6 @@ $("body").on("change", ".change-amount-product-attribute", function(e){
       focus: true,                 // set focus to editable area after initializing summernote
     });
 
-    $(".update-amount").on("change keyup paste", function(e){
-
-        e.preventDefault();
-
-        if ($(this).val() == '') {
-            return false;
-        }
-
-        var amount = $(this).val();
-        var url = $(this).attr('data-url') + '/' + amount;
-        $this = $(this);
-        $.get(url, {
-
-        }, function(data){
-            if(data.totals) {
-
-                if(!data.product) {
-                    $($this).parents('.product-block').remove();   
-                }
-
-                $('.total_price_inc_tax_' + data.product.id ).html(data.product.cart.total_price_inc_tax); 
-                updateSummary(data.totals);
-            } else {
-                $('.cart-details').html('<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p>Winkelwagen is leeg.</p></div>');         
-            }
-        }, 'json');
-    });
-
-
-$('.update-address').on('ifChecked', function(event){
-
-    event.preventDefault();
-
-    if ($(this).val() == '') {
-        return false;
-    }
-
-    var amount = $(this).val();
-    var url = $(this).attr('data-url') + '/' + amount;
-    $.get(url, {
-
-    }, function(data){
-    if(data) {
-
-  }
-    }, 'json');
-});
-
-$(".change-product-combination").on("change", function(e){
- 
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-
-    $.get(url, {
-
-    }, function(data){
-
-        if(data.totals) {
-
-            if(!data.product) {
-                $($this).parents('.product-block').remove();   
-            }
-
-            $this.attr("data-url", "/order/change-product-combination/" + data.product.id);
-
-            $('.update-amount-' + data.oldproductid ).attr("data-url", "/order/update-amount-product/" + data.product.id);
-
-
-            $('.delete-product-' + data.oldproductid ).attr("href", "/order/delete-product/" + data.product.id);
-
-            $('.total_price_inc_tax_' + data.oldproductid ).html(data.product.cart.total_price_inc_tax); 
-            
-            $('.total_price_inc_tax_' + data.oldproductid).removeClass().addClass('total_price_inc_tax_' + data.product.id);
-
-            $('.update-amount-' + data.oldproductid).removeClass().addClass('.update-amount-' + data.product.id);
-
-            $('.delete-product-' + data.oldproductid).removeClass().addClass('.delete-product-' + data.product.id + ' btn btn-danger');
-
-            updateSummary(data.totals);
-        }
-
-
-    }, 'json');
-});
-
-
-$(".sending_method_id").on("change", function(e){
- 
-    var $this = $(this);
-    var url = $(this).attr('data-url') + "/" + $this.val();
-  
-    $.get(url, {
-
-    }, function(data){
-    if(data) {
-
-        updateSummary(data.totals);
-        if(typeof(data.sending_method.related_payment_methods_list)  === "undefined") {
-            $('.payment_method_row').html('<select class="custom-selectbox payment_method_id form-control" disabled="disabled"><option value="0">Please select one option</option></select>');
-         
-        } else {
-            var optionsValues = '<option value="0">Please select one option</option>';
-            $.each(data.sending_method.related_payment_methods_list, function(key, val) {
-                optionsValues += '<option value="' + key + '">' + val + '</option>';
-            });
-
-
-        
-            $('.payment_method_row').html('<select data-url="/order/update-payment-method" class="custom-selectbox payment_method_id form-control" enabled="enabled">' + optionsValues + '</select>');
-     
-
-      
-        }
-
-      }
-    }, 'json');
-});
-
-$("body").on("change", ".payment_method_id",  function(e){
-
-    var $this = $(this);
-
-    var url = $(this).attr('data-url') + "/" + $this.val();
-  
-    $.get(url, {
-
-    }, function(data){
-    if(data) {
-        updateSummary(data.totals);
-
-      }
-    }, 'json');
-
-       e.preventDefault();
-});
-
-
-function updateSummary(data)
-{
-    $('.sub_total_inc_tax').html(data.sub_total_inc_tax);
-    $('.sending_method_cost_inc_tax').html(data.sending_method_cost_inc_tax);
-    $('.payment_method_cost_inc_tax').html(data.payment_method_cost_inc_tax);   
-    $('.total_inc_tax').html(data.total_inc_tax);  
-    $('.total_ex_tax').html(data.total_ex_tax); 
-    $('.total_tax').html(data.total_tax);
-    $('.cart-count').html(data.producttotal);
-    $('.cart-total span').html(data.total_inc_tax);
-
-    
-    return true;
-}
-
-
-    $('.price, .price_inc_tax, .tax-rate').keyup(function() {
-        recalculate(this);
-    });
-
-    $('.tax-rate').change(function() {
-        $('.price').trigger('keyup'); 
-    });
 
     $('.price').trigger('keyup');
 

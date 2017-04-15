@@ -40,6 +40,7 @@ class RedirectRepository implements RedirectRepositoryInterface
     public function create(array $attributes)
     {
         $attributes['modified_by_user_id'] = null;
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
@@ -97,6 +98,7 @@ class RedirectRepository implements RedirectRepositoryInterface
 
     public function updateById(array $attributes, $id)
     {
+        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules($id));
 
         if ($validator->fails()) {

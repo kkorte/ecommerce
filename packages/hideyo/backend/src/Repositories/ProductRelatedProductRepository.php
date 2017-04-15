@@ -13,15 +13,13 @@ class ProductRelatedProductRepository implements ProductRelatedProductRepository
     public function __construct(ProductRelatedProduct $model, ProductRepositoryInterface $product)
     {
         $this->model = $model;
-            $this->product = $product;
+        $this->product = $product;
     }
   
     public function create(array $attributes, $productParentId)
     {
         $parentProduct = $this->product->find($productParentId);
    
-
-        
         if (isset($attributes['products'])) {
             $parentProduct->relatedProducts()->attach($attributes['products']);
         }

@@ -15,7 +15,7 @@
             <li class="active">create</li>
         </ol>
 
-        <h2>Product tag group <small>create</small></h2>
+        <h2>Product tag group<small>create</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 

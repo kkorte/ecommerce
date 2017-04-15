@@ -5,7 +5,7 @@
  *
  * This is the controller for the shop payment methods
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 use App\Http\Controllers\Controller;
 use Hideyo\Backend\Repositories\PaymentMethodRepositoryInterface;

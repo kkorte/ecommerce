@@ -5,7 +5,7 @@
  *
  * This is the controller of the product weight types of the shop
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 use App\Http\Controllers\Controller;
@@ -54,8 +54,8 @@ class ProductAmountSeriesController extends Controller
                 }
             })
             ->addColumn('action', function ($query) use ($productId) {
-                $delete = \Form::deleteajax('/admin/product/'.$productId.'/product-amount-series/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/product/'.$productId.'/product-amount-series/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.product.amount-series.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.product.amount-series.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
                 
                 return $link;
             });
@@ -90,7 +90,7 @@ class ProductAmountSeriesController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product amount series is updated.');
-            return Redirect::route('admin.product.{productId}.product-amount-series.index', $productId);
+            return Redirect::route('hideyo.product.amount-series.index', $productId);
         }
 
         if ($result) {
@@ -123,7 +123,7 @@ class ProductAmountSeriesController extends Controller
         }
         
         Notification::success('The product amount series is updated.');
-        return Redirect::route('admin.product.{productId}.product-amount-series.index', $productId);
+        return Redirect::route('hideyo.product.amount-series.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -132,7 +132,7 @@ class ProductAmountSeriesController extends Controller
 
         if ($result) {
             Notification::success('The product amount series is deleted.');
-            return Redirect::route('admin.product.{productId}.product-amount-series.index', $productId);
+            return Redirect::route('hideyo.product.amount-series.index', $productId);
         }
     }
 }

@@ -46,7 +46,7 @@
                 "processing": true,
                 "serverSide": true,
                 "stateSave": true,
-                "ajax": "/admin/redirect",
+                 "ajax": "{{ URL::route('hideyo.redirect.index') }}",
 
                 columns: [   
                 {data: 'active', name: 'active'},              

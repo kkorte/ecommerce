@@ -6,7 +6,7 @@
  *
  * This is the controller of the product weight types of the shop
  * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
- * @version 1.0
+ * @version 0.1
  */
 
 use App\Http\Controllers\Controller;
@@ -38,8 +38,8 @@ class ProductImageController extends Controller
             })
 
             ->addColumn('action', function ($query) use ($productId) {
-                $delete = \Form::deleteajax('/admin/product/'.$productId.'/images/'. $query->id, 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $link = '<a href="/admin/product/'.$productId.'/images/'.$query->id.'/edit" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
+                $delete = \Form::deleteajax(url()->route('hideyo.product.image.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $link = '<a href="'.url()->route('hideyo.product.image.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$delete;
             
                 return $link;
             });
@@ -65,11 +65,11 @@ class ProductImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product image is inserted.');
-            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
+            return redirect()->route('hideyo.product.image.index', $productId);
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -82,7 +82,6 @@ class ProductImageController extends Controller
         $lists = $this->generateAttributeLists($product);
         $selectedProductAttributes = array();
         $selectedAttributes = array();
-
 
         if ($productImage->relatedProductAttributes->count()) {
             foreach ($productImage->relatedProductAttributes as $row) {
@@ -138,7 +137,7 @@ class ProductImageController extends Controller
         }
         
         Notification::success('The product image is updated.');
-        return redirect()->route('hideyo.product.{productId}.images.index', $productId);
+        return redirect()->route('hideyo.product.image.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -147,7 +146,7 @@ class ProductImageController extends Controller
 
         if ($result) {
             Notification::success('The product image is deleted.');
-            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
+            return redirect()->route('hideyo.product.image.index', $productId);
         }
     }
 }
