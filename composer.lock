@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbdd22394288941c4105cb4abd5fccbc",
+    "content-hash": "686218241f2a00bfc072e7c61f605747",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -443,28 +443,27 @@
         },
         {
             "name": "elasticquent/elasticquent",
-            "version": "dev-master",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elasticquent/Elasticquent.git",
-                "reference": "03aa15d344730a6d0619944b70a8e4f9436d14b0"
+                "reference": "96811af5af96e6e38c636dd67e8f0890babb1d34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elasticquent/Elasticquent/zipball/03aa15d344730a6d0619944b70a8e4f9436d14b0",
-                "reference": "03aa15d344730a6d0619944b70a8e4f9436d14b0",
+                "url": "https://api.github.com/repos/elasticquent/Elasticquent/zipball/96811af5af96e6e38c636dd67e8f0890babb1d34",
+                "reference": "96811af5af96e6e38c636dd67e8f0890babb1d34",
                 "shasum": ""
             },
             "require": {
-                "elasticsearch/elasticsearch": ">1.0 <2.2",
+                "elasticsearch/elasticsearch": ">1.0 <2.1",
                 "illuminate/config": "~4.2|^5",
                 "illuminate/database": "~4.2|^5",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "~4.2|~5.0"
+                "phpunit/phpunit": "~5.0"
             },
             "type": "library",
             "extra": {
@@ -495,20 +494,20 @@
                 "eloquent",
                 "laravel"
             ],
-            "time": "2016-07-26T06:10:40+00:00"
+            "time": "2016-01-28T04:23:05+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v2.1.5",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "c1675245c0a6f789cbb80b3e0b333b9ef521a627"
+                "reference": "9ce5bd7606f6c185d434de4f80863f998f74e179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/c1675245c0a6f789cbb80b3e0b333b9ef521a627",
-                "reference": "c1675245c0a6f789cbb80b3e0b333b9ef521a627",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/9ce5bd7606f6c185d434de4f80863f998f74e179",
+                "reference": "9ce5bd7606f6c185d434de4f80863f998f74e179",
                 "shasum": ""
             },
             "require": {
@@ -519,8 +518,8 @@
             "require-dev": {
                 "athletic/athletic": "~0.1",
                 "cpliakas/git-wrapper": "~1.0",
-                "mockery/mockery": "0.9.4",
-                "phpunit/phpunit": "~4.7",
+                "mockery/mockery": "dev-master@dev",
+                "phpunit/phpunit": "3.7.*",
                 "symfony/yaml": "2.4.3 as 2.4.2",
                 "twig/twig": "1.*"
             },
@@ -549,7 +548,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2016-03-18T16:31:37+00:00"
+            "time": "2015-11-05T15:29:21+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1067,16 +1066,16 @@
         },
         {
             "name": "khill/lavacharts",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kevinkhill/lavacharts.git",
-                "reference": "5cba56942e32e7ae4b4391ca9fa6037558334c28"
+                "reference": "dfa799236ff73049a4b67bf6488b8197ec704122"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevinkhill/lavacharts/zipball/5cba56942e32e7ae4b4391ca9fa6037558334c28",
-                "reference": "5cba56942e32e7ae4b4391ca9fa6037558334c28",
+                "url": "https://api.github.com/repos/kevinkhill/lavacharts/zipball/dfa799236ff73049a4b67bf6488b8197ec704122",
+                "reference": "dfa799236ff73049a4b67bf6488b8197ec704122",
                 "shasum": ""
             },
             "require": {
@@ -1162,7 +1161,7 @@
                 "laravel",
                 "symfony"
             ],
-            "time": "2017-04-12T02:36:22+00:00"
+            "time": "2017-04-14T15:23:35+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5330,8 +5329,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "predis/predis": 20,
-        "elasticquent/elasticquent": 20
+        "predis/predis": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

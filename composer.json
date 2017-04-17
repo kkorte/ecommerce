@@ -19,7 +19,7 @@
         "nesbot/carbon": "~1.14",
         "predis/predis": "~1.1@dev",
         "maatwebsite/excel": "~2.1.0",
-        "elasticquent/elasticquent": "dev-master",
+        "elasticquent/elasticquent": "1.0.6",
         "khill/lavacharts": "~3.0",
         "tylercd100/lern": "^3.6",
         "unisharp/laravel-ckeditor": "^4.5",
@@ -39,7 +39,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Hideyo\\Backend\\": "packages/hideyo/backend/src"
+            "Hideyo\\Backend\\": "packages/hideyo/ecommerce-backend/src"
         }
     },
     "autoload-dev": {
