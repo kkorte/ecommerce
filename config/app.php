@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        Hideyo\Backend\BackendServiceProvider::class,
+        Hideyo\Ecommerce\Backend\BackendServiceProvider::class,
 
 
         /*

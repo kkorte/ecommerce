@@ -39,7 +39,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Hideyo\\Backend\\": "packages/hideyo/ecommerce-backend/src"
+            "Hideyo\\Ecommerce\\Backend\\": "packages/hideyo/ecommerce-backend/src"
         }
     },
     "autoload-dev": {
