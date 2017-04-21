@@ -1,6 +1,7 @@
 /node_modules
 /public/storage
 /public/hideyo
+/public/files
 /vendor
 /packages/hideyo/shop/vendor
 /resources/assets/vendor
