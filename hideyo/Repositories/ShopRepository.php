@@ -128,7 +128,7 @@ class ShopRepository implements ShopRepositoryInterface
 
     public function destroy($shopId)
     {
-        $this->model = $this->find($htmlBlockId);
+        $this->model = $this->find($shopId);
         File::deleteDirectory($this->publicImagePath.$this->model->id);
 
         $destinationPath = $this->storageImagePath.$this->model->id;
