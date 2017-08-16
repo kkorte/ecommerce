@@ -12,10 +12,10 @@ use App\Http\Controllers\Controller;
 
 use Dutchbridge\Validators\UserValidator;
 use Dutchbridge\Datatable\UserNumberDatatable;
-use Hideyo\Ecommerce\Backend\Repositories\UserRepositoryInterface;
+use Hideyo\Repositories\UserRepositoryInterface;
 
-use Hideyo\Ecommerce\Backend\Repositories\UserLogRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ShopRepositoryInterface;
+use Hideyo\Repositories\UserLogRepositoryInterface;
+use Hideyo\Repositories\ShopRepositoryInterface;
 use Auth;
 use Notification;
 use Redirect;
@@ -46,8 +46,8 @@ class UserController extends Controller
             );
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.user.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.user.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('user.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('user.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });

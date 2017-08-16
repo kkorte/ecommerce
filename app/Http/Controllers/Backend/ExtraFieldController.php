@@ -10,8 +10,8 @@
 
 use App\Http\Controllers\Controller;
 
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\ProductCategoryRepositoryInterface;
 
 use Request;
 use Notification;
@@ -49,9 +49,9 @@ class ExtraFieldController extends Controller
                 }
             })
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.extra-field.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.extra-field-values.index', $query->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->values->count().' values</a>
-                 <a href="'.url()->route('hideyo.extra-field.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
+                $deleteLink = Form::deleteajax(url()->route('extra-field.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('extra-field-values.index', $query->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>'.$query->values->count().' values</a>
+                 <a href="'.url()->route('extra-field.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> 
                 '.$deleteLink;
             
                 return $links;
@@ -76,7 +76,7 @@ class ExtraFieldController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The extra field was inserted.');
-            return redirect()->route('hideyo.extra-field.index');
+            return redirect()->route('extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -97,7 +97,7 @@ class ExtraFieldController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The extra field was updated.');
-            return redirect()->route('hideyo.extra-field.index');
+            return redirect()->route('extra-field.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -113,7 +113,7 @@ class ExtraFieldController extends Controller
 
         if ($result) {
             Notification::success('Extra field was deleted.');
-            return redirect()->route('hideyo.extra-field.index');
+            return redirect()->route('extra-field.index');
         }
     }
 }

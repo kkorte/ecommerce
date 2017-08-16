@@ -11,11 +11,11 @@
 use App\Http\Controllers\Controller;
 
 use Dutchbridge\Datatable\ProductAmountOptionDatatable;
-use Hideyo\Ecommerce\Backend\Repositories\ProductAmountOptionRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\AttributeGroupRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\ProductAmountOptionRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
 
 use Request;
 use Notification;

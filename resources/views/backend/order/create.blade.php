@@ -4,11 +4,11 @@
 
 <ol class="breadcrumb">
     <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-    <li><a href="{{ URL::route('hideyo.order.index') }}">Order</a></li>  
+    <li><a href="{{ URL::route('order.index') }}">Order</a></li>  
     <li class="active">show</li>
 </ol>
 <div class="  pull-right">
-    <a href="{{ URL::route('hideyo.order.index') }}" class="btn btn-danger  pull-right">Back to overview</a>
+    <a href="{{ URL::route('order.index') }}" class="btn btn-danger  pull-right">Back to overview</a>
 </div>
 
 
@@ -40,7 +40,7 @@ $(document).ready(function(){
         <div class="row">
             <div class="col-md-4">
 
-                {!! Form::open(array('route' => array('hideyo.order.add-product'), 'files' => true, 'class' => 'form-inline validate')) !!}
+                {!! Form::open(array('route' => array('order.add-product'), 'files' => true, 'class' => 'form-inline validate')) !!}
                 <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                 <h3>Add products</h3>
@@ -83,7 +83,7 @@ $(document).ready(function(){
                             &euro; <span class="total_price_inc_tax_{!! $product['id'] !!}">{!! $product['cart']['total_price_inc_tax'] !!}</span>
                         </td>
                         <td>
-                            <a href="{{ URL::route('hideyo.order.delete-product', $product['id']) }}" class="delete-product-{!! $product['id'] !!} btn btn-danger">verwijder</a>
+                            <a href="{{ URL::route('order.delete-product', $product['id']) }}" class="delete-product-{!! $product['id'] !!} btn btn-danger">verwijder</a>
                         </td>
                     </tr>
                     @endforeach
@@ -289,7 +289,7 @@ $(document).ready(function(){
                  <hr/>
             <h3>Order details</h3>
        
-            {!! Form::open(array('route' => array('hideyo.order.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+            {!! Form::open(array('route' => array('order.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 
             <div class="form-group">
@@ -301,7 +301,7 @@ $(document).ready(function(){
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('hideyo.order.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('order.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 

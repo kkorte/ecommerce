@@ -1,7 +1,7 @@
 <ul class="nav nav-sidebar"><!-- available classes "right-aligned" -->
 
     <li>
-        <a href="{!! URL::route('hideyo.product.index', $product->id) !!}">
+        <a href="{!! URL::route('product.index', $product->id) !!}">
             Overview
         </a>
     </li>
@@ -13,7 +13,7 @@
         @else
         <li>
             @endif
-            <a href="{{ URL::route('hideyo.product.edit', $product->id) }}">
+            <a href="{{ URL::route('product.edit', $product->id) }}">
                 <span class="visible-xs"><i class="entypo-gauge"></i></span>
                 <span class="hidden-xs">Edit</span>
             </a>
@@ -24,7 +24,7 @@
             @else
             <li>
                 @endif
-                <a href="{{ URL::route('hideyo.product.edit_price', $product->id) }}">
+                <a href="{{ URL::route('product.edit_price', $product->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Price</span>
                 </a>
@@ -36,7 +36,7 @@
                 @else
                 <li>
                     @endif
-                    <a href="{{ URL::route('hideyo.product.extra-field-value.index', $product->id) }}">
+                    <a href="{{ URL::route('product.extra-field-value.index', $product->id) }}">
                         <span class="visible-xs"><i class="entypo-gauge"></i></span>
                         <span class="hidden-xs">Extra fields</span>
                     </a>
@@ -47,7 +47,7 @@
                     @else
                     <li>
                         @endif
-                        <a href="{{ URL::route('hideyo.product.combination.index', $product->id) }}">
+                        <a href="{{ URL::route('product.combination.index', $product->id) }}">
                             <span class="visible-xs"><i class="entypo-gauge"></i></span>
                             <span class="hidden-xs">Combinations</span>
                         </a>
@@ -59,7 +59,7 @@
                         @else
                         <li>
                             @endif
-                            <a href="{{ URL::route('hideyo.product.amount-option.index', $product->id) }}">
+                            <a href="{{ URL::route('product.amount-option.index', $product->id) }}">
                                 <span class="visible-xs"><i class="entypo-gauge"></i></span>
                                 <span class="hidden-xs">Amount options</span>
                             </a>
@@ -71,7 +71,7 @@
                         @else
                         <li>
                             @endif
-                            <a href="{{ URL::route('hideyo.product.amount-series.index', $product->id) }}">
+                            <a href="{{ URL::route('product.amount-series.index', $product->id) }}">
                                 <span class="visible-xs"><i class="entypo-gauge"></i></span>
                                 <span class="hidden-xs">Amount series</span>
                             </a>
@@ -84,7 +84,7 @@
                             @else   
                             <li>
                                 @endif
-                                <a href="{{ URL::route('hideyo.product.edit_seo', $product->id) }}">
+                                <a href="{{ URL::route('product.edit_seo', $product->id) }}">
                                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                                     <span class="hidden-xs">Seo</span>
                                 </a>
@@ -96,7 +96,7 @@
                                 @else
                                 <li>
                                     @endif
-                                    <a href="{{ URL::route('hideyo.product.image.index', $product->id) }}">
+                                    <a href="{{ URL::route('product.image.index', $product->id) }}">
                                         <span class="visible-xs"><i class="entypo-user"></i></span>
                                         <span class="hidden-xs">Images</span>
                                     </a>
@@ -107,7 +107,7 @@
                                     @else
                                     <li>
                                         @endif
-                                        <a href="{{ URL::route('hideyo.product.related-product.index', $product->id) }}">
+                                        <a href="{{ URL::route('product.related-product.index', $product->id) }}">
                                             <span class="visible-xs"><i class="entypo-user"></i></span>
                                             <span class="hidden-xs">Related products</span>
                                         </a>

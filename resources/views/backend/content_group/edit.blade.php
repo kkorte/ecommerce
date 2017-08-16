@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.index') !!}">ContentGroup</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.edit', $contentGroup->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.edit', $contentGroup->id) !!}">{!! $contentGroup->title !!}</a></li>
+            <li><a href="{!! URL::route('content-group.index') !!}">ContentGroup</a></li>
+            <li><a href="{!! URL::route('content-group.edit', $contentGroup->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('content-group.edit', $contentGroup->id) !!}">{!! $contentGroup->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($contentGroup, array('method' => 'put', 'route' => array('hideyo.content-group.update', $contentGroup->id), 'files' => true, 'class' => 'form-horizontal')) !!}
+        {!! Form::model($contentGroup, array('method' => 'put', 'route' => array('content-group.update', $contentGroup->id), 'files' => true, 'class' => 'form-horizontal')) !!}
             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.content-group.index'))   
+            @include('backend._fields.buttons', array('cancelRoute' => 'content-group.index'))   
 
         {!! Form::close() !!}        
     </div>

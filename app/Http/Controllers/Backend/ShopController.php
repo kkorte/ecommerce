@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\ShopRepositoryInterface;
+use Hideyo\Repositories\ShopRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
 use Datatables;
@@ -34,8 +34,8 @@ class ShopController extends Controller
             $datatables = Datatables::of($query)
 
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.shop.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.shop.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('shop.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('shop.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             })
 
@@ -62,7 +62,7 @@ class ShopController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The shop was inserted.');
-            return redirect()->route('hideyo.shop.index');
+            return redirect()->route('shop.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -83,7 +83,7 @@ class ShopController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The shop was updated.');
-            return redirect()->route('hideyo.shop.index');
+            return redirect()->route('shop.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -99,7 +99,7 @@ class ShopController extends Controller
 
         if ($result) {
             Notification::success('The shop was deleted.');
-            return redirect()->route('hideyo.shop.index');
+            return redirect()->route('shop.index');
         }
     }
 }

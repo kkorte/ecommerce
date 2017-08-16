@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\FaqItemRepositoryInterface;
+use Hideyo\Repositories\FaqItemRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -48,8 +48,8 @@ class FaqItemController extends Controller
                 return $query->grouptitle;
             })
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.faq.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.faq.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('faq.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('faq.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -73,7 +73,7 @@ class FaqItemController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The faq was inserted.');
-            return redirect()->route('hideyo.faq.index');
+            return redirect()->route('faq.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -102,13 +102,13 @@ class FaqItemController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('FaqItem seo was updated.');
-                return redirect()->route('hideyo.faq.edit_seo', $faqId);
+                return redirect()->route('faq.edit_seo', $faqId);
             } elseif ($this->request->get('faq-combination')) {
                 Notification::success('FaqItem combination leading attribute group was updated.');
-                return redirect()->route('hideyo.faq.{faqId}.faq-combination.index', $faqId);
+                return redirect()->route('faq.{faqId}.faq-combination.index', $faqId);
             } else {
                 Notification::success('FaqItem was updated.');
-                return redirect()->route('hideyo.faq.edit', $faqId);
+                return redirect()->route('faq.edit', $faqId);
             }
         }
 
@@ -126,7 +126,7 @@ class FaqItemController extends Controller
 
         if ($result) {
             Notification::success('The faq was deleted.');
-            return redirect()->route('hideyo.faq.index');
+            return redirect()->route('faq.index');
         }
     }
 }

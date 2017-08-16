@@ -4,14 +4,14 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('hideyo.faq.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{!! URL::route('hideyo.faq.create') !!}">Create</a></li>
+            <li><a href="{!! URL::route('faq.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{!! URL::route('faq.create') !!}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin/dashboard">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.faq.index') !!}">Faq item</a></li>  
+            <li><a href="{!! URL::route('faq.index') !!}">Faq item</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::open(array('route' => array('hideyo.faq.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::open(array('route' => array('faq.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.faq.index')) 
+            @include('backend._fields.buttons', array('cancelRoute' => 'faq.index')) 
 
 
         {!! Form::close() !!}

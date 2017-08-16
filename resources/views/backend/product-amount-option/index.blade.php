@@ -10,13 +10,13 @@
 
 		<ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">amount options</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.{productId}.product-amount-option.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount option<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('product.{productId}.product-amount-option.create', $product->id) }}" class="btn btn-green btn-success pull-right">create amount option<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>amount options</small></h2>
         <hr/>
@@ -40,7 +40,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.product.{productId}.product-amount-option.index', $product->id) }}",
+                   "ajax": "{{ URL::route('product.{productId}.product-amount-option.index', $product->id) }}",
 
                  columns: [
                         {data: 'id', name: 'id'},

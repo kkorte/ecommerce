@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\OrderStatusEmailTemplateRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
+use Hideyo\Repositories\OrderStatusEmailTemplateRepositoryInterface;
+use Hideyo\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -62,7 +62,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The template was inserted.');
-            return redirect()->route('hideyo.order-status-email-template.index');
+            return redirect()->route('order-status-email-template.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -88,7 +88,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('template was updated.');
-            return redirect()->route('hideyo.order-status-email-template.index');
+            return redirect()->route('order-status-email-template.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -104,7 +104,7 @@ class OrderStatusEmailTemplateController extends Controller
 
         if ($result) {
             Notification::success('template was deleted.');
-            return redirect()->route('hideyo.order-status-email-template.index');
+            return redirect()->route('order-status-email-template.index');
         }
     }
 }

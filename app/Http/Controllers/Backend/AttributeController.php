@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\AttributeRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Repositories\AttributeRepositoryInterface;
+use Hideyo\Repositories\AttributeGroupRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
 use Datatables;
@@ -43,8 +43,8 @@ class AttributeController extends Controller
             
             $datatables = Datatables::of($query)
             ->addColumn('action', function ($query) use ($attributeGroupId) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.attribute.destroy', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = ' <a href="'.url()->route('hideyo.attribute.edit', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>'.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('attribute.destroy', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = ' <a href="'.url()->route('attribute.edit', array('attributeGroupId' => $attributeGroupId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>'.$deleteLink;
             
                 return $links;
             });
@@ -79,7 +79,7 @@ class AttributeController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The extra field was inserted.');
-            return redirect()->route('hideyo.attribute.index', $attributeGroupId);
+            return redirect()->route('attribute.index', $attributeGroupId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -114,7 +114,7 @@ class AttributeController extends Controller
 
         if (isset($result->id)) {
             Notification::success('Attribute was updated.');
-            return redirect()->route('hideyo.attribute.index', $attributeGroupId);
+            return redirect()->route('attribute.index', $attributeGroupId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -136,7 +136,7 @@ class AttributeController extends Controller
 
         if ($result) {
             Notification::success('Atrribute was deleted.');
-            return redirect()->route('hideyo.attribute.index', $attributeGroupId);
+            return redirect()->route('attribute.index', $attributeGroupId);
         }
     }
 }

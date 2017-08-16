@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\RedirectRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ShopRepositoryInterface;
+use Hideyo\Repositories\RedirectRepositoryInterface;
+use Hideyo\Repositories\ShopRepositoryInterface;
 
 use Session;
 use Apiclient;
@@ -41,8 +41,8 @@ class RedirectController extends Controller
             })
 
             ->addColumn('action', function ($query) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.redirect.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.redirect.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('redirect.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('redirect.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -67,7 +67,7 @@ class RedirectController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The redirect was created.');
-            return redirect()->route('hideyo.redirect.index');
+            return redirect()->route('redirect.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -104,10 +104,10 @@ class RedirectController extends Controller
 
                 Notification::success('The redirects are imported.');
        
-                return redirect()->route('hideyo.redirect.index');
+                return redirect()->route('redirect.index');
             } else {
                 Notification::success('The redirects imported are failed.');
-                return redirect()->route('hideyo.redirect.import');
+                return redirect()->route('redirect.import');
             }
         });
     }
@@ -139,7 +139,7 @@ class RedirectController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The redirect was updated.');
-            return redirect()->route('hideyo.redirect.index');
+            return redirect()->route('redirect.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -155,7 +155,7 @@ class RedirectController extends Controller
 
         if ($result) {
             Notification::success('Redirect item is deleted.');
-            return redirect()->route('hideyo.redirect.index');
+            return redirect()->route('redirect.index');
         }
     }
 }

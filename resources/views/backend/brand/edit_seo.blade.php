@@ -9,10 +9,10 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.brand.index') !!}">Brand</a></li>
-            <li><a href="{!! URL::route('hideyo.brand.edit', $brand->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.brand.edit', $brand->id) !!}">{!! $brand->title !!}</a></li>
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{!! URL::route('brand.index') !!}">Brand</a></li>
+            <li><a href="{!! URL::route('brand.edit', $brand->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('brand.edit', $brand->id) !!}">{!! $brand->title !!}</a></li>
             <li class="active">seo</li>
         </ol>
 
@@ -20,13 +20,13 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($brand, array('method' => 'put', 'route' => array('hideyo.brand.update', $brand->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($brand, array('method' => 'put', 'route' => array('brand.update', $brand->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
         @include('backend._fields.seo-fields')
 
-        @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.brand.index'))
+        @include('backend._fields.buttons', array('cancelRoute' => 'brand.index'))
 
         {!! Form::close() !!}
 

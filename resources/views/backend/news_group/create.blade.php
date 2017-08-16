@@ -4,14 +4,14 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('hideyo.news-group.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{!! URL::route('hideyo.news-group.create') !!}">Create</a></li>
+            <li><a href="{!! URL::route('news-group.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{!! URL::route('news-group.create') !!}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.news-group.index') !!}">Newsgroup</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{!! URL::route('news-group.index') !!}">Newsgroup</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::open(array('route' => array('hideyo.news-group.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('news-group.store'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
             <div class="form-group">
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.news-group.index'))
+            @include('backend._fields.buttons', array('cancelRoute' => 'news-group.index'))
 
 
         {!! Form::close() !!}

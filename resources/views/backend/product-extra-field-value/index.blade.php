@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">extra fields</li>
         </ol>
 
@@ -22,7 +22,7 @@
         {!! Notification::showAll() !!}
 
         @if($extraFields)
-        {!! Form::open(array('route' => array('hideyo.product.extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('product.extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
         <table class="table">

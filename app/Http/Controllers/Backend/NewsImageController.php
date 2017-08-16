@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\NewsRepositoryInterface;
+use Hideyo\Repositories\NewsRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
 use Datatables;
@@ -45,8 +45,8 @@ class NewsImageController extends Controller
 
 
             ->addColumn('action', function ($image) use ($newsId) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.news-images.destroy', array('newsId' => $newsId, 'id' => $image->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.news-images.edit', array('newsId' => $newsId, 'id' => $image->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('news-images.destroy', array('newsId' => $newsId, 'id' => $image->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('news-images.edit', array('newsId' => $newsId, 'id' => $image->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
 
                 return $links;
             });
@@ -69,7 +69,7 @@ class NewsImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The news image was inserted.');
-            return redirect()->route('hideyo.news-images.index', $newsId);
+            return redirect()->route('news-images.index', $newsId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -90,7 +90,7 @@ class NewsImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The news image was updated.');
-            return redirect()->route('hideyo.news-images.index', $newsId);
+            return redirect()->route('news-images.index', $newsId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -105,7 +105,7 @@ class NewsImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('hideyo.news-images.index', $newsId);
+            return redirect()->route('news-images.index', $newsId);
         }
     }
 }

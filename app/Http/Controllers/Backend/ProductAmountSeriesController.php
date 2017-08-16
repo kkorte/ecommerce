@@ -9,11 +9,11 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\ProductAmountSeriesRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\AttributeGroupRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\ProductAmountSeriesRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -55,8 +55,8 @@ class ProductAmountSeriesController extends Controller
                 return '<a href="#" class="change-active" data-url="/admin/html-block/change-active/'.$query->id.'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
             })
             ->addColumn('action', function ($query) use ($productId) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.product.amount-series.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.product.amount-series.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('product.amount-series.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('product.amount-series.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
                 
                 return $links;
             });
@@ -91,7 +91,7 @@ class ProductAmountSeriesController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product amount series is updated.');
-            return redirect()->route('hideyo.product.amount-series.index', $productId);
+            return redirect()->route('product.amount-series.index', $productId);
         }
 
         if ($result) {
@@ -124,7 +124,7 @@ class ProductAmountSeriesController extends Controller
         }
         
         Notification::success('The product amount series is updated.');
-        return redirect()->route('hideyo.product.amount-series.index', $productId);
+        return redirect()->route('product.amount-series.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -133,7 +133,7 @@ class ProductAmountSeriesController extends Controller
 
         if ($result) {
             Notification::success('The product amount series is deleted.');
-            return redirect()->route('hideyo.product.amount-series.index', $productId);
+            return redirect()->route('product.amount-series.index', $productId);
         }
     }
 }

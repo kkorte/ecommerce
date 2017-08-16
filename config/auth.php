@@ -77,7 +77,7 @@ return [
 
         'husers' => [
             'driver' => 'eloquent',
-            'model' => Hideyo\Ecommerce\Backend\Models\User::class,
+            'model' => Hideyo\Models\User::class,
         ]
         
 

@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.index') !!}">Content</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.edit', $contentGroup->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.content-group.edit', $contentGroup->id) !!}">{!! $contentGroup->title !!}</a></li>
+            <li><a href="{!! URL::route('content-group.index') !!}">Content</a></li>
+            <li><a href="{!! URL::route('content-group.edit', $contentGroup->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('content-group.edit', $contentGroup->id) !!}">{!! $contentGroup->title !!}</a></li>
             <li class="active">seo</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($contentGroup, array('method' => 'put', 'route' => array('hideyo.content-group.update', $contentGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($contentGroup, array('method' => 'put', 'route' => array('content-group.update', $contentGroup->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
@@ -51,7 +51,7 @@
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('hideyo.content-group.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('content-group.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 

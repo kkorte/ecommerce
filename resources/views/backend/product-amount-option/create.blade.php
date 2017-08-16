@@ -10,13 +10,13 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
-            <li><a href="{!! URL::route('hideyo.product.{productId}.images.index', $product->id) !!}">product amount options</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.{productId}.images.index', $product->id) !!}">product amount options</a></li>
                       <li class="active">create combination</li> 
         </ol>
-<a href="{!! URL::route('hideyo.product.{productId}.product-amount-option.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
+<a href="{!! URL::route('product.{productId}.product-amount-option.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
 
 <h2>Product amount options  <small>create</small></h2>
 <hr/>
@@ -30,7 +30,7 @@
 
                     <div class="col-md-12">
 
-					    {!! Form::open(array('route' => array('hideyo.product.{productId}.product-amount-option.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+					    {!! Form::open(array('route' => array('product.{productId}.product-amount-option.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 					
     				        <div class="form-group">
@@ -79,7 +79,7 @@
 					        <div class="form-group">
 					            <div class="col-sm-offset-3 col-sm-5">
 					                {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-					                <a href="{!! URL::route('hideyo.product.{productId}.product-amount-option.index', $product->id) !!}" class="btn btn-large">Cancel</a>
+					                <a href="{!! URL::route('product.{productId}.product-amount-option.index', $product->id) !!}" class="btn btn-large">Cancel</a>
 					            </div>
 					        </div>
 

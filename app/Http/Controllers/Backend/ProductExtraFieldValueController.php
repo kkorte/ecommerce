@@ -12,9 +12,9 @@
 use App\Http\Controllers\Controller;
 
 
-use Hideyo\Ecommerce\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\ProductExtraFieldValueRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -60,7 +60,7 @@ class ProductExtraFieldValueController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product extra fields are updated.');
-            return redirect()->route('hideyo.product.extra-field-value.index', $productId);
+            return redirect()->route('product.extra-field-value.index', $productId);
         }
           
         return redirect()->back()->withInput();
@@ -81,7 +81,7 @@ class ProductExtraFieldValueController extends Controller
         }
         
         Notification::success('The product image is updated.');
-        return redirect()->route('hideyo.product.{productId}.images.index', $productId);
+        return redirect()->route('product.{productId}.images.index', $productId);
     }
 
     public function destroy($productId, $id)
@@ -90,7 +90,7 @@ class ProductExtraFieldValueController extends Controller
 
         if ($result) {
             Notification::success('The product image is deleted.');
-            return redirect()->route('hideyo.product.{productId}.images.index', $productId);
+            return redirect()->route('product.{productId}.images.index', $productId);
         }
     }
 }

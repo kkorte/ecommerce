@@ -11,11 +11,11 @@ use App\Http\Controllers\Controller;
  */
 
 
-use Hideyo\Ecommerce\Backend\Repositories\CouponRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductCategoryRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\SendingMethodRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Repositories\CouponRepositoryInterface;
+use Hideyo\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\SendingMethodRepositoryInterface;
+use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -90,7 +90,7 @@ class CouponController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The coupon was inserted.');
-            return redirect()->route('hideyo.coupon.index');
+            return redirect()->route('coupon.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -119,7 +119,7 @@ class CouponController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The coupon method was updated.');
-            return redirect()->route('hideyo.coupon.index');
+            return redirect()->route('coupon.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -134,7 +134,7 @@ class CouponController extends Controller
 
         if ($result) {
             Notification::success('The coupon was deleted.');
-            return redirect()->route('hideyo.coupon.index');
+            return redirect()->route('coupon.index');
         }
     }
 }

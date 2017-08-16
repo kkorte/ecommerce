@@ -10,20 +10,20 @@
 
 		<ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">combinations</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('product.combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>combinations</small></h2>
         <hr/>
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($product, array('method' => 'put', 'route' => array('hideyo.product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($product, array('method' => 'put', 'route' => array('product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('product-combination', 1) !!}                      
             
@@ -64,7 +64,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.product.combination.index', $product->id) }}",
+                   "ajax": "{{ URL::route('product.combination.index', $product->id) }}",
 
                  columns: [
 

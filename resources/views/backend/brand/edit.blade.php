@@ -8,8 +8,8 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.brand.index') }}">Brands</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('brand.index') }}">Brands</a></li>  
             <li class="active">edit</li>
         </ol>
 
@@ -17,7 +17,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($brand, array('method' => 'put', 'route' => array('hideyo.brand.update', $brand->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($brand, array('method' => 'put', 'route' => array('brand.update', $brand->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
             
 
             <div class="form-group">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.brand.index'))
+            @include('backend._fields.buttons', array('cancelRoute' => 'brand.index'))
             
         {!! Form::close() !!}
     </div>

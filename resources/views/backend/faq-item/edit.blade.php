@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.faq.index') !!}">Faq item</a></li>
-            <li><a href="{!! URL::route('hideyo.faq.edit', $faq->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.faq.edit', $faq->id) !!}">{!! $faq->title !!}</a></li>
+            <li><a href="{!! URL::route('faq.index') !!}">Faq item</a></li>
+            <li><a href="{!! URL::route('faq.edit', $faq->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('faq.edit', $faq->id) !!}">{!! $faq->title !!}</a></li>
             <li class="active">general</li>
         </ol>
 
@@ -21,7 +21,7 @@
         {!! Notification::showAll() !!}
 
 
-        {!! Form::model($faq, array('method' => 'put', 'route' => array('hideyo.faq.update', $faq->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::model($faq, array('method' => 'put', 'route' => array('faq.update', $faq->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.faq.index')) 
+            @include('backend._fields.buttons', array('cancelRoute' => 'faq.index')) 
           
     </div>
 </div>

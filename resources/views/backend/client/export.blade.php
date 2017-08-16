@@ -5,15 +5,15 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('hideyo.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('hideyo.client.create') }}">Create</a></li>
-            <li class="active"><a href="{{ URL::route('hideyo.client.export') }}">Export</a></li>
+            <li><a href="{{ URL::route('client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('client.create') }}">Create</a></li>
+            <li class="active"><a href="{{ URL::route('client.export') }}">Export</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.client.index') }}">Clients</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('client.index') }}">Clients</a></li>  
             <li class="active">export</li>
         </ol>
 
@@ -23,13 +23,13 @@
         {!! Notification::showAll() !!}
 
         
-        {!! Form::open(array('route' => array('hideyo.client.export'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('client.export'), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">
         
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Export xls', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('hideyo.client.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('client.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
         {!! Form::close() !!}

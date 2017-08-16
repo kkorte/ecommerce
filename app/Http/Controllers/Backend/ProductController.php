@@ -11,14 +11,14 @@
 use App\Http\Controllers\Controller;
 
 
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductCategoryRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductWeightTypeRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductExtraFieldValueRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductCombinationRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\BrandRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\ProductWeightTypeRepositoryInterface;
+use Hideyo\Repositories\ProductExtraFieldValueRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\ProductCombinationRepositoryInterface;
+use Hideyo\Repositories\BrandRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -95,9 +95,9 @@ class ProductController extends Controller
 
             ->addColumn('active', function ($product) {
                 if ($product->active) {
-                    return '<a href="#" class="change-active" data-url="'.url()->route('hideyo.product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-ok icon-green"></span></a>';
+                    return '<a href="#" class="change-active" data-url="'.url()->route('product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-ok icon-green"></span></a>';
                 } else {
-                    return '<a href="#" class="change-active" data-url="'.url()->route('hideyo.product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
+                    return '<a href="#" class="change-active" data-url="'.url()->route('product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
                 }
             })
 
@@ -114,7 +114,7 @@ class ProductController extends Controller
                 if ($product->attributes->count()) {
                     return '<a href="/admin/product/'.$product->id.'/product-combination">combinations</a>';
                 } else {
-                    return '<input type="text" class="change-amount" value="'.$product->amount.'" style="width:50px;" data-url="'.url()->route('hideyo.product.change-amount', array('productId' => $product->id)).'">';
+                    return '<input type="text" class="change-amount" value="'.$product->amount.'" style="width:50px;" data-url="'.url()->route('product.change-amount', array('productId' => $product->id)).'">';
                 }
             })
 
@@ -199,10 +199,10 @@ class ProductController extends Controller
 
 
             ->addColumn('action', function ($product) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.product.destroy', $product->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $product->title);
-                $copy = '<a href="'.url()->route('hideyo.product.copy', $product->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
+                $deleteLink = \Form::deleteajax(url()->route('product.destroy', $product->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $product->title);
+                $copy = '<a href="'.url()->route('product.copy', $product->id).'" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
 
-                $links = '<a href="'.url()->route('hideyo.product.edit', $product->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$copy.' '.$deleteLink;
+                $links = '<a href="'.url()->route('product.edit', $product->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$copy.' '.$deleteLink;
 
                 return $links;
             });
@@ -239,7 +239,7 @@ class ProductController extends Controller
 
             ->addColumn('rank', function ($product) {
            
-                return '<input type="text" class="change-rank" value="'.$product->rank.'" style="width:50px;" data-url="'.url()->route('hideyo.product.change-rank', array('productId' => $product->id)).'">';
+                return '<input type="text" class="change-rank" value="'.$product->rank.'" style="width:50px;" data-url="'.url()->route('product.change-rank', array('productId' => $product->id)).'">';
               
             })
 
@@ -281,7 +281,7 @@ class ProductController extends Controller
     public function refactorAllImages()
     {
         $this->productImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
-        return redirect()->route('hideyo.product.index');
+        return redirect()->route('product.index');
     }
 
     public function create()
@@ -295,7 +295,7 @@ class ProductController extends Controller
 
         if (isset($result->id)) {
             \Notification::success('The product was inserted.');
-            return redirect()->route('hideyo.product.index');
+            return redirect()->route('product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -389,7 +389,7 @@ class ProductController extends Controller
 
 
         \Notification::success('The product export is completed.');
-        return redirect()->route('hideyo.product.index');
+        return redirect()->route('product.index');
     }
 
     public function copy($productId)
@@ -425,7 +425,7 @@ class ProductController extends Controller
             }
 
             \Notification::success('The product copy is inserted.');
-            return redirect()->route('hideyo.product.index');
+            return redirect()->route('product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -453,17 +453,17 @@ class ProductController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('Product seo was updated.');
-                return redirect()->route('hideyo.product.edit_seo', $productId);
+                return redirect()->route('product.edit_seo', $productId);
             } elseif ($this->request->get('price')) {
                 Notification::success('Product price was updated.');
-                return redirect()->route('hideyo.product.edit_price', $productId);
+                return redirect()->route('product.edit_price', $productId);
             } elseif ($this->request->get('product-combination')) {
                 Notification::success('Product combination leading attribute group was updated.');
-                return redirect()->route('hideyo.product.{productId}.product-combination.index', $productId);
+                return redirect()->route('product.{productId}.product-combination.index', $productId);
             }
 
             Notification::success('Product was updated.');
-            return redirect()->route('hideyo.product.index');
+            return redirect()->route('product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -479,7 +479,7 @@ class ProductController extends Controller
 
         if ($result) {
             Notification::success('The product was deleted.');
-            return redirect()->route('hideyo.product.index');
+            return redirect()->route('product.index');
         }
     }
 }

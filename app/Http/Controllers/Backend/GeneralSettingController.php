@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\GeneralSettingRepositoryInterface;
+use Hideyo\Repositories\GeneralSettingRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -29,8 +29,8 @@ class GeneralSettingController extends Controller
             )->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = Datatables::of($query)->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.general-setting.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.general-setting.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('general-setting.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('general-setting.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -51,7 +51,7 @@ class GeneralSettingController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The general setting was inserted.');
-            return redirect()->route('hideyo.general-setting.index');
+            return redirect()->route('general-setting.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -71,7 +71,7 @@ class GeneralSettingController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The general setting was updated.');
-            return redirect()->route('hideyo.general-setting.index');
+            return redirect()->route('general-setting.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -85,7 +85,7 @@ class GeneralSettingController extends Controller
         $result  = $this->generalSetting->destroy($generalSettingId);
         if ($result) {
             Notification::error('The general setting was deleted.');
-            return redirect()->route('hideyo.general-setting.index');
+            return redirect()->route('general-setting.index');
         }
     }
 }

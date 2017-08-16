@@ -10,12 +10,12 @@
 
 		<ol class="breadcrumb">
 		  <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-		  <li><a href="{{ URL::route('hideyo.product.index') }}">Product</a></li>
-		  <li><a href="{{ URL::route('hideyo.product.edit', $product->id) }}">{{ $product->title }}</a></li>
+		  <li><a href="{{ URL::route('product.index') }}">Product</a></li>
+		  <li><a href="{{ URL::route('product.edit', $product->id) }}">{{ $product->title }}</a></li>
 		  <li class="active">related</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('product.related-product.create', $product->id) }}" class="btn btn-success pull-right">select related product<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>related products</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-            "ajax": "{{ URL::route('hideyo.product.related-product.index', $product->id) }}",
+            "ajax": "{{ URL::route('product.related-product.index', $product->id) }}",
 
                  columns: [
                         {data: 'id', name: 'id'},

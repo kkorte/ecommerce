@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -24,8 +24,8 @@ class TaxRateController extends Controller
         if ($this->request->wantsJson()) {
             $query = $this->taxRate->getModel()->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
             $datatables = Datatables::of($query)->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.tax-rate.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.tax-rate.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('tax-rate.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('tax-rate.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -47,7 +47,7 @@ class TaxRateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The tax rate was inserted.');
-            return redirect()->route('hideyo.tax-rate.index');
+            return redirect()->route('tax-rate.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -67,7 +67,7 @@ class TaxRateController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The tax rate was updated.');
-            return redirect()->route('hideyo.tax-rate.index');
+            return redirect()->route('tax-rate.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -81,7 +81,7 @@ class TaxRateController extends Controller
         $result  = $this->taxRate->destroy($taxRateId);
         if ($result) {
             Notification::error('The tax_rate was deleted.');
-            return redirect()->route('hideyo.tax-rate.index');
+            return redirect()->route('tax-rate.index');
         }
     }
 }

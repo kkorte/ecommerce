@@ -5,14 +5,14 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('hideyo.product-category.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('hideyo.product-category.tree') }}">Tree</a></li>
+            <li><a href="{{ URL::route('product-category.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('product-category.tree') }}">Tree</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.product-category.index') }}">Product categories</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('product-category.index') }}">Product categories</a></li>  
             <li class="active">tree structure</li>
         </ol>
 
@@ -37,7 +37,7 @@
                     'data' : {
                       'url' : function (node) {
                         return node.id === '#' ?
-                          '{{ URL::route('hideyo.product-category.ajax-root-tree') }}' : '{{ URL::route('hideyo.product-category.ajax-children-tree') }}'
+                          '{{ URL::route('product-category.ajax-root-tree') }}' : '{{ URL::route('product-category.ajax-children-tree') }}'
                       },
                       'data' : function (node) {
                         return { 'id' : node.id };
@@ -50,7 +50,7 @@
                 ]
             }).on('move_node.jstree', function (e, data) {
                 console.log(data);
-                $.get('{{ URL::route('hideyo.product-category.ajax-move-node') }}', { 'id' : data.node.id, 'parent' : data.parent, 'position' : data.position })
+                $.get('{{ URL::route('product-category.ajax-move-node') }}', { 'id' : data.node.id, 'parent' : data.parent, 'position' : data.position })
                 .fail(function () {
                     data.instance.refresh();
                 });

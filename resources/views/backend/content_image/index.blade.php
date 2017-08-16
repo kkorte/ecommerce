@@ -9,13 +9,13 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
             <li><a href="/admin/dashboard">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.content.index') !!}">Content</a></li>  
-            <li><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">edit</a></li>
-            <li class="active"><a href="{!! URL::route('hideyo.content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
+            <li><a href="{!! URL::route('content.index') !!}">Content</a></li>  
+            <li><a href="{!! URL::route('content.edit', $content->id) !!}">edit</a></li>
+            <li class="active"><a href="{!! URL::route('content.edit', $content->id) !!}">{!! $content->title !!}</a></li>
             <li class="active">images</li>           
         </ol>
 
-        <a href="{{ URL::route('hideyo.content-image.create', $content->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
+        <a href="{{ URL::route('content-image.create', $content->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
 
         <h2>Content <small>images</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.content-image.index', $content->id) }}",
+                   "ajax": "{{ URL::route('content-image.index', $content->id) }}",
 
                  columns: [
               {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

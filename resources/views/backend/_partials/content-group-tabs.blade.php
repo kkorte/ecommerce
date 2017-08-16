@@ -1,7 +1,7 @@
 <ul class="nav nav-sidebar"><!-- available classes "right-aligned" -->
 
     <li>
-        <a href="{!! URL::route('hideyo.content-group.index', $contentGroup->id) !!}">
+        <a href="{!! URL::route('content-group.index', $contentGroup->id) !!}">
             Overview
         </a>
     </li>
@@ -10,7 +10,7 @@
     @else
     <li>
     @endif
-        <a href="{{ URL::route('hideyo.content-group.edit', $contentGroup->id) }}">
+        <a href="{{ URL::route('content-group.edit', $contentGroup->id) }}">
             <span class="visible-xs"><i class="entypo-gauge"></i></span>
             <span class="hidden-xs">Edit</span>
         </a>
@@ -21,7 +21,7 @@
     @else
     <li>
     @endif
-        <a href="{{ URL::route('hideyo.content-group.edit_seo', $contentGroup->id) }}">
+        <a href="{{ URL::route('content-group.edit_seo', $contentGroup->id) }}">
             <span class="visible-xs"><i class="entypo-gauge"></i></span>
             <span class="hidden-xs">Seo</span>
         </a>

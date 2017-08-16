@@ -4,14 +4,14 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('hideyo.user.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{!! URL::route('user.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
             <li class="active"><a href="">Edit</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.user.index') !!}">Users</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{!! URL::route('user.index') !!}">Users</a></li>  
             <li class="active">edit</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-           {!! Form::model($user, array('method' => 'put', 'route' => array('hideyo.user.update', $user->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+           {!! Form::model($user, array('method' => 'put', 'route' => array('user.update', $user->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                      <input type="hidden" name="_token" value="{!! Session::token() !!}">
                      <div class="form-group">
                         {!! Form::label('username', 'Username', array('class' => 'col-sm-3 control-label')) !!}
@@ -79,7 +79,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
                             {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                            <a href="{!! URL::route('hideyo.user.index') !!}" class="btn btn-large">Cancel</a>
+                            <a href="{!! URL::route('user.index') !!}" class="btn btn-large">Cancel</a>
                         </div>
                     </div>
 

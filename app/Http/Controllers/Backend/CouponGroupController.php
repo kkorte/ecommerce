@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\CouponRepositoryInterface;
+use Hideyo\Repositories\CouponRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -34,8 +34,8 @@ class CouponGroupController extends Controller
 
             $datatables = \Datatables::of($query)
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.coupon-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.coupon-group.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('coupon-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('coupon-group.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -56,7 +56,7 @@ class CouponGroupController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The coupon was inserted.');
-            return redirect()->route('hideyo.coupon-group.index');
+            return redirect()->route('coupon-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -79,13 +79,13 @@ class CouponGroupController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('CouponGroup seo was updated.');
-                return redirect()->route('hideyo.coupon-group.edit_seo', $couponGroupId);
+                return redirect()->route('coupon-group.edit_seo', $couponGroupId);
             } elseif ($this->request->get('coupon-combination')) {
                 Notification::success('CouponGroup combination leading attribute group was updated.');
-                return redirect()->route('hideyo.coupon-group.{couponId}.coupon-combination.index', $couponGroupId);
+                return redirect()->route('coupon-group.{couponId}.coupon-combination.index', $couponGroupId);
             } else {
                 Notification::success('CouponGroup was updated.');
-                return redirect()->route('hideyo.coupon-group.edit', $couponGroupId);
+                return redirect()->route('coupon-group.edit', $couponGroupId);
             }
         }
 
@@ -103,7 +103,7 @@ class CouponGroupController extends Controller
 
         if ($result) {
             Notification::success('The coupon was deleted.');
-            return redirect()->route('hideyo.coupon-group.index');
+            return redirect()->route('coupon-group.index');
         }
     }
 }

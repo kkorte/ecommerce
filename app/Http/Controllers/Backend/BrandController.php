@@ -8,7 +8,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\BrandRepositoryInterface;
+use Hideyo\Repositories\BrandRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -33,8 +33,8 @@ class BrandController extends Controller
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = Datatables::of($brand)->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.brand.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $query->title);
-                $links = '<a href="'.url()->route('hideyo.brand.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('brand.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $query->title);
+                $links = '<a href="'.url()->route('brand.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -56,7 +56,7 @@ class BrandController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The brand was inserted.');
-            return redirect()->route('hideyo.brand.index');
+            return redirect()->route('brand.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -82,14 +82,14 @@ class BrandController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('Brand seo was updated.');
-                return redirect()->route('hideyo.brand.edit_seo', $brandId);
+                return redirect()->route('brand.edit_seo', $brandId);
             } elseif ($this->request->get('brand-combination')) {
                 Notification::success('Brand combination leading attribute group was updated.');
-                return redirect()->route('hideyo.brand.{brandId}.brand-combination.index', $brandId);
+                return redirect()->route('brand.{brandId}.brand-combination.index', $brandId);
             }
 
             Notification::success('Brand was updated.');
-            return redirect()->route('hideyo.brand.edit', $brandId);            
+            return redirect()->route('brand.edit', $brandId);            
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -104,7 +104,7 @@ class BrandController extends Controller
         $result  = $this->brand->destroy($brandId);
         if ($result) {
             Notification::error('The brand was deleted.');
-            return redirect()->route('hideyo.brand.index');
+            return redirect()->route('brand.index');
         }
     }
 }

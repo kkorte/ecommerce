@@ -8,9 +8,9 @@
  * @version 0.1
  */
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 use DB;
 use Request;
 use Datatables;
@@ -74,7 +74,7 @@ class SendingPaymentMethodRelatedController extends Controller
             
 
             ->addColumn('action', function ($query) {
-                $links = '<a href="'.url()->route('hideyo.sending-payment-method-related.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>';
+                $links = '<a href="'.url()->route('sending-payment-method-related.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>';
             
                 return $links;
             });
@@ -100,7 +100,7 @@ class SendingPaymentMethodRelatedController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The order template was updated.');
-            return redirect()->route('hideyo.sending-payment-method-related.index');
+            return redirect()->route('sending-payment-method-related.index');
         }
         
         Notification::error($result->errors()->all());

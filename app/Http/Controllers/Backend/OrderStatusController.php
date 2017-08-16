@@ -9,8 +9,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\OrderStatusRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\OrderStatusEmailTemplateRepositoryInterface;
+use Hideyo\Repositories\OrderStatusRepositoryInterface;
+use Hideyo\Repositories\OrderStatusEmailTemplateRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -73,7 +73,7 @@ class OrderStatusController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The order status was inserted.');
-            return redirect()->route('hideyo.order-status.index');
+            return redirect()->route('order-status.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -108,7 +108,7 @@ class OrderStatusController extends Controller
 
         if (isset($result->id)) {
             Notification::success('order status was updated.');
-            return redirect()->route('hideyo.order-status.index');
+            return redirect()->route('order-status.index');
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -124,7 +124,7 @@ class OrderStatusController extends Controller
 
         if ($result) {
             Notification::success('The order status was deleted.');
-            return redirect()->route('hideyo.order-status.index');
+            return redirect()->route('order-status.index');
         }
     }
 }

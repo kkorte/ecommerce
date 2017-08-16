@@ -11,7 +11,7 @@
 
            
 
-	    {!! Form::open(array('route' => array('hideyo.product.related-product.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+	    {!! Form::open(array('route' => array('product.related-product.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 
 	        <div class="form-group">
@@ -24,7 +24,7 @@
 	        <div class="form-group">
 	            <div class="col-sm-offset-3 col-sm-5">
 	                {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-	                <a href="{!! URL::route('hideyo.product.related-product.store', $product->id) !!}" class="btn btn-large">Cancel</a>
+	                <a href="{!! URL::route('product.related-product.store', $product->id) !!}" class="btn btn-large">Cancel</a>
 	            </div>
 	        </div>
 

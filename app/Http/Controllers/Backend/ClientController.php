@@ -12,8 +12,8 @@ use App\Http\Controllers\Controller;
  */
 
 
-use Hideyo\Ecommerce\Backend\Repositories\ClientRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ClientAddressRepositoryInterface;
+use Hideyo\Repositories\ClientRepositoryInterface;
+use Hideyo\Repositories\ClientAddressRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -55,13 +55,13 @@ class ClientController extends Controller
             })
 
             ->addColumn('action', function ($clients) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.client.destroy', $clients->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.client.edit', $clients->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('client.destroy', $clients->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('client.edit', $clients->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$deleteLink;
             
                 if (!$clients->active || !$clients->confirmed) {
-                    $links .= ' <a href="'.url()->route('hideyo.client.activate', $clients->id).'" class="btn btn-default btn-sm btn-info">activate</a>';
+                    $links .= ' <a href="'.url()->route('client.activate', $clients->id).'" class="btn btn-default btn-sm btn-info">activate</a>';
                 } else {
-                    $links .= ' <a href="'.url()->route('hideyo.client.de-activate', $clients->id).'" class="btn btn-default btn-sm btn-info">block</a>';
+                    $links .= ' <a href="'.url()->route('client.de-activate', $clients->id).'" class="btn btn-default btn-sm btn-info">block</a>';
                 }
 
                 return $links;
@@ -119,7 +119,7 @@ class ClientController extends Controller
         }
 
         Notification::success('The client was activate.');
-        return redirect()->route('hideyo.client.index');
+        return redirect()->route('client.index');
     }
 
 
@@ -127,7 +127,7 @@ class ClientController extends Controller
     {
         $this->client->deactivate($clientId);
         Notification::success('The client was deactivate.');
-        return redirect()->route('hideyo.client.index');
+        return redirect()->route('client.index');
     }
 
     public function store()
@@ -136,7 +136,7 @@ class ClientController extends Controller
         
         if (isset($result->id)) {
             Notification::success('The client was inserted.');
-            return redirect()->route('hideyo.client.index');
+            return redirect()->route('client.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -215,7 +215,7 @@ class ClientController extends Controller
 
 
         Notification::success('The product export is completed.');
-        return redirect()->route('hideyo.product.index');
+        return redirect()->route('product.index');
     }
 
 
@@ -250,7 +250,7 @@ class ClientController extends Controller
 
 
             Notification::success('The client was updated.');
-            return redirect()->route('hideyo.client.index');
+            return redirect()->route('client.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -265,7 +265,7 @@ class ClientController extends Controller
 
         if ($result) {
             Notification::success('The client was deleted.');
-            return redirect()->route('hideyo.client.index');
+            return redirect()->route('client.index');
         }
     }
 }

@@ -10,8 +10,8 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\ProductTagGroupRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ProductTagGroupRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
 
 use Request;
 use Notification;
@@ -35,8 +35,8 @@ class ProductTagGroupController extends Controller
             ->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.product-tag-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.product-tag-group.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('product-tag-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('product-tag-group.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -62,7 +62,7 @@ class ProductTagGroupController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The product group tag was inserted.');
-            return redirect()->route('hideyo.product-tag-group.index');
+            return redirect()->route('product-tag-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -86,7 +86,7 @@ class ProductTagGroupController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The product group tag was updated.');
-            return redirect()->route('hideyo.product-tag-group.index');
+            return redirect()->route('product-tag-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -102,7 +102,7 @@ class ProductTagGroupController extends Controller
 
         if ($result) {
             Notification::success('The product group tag was deleted.');
-            return redirect()->route('hideyo.product-tag-group.index');
+            return redirect()->route('product-tag-group.index');
         }
     }
 }

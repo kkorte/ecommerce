@@ -11,8 +11,8 @@
 use App\Http\Controllers\Controller;
 
 use Dutchbridge\Datatable\ProductCategoryDatatable;
-use Hideyo\Ecommerce\Backend\Repositories\ProductCategoryRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ProductCategoryRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -81,8 +81,8 @@ class ProductCategoryController extends Controller
                 }
             })
             ->addColumn('action', function ($productCategory) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.product-category.destroy', $productCategory->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'), $productCategory->title);
-                $links = '<a href="'.url()->route('hideyo.product-category.edit', $productCategory->id).'" class="btn btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('product-category.destroy', $productCategory->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'), $productCategory->title);
+                $links = '<a href="'.url()->route('product-category.edit', $productCategory->id).'" class="btn btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -96,7 +96,7 @@ class ProductCategoryController extends Controller
     public function refactorAllImages()
     {
         $this->productCategoryImage->refactorAllImagesByShopId(\Auth::guard('hideyobackend')->user()->selected_shop_id);
-        return redirect()->route('hideyo.product-category.index');
+        return redirect()->route('product-category.index');
     }
 
     public function tree()
@@ -146,7 +146,7 @@ class ProductCategoryController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The product category was inserted.');
-            return redirect()->route('hideyo.product-category.index');
+            return redirect()->route('product-category.index');
         }
             
         foreach ($result->errors()->all() as $error) {
@@ -182,14 +182,14 @@ class ProductCategoryController extends Controller
         if (isset($result->id)) {
             if ($request->get('seo')) {
                 Notification::success('Category seo was updated.');
-                return redirect()->route('hideyo.product-category.edit_seo', $productCategoryId);
+                return redirect()->route('product-category.edit_seo', $productCategoryId);
             } elseif ($request->get('highlight')) {
                 Notification::success('Highlight was updated.');
-                return redirect()->route('hideyo.product-category.edit.hightlight', $productCategoryId);
+                return redirect()->route('product-category.edit.hightlight', $productCategoryId);
             }
     
             Notification::success('Category was updated.');
-            return redirect()->route('hideyo.product-category.edit', $productCategoryId);        
+            return redirect()->route('product-category.edit', $productCategoryId);        
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -205,7 +205,7 @@ class ProductCategoryController extends Controller
 
         if ($result) {
             Notification::success('Category was deleted.');
-            return redirect()->route('hideyo.product-category.index');
+            return redirect()->route('product-category.index');
         }
     }
 

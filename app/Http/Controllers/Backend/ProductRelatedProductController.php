@@ -12,8 +12,8 @@
 use App\Http\Controllers\Controller;
 
 
-use Hideyo\Ecommerce\Backend\Repositories\ProductRelatedProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ProductRelatedProductRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -42,7 +42,7 @@ class ProductRelatedProductController extends Controller
                     return $query->Product->title;
                 })
                 ->addColumn('action', function ($query) use ($productId) {
-                    $deleteLink = \Form::deleteajax(url()->route('hideyo.product.related-product.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                    $deleteLink = \Form::deleteajax(url()->route('product.related-product.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                     
                     return $deleteLink;
                 });
@@ -64,7 +64,7 @@ class ProductRelatedProductController extends Controller
     public function store($productId)
     {
         $result  = $this->productRelatedProduct->create($this->request->all(), $productId);
-        return redirect()->route('hideyo.product.related-product.index', $productId);
+        return redirect()->route('product.related-product.index', $productId);
     }
 
     public function edit($productRelatedProductId)
@@ -80,7 +80,7 @@ class ProductRelatedProductController extends Controller
             return redirect()->back()->withInput()->withErrors($result->errors()->all());
         } else {
             Notification::success('The related product is updated.');
-            return redirect()->route('hideyo.product_related_product.index');
+            return redirect()->route('product_related_product.index');
         }
     }
 
@@ -90,7 +90,7 @@ class ProductRelatedProductController extends Controller
 
         if ($result) {
             Notification::success('The related product is deleted.');
-            return redirect()->route('hideyo.product.related-product.index', $productId);
+            return redirect()->route('product.related-product.index', $productId);
         }
     }
 }

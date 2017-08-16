@@ -8,14 +8,14 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.news.index') !!}">News</a></li>  
-            <li><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">edit</a></li>
-            <li class="active"><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{!! URL::route('news.index') !!}">News</a></li>  
+            <li><a href="{!! URL::route('news.edit', $news->id) !!}">edit</a></li>
+            <li class="active"><a href="{!! URL::route('news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
             <li class="active">images</li>           
         </ol>
 
-        <a href="{{ URL::route('hideyo.news-images.create', $news->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
+        <a href="{{ URL::route('news-images.create', $news->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
 
         <h2>News <small>images</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.news-images.index', $news->id) }}",
+                   "ajax": "{{ URL::route('news-images.index', $news->id) }}",
 
                  columns: [
               {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

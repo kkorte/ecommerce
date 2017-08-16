@@ -11,11 +11,11 @@
 use App\Http\Controllers\Controller;
 
 
-use Hideyo\Ecommerce\Backend\Repositories\ProductCombinationRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ProductRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ExtraFieldRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\AttributeGroupRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\ProductCombinationRepositoryInterface;
+use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ExtraFieldRepositoryInterface;
+use Hideyo\Repositories\AttributeGroupRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
 
 use \Request;
 use \Notification;
@@ -47,8 +47,8 @@ class ProductCombinationController extends Controller
             )->where('product_id', '=', $productId);
 
             $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($productId) {
-                $deleteLink = \Form::deleteajax(url()->route('hideyo.product.combination.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.product.combination.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('product.combination.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('product.combination.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             })

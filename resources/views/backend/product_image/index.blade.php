@@ -10,13 +10,13 @@
 
 		<ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">images</li>
 		</ol>
 
-		<a href="{{ URL::route('hideyo.product.image.create', $product->id) }}" class="btn btn-green btn-success pull-right">upload images<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('product.image.create', $product->id) }}" class="btn btn-green btn-success pull-right">upload images<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>images</small></h2>
         <hr/>
@@ -38,7 +38,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('hideyo.product.image.index', $product->id) }}",
+                   "ajax": "{{ URL::route('product.image.index', $product->id) }}",
 
                  columns: [
                         {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

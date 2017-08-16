@@ -4,15 +4,15 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{!! URL::route('hideyo.product-category.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{!! URL::route('hideyo.product-category.create') !!}">Create</a></li>
-            <li><a href="{{ URL::route('hideyo.product-category.tree') }}">Tree</a></li>
+            <li><a href="{!! URL::route('product-category.index') !!}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{!! URL::route('product-category.create') !!}">Create</a></li>
+            <li><a href="{{ URL::route('product-category.tree') }}">Tree</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product-category.index') !!}">Product categories</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{!! URL::route('product-category.index') !!}">Product categories</a></li>  
             <li class="active">create</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-    {!! Form::open(array('route' => array('hideyo.product-category.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+    {!! Form::open(array('route' => array('product-category.store'), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
         <div class="form-group">
@@ -79,7 +79,7 @@
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('hideyo.product-category.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('product-category.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 
@@ -108,7 +108,7 @@
         $(".parent_id, .redirect_product_category_id").select2({
             minimumInputLength: 1,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                url: "{!! URL::route('hideyo.product-category.ajax_categories') !!}",
+                url: "{!! URL::route('product-category.ajax_categories') !!}",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {

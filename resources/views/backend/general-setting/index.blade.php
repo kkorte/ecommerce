@@ -5,18 +5,18 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('hideyo.general-setting.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('hideyo.general-setting.create') }}">Create</a></li>
+            <li class="active"><a href="{{ URL::route('general-setting.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('general-setting.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.general-setting.index') }}">General settings</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('general-setting.index') }}">General settings</a></li>  
             <li class="active">overview</li>
         </ol>
 
-        <a href="{{ URL::route('hideyo.general-setting.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('general-setting.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
         <h2>General settings <small>overview</small></h2>
         <hr/>
@@ -39,7 +39,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ URL::route('hideyo.general-setting.index') }}",
+                    "ajax": "{{ URL::route('general-setting.index') }}",
 
                  columns: [
                         {data: 'id', name: 'id'},

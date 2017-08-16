@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.product.index') !!}">Product</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
+            <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
             <li class="active">price</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($product, array('method' => 'put', 'route' => array('hideyo.product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::model($product, array('method' => 'put', 'route' => array('product.update', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('price', 1) !!}                      
             
@@ -94,7 +94,7 @@
             </div>
 
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.product.index'))
+            @include('backend._fields.buttons', array('cancelRoute' => 'product.index'))
 
         {!! Form::close() !!}
 

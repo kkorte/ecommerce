@@ -1,7 +1,7 @@
 <ul class="nav nav-sidebar"><!-- available classes "right-aligned" -->
 
     <li>
-        <a href="{!! URL::route('hideyo.coupon-group.index', $couponGroup->id) !!}">
+        <a href="{!! URL::route('coupon-group.index', $couponGroup->id) !!}">
             Overview
         </a>
     </li>
@@ -10,7 +10,7 @@
     @else
     <li>
     @endif
-        <a href="{{ URL::route('hideyo.coupon-group.edit', $couponGroup->id) }}">
+        <a href="{{ URL::route('coupon-group.edit', $couponGroup->id) }}">
             <span class="visible-xs"><i class="entypo-gauge"></i></span>
             <span class="hidden-xs">Edit</span>
         </a>

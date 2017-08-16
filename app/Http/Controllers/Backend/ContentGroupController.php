@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\ContentRepositoryInterface;
+use Hideyo\Repositories\ContentRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -36,8 +36,8 @@ class ContentGroupController extends Controller
 
             $datatables = Datatables::of($query)
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.content-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.content-group.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('content-group.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('content-group.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -59,7 +59,7 @@ class ContentGroupController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The content was inserted.');
-            return redirect()->route('hideyo.content-group.index');
+            return redirect()->route('content-group.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -86,13 +86,13 @@ class ContentGroupController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('ContentGroup seo was updated.');
-                return redirect()->route('hideyo.content-group.edit_seo', $contentGroupId);
+                return redirect()->route('content-group.edit_seo', $contentGroupId);
             } elseif ($this->request->get('content-combination')) {
                 Notification::success('ContentGroup combination leading attribute group was updated.');
-                return redirect()->route('hideyo.content-group.{contentId}.content-combination.index', $contentGroupId);
+                return redirect()->route('content-group.{contentId}.content-combination.index', $contentGroupId);
             } else {
                 Notification::success('ContentGroup was updated.');
-                return redirect()->route('hideyo.content-group.index');
+                return redirect()->route('content-group.index');
             }
         }
 
@@ -114,7 +114,7 @@ class ContentGroupController extends Controller
 
         if ($result) {
             Notification::success('The content was deleted.');
-            return redirect()->route('hideyo.content-group.index');
+            return redirect()->route('content-group.index');
         }
     }
 }

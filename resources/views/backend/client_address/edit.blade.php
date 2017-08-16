@@ -5,23 +5,23 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li ><a href="{{ URL::route('hideyo.client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li ><a href="{{ URL::route('client.index') }}">Overview <span class="sr-only">(current)</span></a></li>
             <li>
-                <a href="{{ URL::route('hideyo.client.edit', $client->id) }}">
+                <a href="{{ URL::route('client.edit', $client->id) }}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Edit</span>
                 </a>
             </li>
 
             <li class="active">
-                <a href="{!! URL::route('hideyo.client-address.index', $client->id) !!}">
+                <a href="{!! URL::route('client-address.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Adressess</span>
                 </a>
             </li>
 
             <li>
-                <a href="{!! URL::route('hideyo.client-order.index', $client->id) !!}">
+                <a href="{!! URL::route('client-order.index', $client->id) !!}">
                     <span class="visible-xs"><i class="entypo-gauge"></i></span>
                     <span class="hidden-xs">Orders</span>
                 </a>
@@ -33,9 +33,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/admin"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.client.index') }}">Client</a></li>
-            <li><a href="{{ URL::route('hideyo.client.edit', $client->id) }}">{!! $client->email !!}</a></li>
-            <li class="active"><a href="{{ URL::route('hideyo.client-address.index', $client->id) }}">addresses</a></li>
+            <li><a href="{{ URL::route('client.index') }}">Client</a></li>
+            <li><a href="{{ URL::route('client.edit', $client->id) }}">{!! $client->email !!}</a></li>
+            <li class="active"><a href="{{ URL::route('client-address.index', $client->id) }}">addresses</a></li>
                 <li class="active">edit</li>
 
         </ol>
@@ -46,7 +46,7 @@
             <div class="col-md-12">
 
 
-				{!! Form::model($clientAddress, array('method' => 'put', 'route' => array('hideyo.client-address.update', $client->id, $clientAddress->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+				{!! Form::model($clientAddress, array('method' => 'put', 'route' => array('client-address.update', $client->id, $clientAddress->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 
                         <div class="form-group">
@@ -138,7 +138,7 @@
 				        <div class="form-group">
 				            <div class="col-sm-offset-3 col-sm-5">
 				                {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-				                <a href="{!! URL::route('hideyo.client-address.store', $client->id) !!}" class="btn btn-large">Cancel</a>
+				                <a href="{!! URL::route('client-address.store', $client->id) !!}" class="btn btn-large">Cancel</a>
 				            </div>
 				        </div>
 

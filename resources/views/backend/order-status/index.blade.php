@@ -5,18 +5,18 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('hideyo.order-status.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('hideyo.order-status.create') }}">Create</a></li>
+            <li class="active"><a href="{{ URL::route('order-status.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('order-status.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.order-status.index') }}">Order status</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('order-status.index') }}">Order status</a></li>  
             <li class="active">overview</li>
         </ol>
 
-        <a href="{{ URL::route('hideyo.order-status.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('order-status.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
         <h2>Order status <small>overview</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   	"ajax": "{{ URL::route('hideyo.order-status.index') }}",
+                   	"ajax": "{{ URL::route('order-status.index') }}",
                  columns: [                     
                         {data: 'title', name: 'title'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}

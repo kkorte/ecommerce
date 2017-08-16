@@ -5,18 +5,18 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('hideyo.error.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::route('hideyo.error.create') }}">Create</a></li>
+            <li class="active"><a href="{{ URL::route('error.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ URL::route('error.create') }}">Create</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.error.index') }}">Errors</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('error.index') }}">Errors</a></li>  
             <li class="active">overview</li>
         </ol>
 
-        <a href="{{ URL::route('hideyo.error.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
+        <a href="{{ URL::route('error.create') }}" class="btn btn-success pull-right" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</a>
 
         <h2>Errors <small>overview</small></h2>
         <hr/>

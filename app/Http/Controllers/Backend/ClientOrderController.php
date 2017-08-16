@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
  * @version 0.1
  */
 
-use Hideyo\Ecommerce\Backend\Repositories\ClientAddressRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\ClientRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\OrderRepositoryInterface;
+use Hideyo\Repositories\ClientAddressRepositoryInterface;
+use Hideyo\Repositories\ClientRepositoryInterface;
+use Hideyo\Repositories\OrderRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Form;

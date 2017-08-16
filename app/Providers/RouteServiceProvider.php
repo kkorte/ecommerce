@@ -38,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         //$this->mapApiRoutes();
 
-        $this->mapFrontendRoutes();
+        // $this->mapFrontendRoutes();
         $this->mapBackendRoutes();
         $this->mapAuthBackendRoutes();
         //
@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => ['hideyobackend','auth.hideyo.backend'],
-            'prefix' => config()->get('hideyo.route_prefix').'/admin', 
+            'prefix' => 'admin', 
             'namespace' => 'App\Http\Controllers\Backend'
         ], function ($router) {
             require base_path('routes/backend.php');
@@ -78,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => ['hideyobackend'],
-            'prefix' => config()->get('hideyo.route_prefix').'/admin', 
+            'prefix' => 'admin', 
             'namespace' => 'App\Http\Controllers\Backend'
         ], function ($router) {
             require base_path('routes/auth_backend.php');
@@ -125,4 +125,8 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/api.php');
         });
     }
+
+
+
+    
 }

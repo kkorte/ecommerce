@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\BrandRepositoryInterface;
+use Hideyo\Repositories\BrandRepositoryInterface;
 use Illuminate\Http\Request;
 use Notification;
 use Datatables;
@@ -38,8 +38,8 @@ class BrandImageController extends Controller
                 return '<img src="'.config('hideyo.public_path').'/brand/100x100/'.$image->brand_id.'/'.$image->file.'"  />';
             })
             ->addColumn('action', function ($image) use ($brandId) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.brand-image.destroy', array('brandId' => $brandId, 'id' => $image->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.brand-image.edit', array('brandId' => $brandId, 'id' => $image->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('brand-image.destroy', array('brandId' => $brandId, 'id' => $image->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('brand-image.edit', array('brandId' => $brandId, 'id' => $image->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -61,7 +61,7 @@ class BrandImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The brand image was inserted.');
-            return redirect()->route('hideyo.brand-image.index', $brandId);
+            return redirect()->route('brand-image.index', $brandId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -82,7 +82,7 @@ class BrandImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The brand image was updated.');
-            return redirect()->route('hideyo.brand-image.index', $brandId);
+            return redirect()->route('brand-image.index', $brandId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -97,7 +97,7 @@ class BrandImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('hideyo.brand-image.index', $brandId);
+            return redirect()->route('brand-image.index', $brandId);
         }
     }
 }

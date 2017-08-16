@@ -4,14 +4,14 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Overview <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="{{ URL::route('hideyo.tax-rate.create') }}">Edit</a></li>
+            <li><a href="{{ URL::route('tax-rate.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('tax-rate.create') }}">Edit</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.tax-rate.index') }}">Tax rates</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('tax-rate.index') }}">Tax rates</a></li>  
             <li class="active">edit</li>
         </ol>
 
@@ -19,7 +19,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($taxRate, array('method' => 'put', 'route' => array('hideyo.tax-rate.update', $taxRate->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::model($taxRate, array('method' => 'put', 'route' => array('tax-rate.update', $taxRate->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
             <div class="form-group">
                 {!! Form::label('title', 'Title', array('class' => 'col-sm-3 control-label')) !!}
                 <div class="col-sm-5">
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            @include('backend._fields.buttons', array('cancelRoute' => 'hideyo.tax-rate.index'))
+            @include('backend._fields.buttons', array('cancelRoute' => 'tax-rate.index'))
         {!! Form::close() !!}
     </div>
 </div>

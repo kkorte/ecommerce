@@ -84,7 +84,7 @@
 
 
             <div class="link">    
-                <a href="{{ URL::route('hideyo.login') }}" class="link"><i class="entypo-back"></i> back to login</a>               
+                <a href="{{ URL::route('login') }}" class="link"><i class="entypo-back"></i> back to login</a>               
             </div>
 
 </div>

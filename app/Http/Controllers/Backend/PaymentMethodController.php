@@ -8,9 +8,9 @@
  * @version 0.1
  */
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\PaymentMethodRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\OrderStatusRepositoryInterface;
+use Hideyo\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\OrderStatusRepositoryInterface;
 
 
 use Illuminate\Http\Request;
@@ -58,8 +58,8 @@ class PaymentMethodController extends Controller
                 }
             })
             ->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.payment-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.payment-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('payment-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('payment-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -86,7 +86,7 @@ class PaymentMethodController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The payment method was inserted.');
-            return redirect()->route('hideyo.payment-method.index');
+            return redirect()->route('payment-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -113,7 +113,7 @@ class PaymentMethodController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The payment method was updated.');
-            return redirect()->route('hideyo.payment-method.index');
+            return redirect()->route('payment-method.index');
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -129,7 +129,7 @@ class PaymentMethodController extends Controller
 
         if ($result) {
             Notification::success('The payment method was deleted.');
-            return redirect()->route('hideyo.payment-method.index');
+            return redirect()->route('payment-method.index');
         }
     }
 }

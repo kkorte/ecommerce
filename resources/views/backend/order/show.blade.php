@@ -5,18 +5,18 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-            <li class="active"><a href="{{ URL::route('hideyo.order.index') }}">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{{ URL::route('order.index') }}">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Show</a></li>
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <ol class="breadcrumb">
-            <li><a href="{{ URL::route('hideyo.dashboard.index') }}">Dashboard</a></li>
-            <li><a href="{{ URL::route('hideyo.order.index') }}">Orders</a></li>  
+            <li><a href="{{ URL::route('dashboard.index') }}">Dashboard</a></li>
+            <li><a href="{{ URL::route('order.index') }}">Orders</a></li>  
             <li class="active">show</li>
         </ol>
 
-        <a href="{{ URL::route('hideyo.order.index') }}" class="btn btn-danger btn-icon icon-left pull-right">Back to overview<i class="entypo-back"></i></a>
+        <a href="{{ URL::route('order.index') }}" class="btn btn-danger btn-icon icon-left pull-right">Back to overview<i class="entypo-back"></i></a>
 
         <h2>Order <small>show</small></h2>
         <hr/>

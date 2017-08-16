@@ -9,9 +9,9 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\SendingMethodRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\TaxRateRepositoryInterface;
-use Hideyo\Ecommerce\Backend\Repositories\PaymentMethodRepositoryInterface;
+use Hideyo\Repositories\SendingMethodRepositoryInterface;
+use Hideyo\Repositories\TaxRateRepositoryInterface;
+use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -39,8 +39,8 @@ class SendingMethodController extends Controller
             $query = $this->sendingMethod->getModel()->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = Datatables::of($query)->addColumn('action', function ($query) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.sending-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.sending-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('sending-method.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('sending-method.edit', $query->id).'" class="btn btn-sm btn-success"><i class="fi-pencil"></i>Edit</a>  '.$deleteLink;
                 return $links;
             });
 
@@ -64,7 +64,7 @@ class SendingMethodController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The sending method was inserted.');
-            return redirect()->route('hideyo.sending-method.index');
+            return redirect()->route('sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -91,7 +91,7 @@ class SendingMethodController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The sending method was updated.');
-            return redirect()->route('hideyo.sending-method.index');
+            return redirect()->route('sending-method.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -107,7 +107,7 @@ class SendingMethodController extends Controller
 
         if ($result) {
             Notification::success('The sending method was deleted.');
-            return redirect()->route('hideyo.sending-method.index');
+            return redirect()->route('sending-method.index');
         }
     }
 }

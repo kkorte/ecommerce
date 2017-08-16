@@ -10,9 +10,9 @@
 
         <ol class="breadcrumb">
             <li><a href="/"><i class="entypo-folder"></i>Dashboard</a></li>
-            <li><a href="{!! URL::route('hideyo.news.index') !!}">News</a></li>
-            <li><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">edit</a></li>
-            <li><a href="{!! URL::route('hideyo.news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
+            <li><a href="{!! URL::route('news.index') !!}">News</a></li>
+            <li><a href="{!! URL::route('news.edit', $news->id) !!}">edit</a></li>
+            <li><a href="{!! URL::route('news.edit', $news->id) !!}">{!! $news->title !!}</a></li>
             <li class="active">seo</li>
         </ol>
 
@@ -20,7 +20,7 @@
         <hr/>
         {!! Notification::showAll() !!}
 
-        {!! Form::model($news, array('method' => 'put', 'route' => array('hideyo.news.update', $news->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+        {!! Form::model($news, array('method' => 'put', 'route' => array('news.update', $news->id), 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">     
         {!! Form::hidden('seo', 1) !!}                      
             
@@ -29,7 +29,7 @@
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-5">
                 {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                <a href="{!! URL::route('hideyo.news.index') !!}" class="btn btn-large">Cancel</a>
+                <a href="{!! URL::route('news.index') !!}" class="btn btn-large">Cancel</a>
             </div>
         </div>
 

@@ -28,5 +28,4 @@ return array(
     */
 
     'default_index' => 'hideyo',
-
 );

@@ -9,7 +9,7 @@
  */
 
 use App\Http\Controllers\Controller;
-use Hideyo\Ecommerce\Backend\Repositories\ContentRepositoryInterface;
+use Hideyo\Repositories\ContentRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -66,7 +66,7 @@ class ContentImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The content image was inserted.');
-            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
+            return redirect()->route('content.{contentId}.images.index', $contentId);
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -87,7 +87,7 @@ class ContentImageController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The content image was updated.');
-            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
+            return redirect()->route('content.{contentId}.images.index', $contentId);
         } else {
             foreach ($result->errors()->all() as $error) {
                 Notification::error($error);
@@ -102,7 +102,7 @@ class ContentImageController extends Controller
 
         if ($result) {
             Notification::success('The file was deleted.');
-            return redirect()->route('hideyo.content.{contentId}.images.index', $contentId);
+            return redirect()->route('content.{contentId}.images.index', $contentId);
         }
     }
 }

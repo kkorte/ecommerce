@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
  * @version 0.1
  */
 
-use Hideyo\Ecommerce\Backend\Repositories\ContentRepositoryInterface;
+use Hideyo\Repositories\ContentRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Notification;
@@ -51,8 +51,8 @@ class ContentController extends Controller
                 return $content->contenttitle;
             })
             ->addColumn('action', function ($content) {
-                $deleteLink = Form::deleteajax(url()->route('hideyo.content.destroy', $content->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('hideyo.content.edit', $content->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = Form::deleteajax(url()->route('content.destroy', $content->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('content.edit', $content->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -74,7 +74,7 @@ class ContentController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The content was inserted.');
-            return redirect()->route('hideyo.content.index');
+            return redirect()->route('content.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -102,13 +102,13 @@ class ContentController extends Controller
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('Content seo was updated.');
-                return redirect()->route('hideyo.content.edit_seo', $contentId);
+                return redirect()->route('content.edit_seo', $contentId);
             } elseif ($this->request->get('content-combination')) {
                 Notification::success('Content combination leading attribute group was updated.');
-                return redirect()->route('hideyo.content.{contentId}.content-combination.index', $contentId);
+                return redirect()->route('content.{contentId}.content-combination.index', $contentId);
             } else {
                 Notification::success('Content was updated.');
-                return redirect()->route('hideyo.content.edit', $contentId);
+                return redirect()->route('content.edit', $contentId);
             }
         }
 
@@ -127,7 +127,7 @@ class ContentController extends Controller
 
         if ($result) {
             Notification::success('The content was deleted.');
-            return redirect()->route('hideyo.content.index');
+            return redirect()->route('content.index');
         }
     }
 }
