@@ -61,7 +61,7 @@ gulp.task('adminjavascript', function() { 
         .pipe($.plumber())
         .pipe($.concat('site.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest('public/hideyo/javascript/'))
+        .pipe(gulp.dest('./public/javascript/admin/'))
 
 });
 
@@ -76,18 +76,21 @@ gulp.task('jstree', function() { 
 });
 
 
+
 gulp.task('adminsass', function() {
-    return gulp.src('./scss/style.scss')
+    return gulp.src('./resources/scss/admin/style.scss')
         .pipe($.sass({
-          includePaths: [sassPaths]
+          includePaths: sassPaths
         })
           .on('error', $.sass.logError))
         .pipe($.autoprefixer({
           browsers: ['last 2 versions', 'ie >= 9']
         }))
-        .pipe($.cleanCss())
-        .pipe(gulp.dest('public/hideyo/css/'));
+        .pipe($.minifyCss())
+        .pipe(gulp.dest('./public/css/admin/'));
 });
+
+
 
 
 gulp.task('default', ['bower', 'jstree', 'icons', 'adminsass',  'adminjavascript'], function() {
