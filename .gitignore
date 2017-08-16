@@ -1,12 +1,44 @@
-/node_modules
+# IDE's and other
+.idea/
+.DS_Store
+*.swp
+_ide_helper.php
+
+# Laravel
+
+.env
+
+# Node and npm
+node_modules/
+bower_components/
+*.log
+
+# Project
+public/assets/
+public/uploads/
 /public/storage
 /public/hideyo
 /public/files
+storage/framework/
+
+
 /vendor
-/packages/hideyo/shop/vendor
-/resources/assets/vendor
-/resources/views/vendor
-/.idea
-Homestead.json
+/node_modules
 Homestead.yaml
+Homestead.json
 .env
+.sass-cache
+composer.lock
+node_modules
+bower_components
+
+/public/images
+/public/javascript
+/public/css
+/public/fonts
+/public/upload
+/public/filemanager
+
+/log
+/log/
+/log/capistrano.log
