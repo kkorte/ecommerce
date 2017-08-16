@@ -33,15 +33,15 @@ class FaqItemController extends Controller
             $query = $this->faq->getModel()->select(
                 [
                 
-                config()->get('hideyo.db_prefix').'faq_item.id', 
-                config()->get('hideyo.db_prefix').'faq_item.faq_item_group_id',
-                config()->get('hideyo.db_prefix').'faq_item.question', 
-                config()->get('hideyo.db_prefix').'faq_item.answer', 
-                config()->get('hideyo.db_prefix').'faq_item_group.title as grouptitle']
+                'faq_item.id', 
+                'faq_item.faq_item_group_id',
+                'faq_item.question', 
+                'faq_item.answer', 
+                'faq_item_group.title as grouptitle']
             )
             ->with(array('faqItemGroup'))
-            ->leftJoin(config()->get('hideyo.db_prefix').'faq_item_group', config()->get('hideyo.db_prefix').'faq_item_group.id', '=', config()->get('hideyo.db_prefix').'faq_item.faq_item_group_id')
-            ->where(config()->get('hideyo.db_prefix').'faq_item.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            ->leftJoin('faq_item_group', 'faq_item_group.id', '=', 'faq_item.faq_item_group_id')
+            ->where('faq_item.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
 
             $datatables = Datatables::of($query)
             ->addColumn('faqitemgroup', function ($query) {

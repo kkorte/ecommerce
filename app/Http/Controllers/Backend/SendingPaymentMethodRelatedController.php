@@ -27,11 +27,11 @@ class SendingPaymentMethodRelatedController extends Controller
     {
         if (Request::wantsJson()) {
 
-            $query = DB::table(config()->get('hideyo.db_prefix').'sending_payment_method_related')->join(config()->get('hideyo.db_prefix').'sending_method', config()->get('hideyo.db_prefix').'sending_payment_method_related.sending_method_id', '=', config()->get('hideyo.db_prefix').'sending_method.id')->join(config()->get('hideyo.db_prefix').'payment_method', config()->get('hideyo.db_prefix').'sending_payment_method_related.payment_method_id', '=', config()->get('hideyo.db_prefix').'payment_method.id')
-                ->select([config()->get('hideyo.db_prefix').'payment_method.title as payment_method_title', 
-                    config()->get('hideyo.db_prefix').'sending_method.title as sending_method_title', 
-                    config()->get('hideyo.db_prefix').'sending_payment_method_related.*'])
-               ->where(config()->get('hideyo.db_prefix').'sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            $query = DB::table('sending_payment_method_related')->join('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->join('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')
+                ->select(['payment_method.title as payment_method_title', 
+                    'sending_method.title as sending_method_title', 
+                    'sending_payment_method_related.*'])
+               ->where('sending_method.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             $datatables = Datatables::of($query)
 
             ->addColumn('payment_method', function ($query) {

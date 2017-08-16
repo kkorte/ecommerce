@@ -63,7 +63,7 @@ class OrderController extends Controller
         if (Request::wantsJson()) {
 
             $order = $this->order->getModel()
-                ->from(config()->get('hideyo.db_prefix').'order as order')
+                ->from('order as order')
                 ->select(
                 [
 
@@ -80,7 +80,7 @@ class OrderController extends Controller
 
 
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'order_address', 'order.bill_order_address_id', '=', config()->get('hideyo.db_prefix').'order_address.id');
+            ->leftJoin('order_address', 'order.bill_order_address_id', '=', 'order_address.id');
             
             
             $datatables = \Datatables::of($order)

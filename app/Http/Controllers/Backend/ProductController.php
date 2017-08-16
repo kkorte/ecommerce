@@ -49,16 +49,16 @@ class ProductController extends Controller
         if ($this->request->wantsJson()) {
 
             $product = $this->product->getModel()->select(
-                [config()->get('hideyo.db_prefix').'product.*', 
+                ['product.*', 
                 'brand.title as brandtitle', 
                 'product_category.title as categorytitle']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'product_category as product_category', 'product_category.id', '=', config()->get('hideyo.db_prefix').'product.product_category_id')
+            ->leftJoin('product_category as product_category', 'product_category.id', '=', 'product.product_category_id')
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'brand as brand', 'brand.id', '=', config()->get('hideyo.db_prefix').'product.brand_id')
+            ->leftJoin('brand as brand', 'brand.id', '=', 'product.brand_id')
 
-            ->where(config()->get('hideyo.db_prefix').'product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
 
             $datatables = \Datatables::of($product)
@@ -221,16 +221,16 @@ class ProductController extends Controller
         if ($this->request->wantsJson()) {
 
             $product = $this->product->getModel()->select(
-                [config()->get('hideyo.db_prefix').'product.*', 
+                ['product.*', 
                 'brand.title as brandtitle', 
                 'product_category.title as categorytitle']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'product_category as product_category', 'product_category.id', '=', config()->get('hideyo.db_prefix').'product.product_category_id')
+            ->leftJoin('product_category as product_category', 'product_category.id', '=', 'product.product_category_id')
 
-            ->leftJoin(config()->get('hideyo.db_prefix').'brand as brand', 'brand.id', '=', config()->get('hideyo.db_prefix').'product.brand_id')
+            ->leftJoin('brand as brand', 'brand.id', '=', 'product.brand_id')
 
-            ->where(config()->get('hideyo.db_prefix').'product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
+            ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
 
             $datatables = \Datatables::of($product)
