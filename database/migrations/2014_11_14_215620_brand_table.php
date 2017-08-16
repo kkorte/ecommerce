@@ -14,7 +14,7 @@ class BrandTable extends Migration
     public function up()
     {
         // Creates the users table
-        Schema::create(config('hideyo.db_prefix').'brand', function ($table) {
+        Schema::create('brand', function ($table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->string('reference_code')->nullable();
@@ -26,18 +26,18 @@ class BrandTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->integer('rank')->default(0);
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->string('slug');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->unique(array('title','shop_id'), 'unique_brand_title');
             $table->timestamps();
         });
 
-        Schema::create(config('hideyo.db_prefix').'brand_image', function (Blueprint $table) {
+        Schema::create('brand_image', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('brand_id')->unsigned();
-            $table->foreign('brand_id')->references('id')->on(config('hideyo.db_prefix').'brand')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('brand')->onDelete('cascade');
             ;
             $table->string('file')->nullable();
             $table->string('path')->nullable();
@@ -46,13 +46,13 @@ class BrandTable extends Migration
             $table->integer('rank')->default(0);
             $table->string('tag')->nullable();
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
 
-        Schema::table(config('hideyo.db_prefix').'product', function (Blueprint $table) {
+        Schema::table('product', function (Blueprint $table) {
             $table->integer('brand_id')->unsigned()->nullable();
-            $table->foreign('brand_id')->references('id')->on(config('hideyo.db_prefix').'brand')->onDelete('set null');
+            $table->foreign('brand_id')->references('id')->on('brand')->onDelete('set null');
         });
     }
 

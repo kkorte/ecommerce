@@ -176,12 +176,12 @@ class Product extends BaseModel
 
     public function subcategories()
     {
-        return $this->belongsToMany('Hideyo\Models\ProductCategory', config()->get('hideyo.db_prefix').'product_sub_product_category');
+        return $this->belongsToMany('Hideyo\Models\ProductCategory', 'product_sub_product_category');
     }
 
     public function relatedProducts()
     {
-        return $this->belongsToMany('Hideyo\Models\Product', config()->get('hideyo.db_prefix').'product_related_product', 'product_id', 'related_product_id');
+        return $this->belongsToMany('Hideyo\Models\Product', 'product_related_product', 'product_id', 'related_product_id');
     }
 
     public function relatedProductsActive()

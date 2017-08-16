@@ -12,12 +12,12 @@ class ProductCategoryHighlightProduct extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'product_category_highlight_product', function (Blueprint $table) {
+        Schema::create('product_category_highlight_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id', 'pchp_product_id_fk')->references('id')->on(config('hideyo.db_prefix').'product')->onDelete('cascade');
+            $table->foreign('product_id', 'pchp_product_id_fk')->references('id')->on('product')->onDelete('cascade');
             $table->integer('product_category_id')->unsigned();
-            $table->foreign('product_category_id', 'pchp_product_category_id_fk')->references('id')->on(config('hideyo.db_prefix').'product_category')->onDelete('cascade');
+            $table->foreign('product_category_id', 'pchp_product_category_id_fk')->references('id')->on('product_category')->onDelete('cascade');
             $table->timestamps();
         });
     }

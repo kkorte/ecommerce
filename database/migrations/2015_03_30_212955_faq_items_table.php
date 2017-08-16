@@ -15,7 +15,7 @@ class FaqItemsTable extends Migration
     {
 
         // Creates the users table
-        Schema::create(config('hideyo.db_prefix').'faq_item_group', function ($table) {
+        Schema::create('faq_item_group', function ($table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->integer('rank')->default(0);
@@ -25,18 +25,18 @@ class FaqItemsTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->string('slug');            
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->unique(array('title','shop_id'), 'unique_faq_item_group_title');
             $table->timestamps();
         });
 
 
-        Schema::create(config('hideyo.db_prefix').'faq_item', function (Blueprint $table) {
+        Schema::create('faq_item', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('faq_item_group_id')->unsigned()->nullable();
-            $table->foreign('faq_item_group_id')->references('id')->on(config('hideyo.db_prefix').'faq_item_group')->onDelete('set null');
+            $table->foreign('faq_item_group_id')->references('id')->on('faq_item_group')->onDelete('set null');
             $table->string('question')->nullable();
             $table->text('answer')->nullable();
             $table->string('meta_title')->nullable();
@@ -44,9 +44,9 @@ class FaqItemsTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->string('slug');
             $table->integer('shop_id')->unsigned()->nullable();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
 
             $table->unique(array('question','shop_id'), 'unique_faq_item_title');

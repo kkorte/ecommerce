@@ -34,11 +34,11 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
             $rules = array();
         } else {
             $rules = array(
-                'title'                 => 'required|unique_with:'.config()->get('hideyo.db_prefix').'product_category, shop_id'
+                'title'                 => 'required|unique_with:'.'product_category, shop_id'
             );
             
             if ($productCategoryId) {
-                $rules['title'] =   'required|between:4,65|unique_with:'.config()->get('hideyo.db_prefix').'product_category, shop_id, '.$productCategoryId.' = id';
+                $rules['title'] =   'required|between:4,65|unique_with:'.'product_category, shop_id, '.$productCategoryId.' = id';
             }
         }
         return $rules;
@@ -442,9 +442,9 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
                 $query->where('tag', '=', $imageTag);
             } $query->orderBy('rank', 'asc');
         }, 'refProductCategory'))
-        ->where(config()->get('hideyo.db_prefix').'product_category.shop_id', '=', $shopId)
-        ->where(config()->get('hideyo.db_prefix').'product_category.slug', '=', $slug)
-        ->where(config()->get('hideyo.db_prefix').'product_category.active', '=', 1)
+        ->where('product_category.shop_id', '=', $shopId)
+        ->where('product_category.slug', '=', $slug)
+        ->where('product_category.active', '=', 1)
         ->get()
         ->first();
 

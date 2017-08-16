@@ -12,7 +12,7 @@ class HtmlBlock extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'html_block', function (Blueprint $table) {
+        Schema::create('html_block', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->string('title')->nullable();
@@ -30,9 +30,9 @@ class HtmlBlock extends Migration
             $table->string('thumbnail_height')->nullable();
             $table->string('thumbnail_width')->nullable();            
             $table->integer('shop_id')->unsigned()->nullable();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
     }

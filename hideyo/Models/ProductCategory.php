@@ -32,7 +32,7 @@ class ProductCategory extends Node
 
     public function __construct(array $attributes = array())
     {
-        $this->table = config()->get('hideyo.db_prefix').$this->table;  
+        $this->table = $this->table;  
         parent::__construct($attributes);
     }
 
@@ -56,7 +56,7 @@ class ProductCategory extends Node
 
     public function refProductCategory()
     {
-        return $this->belongsTo('Hideyo\Models\ProductCategory', config()->get('hideyo.db_prefix').'redirect_product_category_id');
+        return $this->belongsTo('Hideyo\Models\ProductCategory', 'redirect_product_category_id');
     }
 
     public function productCategoryImages()
@@ -66,12 +66,12 @@ class ProductCategory extends Node
 
     public function productCategoryHighlightProduct()
     {
-        return $this->belongsToMany('Hideyo\Models\Product', config()->get('hideyo.db_prefix').'product_category_highlight_product', 'product_category_id', 'product_id');
+        return $this->belongsToMany('Hideyo\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id');
     }
 
     public function productCategoryHighlightProductActive()
     {
-        return $this->belongsToMany('Hideyo\Models\Product', config()->get('hideyo.db_prefix').'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
+        return $this->belongsToMany('Hideyo\Models\Product', 'product_category_highlight_product', 'product_category_id', 'product_id')->where('active', '=', 1);
     }
 
     public function products()

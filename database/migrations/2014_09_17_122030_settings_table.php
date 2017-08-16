@@ -12,15 +12,15 @@ class SettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'general_setting', function (Blueprint $table) {
+        Schema::create('general_setting', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('value')->nullable();
             $table->text('text_value')->nullable();
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->unique(array('name','shop_id'), 'unique_general_setting_title');
             $table->timestamps();
         });

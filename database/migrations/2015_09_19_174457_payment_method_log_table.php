@@ -13,12 +13,12 @@ class PaymentMethodLogTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'order_payment_log', function (Blueprint $table) {
+        Schema::create('order_payment_log', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type', array('mollie'))->nullable();
             $table->longText('log');
             $table->integer('order_id')->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on(config('hideyo.db_prefix').'order')->onDelete('set null');
+            $table->foreign('order_id')->references('id')->on('order')->onDelete('set null');
             $table->timestamps();
         });
     }

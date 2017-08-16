@@ -24,7 +24,7 @@ class ProductImage extends BaseModel
     public function relatedProductAttributes()
     {
         return $this->belongsToMany('Hideyo\Models\ProductAttribute', 
-            config()->get('hideyo.db_prefix').'product_attribute_image', 
+            'product_attribute_image', 
             'product_image_id', 
             'product_attribute_id');
     }
@@ -32,7 +32,7 @@ class ProductImage extends BaseModel
     public function relatedAttributes()
     {
         return $this->belongsToMany('Hideyo\Models\Attribute', 
-            config()->get('hideyo.db_prefix').'product_image_attribute', 
+            'product_image_attribute', 
             'product_image_id', 
             'attribute_id');
     }

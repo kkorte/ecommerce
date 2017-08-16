@@ -13,7 +13,7 @@ class ContentTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'content', function (Blueprint $table) {
+        Schema::create('content', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);            
             $table->string('title')->nullable();
@@ -24,17 +24,17 @@ class ContentTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->string('slug');
             $table->integer('shop_id')->unsigned()->nullable();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
             $table->unique(array('title','shop_id'), 'unique_content_title');
         });
 
-        Schema::create(config('hideyo.db_prefix').'content_image', function (Blueprint $table) {
+        Schema::create('content_image', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('content_id')->unsigned();
-            $table->foreign('content_id')->references('id')->on(config('hideyo.db_prefix').'content')->onDelete('cascade');
+            $table->foreign('content_id')->references('id')->on('content')->onDelete('cascade');
             ;
             $table->string('file')->nullable();
             $table->string('path')->nullable();
@@ -43,12 +43,12 @@ class ContentTable extends Migration
             $table->integer('rank')->default(0);
             $table->string('tag')->nullable();
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
 
         // Creates the users table
-        Schema::create(config('hideyo.db_prefix').'content_group', function ($table) {
+        Schema::create('content_group', function ($table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->integer('rank')->default(0);
@@ -59,19 +59,19 @@ class ContentTable extends Migration
             $table->string('meta_keywords')->nullable();
 
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
 
             $table->string('slug');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->unique(array('title','shop_id'), 'unique_content_group_title');
             $table->timestamps();
         });
 
 
-        Schema::table(config('hideyo.db_prefix').'content', function (Blueprint $table) {
+        Schema::table('content', function (Blueprint $table) {
             $table->integer('content_group_id')->unsigned()->nullable();
-            $table->foreign('content_group_id', 'c_content_group_id_fk')->references('id')->on(config('hideyo.db_prefix').'content_group')->onDelete('set null');
+            $table->foreign('content_group_id', 'c_content_group_id_fk')->references('id')->on('content_group')->onDelete('set null');
         });
         
 

@@ -19,7 +19,7 @@ class SendingMethod extends BaseModel
 
     public function relatedPaymentMethods()
     {
-        return $this->belongsToMany('Hideyo\Models\PaymentMethod', config()->get('hideyo.db_prefix').'sending_payment_method_related');
+        return $this->belongsToMany('Hideyo\Models\PaymentMethod', 'sending_payment_method_related');
     }
 
     public function getPriceDetails()

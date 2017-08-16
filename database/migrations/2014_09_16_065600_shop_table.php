@@ -13,7 +13,7 @@ class ShopTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'shop', function (Blueprint $table) {
+        Schema::create('shop', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->boolean('wholesale')->default(false);

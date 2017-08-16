@@ -13,22 +13,22 @@ class LanguageTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'language', function (Blueprint $table) {
+        Schema::create('language', function (Blueprint $table) {
             $table->increments('id');
             $table->text('language')->nullable();
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->timestamps();
         });
     
-        Schema::table(config('hideyo.db_prefix').'shop', function (Blueprint $table) {
-            $table->foreign('language_id')->references('id')->on(config('hideyo.db_prefix').'language')->onDelete('set null');
+        Schema::table('shop', function (Blueprint $table) {
+            $table->foreign('language_id')->references('id')->on('language')->onDelete('set null');
         });
 
-        Schema::table(config('hideyo.db_prefix').'user', function (Blueprint $table) {
-            $table->foreign('language_id')->references('id')->on(config('hideyo.db_prefix').'language')->onDelete('set null');
+        Schema::table('user', function (Blueprint $table) {
+            $table->foreign('language_id')->references('id')->on('language')->onDelete('set null');
         });
     }
 

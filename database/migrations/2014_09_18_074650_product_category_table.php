@@ -13,7 +13,7 @@ class ProductCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'product_category', function (Blueprint $table) {
+        Schema::create('product_category', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->string('title')->nullable();
@@ -27,11 +27,11 @@ class ProductCategoryTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->string('slug');
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->integer('redirect_product_category_id')->unsigned()->nullable();
-            $table->foreign('redirect_product_category_id')->references('id')->on(config('hideyo.db_prefix').'product_category')->onDelete('set null');
+            $table->foreign('redirect_product_category_id')->references('id')->on('product_category')->onDelete('set null');
             $table->integer('parent_id')->nullable()->index();
             $table->integer('lft')->nullable()->index();
             $table->integer('rgt')->nullable()->index();
@@ -39,7 +39,7 @@ class ProductCategoryTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('hideyo.db_prefix').'product_category_image', function (Blueprint $table) {
+        Schema::create('product_category_image', function (Blueprint $table) {
             $table->increments('id');
             $table->string('file')->nullable();
             $table->string('path')->nullable();
@@ -48,18 +48,18 @@ class ProductCategoryTable extends Migration
             $table->integer('rank')->default(0);
             $table->string('tag')->nullable();
             $table->integer('product_category_id')->unsigned();
-            $table->foreign('product_category_id')->references('id')->on(config('hideyo.db_prefix').'product_category')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_category')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
 
-        Schema::create(config('hideyo.db_prefix').'product_category_related_extra_field', function (Blueprint $table) {
+        Schema::create('product_category_related_extra_field', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('extra_field_id')->unsigned()->nullable();
-            $table->foreign('extra_field_id', 'pcref_extra_field_id_fk')->references('id')->on(config('hideyo.db_prefix').'extra_field')->onDelete('cascade');
+            $table->foreign('extra_field_id', 'pcref_extra_field_id_fk')->references('id')->on('extra_field')->onDelete('cascade');
             $table->integer('product_category_id')->unsigned()->nullable();
-            $table->foreign('product_category_id', 'pcref_product_category_id_fk')->references('id')->on(config('hideyo.db_prefix').'product_category')->onDelete('cascade');
+            $table->foreign('product_category_id', 'pcref_product_category_id_fk')->references('id')->on('product_category')->onDelete('cascade');
             $table->timestamps();
         });       
     }

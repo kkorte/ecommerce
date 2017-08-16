@@ -13,7 +13,7 @@ class NewsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'news', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->increments('id');              
             $table->string('title')->nullable();
             $table->text('short_description')->nullable();
@@ -24,18 +24,18 @@ class NewsTable extends Migration
             $table->string('slug');
             $table->date('published_at')->nullable(); 
             $table->integer('shop_id')->unsigned()->nullable();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
             $table->unique(array('title','shop_id'), 'unique_news_title');
         });
 
 
-        Schema::create(config('hideyo.db_prefix').'news_image', function (Blueprint $table) {
+        Schema::create('news_image', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('news_id')->unsigned();
-            $table->foreign('news_id')->references('id')->on(config('hideyo.db_prefix').'news')->onDelete('cascade');
+            $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
             $table->string('file')->nullable();
             $table->string('path')->nullable();
             $table->integer('size')->nullable();
@@ -43,12 +43,12 @@ class NewsTable extends Migration
             $table->integer('rank')->default(0);
             $table->string('tag')->nullable();
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
 
         // Creates the users table
-        Schema::create(config('hideyo.db_prefix').'news_group', function ($table) {
+        Schema::create('news_group', function ($table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->integer('rank')->default(0);
@@ -58,17 +58,17 @@ class NewsTable extends Migration
             $table->string('meta_keywords')->nullable();
             $table->string('slug');
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->unique(array('title','shop_id'), 'unique_news_group_title');
             $table->timestamps();
         });
 
 
-        Schema::table(config('hideyo.db_prefix').'news', function (Blueprint $table) {
+        Schema::table('news', function (Blueprint $table) {
             $table->integer('news_group_id')->unsigned()->nullable();
-            $table->foreign('news_group_id')->references('id')->on(config('hideyo.db_prefix').'news_group')->onDelete('set null');
+            $table->foreign('news_group_id')->references('id')->on('news_group')->onDelete('set null');
         });       
 
     }

@@ -189,8 +189,8 @@ class ExtraFieldRepository implements ExtraFieldRepositoryInterface
 
     public function selectAllByAllProductsAndProductCategoryId($productCategoryId)
     {
-        return $this->model->select(config()->get('hideyo.db_prefix').'extra_field.*')
-        ->leftJoin(config()->get('hideyo.db_prefix').'product_category_related_extra_field', config()->get('hideyo.db_prefix').'extra_field.id', '=', config()->get('hideyo.db_prefix').'product_category_related_extra_field.extra_field_id')
+        return $this->model->select('extra_field.*')
+        ->leftJoin('product_category_related_extra_field', 'extra_field.id', '=', 'product_category_related_extra_field.extra_field_id')
         
         ->where(function ($query) use ($productCategoryId) {
 

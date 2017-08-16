@@ -13,7 +13,7 @@ class ClientTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('hideyo.db_prefix').'client', function (Blueprint $table) {
+        Schema::create('client', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
             $table->enum('type', array('consumer', 'wholesale'))->default('consumer');            
@@ -35,21 +35,21 @@ class ClientTable extends Migration
             $table->datetime('last_login')->nullable();          
             $table->longText('browser_detect')->nullable();
             $table->integer('language_id')->unsigned()->nullable();
-            $table->foreign('language_id')->references('id')->on(config('hideyo.db_prefix').'language')->onDelete('set null');
+            $table->foreign('language_id')->references('id')->on('language')->onDelete('set null');
             $table->integer('delivery_client_address_id')->unsigned()->nullable();
             $table->integer('bill_client_address_id')->unsigned()->nullable();            
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on(config('hideyo.db_prefix').'shop')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
             $table->unique(array('email','shop_id'), 'unique_email');
         });
 
-        Schema::create(config('hideyo.db_prefix').'client_address', function (Blueprint $table) {
+        Schema::create('client_address', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on(config('hideyo.db_prefix').'client')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
             $table->string('company')->nullable();
             $table->enum('gender', array('male', 'female'));
             $table->string('initials')->nullable();
@@ -65,13 +65,13 @@ class ClientTable extends Migration
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->integer('modified_by_user_id')->unsigned()->nullable();
-            $table->foreign('modified_by_user_id')->references('id')->on(config('hideyo.db_prefix').'user')->onDelete('set null');
+            $table->foreign('modified_by_user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
 
-        Schema::table(config('hideyo.db_prefix').'client', function (Blueprint $table) {
-            $table->foreign('delivery_client_address_id')->references('id')->on(config('hideyo.db_prefix').'client_address')->onDelete('set null');
-            $table->foreign('bill_client_address_id')->references('id')->on(config('hideyo.db_prefix').'client_address')->onDelete('set null');
+        Schema::table('client', function (Blueprint $table) {
+            $table->foreign('delivery_client_address_id')->references('id')->on('client_address')->onDelete('set null');
+            $table->foreign('bill_client_address_id')->references('id')->on('client_address')->onDelete('set null');
         });
     }
 

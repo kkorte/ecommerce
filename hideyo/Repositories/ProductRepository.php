@@ -584,7 +584,7 @@ class ProductRepository implements ProductRepositoryInterface
         }))
         ->where('shop_id', '=', $shopId)
         ->where('active', '=', 1)
-                ->whereNotNull(config()->get('hideyo.db_prefix').'product.product_category_id')
+                ->whereNotNull('product.product_category_id')
         ->where(function ($query) use ($productCategoryId) {
             $query->where('product_category_id', '=', $productCategoryId);
             $query->orWhereHas('subcategories', function ($query) use ($productCategoryId) {
@@ -629,7 +629,7 @@ class ProductRepository implements ProductRepositoryInterface
         //         });
         //     }
         // }
-        $result->orderBy(\DB::raw(config()->get('hideyo.db_prefix').'product.rank = 0, '.config()->get('hideyo.db_prefix').'product.rank'), 'ASC');
+        $result->orderBy(\DB::raw('product.rank = 0, '.'product.rank'), 'ASC');
 
         return $result->get();
     }
