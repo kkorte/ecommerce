@@ -1,18 +1,30 @@
 {
-  "private": true,
-  "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
-  },
+  "name": "foundation-sites-template",
+  "version": "1.0.0",
+  "description": "Basic template for a new Foundation for Sites project.",
+  "main": "gulpfile.js",
   "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",
-    "jquery": "^3.1.0",
-    "laravel-elixir": "^6.0.0-9",
-    "laravel-elixir-vue-2": "^0.2.0",
-    "laravel-elixir-webpack-official": "^1.0.2",
-    "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
-  }
+    "gulp-autoprefixer": "^2.2.0",
+    "gulp-bower": "0.0.10",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.5.2",
+    "gulp-flatten": "0.0.4",
+    "gulp-livereload": "^3.8.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-replace": "^0.5.3",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-sync": "^0.1.4",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.4"
+  },
+  "scripts": {
+    "start": "gulp"
+  },
+  "author": "ZURB <foundation@zurb.com>",
+  "license": "MIT",
+  "private": true
 }

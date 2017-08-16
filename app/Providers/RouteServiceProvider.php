@@ -39,9 +39,57 @@ class RouteServiceProvider extends ServiceProvider
         //$this->mapApiRoutes();
 
         $this->mapFrontendRoutes();
-
+        $this->mapBackendRoutes();
+        $this->mapAuthBackendRoutes();
         //
     }
+
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapBackendRoutes()
+    {
+
+        Route::group([
+            'middleware' => ['hideyobackend','auth.hideyo.backend'],
+            'prefix' => config()->get('hideyo.route_prefix').'/admin', 
+            'namespace' => 'App\Http\Controllers\Backend'
+        ], function ($router) {
+            require base_path('routes/backend.php');
+        });
+    }
+
+
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAuthBackendRoutes()
+    {
+
+        Route::group([
+            'middleware' => ['hideyobackend'],
+            'prefix' => config()->get('hideyo.route_prefix').'/admin', 
+            'namespace' => 'App\Http\Controllers\Backend'
+        ], function ($router) {
+            require base_path('routes/auth_backend.php');
+        });
+    }
+
+
+
+
+
+
 
     /**
      * Define the "web" routes for the application.

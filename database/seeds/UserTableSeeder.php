@@ -2,16 +2,11 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Hideyo\Backend\Models\Language as Language;
-use Hideyo\Backend\Models\Company as Company;
-use Hideyo\Backend\Models\Shop as Shop;
-use Hideyo\Backend\Models\User as User;
-use Hideyo\Backend\Models\Role as Role;
-use Hideyo\Backend\Models\Permission as Permission;
+use Hideyo\Ecommerce\Backend\Models\Shop as Shop;
+use Hideyo\Ecommerce\Backend\Models\User as User;
 
 class UserTableSeeder extends Seeder
 {
-
     public function run()
     {
         $user = new User;
@@ -33,9 +28,5 @@ class UserTableSeeder extends Seeder
         } else {
             Log::info('Created user "'.$user->email.'" <'.$user->email.'>');
         }
-
-
-
-
     }
 }

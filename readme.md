@@ -1,27 +1,84 @@
-# Laravel PHP Framework
+[![Code Climate](https://codeclimate.com/github/hideyo/ecommerce-backend.png)](https://codeclimate.com/github/hideyo/ecommerce-backend)
+<a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/license.svg" alt="License"></a>
+# Hideyo e-commerce backend
+Hideyo is an open-source e-commerce solution built in Laravel. This backend package includes a backend system. Contact us at info@hideyo.io for questions or enterprise solutions. 
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+It's still beta. The code is not yet optimal and clean. In the next month we will improve it. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Author: Matthijs Neijenhuijs
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
-## Official Documentation
+## Hideyo backend requirements
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+For now: <a href="https://www.elastic.co/">Elasticsearch</a>, <a href="https://www.npmjs.com/">npm</a>, <a href="https://bower.io/">Bower</a> and <a href="http://gulpjs.com/">gulp.js</a>. 
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+## Installation
 
-## Security Vulnerabilities
+First install laravel and have a database connection running on: https://laravel.com/docs/5.4/installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Install via [composer](https://getcomposer.org/) - In the terminal:
+```bash
+composer require hideyo/ecommerce-backend
+```
+
+Now add the following to the `providers` array in your `config/app.php`
+```php
+Hideyo\Ecommerce\Backend\BackendServiceProvider::class
+```
+
+## Publish configuration in Laravel
+
+You need to run these commands in the terminal in order to copy the config, migration files and views
+```bash
+php artisan vendor:publish --provider="Hideyo\Ecommerce\Backend\BackendServiceProvider"
+```
+
+## Database migration & seeding
+Before you run the migration you may want to take a look at `config/hideyo.php` and change the `table` property to a table name that you would like to use. After that run the migration 
+```bash
+php artisan migrate
+
+Put this in database/seeds/DatabaseSeerder.php:
+
+$this->call(ShopTableSeeder::class);
+$this->call(UserTableSeeder::class);
+
+
+```
+
+----
+
+## Generate stylesheet and JavaScript
+
+go to "resources/assets/vendor/hideyobackend" in command line generate the stylesheet and javascript with:
+```bash
+npm install
+bower update
+gulp 
+```
+
+---
+
+## Seeding database with User
+Before you can login to the backend you need a default user. Laravel seeding will help you: 
+```bash
+
+php artisan optimize
+php artisan db:seed 
+```
+
+
+---
+## Login url
+
+Login url for the backend is:
+```bash
+
+/hideyo/admin
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+GNU GENERAL PUBLIC LICENSE

@@ -2,16 +2,12 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Hideyo\Backend\Models\Shop as Shop;
+use Hideyo\Ecommerce\Backend\Models\Shop as Shop;
 
 class ShopTableSeeder extends Seeder
 {
-
     public function run()
     {
-
-
-
         $shop = new Shop;
 
         DB::table($shop->getTable())->delete();
@@ -22,13 +18,13 @@ class ShopTableSeeder extends Seeder
         $shop->active = 1;
         $shop->description = "description";
         $shop->currency_code = "EUR";
-
-
+        $shop->thumbnail_widescreen_sizes = "100x100;500x500;800x800";
+        $shop->thumbnail_square_sizes = "100x100;500x500;800x800";        
+        
         if (! $shop->save()) {
             Log::info('Unable to create shop '.$shop->title, (array)$shop->errors());
         } else {
             Log::info('Created shop "'.$shop->title);
         }
-
     }
 }

@@ -45,6 +45,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'hideyobackend' => [
+            'driver' => 'session',
+            'provider' => 'husers',
+        ]
+
     ],
 
     /*
@@ -69,6 +74,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
+        'husers' => [
+            'driver' => 'eloquent',
+            'model' => Hideyo\Ecommerce\Backend\Models\User::class,
+        ]
+        
 
         // 'users' => [
         //     'driver' => 'database',
