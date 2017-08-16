@@ -1,0 +1,14 @@
+{
+  "name": "wchar",
+  "homepage": "https://github.com/websanova/wChar",
+  "version": "2.1.3",
+  "_release": "2.1.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.3",
+    "commit": "cf03a9091aa265107d800c22427026441a613131"
+  },
+  "_source": "https://github.com/websanova/wChar.git",
+  "_target": "^2.1.3",
+  "_originalSource": "wchar"
+}

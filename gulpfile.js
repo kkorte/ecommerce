@@ -52,7 +52,7 @@ var sources = {
 
 gulp.task('icons', function() { 
     return gulp.src(sources.admin.fonts) 
-        .pipe(gulp.dest('../../../../public/hideyo/fonts')); 
+        .pipe(gulp.dest('public/hideyo/fonts')); 
 });
 
 
@@ -61,7 +61,7 @@ gulp.task('adminjavascript', function() { 
         .pipe($.plumber())
         .pipe($.concat('site.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest('../../../../public/hideyo/javascript/'))
+        .pipe(gulp.dest('public/hideyo/javascript/'))
 
 });
 
@@ -72,7 +72,7 @@ gulp.task('bower', function() { 
 
 gulp.task('jstree', function() { 
     return gulp.src(config.bowerDir + '/jstree/src/themes/default/**.*') 
-        .pipe(gulp.dest('../../../../public/hideyo/javascript/jstree')); 
+        .pipe(gulp.dest('public/hideyo/javascript/jstree')); 
 });
 
 
@@ -85,8 +85,8 @@ gulp.task('adminsass', function() {
         .pipe($.autoprefixer({
           browsers: ['last 2 versions', 'ie >= 9']
         }))
-        //.pipe($.cleanCss())
-        .pipe(gulp.dest('../../../../public/hideyo/css/'));
+        .pipe($.cleanCss())
+        .pipe(gulp.dest('public/hideyo/css/'));
 });
 
 

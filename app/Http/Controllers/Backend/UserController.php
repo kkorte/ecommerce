@@ -4,7 +4,7 @@
  * UserController
  *
  * This is the controller of users of the shop
- * @author Matthijs Neijenhuijs <matthijs@hideyo.io>
+ * @author Matthijs Neijenhuijs <matthijs@io>
  * @version 0.1
  */
 
@@ -84,7 +84,7 @@ class UserController extends Controller
         $result  = $this->userNumber->create(Request::all(), $user_id);
  
         if ($result->user_id) {
-            return Redirect::route('hideyo.user.numbers', $user_id);
+            return Redirect::route('user.numbers', $user_id);
         } else {
             Notification::error('field are required');
         }
@@ -99,7 +99,7 @@ class UserController extends Controller
 
         if (isset($result->id)) {
             Notification::success('The user was inserted.');
-            return Redirect::route('hideyo.user.index');
+            return Redirect::route('user.index');
         }
         
         foreach ($result->errors()->all() as $error) {
@@ -137,7 +137,7 @@ class UserController extends Controller
         $result  = $this->user->updateShopProfileById($shop, $id);
 
         Notification::success('The shop changed.');
-        return Redirect::route('hideyo.shop.index');
+        return Redirect::route('shop.index');
     }
 
     public function updateProfile()
@@ -184,7 +184,7 @@ class UserController extends Controller
         } else {
             // $this->userLog->create('info', 'Profile '.$result->email.' updated', $result->id);
             Notification::success('The user was updated.');
-            return Redirect::route('hideyo.user.edit', $result->id);
+            return Redirect::route('user.edit', $result->id);
         }
     }
 
@@ -194,7 +194,7 @@ class UserController extends Controller
 
         if ($result) {
             Notification::success('The user was deleted.');
-            return Redirect::route('hideyo.user.index');
+            return Redirect::route('user.index');
         }
     }
 }

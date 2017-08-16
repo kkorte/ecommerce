@@ -170,11 +170,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
         App\Providers\HtmlServiceProvider::class,
 
-
-       // Hideyo\Ecommerce\Backend\BackendServiceProvider::class,
         /*
          * Application Service Providers...
          */

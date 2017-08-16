@@ -225,6 +225,20 @@ class BackendServiceProvider extends ServiceProvider {
             'Hideyo\Repositories\FaqItemRepository');
 
 
+        $this->app->bind(
+            'Hideyo\Repositories\BrandRepositoryInterface', 
+            'Hideyo\Repositories\BrandRepository');
+
+
+        $this->app->bind(
+            'Hideyo\Repositories\NewsRepositoryInterface', 
+            'Hideyo\Repositories\NewsRepository');
+
+
+        $this->app->bind(
+            'Hideyo\Repositories\ProductTagGroupRepositoryInterface', 
+            'Hideyo\Repositories\ProductTagGroupRepository');
+
 
     }
 }
