@@ -23,7 +23,7 @@
 
         <h3>Create Quick</h3>
 
-                        {!! Form::open(array('route' => array('product.amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+                        {!! Form::open(array('route' => array('product.product-amount-series.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                             <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
                             <input type="hidden" name="active" value="1">
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-5">
                                     {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-                                    <a href="{!! URL::route('product.amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
+                                    <a href="{!! URL::route('product.product-amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('product.amount-series.index', $product->id) }}",
+                   "ajax": "{{ URL::route('product.product-amount-series.index', $product->id) }}",
 
                  columns: [
                         {data: 'active', name: 'active'},

@@ -15,7 +15,7 @@
             <li class="active">images</li>           
         </ol>
 
-        <a href="{{ URL::route('product-category-images.create', $productCategory->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
+        <a href="{{ URL::route('product-category.images.create', $productCategory->id) }}" class="btn btn-success pull-right">upload image<i class="entypo-plus"></i></a>
 
         <h2>Productcategory <small>images</small></h2>
         <hr/>
@@ -37,7 +37,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('product-category-images.index', $productCategory->id) }}",
+                   "ajax": "{{ URL::route('product-category.images.index', $productCategory->id) }}",
 
                  columns: [
               {data: 'thumb', name: 'thumb', orderable: false, searchable: false},

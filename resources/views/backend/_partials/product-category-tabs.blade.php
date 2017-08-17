@@ -30,7 +30,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('product-category-images.index', $productCategory->id) !!}">
+        <a href="{!! URL::route('product-category.images.index', $productCategory->id) !!}">
             <span class="visible-xs"><i class="entypo-user"></i></span>
             <span class="hidden-xs">Images</span>
         </a>

@@ -147,21 +147,21 @@
     Route::get('product/change-rank/{productId}/{rank?}', array('as' => 'product.change-rank', 'uses' => 'ProductController@changeRank', 'as' => 'product.change-rank'));
   
     Route::get('product/edit/{productId}/seo', array('as' => 'product.edit_seo', 'uses' => 'ProductController@editSeo'));
-    Route::resource('product/{productId}/images', 'ProductImageController', ['as' => 'product.image']);
-    Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController', ['as' => 'product.amount-option']);
-    Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController', ['as' => 'product.amount-series']);
+    Route::resource('product/{productId}/images', 'ProductImageController', ['as' => 'product']);
+    Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController', ['as' => 'product']);
+    Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController', ['as' => 'product']);
 
     Route::get('product/{productId}/copy', array('as' => 'product.copy', 'users' => 'ProductController@copy', 'as' => 'product.copy'));
 
-    Route::resource('product/{productId}/product-combination', 'ProductCombinationController', ['as' => 'product.combination']);
+    Route::resource('product/{productId}/product-combination', 'ProductCombinationController', ['as' => 'product']);
 
-    Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount?}', array('as' => 'product.change-amount-combination', 'uses' => 'ProductCombinationController@changeAmount'));
+    Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount?}', array('as' => 'product', 'uses' => 'ProductCombinationController@changeAmount'));
  
     Route::post('product/{productId}/copy', array('as' => 'product.store-copy', 'uses' => 'ProductController@storeCopy'));
     
-    Route::resource('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController', ['as' => 'product.extra-field-value']);
+    Route::resource('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController', ['as' => 'product']);
 
-    Route::resource('product/{productId}/related-product', 'ProductRelatedProductController', ['as' => 'product.related-product']);
+    Route::resource('product/{productId}/related-product', 'ProductRelatedProductController', ['as' => 'product']);
 
     Route::get('product-category/refactor-images', array('as' => 'product-category.refactor-images', 'uses' => 'ProductCategoryController@refactorAllImages'));
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));
@@ -179,7 +179,7 @@
  
     Route::get('product_category/edit/{productCategoryId}/hightlight', array('as' => 'product-category.edit.hightlight', 'uses' => 'ProductCategoryController@editHighlight'));
 
-    Route::resource('product-category/{productCategoryId}/images', 'ProductCategoryImageController', ['as' => 'product-category-images']);
+    Route::resource('product-category/{productCategoryId}/images', 'ProductCategoryImageController', ['as' => 'product-category']);
 
 
     Route::get('product_category/edit/{productCategoryId}/seo', array('as' => 'product-category.edit_seo', 'uses' => 'ProductCategoryController@editSeo'));

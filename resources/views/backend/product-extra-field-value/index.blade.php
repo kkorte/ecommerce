@@ -22,7 +22,7 @@
         {!! Notification::showAll() !!}
 
         @if($extraFields)
-        {!! Form::open(array('route' => array('product.extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+        {!! Form::open(array('route' => array('product.product-extra-field-value.store', $product->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
         <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
         <table class="table">

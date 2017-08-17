@@ -73,6 +73,12 @@ class BackendServiceProvider extends ServiceProvider {
             'Hideyo\Repositories\ExtraFieldDefaultValueRepositoryInterface', 
             'Hideyo\Repositories\ExtraFieldDefaultValueRepository');
 
+
+        $this->app->bind(
+            'Hideyo\Repositories\ExceptionRepositoryInterface', 
+            'Hideyo\Repositories\ExceptionRepository');
+        
+
         $this->app->bind(
             'Hideyo\Repositories\CouponRepositoryInterface', 
             'Hideyo\Repositories\CouponRepository');
@@ -238,6 +244,9 @@ class BackendServiceProvider extends ServiceProvider {
         $this->app->bind(
             'Hideyo\Repositories\ProductTagGroupRepositoryInterface', 
             'Hideyo\Repositories\ProductTagGroupRepository');
+
+
+
 
 
     }

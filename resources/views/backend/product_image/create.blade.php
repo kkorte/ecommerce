@@ -13,10 +13,10 @@
             <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
             <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
             <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
-            <li><a href="{!! URL::route('product.image.index', $product->id) !!}">images</a></li>
+            <li><a href="{!! URL::route('product.images.index', $product->id) !!}">images</a></li>
                       <li class="active">upload image</li> 
         </ol>
-<a href="{!! URL::route('product.image.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
+<a href="{!! URL::route('product.images.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to images<i class="entypo-plus"></i></a>
 
 <h2>Product  <small>images - upload</small></h2>
 <hr/>
@@ -31,7 +31,7 @@
                     <div class="col-md-12">
 
 
-					    {!! Form::open(array('route' => array('product.image.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
+					    {!! Form::open(array('route' => array('product.images.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal', 'data-toggle' => 'validator')) !!}
 						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 
 					        <div class="form-group">
@@ -75,7 +75,7 @@
 					        <div class="form-group">
 					            <div class="col-sm-offset-3 col-sm-5">
 					                {!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-					                <a href="{!! URL::route('product.image.store', $product->id) !!}" class="btn btn-large">Cancel</a>
+					                <a href="{!! URL::route('product.images.store', $product->id) !!}" class="btn btn-large">Cancel</a>
 					            </div>
 					        </div>
 
