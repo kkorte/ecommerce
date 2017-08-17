@@ -1,12 +1,15 @@
 {
-  "name": "foundation-sites-template",
+  "name": "hideyo/ecommerce-backend",
   "version": "1.0.0",
+  "description": "laravel e-commerce platform",
   "authors": [
-    "ZURB <foundation@zurb.com>"
+      {
+        "name": "Matthijs Neijenhuijs",
+        "email": "matthijs@hideyo.io"
+      }
   ],
-  "description": "Basic template for a new Foundation for Sites project.",
   "main": "index.html",
-  "license": "MIT",
+  "license": "GNU GENERAL PUBLIC LICENSE",
   "homepage": "http://foundation.zurb.com",
   "dependencies": {
     "jquery": "~2.1.4",
@@ -33,7 +36,6 @@
     "open-sans": "~1.1.0",
     "foundation-icon-fonts": "*",
     "roboto-fontface": "~0.4.2"
-
   },
   "ignore": [
     "**/.*",
