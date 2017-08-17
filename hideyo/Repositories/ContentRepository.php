@@ -153,16 +153,16 @@ class ContentRepository implements ContentRepositoryInterface
             if ($shop->square_thumbnail_sizes) {
                 $sizes = explode(',', $shop->square_thumbnail_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
+                    foreach ($sizes as $valueSize) {
                         $image = Image::make($uploadSuccess->getRealPath());
-                        $explode = explode('x', $value);
+                        $explode = explode('x', $valueSize);
                         $image->resize($explode[0], $explode[1]);
                         $image->interlace();
 
-                        if (!File::exists(public_path() . "/files/content/".$value."/".$contentId."/")) {
-                            File::makeDirectory(public_path() . "/files/content/".$value."/".$contentId."/", 0777, true);
+                        if (!File::exists(public_path() . "/files/content/".$valueSize."/".$contentId."/")) {
+                            File::makeDirectory(public_path() . "/files/content/".$valueSize."/".$contentId."/", 0777, true);
                         }
-                        $image->save(public_path() . "/files/content/".$value."/".$contentId."/".$filename);
+                        $image->save(public_path() . "/files/content/".$valueSize."/".$contentId."/".$filename);
                     }
                 }
             }
@@ -265,8 +265,8 @@ class ContentRepository implements ContentRepositoryInterface
             if ($shop->square_thumbnail_sizes) {
                 $sizes = explode(',', $shop->square_thumbnail_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
-                        File::delete(public_path() . "/files/content/".$value."/".$this->modelImage->content_id."/".$this->modelImage->file);
+                    foreach ($sizes as $valueSize) {
+                        File::delete(public_path() . "/files/content/".$valueSize."/".$this->modelImage->content_id."/".$this->modelImage->file);
                     }
                 }
             }
