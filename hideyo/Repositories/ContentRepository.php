@@ -141,11 +141,11 @@ class ContentRepository implements ContentRepositoryInterface
         $attributes['size'] = $attributes['file']->getSize();
         
         $filename =  str_replace(" ", "_", strtolower($attributes['file']->getClientOriginalName()));
-        $upload_success = $attributes['file']->move($destinationPath, $filename);
+        $uploadSuccess = $attributes['file']->move($destinationPath, $filename);
 
-        if ($upload_success) {
+        if ($uploadSuccess) {
             $attributes['file'] = $filename;
-            $attributes['path'] = $upload_success->getRealPath();
+            $attributes['path'] = $uploadSuccess->getRealPath();
      
             $this->modelImage->fill($attributes);
             $this->modelImage->save();
@@ -154,7 +154,7 @@ class ContentRepository implements ContentRepositoryInterface
                 $sizes = explode(',', $shop->square_thumbnail_sizes);
                 if ($sizes) {
                     foreach ($sizes as $key => $value) {
-                        $image = Image::make($upload_success->getRealPath());
+                        $image = Image::make($uploadSuccess->getRealPath());
                         $explode = explode('x', $value);
                         $image->resize($explode[0], $explode[1]);
                         $image->interlace();
