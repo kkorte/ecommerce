@@ -1,8 +1,14 @@
 {
-    "name": "hideyo/ecommerce",
-    "description": "Hideyo ecommerce platform",
-    "keywords": ["framework", "laravel", "ecommerce"],
-    "license": "MIT",
+    "name": "hideyo/ecommerce-backend",
+    "description": "laravel e-commerce platform",
+    "authors": [
+        {
+            "name": "Matthijs Neijenhuijs",
+            "email": "matthijs@hideyo.io"
+        }
+    ],
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "minimum-stability": "dev",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
