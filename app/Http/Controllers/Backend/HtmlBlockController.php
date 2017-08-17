@@ -84,17 +84,21 @@ class HtmlBlockController extends Controller
     public function storeCopy($htmlBlockId)
     {
         $htmlBlock = $this->htmlBlock->find($htmlBlockId);
-        $result  = $this->htmlBlock->createCopy($this->request->all(), $htmlBlockId);
 
-        if (isset($result->id)) {
-            Notification::success('The htmlBlock copy is inserted.');
-            return redirect()->route('html-block.index');
+        if($htmlBlock) {
+
+            $result  = $this->htmlBlock->createCopy($this->request->all(), $htmlBlockId);
+
+            if (isset($result->id)) {
+                Notification::success('The htmlBlock copy is inserted.');
+                return redirect()->route('html-block.index');
+            }
+
+            foreach ($result->errors()->all() as $error) {
+                Notification::error($error);
+            }        
         }
 
-        foreach ($result->errors()->all() as $error) {
-            Notification::error($error);
-        }
-        
         return redirect()->back()->withInput();
     }
 
@@ -141,10 +145,11 @@ class HtmlBlockController extends Controller
             } elseif ($this->request->get('htmlBlock-combination')) {
                 Notification::success('HtmlBlock combination leading attribute group was updated.');
                 return redirect()->route('html-block.{htmlBlockId}.htmlBlock-combination.index', $htmlBlockId);
-            } else {
-                Notification::success('HtmlBlock was updated.');
-                return redirect()->route('html-block.edit', $htmlBlockId);
             }
+
+            Notification::success('HtmlBlock was updated.');
+            return redirect()->route('html-block.edit', $htmlBlockId);
+            
         }
 
         foreach ($result->errors()->all() as $error) {

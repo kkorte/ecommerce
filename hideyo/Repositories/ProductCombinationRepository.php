@@ -80,11 +80,11 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
     }
 
 
-    public function updateById(array $attributes, $productId, $id)
+    public function updateById(array $attributes, $productId, $productAttributeId)
     {
         $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
         $attributes['product_id'] = $productId;
-        $this->model = $this->find($id);
+        $this->model = $this->find($productAttributeId);
         return $this->updateEntity($attributes);
     }
 
@@ -147,9 +147,9 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
         return $this->model;
     }
 
-    public function destroy($id)
+    public function destroy($productAttributeId)
     {
-        $this->model = $this->find($id);
+        $this->model = $this->find($productAttributeId);
         return $this->model->delete();
     }
 
@@ -177,14 +177,14 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
            return $this->model->with(array('productCategory', 'productImages'))->get()->first();
     }
 
-    function selectOneByShopIdAndId($shopId, $id)
+    function selectOneByShopIdAndId($shopId, $productAttributeId)
     {
-           return $this->model->with(array('productCategory', 'productImages'))->where('id', '=', $id)->get()->first();
+           return $this->model->with(array('productCategory', 'productImages'))->where('id', '=', $productAttributeId)->get()->first();
     }
     
-    public function find($id)
+    public function find($productAttributeId)
     {
-        return $this->model->find($id);
+        return $this->model->find($productAttributeId);
     }
 
     public function getModel()
@@ -192,10 +192,9 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
         return $this->model;
     }
 
-    public function changeAmount($id, $amount)
+    public function changeAmount($productAttributeId, $amount)
     {
-
-        $this->model = $this->find($id);
+        $this->model = $this->find($productAttributeId);
 
         if ($this->model) {
             $attributes = array(

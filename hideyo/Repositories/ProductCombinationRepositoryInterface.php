@@ -5,7 +5,7 @@ interface ProductCombinationRepositoryInterface
 {
     public function create(array $attributes, $productParentId);
     
-    public function updateById(array $attributes, $productId, $id);
+    public function updateById(array $attributes, $productId, $productAttributeId);
     
     public function destroy($id);
 
@@ -17,9 +17,9 @@ interface ProductCombinationRepositoryInterface
 
     public function selectOneByShopIdAndSlug($shopId, $slug);
 
-    public function selectOneByShopIdAndId($shopId, $id);
+    public function selectOneByShopIdAndId($shopId, $productAttributeId);
 
-    public function find($id);
+    public function find($productAttributeId);
 
     public function getModel();
 
