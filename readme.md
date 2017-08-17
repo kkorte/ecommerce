@@ -1,6 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/hideyo/ecommerce.png)](https://codeclimate.com/github/hideyo/ecommerce)
-<a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/license.svg" alt="License"></a>
+<a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/license.svg" alt="License"></a>
 # Hideyo e-commerce backend
 Hideyo is an open-source e-commerce solution built in Laravel.  Contact us at info@hideyo.io for questions or enterprise solutions. 
 
