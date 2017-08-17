@@ -113,16 +113,16 @@ class BrandRepository implements BrandRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
+                    foreach ($sizes as $keySize => $valueSize) {
                         $image = Image::make($uploadSuccess->getRealPath());
-                        $explode = explode('x', $value);
+                        $explode = explode('x', $valueSize);
                         $image->resize($explode[0], $explode[1]);
                         $image->interlace();
 
-                        if (!File::exists($this->publicImagePath.$value."/".$brandId."/")) {
-                            File::makeDirectory($this->publicImagePath.$value."/".$brandId."/", 0777, true);
+                        if (!File::exists($this->publicImagePath.$valueSize."/".$brandId."/")) {
+                            File::makeDirectory($this->publicImagePath.$valueSize."/".$brandId."/", 0777, true);
                         }
-                        $image->save($this->publicImagePath.$value."/".$brandId."/".$filename);
+                        $image->save($this->publicImagePath.$valueSize."/".$brandId."/".$filename);
                     }
                 }
             }
@@ -204,8 +204,8 @@ class BrandRepository implements BrandRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
-                        File::delete($this->publicImagePath.$value."/".$this->modelImage->brand_id."/".$this->modelImage->file);
+                    foreach ($sizes as $keySize => $valueSize) {
+                        File::delete($this->publicImagePath.$valueSize."/".$this->modelImage->brand_id."/".$this->modelImage->file);
                     }
                 }
             }
@@ -223,18 +223,18 @@ class BrandRepository implements BrandRepositoryInterface
                 if ($shop->thumbnail_square_sizes) {
                     $sizes = explode(',', $shop->thumbnail_square_sizes);
                     if ($sizes) {
-                        foreach ($sizes as $key => $value) {
-                            if (!File::exists($this->publicImagePath.$value."/".$productImage->brand_id."/")) {
-                                File::makeDirectory($this->publicImagePath.$value."/".$productImage->brand_id."/", 0777, true);
+                        foreach ($sizes as $keySize => $valueSize) {
+                            if (!File::exists($this->publicImagePath.$valueSize."/".$productImage->brand_id."/")) {
+                                File::makeDirectory($this->publicImagePath.$valueSize."/".$productImage->brand_id."/", 0777, true);
                             }
 
-                            if (!File::exists($this->publicImagePath.$value."/".$productImage->brand_id."/".$productImage->file)) {
+                            if (!File::exists($this->publicImagePath.$valueSize."/".$productImage->brand_id."/".$productImage->file)) {
                                 if (File::exists($this->storageImagePath.$productImage->brand_id."/".$productImage->file)) {
                                     $image = Image::make($this->storageImagePath.$productImage->brand_id."/".$productImage->file);
-                                    $explode = explode('x', $value);
+                                    $explode = explode('x', $valueSize);
                                     $image->fit($explode[0], $explode[1]);
                                     $image->interlace();
-                                    $image->save($this->publicImagePath.$value."/".$productImage->brand_id."/".$productImage->file);
+                                    $image->save($this->publicImagePath.$valueSize."/".$productImage->brand_id."/".$productImage->file);
                                 }
                             }
                         }
