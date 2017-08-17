@@ -7,7 +7,7 @@
             "email": "matthijs@hideyo.io"
         }
     ],
-    "license": "GNU GENERAL PUBLIC LICENSE",
+    "license": "GPL-3.0+",
     "minimum-stability": "dev",
     "type": "project",
     "require": {
