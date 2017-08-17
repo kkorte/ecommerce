@@ -88,10 +88,10 @@ class ProductAttribute extends BaseModel
 
     public function getPriceDetails()
     {  
+        $price = $this->product->price;
+
         if ($this->price) {
             $price = $this->price;
-        } else {
-            $price = $this->product->price;
         }
 
         $taxRate = 0;

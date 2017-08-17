@@ -74,7 +74,6 @@ class Product extends BaseModel
         }
     }
 
-
     public function getDiscountEndDateAttribute($value)
     {
         if ($value) {
@@ -175,7 +174,6 @@ class Product extends BaseModel
     {
         return $this->belongsTo('Hideyo\Models\Brand');
     }
-
 
     public function productCategory()
     {

@@ -30,12 +30,12 @@ class ClientRepository implements ClientRepositoryInterface
     /**
      * The validation rules for the model.
      *
-     * @param  integer  $id id attribute model    
+     * @param  integer  $clientId id attribute model    
      * @return array
      */
-    private function rules($id = false)
+    private function rules($clientId = false)
     {
-        if ($id) {
+        if ($clientId) {
             $rules = array(
                 'email' => 'required|email|unique_with:client, shop_id'
             );
@@ -54,8 +54,8 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
 
-        if ($id) {
-            $rules['email'] =   'required|email|unique_with:'.$this->model->getTable().', shop_id, '.$id.' = id';
+        if ($clientId) {
+            $rules['email'] =   'required|email|unique_with:'.$this->model->getTable().', shop_id, '.$clientId.' = id';
         }
 
         return $rules;
@@ -104,13 +104,13 @@ class ClientRepository implements ClientRepositoryInterface
         }
     }
 
-    public function updateById(array $attributes, $id)
+    public function updateById(array $attributes, $clientId)
     {
-        $this->model = $this->find($id);
+        $this->model = $this->find($clientId);
         $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
         $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
 
-        $validator = Validator::make($attributes, $this->rules($id));
+        $validator = Validator::make($attributes, $this->rules($clientId));
 
         if ($validator->fails()) {
             return $validator;
@@ -135,9 +135,9 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->model;
     }
 
-    public function destroy($id)
+    public function destroy($clientId)
     {
-        $this->model = $this->find($id);
+        $this->model = $this->find($clientId);
         $this->model->save();
         return $this->model->delete();
     }
@@ -154,9 +154,9 @@ class ClientRepository implements ClientRepositoryInterface
         ->get();
     }
 
-    public function find($id)
+    public function find($clientId)
     {
-        return $this->model->find($id);
+        return $this->model->find($clientId);
     }
 
     public function findByEmail($email, $shopId)
@@ -254,15 +254,15 @@ class ClientRepository implements ClientRepositoryInterface
         return $this->model;
     }
 
-    function selectOneByShopIdAndId($shopId, $id)
+    function selectOneByShopIdAndId($shopId, $clientId)
     {
-        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', $shopId)->where('active', '=', 1)->where('id', '=', $id)->first();
+        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', $shopId)->where('active', '=', 1)->where('id', '=', $clientId)->first();
         return $result;
     }
 
-    function selectOneById($id)
+    function selectOneById($clientId)
     {
-        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $id)->first();
+        $result = $this->model->with(array('clientAddress', 'clientDeliveryAddress', 'clientBillAddress'))->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $clientId)->first();
         return $result;
     }
 
@@ -299,9 +299,9 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 
-    function activate($id)
+    function activate($clientId)
     {
-        $this->model = $this->model->where('id', '=', $id)->get()->first();
+        $this->model = $this->model->where('id', '=', $clientId)->get()->first();
 
         if ($this->model) {
             $attributes['confirmed'] = 1;
@@ -315,9 +315,9 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 
-    function deactivate($id)
+    function deactivate($clientId)
     {
-        $this->model = $this->model->where('id', '=', $id)->get()->first();
+        $this->model = $this->model->where('id', '=', $clientId)->get()->first();
 
         if ($this->model) {
             $attributes['confirmed'] = 0;
