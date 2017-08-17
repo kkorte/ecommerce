@@ -97,7 +97,7 @@ class AttributeController extends Controller
     public function edit($attributeGroupId, $attributeId)
     {
         return view('backend.attribute.edit')->with(
-            array('attribute' => $this->attribute->find($attributeId))
+            array('attributeGroupId' => $attributeGroupId, 'attribute' => $this->attribute->find($attributeId))
         );
     }
 
@@ -115,10 +115,10 @@ class AttributeController extends Controller
         if (isset($result->id)) {
             Notification::success('Attribute was updated.');
             return redirect()->route('attribute.index', $attributeGroupId);
-        } else {
-            foreach ($result->errors()->all() as $error) {
-                Notification::error($error);
-            }
+        }
+
+        foreach ($result->errors()->all() as $error) {
+            Notification::error($error);
         }
 
         return redirect()->back()->withInput();

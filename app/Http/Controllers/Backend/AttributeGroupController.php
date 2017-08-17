@@ -76,11 +76,11 @@ class AttributeGroupController extends Controller
         if (isset($result->id)) {
             Notification::success('The extra field was inserted.');
             return redirect()->route('attribute-group.index');
-        } else {
-            foreach ($result->errors()->all() as $error) {
-                Notification::error($error);
-            }
         }
+
+        foreach ($result->errors()->all() as $error) {
+            Notification::error($error);
+        }      
 
         return redirect()->back()->withInput();
     }
