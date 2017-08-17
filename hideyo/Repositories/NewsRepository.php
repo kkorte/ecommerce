@@ -134,7 +134,7 @@ class NewsRepository implements NewsRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $keyImage => $valueImage) {
+                    foreach ($sizes as $valueImage) {
                         $image = Image::make($uploadSuccess->getRealPath());
                         $explode = explode('x', $valueImage);
                         $image->resize($explode[0], $explode[1]);
@@ -181,7 +181,7 @@ class NewsRepository implements NewsRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $keyImage => $valueImage) {
+                    foreach ($sizes as $valueImage) {
                         if (!File::exists($this->publicImagePath.$valueImage."/".$productImage->news_id."/")) {
                             File::makeDirectory($this->publicImagePath.$valueImage."/".$productImage->news_id."/", 0777, true);
                         }
@@ -297,7 +297,7 @@ class NewsRepository implements NewsRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $keyImage => $valueImage) {
+                    foreach ($sizes as $valueImage) {
                         File::delete($this->publicImagePath.$valueImage."/".$this->modelImage->news_id."/".$this->modelImage->file);
                     }
                 }
