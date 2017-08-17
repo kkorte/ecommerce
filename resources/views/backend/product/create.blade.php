@@ -146,12 +146,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            {!! Form::label('weight_title', 'Weight title', array('class' => 'col-sm-3 control-label')) !!}
-            <div class="col-sm-5">
-                {!! Form::text('weight_title', null, array('class' => 'form-control', 'data-sign' => '&euro;')) !!}
-            </div>
-        </div>
 
         <div class="form-group">
             {!! Form::label('rank', 'Rank', array('class' => 'col-sm-3 control-label')) !!}

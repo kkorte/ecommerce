@@ -40,7 +40,6 @@ class ProductTable extends Migration
             $table->date('discount_end_date')->nullable();
             $table->bigInteger('amount')->default(0);
             $table->bigInteger('weight')->default(0);
-            $table->string('weight_title');
             $table->integer('rank')->default(0);
             $table->string('slug');
 

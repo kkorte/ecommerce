@@ -171,6 +171,9 @@ return [
         Krucas\Notification\NotificationServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\HtmlServiceProvider::class,
+        Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -67,6 +67,14 @@ class Product extends BaseModel
         }
     }
 
+    public function setRankAttribute($value)
+    {       
+        if (is_null($value)) {
+            $value = 0;
+        }
+    }
+
+
     public function getDiscountEndDateAttribute($value)
     {
         if ($value) {
