@@ -40,10 +40,10 @@ var sources = {
       'resources/assets/**/*'
     ],
     fonts: [
+        config.bowerDir + '/foundation-icon-fonts/**/**.*', 
         config.bowerDir + '/font-awesome/fonts/**/**.*', 
-        config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*',
-        config.bowerDir + '/jstree/src/themes/default/**.*',
-        config.bowerDir + '/open-sans/fonts/**/**.*'
+        config.bowerDir + '/roboto-fontface/fonts/**/**.*', 
+        config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
     ]
   }
 
@@ -52,7 +52,7 @@ var sources = {
 
 gulp.task('icons', function() { 
     return gulp.src(sources.admin.fonts) 
-        .pipe(gulp.dest('public/hideyo/fonts')); 
+        .pipe(gulp.dest('public/fonts')); 
 });
 
 
@@ -72,7 +72,7 @@ gulp.task('bower', function() { 
 
 gulp.task('jstree', function() { 
     return gulp.src(config.bowerDir + '/jstree/src/themes/default/**.*') 
-        .pipe(gulp.dest('public/hideyo/javascript/jstree')); 
+        .pipe(gulp.dest('public/javascript/jstree')); 
 });
 
 

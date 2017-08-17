@@ -30,7 +30,10 @@
     "sweetalert": "^1.1.3",
     "wchar": "^2.1.3",
     "bootstrap-maxlength": "^1.7.0",
-    "open-sans": "~1.1.0"
+    "open-sans": "~1.1.0",
+    "foundation-icon-fonts": "*",
+    "roboto-fontface": "~0.4.2"
+
   },
   "ignore": [
     "**/.*",

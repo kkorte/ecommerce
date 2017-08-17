@@ -1,9 +1,19 @@
-$open-sans-path: "/hideyo/fonts" !default;
-
+$open-sans-path: "/fonts" !default;
+$roboto-font-path: '/fonts' !default;
 @import '../../../bower_components/open-sans/scss/open-sans.scss';
-$font-family-base: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@import '../../../bower_components/roboto-fontface/css/roboto-fontface.scss';
+
+$font-family-base: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+
+// Typography
+$font-family-sans-serif: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$headings-font-weight: 300 !default;
+
+$font-size-base:          15px !default;
 $navbar-default-bg: blue;
-$navbar-inverse-bg: #262626;
+$navbar-inverse-bg: #009688;
+$navbar-height: 60px;
+
 $navbar-inverse-brand-color: white;
 $navbar-inverse-link-color: white;
 $btn-border-radius-base: 0;
@@ -17,11 +27,12 @@ $fa-font-path: "/hideyo/fonts";
 }
 
 
-$icon-font-path: "/hideyo/fonts/";
+$icon-font-path: "/fonts/";
 @import '../../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
 @import '../../../bower_components/select2/src/scss/core.scss';
 @import '../../../bower_components/select2-bootstrap-css/lib/select2-bootstrap.scss';
 @import '../../../bower_components/font-awesome/scss/font-awesome.scss';
+@import 'materialdesign';
 @import "datatables";
 @import "login";
 @import "jstree";
@@ -74,7 +85,7 @@ $icon-font-path: "/hideyo/fonts/";
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 
@@ -102,6 +113,7 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+  padding-top:30px!important;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -132,8 +144,8 @@ body {
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
+
+  background-color: #dedede;
 }
 
 
