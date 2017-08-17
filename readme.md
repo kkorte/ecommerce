@@ -2,7 +2,7 @@
 <a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/license.svg" alt="License"></a>
 # Hideyo e-commerce backend
-Hideyo is an open-source e-commerce solution built in Laravel.  Contact us at info@hideyo.io for questions or enterprise solutions. 
+Hideyo e-commerce is an open-source e-commerce solution built in Laravel.  Contact us at info@hideyo.io for questions or enterprise solutions. 
 
 It's still beta. The code is not yet optimal and clean. In the next month we will improve it. 
 
