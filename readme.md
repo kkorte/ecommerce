@@ -14,36 +14,35 @@ Author: Matthijs Neijenhuijs
 For now: <a href="https://www.elastic.co/">Elasticsearch</a>, <a href="https://www.npmjs.com/">npm</a>, <a href="https://bower.io/">Bower</a> and <a href="http://gulpjs.com/">gulp.js</a>. 
 
 
+## System Requirements
+
+Lavalite is designed to run on a  machine with PHP 5.5.9 and MySQL 5.5.
+
+* PHP >= 5.5.9 with
+    * OpenSSL PHP Extension
+    * PDO PHP Extension
+    * Mbstring PHP Extension
+    * Tokenizer PHP Extension
+    * Elasticsearch
+    * Bower & Hulp
+* [Composer](https://getcomposer.org) installed to load the dependencies of Lavalite.
+
+
 ## Installation
 
-First install laravel and have a database connection running on: https://laravel.com/docs/5.4/installation
+Please check the system requirements before installing Lavalite.
 
-Install via [composer](https://getcomposer.org/) - In the terminal:
-```bash
-composer require hideyo/ecommerce-backend
-```
+1. You may install by cloning from github, or via composer.
+  * Github:
+    * `git clone git@github.com:hideyo/ecommerce.git`
+    * From a command line open in the folder, run `composer install`.
 
-Now add the following to the `providers` array in your `config/app.php`
-```php
-Hideyo\Ecommerce\Backend\BackendServiceProvider::class
-```
 
-## Publish configuration in Laravel
-
-You need to run these commands in the terminal in order to copy the config, migration files and views
-```bash
-php artisan vendor:publish --provider="Hideyo\Ecommerce\Backend\BackendServiceProvider"
-```
 
 ## Database migration & seeding
 Before you run the migration you may want to take a look at `config/hideyo.php` and change the `table` property to a table name that you would like to use. After that run the migration 
 ```bash
 php artisan migrate
-
-Put this in database/seeds/DatabaseSeerder.php:
-
-$this->call(ShopTableSeeder::class);
-$this->call(UserTableSeeder::class);
 
 
 ```
@@ -52,7 +51,7 @@ $this->call(UserTableSeeder::class);
 
 ## Generate stylesheet and JavaScript
 
-go to "resources/assets/vendor/hideyobackend" in command line generate the stylesheet and javascript with:
+go to root in command line generate the stylesheet and javascript with:
 ```bash
 npm install
 bower update
@@ -76,7 +75,7 @@ php artisan db:seed
 Login url for the backend is:
 ```bash
 
-/hideyo/admin
+/admin
 ```
 
 ## License
