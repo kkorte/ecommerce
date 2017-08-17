@@ -24,13 +24,14 @@ Lavalite is designed to run on a  machine with PHP 5.5.9 and MySQL 5.5.
     * Mbstring PHP Extension
     * Tokenizer PHP Extension
     * Elasticsearch
-    * Bower & Hulp
-* [Composer](https://getcomposer.org) installed to load the dependencies of Lavalite.
+    * Bower & Gulp
+    * Composer
+
 
 
 ## Installation
 
-Please check the system requirements before installing Lavalite.
+Please check the system requirements before installing Hideyo ecommerce.
 
 1. You may install by cloning from github, or via composer.
   * Github:
