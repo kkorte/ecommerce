@@ -7,7 +7,7 @@ interface ProductRepositoryInterface
 
     public function createCopy(array $attributes, $productId);
 
-    public function updateById(array $attributes, $id);
+    public function updateById(array $attributes, $productId);
     
     public function selectAll();
 
@@ -17,7 +17,7 @@ interface ProductRepositoryInterface
 
     public function selectAllByProductParentId($productParentId);
     
-    public function find($id);
+    public function find($productId);
     
     public function getModel();
 

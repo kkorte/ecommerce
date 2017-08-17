@@ -33,7 +33,7 @@ class ProductRepository implements ProductRepositoryInterface
     /**
      * The validation rules for the model.
      *
-     * @param  integer  $id id attribute model    
+     * @param  integer  $productId id attribute model    
      * @return array
      */
     private function rules($productId = false, $attributes = false)
@@ -598,7 +598,7 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
 
-    function selectOneByShopIdAndId($shopId, $id)
+    function selectOneByShopIdAndId($shopId, $productId)
     {
            return $this->model->with(
                array(
@@ -650,7 +650,7 @@ class ProductRepository implements ProductRepositoryInterface
                     )->with(array('relatedProductAttributes',
                     'relatedAttributes'));
                 })
-           )->where('shop_id', '=', $shopId)->where('active', '=', 1)->whereNotNull('product_category_id')->where('id', '=', $id)->get()->first();
+           )->where('shop_id', '=', $shopId)->where('active', '=', 1)->whereNotNull('product_category_id')->where('id', '=', $productId)->get()->first();
     }
 
 
