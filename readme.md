@@ -2,16 +2,11 @@
 <a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/hideyo/ecommerce-backend"><img src="https://poser.pugx.org/hideyo/ecommerce-backend/license.svg" alt="License"></a>
 # Hideyo e-commerce backend
-Hideyo is an open-source e-commerce solution built in Laravel. This backend package includes a backend system. Contact us at info@hideyo.io for questions or enterprise solutions. 
+Hideyo is an open-source e-commerce solution built in Laravel.  Contact us at info@hideyo.io for questions or enterprise solutions. 
 
 It's still beta. The code is not yet optimal and clean. In the next month we will improve it. 
 
 Author: Matthijs Neijenhuijs
-
-
-## Hideyo backend requirements
-
-For now: <a href="https://www.elastic.co/">Elasticsearch</a>, <a href="https://www.npmjs.com/">npm</a>, <a href="https://bower.io/">Bower</a> and <a href="http://gulpjs.com/">gulp.js</a>. 
 
 
 ## System Requirements
