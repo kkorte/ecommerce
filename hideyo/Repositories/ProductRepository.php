@@ -70,8 +70,6 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function createCopy(array $attributes, $productId)
     {
-
-        $product =  $this->find($productId);
         $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules());
 
@@ -342,7 +340,6 @@ class ProductRepository implements ProductRepositoryInterface
         $directory = $this->storageImagePath.$this->model->id;
         File::deleteDirectory($directory);
 
-        $shopId = Auth::guard('hideyobackend')->user()->selected_shop_id;
         File::deleteDirectory($this->publicImagePath.$this->model->id);
         $this->model->addAllToIndex();
         return $this->model->delete();
