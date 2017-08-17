@@ -77,4 +77,5 @@ Login url for the backend is:
 
 ## License
 
-GNU GENERAL PUBLIC LICENSE
+GNU General Public License version 3 (GPLv3)
+
