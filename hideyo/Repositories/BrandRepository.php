@@ -113,7 +113,7 @@ class BrandRepository implements BrandRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $keySize => $valueSize) {
+                    foreach ($sizes as $valueSize) {
                         $image = Image::make($uploadSuccess->getRealPath());
                         $explode = explode('x', $valueSize);
                         $image->resize($explode[0], $explode[1]);
@@ -204,7 +204,7 @@ class BrandRepository implements BrandRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $keySize => $valueSize) {
+                    foreach ($sizes as $valueSize) {
                         File::delete($this->publicImagePath.$valueSize."/".$this->modelImage->brand_id."/".$this->modelImage->file);
                     }
                 }
@@ -223,7 +223,7 @@ class BrandRepository implements BrandRepositoryInterface
                 if ($shop->thumbnail_square_sizes) {
                     $sizes = explode(',', $shop->thumbnail_square_sizes);
                     if ($sizes) {
-                        foreach ($sizes as $keySize => $valueSize) {
+                        foreach ($sizes as $valueSize) {
                             if (!File::exists($this->publicImagePath.$valueSize."/".$productImage->brand_id."/")) {
                                 File::makeDirectory($this->publicImagePath.$valueSize."/".$productImage->brand_id."/", 0777, true);
                             }

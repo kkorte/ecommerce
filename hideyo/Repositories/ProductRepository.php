@@ -150,32 +150,32 @@ class ProductRepository implements ProductRepositoryInterface
             $attributes['extension'] = $file->getClientOriginalExtension();
             $attributes['size'] = $file->getSize();
             $filename = str_replace(" ", "_", strtolower($file->getClientOriginalName()));
-            $upload_success = $file->move($destinationPath, $filename);
+            $uploadSuccess = $file->move($destinationPath, $filename);
 
-            if ($upload_success) {
+            if ($uploadSuccess) {
                 $attributes['file'] = $filename;
-                $attributes['path'] = $upload_success->getRealPath();
+                $attributes['path'] = $uploadSuccess->getRealPath();
                 $file = new ProductImage;
                 $file->fill($attributes);
                 $file->save();
                 if ($shop->thumbnail_square_sizes) {
                     $sizes = explode(',', $shop->thumbnail_square_sizes);
                     if ($sizes) {
-                        foreach ($sizes as $key => $value) {
-                            $image = Image::make($upload_success->getRealPath());
-                            $explode = explode('x', $value);
+                        foreach ($sizes as $valueSize) {
+                            $image = Image::make($uploadSuccess->getRealPath());
+                            $explode = explode('x', $valueSize);
 
                             if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
                                 $image->resize($explode[0], $explode[1]);
                             }
 
-                            if (!File::exists($this->publicImagePath.$value."/".$productId."/")) {
-                                File::makeDirectory($this->publicImagePath.$value."/".$productId."/", 0777, true);
+                            if (!File::exists($this->publicImagePath.$valueSize."/".$productId."/")) {
+                                File::makeDirectory($this->publicImagePath.$valueSize."/".$productId."/", 0777, true);
                             }
 
                             $image->interlace();
 
-                            $image->save($this->publicImagePath.$value."/".$productId."/".$filename);
+                            $image->save($this->publicImagePath.$valueSize."/".$productId."/".$filename);
                         }
                     }
                 }
@@ -202,20 +202,20 @@ class ProductRepository implements ProductRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
-                        if (!File::exists($this->publicImagePath.$value."/".$productImage->product_id."/")) {
-                            File::makeDirectory($this->publicImagePath.$value."/".$productImage->product_id."/", 0777, true);
+                    foreach ($sizes as $valueSize) {
+                        if (!File::exists($this->publicImagePath.$valueSize."/".$productImage->product_id."/")) {
+                            File::makeDirectory($this->publicImagePath.$valueSize."/".$productImage->product_id."/", 0777, true);
                         }
 
-                        if (!File::exists($this->publicImagePath.$value."/".$productImage->product_id."/".$productImage->file)) {
+                        if (!File::exists($this->publicImagePath.$valueSize."/".$productImage->product_id."/".$productImage->file)) {
                             if (File::exists($this->storageImagePath.$productImage->product_id."/".$productImage->file)) {
                                 $image = Image::make($this->storageImagePath.$productImage->product_id."/".$productImage->file);
-                                $explode = explode('x', $value);
+                                $explode = explode('x', $valueSize);
                                 $image->fit($explode[0], $explode[1]);
                             
                                 $image->interlace();
 
-                                $image->save($this->publicImagePath.$value."/".$productImage->product_id."/".$productImage->file);
+                                $image->save($this->publicImagePath.$valueSize."/".$productImage->product_id."/".$productImage->file);
                             }
                         }
                     }
@@ -363,8 +363,8 @@ class ProductRepository implements ProductRepositoryInterface
             if ($shop->thumbnail_square_sizes) {
                 $sizes = explode(',', $shop->thumbnail_square_sizes);
                 if ($sizes) {
-                    foreach ($sizes as $key => $value) {
-                        File::delete($this->publicImagePath.$value."/".$this->modelImage->product_id."/".$this->modelImage->file);
+                    foreach ($sizes as $valueSize) {
+                        File::delete($this->publicImagePath.$valueSize."/".$this->modelImage->product_id."/".$this->modelImage->file);
                     }
                 }
             }
@@ -592,43 +592,6 @@ class ProductRepository implements ProductRepositoryInterface
             });
         });
 
-        // if ($filters) {
-        //     if (isset($filters['filter']['product_attribute'])) {
-        //         $keys = array();
-        //         foreach ($filters['filter']['product_attribute'] as $key => $row) {
-        //             if ($keys) {
-        //                 $keys = array_merge($row);
-        //             } else {
-        //                 $keys = $row;
-        //             }
-        //         }
-
-        //         $result->whereHas('attributes', function ($query) use ($filters, $keys) {
-
-        //             $query->whereHas('combinations', function ($query) use ($filters, $keys) {
-
-        //                 $query->whereIn('attribute_id', $keys);
-        //             });
-        //         });
-        //     }
-
-
-        //     if (isset($filters['filter']['extra_field'])) {
-        //         $fieldKeys = array();
-        //         foreach ($filters['filter']['extra_field'] as $key => $row) {
-        //             if ($fieldKeys) {
-        //                 $fieldKeys = array_merge($row);
-        //             } else {
-        //                 $fieldKeys = $row;
-        //             }
-        //         }
-
-        //         $result->whereHas('extraFields', function ($query) use ($filters, $fieldKeys) {
-        //                 $query->whereIn('extra_field_default_value_id', $fieldKeys);
-        //                 $query->orWhereIn('value', $fieldKeys);
-        //         });
-        //     }
-        // }
         $result->orderBy(\DB::raw('product.rank = 0, '.'product.rank'), 'ASC');
 
         return $result->get();
