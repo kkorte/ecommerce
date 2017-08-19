@@ -174,6 +174,7 @@ return [
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        'hisorange\BrowserDetect\Provider\BrowserDetectService',
 
         /*
          * Application Service Providers...
@@ -238,7 +239,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'BrowserDetect'             => 'hisorange\BrowserDetect\Facade\Parser'
 
 
 
