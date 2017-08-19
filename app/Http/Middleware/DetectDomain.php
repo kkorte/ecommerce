@@ -48,8 +48,7 @@ class DetectDomain
         Config::set('app.shop_id', $shopId);
         
         if (!$shopId) {
-            print_r('shop kapot');
-            exit;
+        	abort(404, "shop cannot be found");
         }
 
 
