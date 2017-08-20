@@ -25,7 +25,8 @@ class ProductCategory extends Node
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'title',
+                 'onUpdate' => true
             ]
         ];
     }

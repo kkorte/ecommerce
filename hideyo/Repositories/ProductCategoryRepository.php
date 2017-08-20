@@ -429,6 +429,8 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     function selectOneByShopIdAndSlug($shopId, $slug, $imageTag = false)
     {
+
+ 
         $result = $this->model->
         with(array('products' => function ($query) {
             $query->where('active', '=', 1)->with(

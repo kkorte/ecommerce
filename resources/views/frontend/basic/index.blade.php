@@ -1,1 +1,6 @@
-index.blade.php
+@extends('frontend._layouts.default')
+
+@section('main')
+
+
+@stop

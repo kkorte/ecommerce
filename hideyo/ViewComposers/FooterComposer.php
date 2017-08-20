@@ -1,4 +1,4 @@
-<?php namespace App\Http\ViewComposers;
+<?php namespace Hideyo\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 use Hideyo\Repositories\NewsRepositoryInterface;
@@ -25,6 +25,6 @@ class FooterComposer
      */
     public function compose(View $view)
     {
-        $view->with('footerNews', $this->news->selectByLimitAndOrderBy(Config::get('app.shop_id'), '5', 'desc'));
+        //$view->with('footerNews', $this->news->selectByLimitAndOrderBy(Config::get('app.shop_id'), '5', 'desc'));
     }
 }

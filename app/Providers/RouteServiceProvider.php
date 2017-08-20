@@ -36,8 +36,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapFrontendRoutes();
+
         $this->mapBackendRoutes();
+        $this->mapFrontendRoutes();
         $this->mapAuthBackendRoutes();
     }
 

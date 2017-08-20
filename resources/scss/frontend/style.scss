@@ -1,0 +1,35 @@
+$open-sans-path: "/fonts" !default;
+$roboto-font-path: '/fonts' !default;
+@import '../../../bower_components/open-sans/scss/open-sans.scss';
+@import '../../../bower_components/roboto-fontface/css/roboto-fontface.scss';
+
+$font-family-base: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+
+// Typography
+$font-family-sans-serif: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$headings-font-weight: 300 !default;
+
+$font-size-base:          15px !default;
+$navbar-default-bg: blue;
+$navbar-inverse-bg: #009688;
+$navbar-height: 60px;
+
+$navbar-inverse-brand-color: white;
+$navbar-inverse-link-color: white;
+$btn-border-radius-base: 0;
+$btn-border-radius-small: 0;
+$btn-border-radius-medium: 0;
+$btn-border-radius-large: 0;
+$fa-font-path: "/hideyo/fonts";
+
+
+$icon-font-path: "/fonts/";
+@import '../../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
+@import '../../../bower_components/select2/src/scss/core.scss';
+@import '../../../bower_components/select2-bootstrap-css/lib/select2-bootstrap.scss';
+@import '../../../bower_components/font-awesome/scss/font-awesome.scss';
+
+
+
+
+body { padding-top: 70px; }
