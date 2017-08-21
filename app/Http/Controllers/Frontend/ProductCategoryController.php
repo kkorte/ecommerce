@@ -18,7 +18,7 @@ class ProductCategoryController extends Controller
         $this->product = $product;
         $this->productAttribute = $productAttribute;
         $this->productExtraFieldValue = $productExtraFieldValue;
-        $this->shopId = config()->get('app.shop_id');
+ 
     }
 
     public function getBySlugAjax(Request $request, $slug)
@@ -38,7 +38,7 @@ class ProductCategoryController extends Controller
         unset($inputFields['_token']);
         $page = $request->get('page', 1);
 
-        $category = $this->productCategory->selectOneByShopIdAndSlug($this->shopId, $slug);
+        $category = $this->productCategory->selectOneByShopIdAndSlug(config()->get('app.shop_id'), $slug);
 
         if ($category) {
             if ($category->ancestors()->count()) {
@@ -47,16 +47,16 @@ class ProductCategoryController extends Controller
 
             $products = "";
             if ($category->id) {
-                $products = $this->product->selectAllByShopIdAndProductCategoryId($this->shopId, $category['id'], $inputFields);
+                $products = $this->product->selectAllByShopIdAndProductCategoryId(config()->get('app.shop_id'), $category['id'], $inputFields);
             }
 
             if ($category['ref_product_category']) {
                 return redirect()->to('category/'.$category['ref_product_category']['slug']);
             }
             if ($category->isLeaf()) {
-                $childrenProductCategories = $this->productCategory->selectCategoriesByParentId($this->shopId, $category->parent_id);
-                $attributes = $this->productAttribute->selectAllByProductCategoryId($category->id, $this->shopId);
-                $extraFields = $this->productExtraFieldValue->selectAllByProductCategoryId($category->id, $this->shopId);
+                $childrenProductCategories = $this->productCategory->selectCategoriesByParentId(config()->get('app.shop_id'), $category->parent_id);
+                $attributes = $this->productAttribute->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
+                $extraFields = $this->productExtraFieldValue->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
                           
                 $filterCombinations = array();
 
@@ -125,7 +125,7 @@ class ProductCategoryController extends Controller
 
             $products = "";
             if ($category->id) {
-                $products = $this->product->selectAllByShopIdAndProductCategoryId($this->shopId, $category['id']);
+                $products = $this->product->selectAllByShopIdAndProductCategoryId(config()->get('app.shop_id'), $category['id']);
             }
 
             if ($category->refProductCategory) {
@@ -133,12 +133,12 @@ class ProductCategoryController extends Controller
             }
             if ($category->isLeaf()) {
                 if ($category->isChild()) {
-                    $childrenProductCategories = $this->productCategory->selectCategoriesByParentId($this->shopId, $category->parent_id);
+                    $childrenProductCategories = $this->productCategory->selectCategoriesByParentId(config()->get('app.shop_id'), $category->parent_id);
                 } else {
-                    $childrenProductCategories = $this->productCategory->selectAllByShopIdAndRoot($this->shopId);
+                    $childrenProductCategories = $this->productCategory->selectAllByShopIdAndRoot(config()->get('app.shop_id'));
                 }
-                $attributes = $this->productAttribute->selectAllByProductCategoryId($category->id, $this->shopId);
-                $extraFields = $this->productExtraFieldValue->selectAllByProductCategoryId($category->id, $this->shopId);
+                $attributes = $this->productAttribute->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
+                $extraFields = $this->productExtraFieldValue->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
               
                 $filterCombinations = array();
 
@@ -178,7 +178,7 @@ class ProductCategoryController extends Controller
                     )
                 );
             } else {
-                $childrenProductCategories = $this->productCategory->selectCategoriesByParentId($this->shopId, $category->id);
+                $childrenProductCategories = $this->productCategory->selectCategoriesByParentId(config()->get('app.shop_id'), $category->id);
                 return view('frontend.product_category.categories')->with(
                     array(
                         'category' => $category,

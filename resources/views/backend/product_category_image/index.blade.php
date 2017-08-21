@@ -40,7 +40,7 @@
                    "ajax": "{{ URL::route('product-category.images.index', $productCategory->id) }}",
 
                  columns: [
-              {data: 'thumb', name: 'thumb', orderable: false, searchable: false},
+                        {data: 'thumb', name: 'thumb', orderable: false, searchable: false},
                         {data: 'file', name: 'file'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]

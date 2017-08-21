@@ -2,10 +2,17 @@
 
 @section('main')
 
+@if (isset($category->products))
 <div class="row">
-	<div class="col-sm-3 col-md-2">
-		<p>products</p>
-    </div>
+    @if( $products )
+    @foreach ($products as $product)
+
+
+        @include('frontend.product_category._product-row-item')
+    @endforeach
+    @endif
 </div>
+@endif
+
 
 @stop

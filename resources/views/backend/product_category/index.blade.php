@@ -28,8 +28,8 @@
                     <th class="col-md-1">{{{ trans('table.active') }}}</th>
                     <th class="col-md-1">{{{ trans('table.image') }}}</th>
                     <th class="col-md-1">{{{ trans('table.products') }}}</th>
-                    <th class="col-md-3">{{{ trans('table.parent') }}}</th>                    
-                    <th class="col-md-3">{{{ trans('table.redirect') }}}</th>
+                    <th class="col-md-2">{{{ trans('table.parent') }}}</th>                    
+                    <th class="col-md-2">{{{ trans('table.redirect') }}}</th>
                     <th class="col-md-3">{{{ trans('table.title') }}}</th>
                     <th class="col-md-2">{{{ trans('table.actions') }}}</th>
                 </tr>
@@ -37,32 +37,26 @@
         </table>
 
         <script type="text/javascript">
-        $(document).ready(function() {
+            $(document).ready(function() {
 
-            oTable = $('#datatable').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "stateSave": true,
-
-
-                "ajax": "{{ URL::route('product-category.index') }}",
-
-                columns: [
-                {data: 'active', name: 'active'},
-                {data: 'image', name: 'image', orderable: false, bVisible: true, bSearchable: false},
-                {data: 'products', name: 'products', orderable: false, bVisible: true, bSearchable: false},
-                {data: 'parent', orderable: false, name: 'parent', bVisible: true, bSearchable: false},
-                {data: 'redirect_product_category_id', name: 'redirect_product_category_id', bSearchable: false},
-                
-                {data: 'title', name: 'title'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
-                ]
-
+                oTable = $('#datatable').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "stateSave": true,
+                    "ajax": "{{ URL::route('product-category.index') }}",
+                    columns: [
+                        {data: 'active', name: 'active'},
+                        {data: 'image', name: 'image', orderable: false, bVisible: true, bSearchable: false},
+                        {data: 'products', name: 'products', orderable: false, bVisible: true, bSearchable: false},
+                        {data: 'parent', orderable: false, name: 'parent', bVisible: true, bSearchable: false},
+                        {data: 'redirect_product_category_id', name: 'redirect_product_category_id', bSearchable: false},                    
+                        {data: 'title', name: 'title'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false}
+                    ]
+                });
             });
-        });
         </script>
 
     </div>
 </div>   
 @stop
-

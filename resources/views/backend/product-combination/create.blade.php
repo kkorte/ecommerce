@@ -13,10 +13,10 @@
             <li><a href="{!! URL::route('product.index') !!}">Product</a></li>
             <li><a href="{!! URL::route('product.edit', $product->id) !!}">edit</a></li>
             <li><a href="{!! URL::route('product.edit', $product->id) !!}">{!! $product->title !!}</a></li>
-            <li><a href="{!! URL::route('product.image.index', $product->id) !!}">combinations</a></li>
+            <li><a href="{!! URL::route('product.images.index', $product->id) !!}">combinations</a></li>
                       <li class="active">create combination</li> 
         </ol>
-<a href="{!! URL::route('product.combination.index', $product->id) !!}" class="btn btn-danger btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
+<a href="{!! URL::route('product.product-combination.index', $product->id) !!}" class="btn btn-danger btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
 
 <h2>Product combinations  <small>create</small></h2>
 <hr/>
@@ -30,7 +30,7 @@
 
                     <div class="col-md-12">
 
-					    {!! Form::open(array('route' => array('product.combination.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+					    {!! Form::open(array('route' => array('product.product-combination.store', $product->id), 'method'=>'POST', 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 						    <input type="hidden" name="_token" value="{!! Session::token() !!}">
 						    <input type="hidden" name="default_attribute_group_id" class="default_attribute_group_id" value="{!! key($attributeGroups->toArray()) !!}">
 					        <div class="form-group">
@@ -131,7 +131,7 @@
 				                </div>
 				            </div>
             				
-            				@include('backend._fields.buttons', array('cancelRoute' => 'product.combination.index', 'cancelRouteParameters' => $product->id))
+            				@include('backend._fields.buttons', array('cancelRoute' => 'product.product-combination.index', 'cancelRouteParameters' => $product->id))
 
 
 					    	{!! Form::close() !!}
@@ -142,7 +142,7 @@
 					
 									$( ".attribute_group_id" ).on( "change", function() {
 								    hasBeenClicked = true;
-								    $.getJSON( "{{ URL::route('product.combination.create', $product->id) }}", { attribute_group_id: this.value } )
+								    $.getJSON( "{{ URL::route('product.product-combination.create', $product->id) }}", { attribute_group_id: this.value } )
 								        .done(function( data ) {
 
 											//clear the current content of the select
@@ -159,7 +159,7 @@
 
  										var defaultValue = $( ".default_attribute_group_id" ).val();
 	
-		    							$.getJSON( "{{ URL::route('product.combination.create', $product->id) }}", { attribute_group_id: defaultValue } )
+		    							$.getJSON( "{{ URL::route('product.product-combination.create', $product->id) }}", { attribute_group_id: defaultValue } )
 								        .done(function( data ) {
 											//clear the current content of the select
 											$select.html('');

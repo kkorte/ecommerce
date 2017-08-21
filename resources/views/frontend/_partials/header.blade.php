@@ -16,7 +16,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 	            @foreach($frontendProductCategories as $productCategory)
-	            <li><a href="{!! URL::route('product-category', $productCategory->slug) !!}">{!! $productCategory->title !!}</a></li>
+	            <li><a href="{!! URL::route('product-category.item', $productCategory->slug) !!}">{!! $productCategory->title !!}</a></li>
 	            @endforeach
 			</ul>
 

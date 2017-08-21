@@ -36,8 +36,8 @@ class ProductImageController extends Controller
             })
 
             ->addColumn('action', function ($query) use ($productId) {
-                $deleteLink = \Form::deleteajax(url()->route('product.image.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('product.image.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                $deleteLink = \Form::deleteajax(url()->route('product.images.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $links = '<a href="'.url()->route('product.images.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
             
                 return $links;
             });
@@ -61,7 +61,7 @@ class ProductImageController extends Controller
  
         if (isset($result->id)) {
             Notification::success('The product image is inserted.');
-            return redirect()->route('product.image.index', $productId);
+            return redirect()->route('product.images.index', $productId);
         }
 
         foreach ($result->errors()->all() as $error) {
@@ -133,7 +133,7 @@ class ProductImageController extends Controller
         }
         
         Notification::success('The product image is updated.');
-        return redirect()->route('product.image.index', $productId);
+        return redirect()->route('product.images.index', $productId);
     }
 
     public function destroy($productId, $productImageId)
@@ -142,7 +142,7 @@ class ProductImageController extends Controller
 
         if ($result) {
             Notification::success('The product image is deleted.');
-            return redirect()->route('product.image.index', $productId);
+            return redirect()->route('product.images.index', $productId);
         }
     }
 }

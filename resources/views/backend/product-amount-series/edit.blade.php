@@ -16,7 +16,7 @@
 			<li><a href="#">amount series</a></li>
 			<li class="active">create product amount series</li> 
 		</ol>
-		<a href="{!! URL::route('product.amount-series.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
+		<a href="{!! URL::route('product.product-amount-series.index', $product->id) !!}" class="btn btn-green btn-icon icon-left pull-right">back to overview<i class="entypo-plus"></i></a>
 
 		<h2>Product amount series  <small>edit</small></h2>
 		<hr/>
@@ -30,7 +30,7 @@
 
 						<div class="col-md-12">
 
-							{!! Form::model($productAmountSeries, array('method' => 'put', 'route' => array('product.amount-series.update', $product->id, $productAmountSeries->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+							{!! Form::model($productAmountSeries, array('method' => 'put', 'route' => array('product.product-amount-series.update', $product->id, $productAmountSeries->id), 'files' => true, 'class' => 'form-horizontal form-groups-bordered validate')) !!}
 
 							<input type="hidden" name="_token" value="{!! Session::token() !!}">
 
@@ -65,7 +65,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-5">
 									{!! Form::submit('Save', array('class' => 'btn btn-default')) !!}
-									<a href="{!! URL::route('product.amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
+									<a href="{!! URL::route('product.product-amount-series.index', $product->id) !!}" class="btn btn-large">Cancel</a>
 								</div>
 							</div>
 
