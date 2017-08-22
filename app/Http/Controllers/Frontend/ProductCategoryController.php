@@ -120,7 +120,7 @@ class ProductCategoryController extends Controller
         if ($category) {
 
             if ($category->ancestors()->count()) {
-                $request->session()->put('category_id', $category->ancestors()->first()->id);
+                //$request->session()->put('category_id', $category->ancestors()->first()->id);
             }
 
             $products = "";

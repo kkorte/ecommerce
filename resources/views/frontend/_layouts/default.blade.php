@@ -7,7 +7,7 @@
         <meta name="description" content="Frontend" />
         <meta name="author" content="" />
 
-        <title>Frontend</title>
+        <title>@yield('meta_title')</title>
 		<link rel="stylesheet" href="{{ URL::asset('/css/style.css')}}">
         <script src="{{ URL::asset('/javascript/site.js')}}"></script>
 
