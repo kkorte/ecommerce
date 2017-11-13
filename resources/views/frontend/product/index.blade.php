@@ -37,7 +37,7 @@
 
 
 <div class="row">
-    <div class="col-sm-3 col-md-2">
+    <div class="col-sm-3 col-md-2 product-container">
         <h1>{!! $product->title !!}</h1>
 
         <div class="description">
@@ -71,7 +71,7 @@
                 
                 @endif
                 <button type="button" class="button add-to-cart-button btn-blue btn-long">
-                <span class="icon icon-cart"></span> In winkelwagen
+                    <span class="icon icon-cart"></span> In winkelwagen
                 </button>
                 @endif
             </form>

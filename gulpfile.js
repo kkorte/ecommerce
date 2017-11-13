@@ -153,6 +153,7 @@ gulp.task('default', ['bower', 'jstree', 'icons', 'frontendcss', 'backendcss', '
 if (DO_WATCH) {
     gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
     gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
+    gulp.watch([config.jsPath + '/main.js'], ['frontendjavascript']);
     gulp.watch([config.jsPath + '/admin/main.js'], ['adminjavascript']);
 
 }
