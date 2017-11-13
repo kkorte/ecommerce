@@ -10,8 +10,6 @@ return [
     |
     */
 
-    'db_prefix' => 'hideyo_',
-    'route_prefix' => 'hideyo',
     'storage_path' => '/app/files',
     'public_path' => '/files'
 

@@ -10,7 +10,6 @@ return [
     |
     */
 
-    'route_prefix'  => '',
     'storage_path'  => '/app/files',
     'public_path'   => '/files'
 ];

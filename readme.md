@@ -37,7 +37,7 @@ Please check the system requirements before installing Hideyo ecommerce.
 
 
 ## Database migration & seeding
-Before you run the migration you may want to take a look at `config/hideyo.php` and change the `table` property to a table name that you would like to use. After that run the migration 
+Before you run the migration you may want to take a look at `config/database.php` and connect your database. After that run the migration 
 ```bash
 php artisan migrate
 
@@ -48,7 +48,7 @@ php artisan migrate
 
 ## Generate stylesheet and JavaScript
 
-go to root in command line generate the stylesheet and javascript with:
+go to root in command line generate the stylesheet and javascript files with:
 ```bash
 npm install
 bower update
@@ -58,7 +58,7 @@ gulp
 ---
 
 ## Seeding database with User
-Before you can login to the backend you need a default user. Laravel seeding will help you: 
+Before you can login to the backend you need a default user. Laravel database seeding will help you: 
 ```bash
 
 php artisan optimize
@@ -67,7 +67,7 @@ php artisan db:seed
 
 
 ---
-## Login url
+## Admin login url
 
 Login url for the backend is:
 ```bash
