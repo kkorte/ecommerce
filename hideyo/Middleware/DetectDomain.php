@@ -1,4 +1,4 @@
-<?php namespace App\Http\Middleware;
+<?php namespace Hideyo\Middleware;
 
 use Closure;
 use Illuminate\Auth\Guard;
@@ -48,7 +48,7 @@ class DetectDomain
         Config::set('app.shop_id', $shopId);
         
         if (!$shopId) {
-        	abort(404, "shop cannot be found");
+            abort(404, "shop cannot be found");
         }
 
 

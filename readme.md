@@ -78,4 +78,3 @@ Login url for the backend is:
 ## License
 
 GNU General Public License version 3 (GPLv3)
-
