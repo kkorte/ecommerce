@@ -244,7 +244,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'BrowserDetect'             => 'hisorange\BrowserDetect\Facade\Parser',
+        'BrowserDetect' => 'hisorange\BrowserDetect\Facade\Parser',
         'Cart' => Hideyo\Facades\CartFacade::class    
     ],
 
