@@ -12,7 +12,7 @@ Author: Matthijs Neijenhuijs
 
 ## System Requirements
 
-Lavalite is designed to run on a  machine with PHP 5.5.9 and MySQL 5.5.
+Hideyo is designed to run on a machine with PHP 5.5.9 and MySQL 5.5.
 
 * PHP >= 5.5.9 with
     * OpenSSL PHP Extension
