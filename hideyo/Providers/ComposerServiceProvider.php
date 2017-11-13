@@ -1,8 +1,8 @@
-<?php namespace App\Providers;
+<?php namespace Hideyo\Providers;
 
 use View;
 use Illuminate\Support\ServiceProvider;
-use App\Http\ViewComposers\CartComposer;
+
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,6 @@ class ComposerServiceProvider extends ServiceProvider
 
         View::composer('*', 'Hideyo\ViewComposers\FooterComposer');
         View::composer('*', 'Hideyo\ViewComposers\ProductCategoryComposer');
-        View::composer('*', 'Hideyo\ViewComposers\CartComposer');
         View::composer('*', 'Hideyo\ViewComposers\ShopComposer');
     }
 

@@ -35,16 +35,18 @@ class ProductCategoryController extends Controller
             }
 
             $products = "";
-            if ($category->id) {
+            if ($category->products()->count()) {
                 $products = $this->product->selectAllByShopIdAndProductCategoryId(config()->get('app.shop_id'), $category['id']);
             }
 
             if ($category->isLeaf()) {
+
                 if ($category->isChild()) {
                     $childrenProductCategories = $this->productCategory->selectCategoriesByParentId(config()->get('app.shop_id'), $category->parent_id);
                 } else {
                     $childrenProductCategories = $this->productCategory->selectAllByShopIdAndRoot(config()->get('app.shop_id'));
                 }
+
                 $attributes = $this->productAttribute->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
                 $extraFields = $this->productExtraFieldValue->selectAllByProductCategoryId($category->id, config()->get('app.shop_id'));
               
@@ -88,6 +90,7 @@ class ProductCategoryController extends Controller
             }
 
             $childrenProductCategories = $this->productCategory->selectCategoriesByParentId(config()->get('app.shop_id'), $category->id);
+            
             return view('frontend.product_category.categories')->with(
                 array(
                     'category' => $category,

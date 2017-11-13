@@ -122,7 +122,7 @@
     Route::resource('invoice', 'InvoiceController');
     Route::resource('invoice/{invoiceId}/download', 'InvoiceController@download');
 
-    Route::resource('attribute-group/{attributeGroupId}/attributes', 'AttributeController', ['as' => 'attribute']);
+    Route::resource('attribute-group/{attributeGroupId}/attribute', 'AttributeController');
 
     Route::resource('attribute-group', 'AttributeGroupController');
 

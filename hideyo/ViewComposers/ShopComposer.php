@@ -1,7 +1,7 @@
 <?php namespace Hideyo\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use Hideyo\Services\Cart as Cart;
+
 use App\Shop;
 use Auth;
 use Request;

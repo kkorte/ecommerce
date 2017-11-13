@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Hideyo\Providers;
 
 use Html;
 use Form;

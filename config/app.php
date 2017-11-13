@@ -170,25 +170,28 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        App\Providers\HtmlServiceProvider::class,
+
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         'hisorange\BrowserDetect\Provider\BrowserDetectService',
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+
 
         /*
          * Application Service Providers...
          */
-        App\Providers\BackendServiceProvider::class,
-        App\Providers\ComposerServiceProvider::class,
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
-        Cviebrock\EloquentSluggable\ServiceProvider::class,
-
+        Hideyo\Providers\RouteServiceProvider::class,
+        Hideyo\Providers\CartServiceProvider::class,
+        Hideyo\Providers\BackendServiceProvider::class,
+        Hideyo\Providers\ComposerServiceProvider::class,
+        Hideyo\Providers\HtmlServiceProvider::class
     ],
 
     /*
@@ -241,10 +244,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'BrowserDetect'             => 'hisorange\BrowserDetect\Facade\Parser'
-
-
-
+        'BrowserDetect'             => 'hisorange\BrowserDetect\Facade\Parser',
+        'Cart' => Hideyo\Facades\CartFacade::class    
     ],
 
 ];

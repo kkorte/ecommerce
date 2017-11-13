@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Hideyo\Providers;
 
 class HtmlServiceProvider extends \Collective\Html\HtmlServiceProvider
 {
