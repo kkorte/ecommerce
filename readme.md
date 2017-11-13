@@ -37,7 +37,7 @@ Please check the system requirements before installing Hideyo ecommerce.
 
 
 ## Database migration & seeding
-Before you run the migration you may want to take a look at `config/database.php` and connect your database. After that run the migration 
+Before you run the migration you may want to take a look at `config/database.php` or set-up a .env file in your root and connect your database. After that run the migration 
 ```bash
 php artisan migrate
 
