@@ -4,13 +4,6 @@ namespace Hideyo\Services\Cart;
 
 use Hideyo\Services\Cart\Helpers\Helpers;
 
-/**
- * Created by PhpStorm.
- * User: darryl
- * Date: 1/15/2015
- * Time: 9:02 PM
- */
-
 class CartCondition {
 
     /**
