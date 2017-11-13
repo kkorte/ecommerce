@@ -40,6 +40,8 @@ use Hideyo\Repositories\OrderStatusRepositoryInterface;
 use Hideyo\Repositories\OrderStatusRepository;
 use Hideyo\Repositories\OrderStatusEmailTemplateRepositoryInterface;
 use Hideyo\Repositories\OrderStatusEmailTemplateRepository;
+use Hideyo\Repositories\CartRepositoryInterface;
+use Hideyo\Repositories\CartRepository;
 use Hideyo\Repositories\InvoiceRepositoryInterface;
 use Hideyo\Repositories\InvoiceRepository;
 use Hideyo\Repositories\InvoiceAddressRepositoryInterface;
@@ -126,6 +128,7 @@ class BackendServiceProvider extends ServiceProvider {
         $this->app->singleton(OrderStatusEmailTemplateRepositoryInterface::class, OrderStatusEmailTemplateRepository::class);
         $this->app->singleton(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
         $this->app->singleton(OrderPaymentLogRepositoryInterface::class, OrderPaymentLogRepository::class);
+        $this->app->singleton(CartRepositoryInterface::class, CartRepository::class);
         $this->app->singleton(SendingPaymentMethodRelatedRepositoryInterface::class, SendingPaymentMethodRelatedRepository::class);
         $this->app->singleton(CollectionRepositoryInterface::class, CollectionRepository::class);
         $this->app->singleton(RedirectRepositoryInterface::class, RedirectRepository::class);

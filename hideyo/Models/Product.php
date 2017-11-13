@@ -129,10 +129,10 @@ class Product extends BaseModel
             }
 
             return array(
-                'orginal_price_ex_tax'  => $this->price,
-                'orginal_price_ex_tax_number_format'  => number_format($this->price, 2, '.', ''),
-                'orginal_price_inc_tax' => $priceInc,
-                'orginal_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
+                'original_price_ex_tax'  => $this->price,
+                'original_price_ex_tax_number_format'  => number_format($this->price, 2, '.', ''),
+                'original_price_inc_tax' => $priceInc,
+                'original_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
                 'commercial_price_number_format' => $commercialPrice,
                 'tax_rate' => $taxRate,
                 'tax_value' => $taxValue,

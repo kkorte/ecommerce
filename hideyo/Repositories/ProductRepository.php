@@ -424,7 +424,6 @@ class ProductRepository implements ProductRepositoryInterface
 
     function selectOneById($productId)
     {
-
         $result = $this->model->with(array('productCategory', 'relatedProducts', 'productImages' => function ($query) {
             $query->orderBy('rank', 'asc');
         }))->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $productId)->get()->first();

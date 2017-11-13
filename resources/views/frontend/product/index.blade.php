@@ -46,9 +46,9 @@
         <h3 class="price">
             @if($priceDetails['discount_price_inc'])                        
             &euro; {!! $priceDetails['discount_price_inc_number_format'] !!}
-            <span>&euro; {!! $priceDetails['orginal_price_inc_tax_number_format'] !!}</span>
+            <span>&euro; {!! $priceDetails['original_price_inc_tax_number_format'] !!}</span>
             @else 
-            &euro; {!! $priceDetails['orginal_price_inc_tax_number_format'] !!}
+            &euro; {!! $priceDetails['original_price_inc_tax_number_format'] !!}
             @endif         
         </h3>
         

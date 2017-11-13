@@ -6,6 +6,7 @@ use BrowserDetect;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
 use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 use Hideyo\Repositories\ShopRepositoryInterface;
+use Hideyo\Repositories\CartRepositoryInterface;
 
 
 class CartController extends Controller
@@ -19,12 +20,14 @@ class CartController extends Controller
         Request $request,
         SendingMethodRepositoryInterface $sendingMethod,
         PaymentMethodRepositoryInterface $paymentMethod,        
-        ShopRepositoryInterface $shop)
+        ShopRepositoryInterface $shop,
+        CartRepositoryInterface $cart)
     {
         $this->request = $request;
         $this->shop = $shop;
         $this->sendingMethod = $sendingMethod;        
         $this->paymentMethod = $paymentMethod;
+        $this->cart = $cart;
         $this->shopId = config()->get('app.shop_id');
     }
 
@@ -70,5 +73,68 @@ class CartController extends Controller
         
         return $paymentMethodsList = $this->paymentMethod->selectAllActiveByShopId(config()->get('app.shop_id'));       
     }
+
+
+    public function postProduct(Request $request, $productId, $productCombinationId = false)
+    {
+        $result = $this->cart->postProduct(
+            $request->get('product_id'), 
+            $productCombinationId, 
+            $request->get('leading_attribute_id'), 
+            $request->get('product_attribute_id'),
+            $request->get('amount')
+        );
+
+        if($result){
+
+            return response()->json(array(
+                'result' => true, 
+                'producttotal' => app('cart')->getContent()->count(),
+                'total_inc_tax_number_format' => app('cart')->getTotalWithTax(),
+                'total_ex_tax_number_format' => app('cart')->getTotalWithoutTax()
+
+            ));
+        }
+        
+        return response()->json(false);
+    }
+
+    public function deleteProduct($productId)
+    {
+        $result = app('cart')->remove($productId);
+
+        if (app('cart')->getContent()->count()) {
+
+            $this->refreshCouponCode();
+            return response()->json(array('result' => $result, 'totals' => true, 'producttotal' => app('cart')->getContent()->count()));
+        }
+        
+        return response()->json(false);        
+    }
+
+    public function updateAmountProduct(Request $request, $productId, $amount)
+    {
+        $this->cart->updateAmountProduct($productId, $amount, $request->get('leading_attribute_id'), $request->get('product_attribute_id'));
+
+        if (app('cart')->getContent()->count() AND app('cart')->get($productId)) {
+            $product = app('cart')->get($productId);
+            $amountNa = false;
+
+            if($product->quantity < $amount) {
+                $amountNa = view('frontend.cart.amount-na')->with(array('product' => $product))->render();
+            }
+            
+            $this->refreshCouponCode();
+            return response()->json(array(
+                'amountNa' => $amountNa,
+                'product_id' => $productId,
+                'product' => $product, 
+                'total_price_inc_tax_number_format' => $product->getOriginalPriceWithTaxSum(),
+                'total_price_ex_tax_number_format' => $product->getOriginalPriceWithoutTaxSum()));
+        }
+        
+        return response()->json(false);
+    }
+
 
 }
