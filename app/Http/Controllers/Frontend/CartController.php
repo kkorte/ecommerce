@@ -38,11 +38,11 @@ class CartController extends Controller
 
         if (app('cart')->getContent()->count()) {
             
-            if(!app('cart')->getConditionsByType('sending_method')->count()) {
+            if($sendingMethodsList->count() AND !app('cart')->getConditionsByType('sending_method')->count()) {
                 self::updateSendingMethod($sendingMethodsList->first()->id);
             }      
 
-            if (!app('cart')->getConditionsByType('payment_method')->count()) {
+            if ($paymentMethodsList->count() AND !app('cart')->getConditionsByType('payment_method')->count()) {
                 $this->cart->updatePaymentMethod($paymentMethodsList->first()->id);
             }
 

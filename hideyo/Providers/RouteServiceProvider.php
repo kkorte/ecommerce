@@ -24,8 +24,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -36,13 +34,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-
         $this->mapBackendRoutes();
-
         $this->mapAuthBackendRoutes();
-                $this->mapFrontendRoutes();
+        $this->mapFrontendRoutes();
     }
-
 
     /**
      * Define the "web" routes for the application.
@@ -53,7 +48,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapBackendRoutes()
     {
-
         Route::group([
             'middleware' => ['hideyobackend','auth.hideyo.backend'],
             'prefix' => 'admin', 
@@ -62,8 +56,6 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/backend.php');
         });
     }
-
-
 
     /**
      * Define the "web" routes for the application.
@@ -74,7 +66,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapAuthBackendRoutes()
     {
-
         Route::group([
             'middleware' => ['hideyobackend'],
             'prefix' => 'admin', 
@@ -83,12 +74,6 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/auth_backend.php');
         });
     }
-
-
-
-
-
-
 
     /**
      * Define the "web" routes for the application.
@@ -100,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapFrontendRoutes()
     {
         Route::group([
-            'middleware' => 'detect.shop',
+            'middleware' => ['web', 'detect.shop'],
             'namespace' => $this->frontendNamespace,
         ], function ($router) {
             require base_path('routes/frontend.php');
@@ -123,9 +108,5 @@ class RouteServiceProvider extends ServiceProvider
         ], function ($router) {
             require base_path('routes/api.php');
         });
-    }
-
-
-
-    
+    }    
 }
