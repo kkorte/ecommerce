@@ -58,6 +58,7 @@ class ProductCombinationController extends Controller
             })
 
             ->addColumn('price', function ($query) {
+                $result = 0;
                 if ($query->price) {
 
                     $taxRate = 0;

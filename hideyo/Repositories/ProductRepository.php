@@ -47,8 +47,8 @@ class ProductRepository implements ProductRepositoryInterface
             $rules = array();
         } elseif (isset($attributes['price'])) {
             $rules = array(
-                'discount_start_date' => 'date_format:d/m/Y',
-                'discount_end_date' => 'date_format:d/m/Y'
+                'discount_start_date' => 'nullable|date_format:d/m/Y',
+                'discount_end_date' => 'nullable|date_format:d/m/Y'
             );
         } else {
             $rules = array(
