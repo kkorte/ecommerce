@@ -16,7 +16,7 @@
             <li class="active">combinations</li>
 		</ol>
 
-		<a href="{{ URL::route('product.product-combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
+		<a href="{{ URL::route('product-combination.create', $product->id) }}" class="btn btn-green btn-success pull-right">create combination<i class="entypo-plus"></i></a>
 
 		<h2>Product <small>combinations</small></h2>
         <hr/>
@@ -64,7 +64,7 @@
                 oTable = $('#datatable').DataTable({
                     "processing": true,
                     "serverSide": true,
-                   "ajax": "{{ URL::route('product.product-combination.index', $product->id) }}",
+                   "ajax": "{{ URL::route('product-combination.index', $product->id) }}",
 
                  columns: [
 

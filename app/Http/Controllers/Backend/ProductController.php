@@ -459,7 +459,7 @@ class ProductController extends Controller
                 return redirect()->route('product.edit_price', $productId);
             } elseif ($this->request->get('product-combination')) {
                 Notification::success('Product combination leading attribute group was updated.');
-                return redirect()->route('product.{productId}.product-combination.index', $productId);
+                return redirect()->route('product-combination.index', $productId);
             }
 
             Notification::success('Product was updated.');

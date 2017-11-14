@@ -86,7 +86,6 @@ class Product extends BaseModel
 
     public function getPriceDetails()
     {
-
         if ($this->price) {
             $taxRate = 0;
             $priceInc = 0;
@@ -105,18 +104,10 @@ class Product extends BaseModel
                 if ($this->discount_type == 'amount') {
                     $discountPriceInc = $priceInc - $this->discount_value;
                      $discountPriceEx = $discountPriceInc / 1.21;
-                    if ($this->shop->wholesale) {
-                        $discountPriceEx = $this->price - $this->discount_value;
-                    }
                 } elseif ($this->discount_type == 'percent') {
                     $tax = ($this->discount_value / 100) * $priceInc;
                     $discountPriceInc = $priceInc - $tax;
                     $discountPriceEx = $discountPriceInc / 1.21;
-
-                    if ($this->shop->wholesale) {
-                        $discount = ($this->discount_value / 100) * $this->price;
-                        $discountPriceEx = $this->price - $discount;
-                    }
                 }
                 $discountTaxRate = $discountPriceInc - $discountPriceEx;
                 $discountPriceInc = $discountPriceInc;

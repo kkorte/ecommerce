@@ -19,7 +19,6 @@ class Invoice extends BaseModel
 
     public static function boot()
     {
-
         static::creating(function ($model) {
 
             $order = Invoice::whereNotNull('client_id')->where('shop_id', '=', $model->shop_id)->where('created_at', '>=', Carbon::now()->year)->orderBy('created_at', 'desc')->first();
@@ -36,7 +35,7 @@ class Invoice extends BaseModel
             }
         });
 
-          parent::boot();
+        parent::boot();
     }
 
 
@@ -50,12 +49,10 @@ class Invoice extends BaseModel
         return $this->belongsTo('Hideyo\Models\Client');
     }
 
-
     public function order()
     {
         return $this->belongsTo('Hideyo\Models\Order');
     }
-
 
     public function invoiceAddress()
     {
@@ -91,7 +88,6 @@ class Invoice extends BaseModel
     {
         return $this->price_with_tax;
     }
-
 
     public function getPriceWithoutTaxNumberFormat()
     {

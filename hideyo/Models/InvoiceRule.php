@@ -47,7 +47,6 @@ class InvoiceRule extends BaseModel
         return number_format($this->price_without_tax, 2, '.', '');
     }
 
-
     public function getTotalPriceWithoutTaxNumberFormat()
     {
         return number_format($this->total_price_without_tax, 2, '.', '');

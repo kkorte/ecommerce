@@ -47,7 +47,7 @@
                     @else
                     <li>
                         @endif
-                        <a href="{{ URL::route('product.product-combination.index', $product->id) }}">
+                        <a href="{{ URL::route('product-combination.index', $product->id) }}">
                             <span class="visible-xs"><i class="entypo-gauge"></i></span>
                             <span class="hidden-xs">Combinations</span>
                         </a>

@@ -153,7 +153,7 @@
 
     Route::get('product/{productId}/copy', array('as' => 'product.copy', 'users' => 'ProductController@copy', 'as' => 'product.copy'));
 
-    Route::resource('product/{productId}/product-combination', 'ProductCombinationController', ['as' => 'product']);
+    Route::resource('product/{productId}/product-combination', 'ProductCombinationController');
 
     Route::get('product/{productId}/product-combination/change-amount-attribute/{id}/{amount?}', array('as' => 'product', 'uses' => 'ProductCombinationController@changeAmount'));
  

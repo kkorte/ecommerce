@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\ProductAttributeCombination;
-use App\ProductAttribute;
+use Hideyo\Models\ProductAttributeCombination;
+use Hideyo\Models\ProductAttribute;
 use Hideyo\Repositories\ProductRepositoryInterface;
 
 use Hideyo\Repositories\ProductCategoryRepositoryInterface;
@@ -18,9 +18,7 @@ class ProductController extends Controller
     public function __construct(ProductRepositoryInterface $product, ProductCategoryRepositoryInterface $productCategory)
     {
         $this->product = $product;
-
         $this->productCategory = $productCategory;
-
     }
 
     public function getIndex(Request $request, $categorySlug, $productId, $productSlug, $productAttributeId = false)
@@ -144,7 +142,7 @@ class ProductController extends Controller
                 }
 
                 $productAttributeId = $productAttribute->id;
-                $productImages = $this->ajaxProductImages($product, $productAttributeId, $productAttributeId);       
+                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);       
                 $template = 'frontend.product.combinations';
 
                 if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
@@ -153,19 +151,17 @@ class ProductController extends Controller
 
                 return view($template)->with(
                     array(
-                    'newPullDowns' => $newPullDowns,
-                    'productImages' => $productImages,
-                    'countPullDowns' => count($newPullDowns),
-                    'pullDownsCount' => count($newPullDowns),
-                    'leadAttributeId' => $productAttributeId,
-                    'productAttributeId' => $productAttributeId,
-                    'productAttribute' => $productAttribute,
-                    'firstPulldown' => key($newPullDowns),
-                    'secondAttributeId' => $secondAttributeId,
-                    'priceDetails' => $priceDetails,
-                    'childrenProductCategories' => $productCategories,
-                    'product' => $product,
-        
+                        'newPullDowns' => $newPullDowns,
+                        'productImages' => $productImages,
+                        'countPullDowns' => count($newPullDowns),
+                        'pullDownsCount' => count($newPullDowns),
+                        'leadAttributeId' => $productAttributeId,
+                        'productAttributeId' => $productAttributeId,
+                        'productAttribute' => $productAttribute,
+                        'firstPulldown' => key($newPullDowns),
+                        'priceDetails' => $priceDetails,
+                        'childrenProductCategories' => $productCategories,
+                        'product' => $product        
                     )
                 );
 
@@ -184,11 +180,10 @@ class ProductController extends Controller
 
                 return view($template)->with(
                     array(
-                    'priceDetails' => $product->getPriceDetails(),
-                    'childrenProductCategories' => $productCategories,
-                    'product' => $product,
-                    'productImages' => $productImages
-        
+                        'priceDetails' => $product->getPriceDetails(),
+                        'childrenProductCategories' => $productCategories,
+                        'product' => $product,
+                        'productImages' => $productImages        
                     )
                 );
             }

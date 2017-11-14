@@ -111,18 +111,10 @@ class ProductAttribute extends BaseModel
             if ($this->discount_type == 'amount') {
                 $discountPriceInc = $priceInc - $this->discount_value;
                 $discountPriceEx = $discountPriceInc / 1.21;
-                if ($this->shop->wholesale) {
-                    $discountPriceEx = $this->price - $this->discount_value;
-                }
             } elseif ($this->discount_type == 'percent') {
                 $tax = ($this->discount_value / 100) * $priceInc;
                 $discountPriceInc = $priceInc - $tax;
                 $discountPriceEx = $discountPriceInc / 1.21;
-
-                if ($this->shop->wholesale) {
-                    $discount = ($this->discount_value / 100) * $this->price;
-                    $discountPriceEx = $this->price - $discount;
-                }
             }
 
 
@@ -137,10 +129,10 @@ class ProductAttribute extends BaseModel
         }
 
         return array(
-            'orginal_price_ex_tax'  => $price,
-            'orginal_price_ex_tax_number_format'  => number_format($price, 2, '.', ''),
-            'orginal_price_inc_tax' => $priceInc,
-            'orginal_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
+            'original_price_ex_tax'  => $price,
+            'original_price_ex_tax_number_format'  => number_format($price, 2, '.', ''),
+            'original_price_inc_tax' => $priceInc,
+            'original_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
             'commercial_price_number_format' => $commercialPrice,
             'tax_rate' => $taxRate,
             'tax_value' => $taxValue,

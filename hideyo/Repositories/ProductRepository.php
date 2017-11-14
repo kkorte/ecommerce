@@ -650,6 +650,45 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
 
+    function ajaxProductImages($product, $combinationsIds, $productAttributeId = false) 
+    {
+        $images = array();
 
+        if($product->productImages->count()) {  
+
+            $images = $product->productImages()->has('relatedAttributes', '=', 0)->has('relatedProductAttributes', '=', 0)->orderBy('rank', '=', 'asc')->get();
+
+            if($combinationsIds) {
+
+                $imagesRelatedAttributes = ProductImage::
+                whereHas('relatedAttributes', function($query) use ($combinationsIds, $product) { $query->with(array('productImage'))->whereIn('attribute_id', $combinationsIds); })
+                ->where('product_id', '=', $product->id)
+                ->get();
+
+                if($imagesRelatedAttributes) {
+                    $images = $images->merge($imagesRelatedAttributes)->sortBy('rank');
+                }
+                
+            }
+
+            if($productAttributeId) {
+
+                $imagesRelatedProductAttributes = ProductImage::
+                whereHas('relatedProductAttributes', function($query) use ($productAttributeId, $product) { $query->where('product_attribute_id', '=', $productAttributeId); })
+                ->where('product_id', '=', $product->id)
+                ->get();
+
+                if($imagesRelatedProductAttributes) {
+                    $images = $images->merge($imagesRelatedProductAttributes)->sortBy('rank');
+                }   
+
+                
+            }
+
+            $images->toArray();
+        }
+
+        return $images;
+    }
 
 }

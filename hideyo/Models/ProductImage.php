@@ -36,4 +36,15 @@ class ProductImage extends BaseModel
             'product_image_id', 
             'attribute_id');
     }
+
+    public function productImageAttributes()
+    {
+        return $this->hasMany('Hideyo\Models\ProductImageAttribute');
+    }
+
+    public function productAttributeImages()
+    {
+        return $this->hasMany('Hideyo\Models\ProductAttributeImage');
+    }
+    
 }
