@@ -209,9 +209,8 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
         return false;
     }
 
-    function selectAllByProductCategoryId($productCategoryId, $shopId)
+    public function selectAllByProductCategoryId($productCategoryId, $shopId)
     {
-
          return $this->model->
          whereHas('product', function ($query) use ($productCategoryId, $shopId) {
             $query->where('product_category_id', '=', $productCategoryId);
@@ -241,7 +240,6 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
         }
     }
 
-
     public function reduceAmounts($products)
     {
         if ($products->count()) {
@@ -258,6 +256,4 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
             }
         }
     }
-
-
 }

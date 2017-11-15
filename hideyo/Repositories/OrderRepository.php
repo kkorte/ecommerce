@@ -98,7 +98,6 @@ class OrderRepository implements OrderRepositoryInterface
     {
         $this->model = $this->find($id);
         $this->model->save();
-
         return $this->model->delete();
     }
 
@@ -110,20 +109,15 @@ class OrderRepository implements OrderRepositoryInterface
 
         if ($startDate) {
             $dt = Carbon::createFromFormat('d/m/Y', $startDate);
-
             $query->where('created_at', '>=', $dt->toDateString('Y-m-d'));
         }
 
-
         if ($endDate) {
             $dt = Carbon::createFromFormat('d/m/Y', $endDate);
-
             $query->where('created_at', '<=', $dt->toDateString('Y-m-d'));
         }
 
-
         $query->orderBy('created_at', 'ASC');
-
         return $query->get();
     }
 
@@ -137,7 +131,6 @@ class OrderRepository implements OrderRepositoryInterface
         return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
-
     public function orderProductsByClientId($clientId, $shopId)
     {
 
@@ -145,7 +138,6 @@ class OrderRepository implements OrderRepositoryInterface
             $query->where('client_id', '=', $clientId)->where('shop_id', '=', $shopId);
         });
     }
-
 
     public function selectAllByCompany()
     {
@@ -157,9 +149,8 @@ class OrderRepository implements OrderRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function productsByOrderIds(array $orderIds) {
-
-
+    public function productsByOrderIds(array $orderIds) 
+    {
         $result = DB::table('order_product')
         ->select(DB::raw('DISTINCT(CONCAT_WS(\' - \',order_product.title, IFNULL(order_product.product_attribute_title, \'\'))) as title, order_product.product_attribute_title, order_product.reference_code, order_product.price_with_tax, order_product.price_without_tax,  SUM(order_product.amount) as total_amount'))
         ->whereIn('order_product.order_id', $orderIds)
@@ -179,10 +170,8 @@ class OrderRepository implements OrderRepositoryInterface
         return $result;
     }
 
-
     public function getModel()
     {
         return $this->model;
-    }
-    
+    } 
 }
