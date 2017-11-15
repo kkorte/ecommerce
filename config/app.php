@@ -245,7 +245,9 @@ return [
         'Notification' => Krucas\Notification\Facades\Notification::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'BrowserDetect' => 'hisorange\BrowserDetect\Facade\Parser',
-        'Cart' => Hideyo\Facades\CartFacade::class    
+        'Cart' => Hideyo\Facades\CartFacade::class,
+        'ProductHelper'       => Hideyo\Helpers\ProductHelper::class,
+
     ],
 
 ];

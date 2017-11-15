@@ -1,5 +1,6 @@
 <?php 
 
+Route::get('cart/delete-product/{productId}', array('as' => 'cart.delete.product', 'uses' => 'CartController@deleteProduct'));
 Route::get('cart', array('as' => 'cart.index', 'uses' => 'CartController@getIndex'));
 
 //product routes
