@@ -3,8 +3,6 @@
 namespace Hideyo\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
-use View;
 use Hideyo\Models\Shop as Shop;
 
 class AuthenticateAdmin
@@ -19,8 +17,7 @@ class AuthenticateAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
-        if (Auth::guard('hideyobackend')->guest()) {
+        if (auth()->guard('hideyobackend')->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } 
@@ -28,9 +25,9 @@ class AuthenticateAdmin
             return redirect()->guest('/admin/security/login');
         }
 
-        if (Auth::guard('hideyobackend')->check()) {
-            View::share('this_user', Auth::guard('hideyobackend')->user());
-            View::share('available_shops', Shop::all());
+        if (auth()->guard('hideyobackend')->check()) {
+            view()->share('this_user', auth()->guard('hideyobackend')->user());
+            view()->share('available_shops', Shop::all());
         }
 
         return $next($request);

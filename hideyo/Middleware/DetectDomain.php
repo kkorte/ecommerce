@@ -1,26 +1,13 @@
 <?php namespace Hideyo\Middleware;
 
 use Closure;
-use Illuminate\Auth\Guard;
-use Illuminate\Support\Facades\Auth;
-
 use Hideyo\Repositories\ShopRepositoryInterface;
-use Hideyo\Repositories\DiscountRepositoryInterface;
-
-
-use Config;
-use \Apiclient;
-use \ShopFrontend;
-use \View;
 
 class DetectDomain
 {
-
-
     /**
      * Create a new filter instance.
      *
-     * @param  Guard  $auth
      * @return void
      */
     public function __construct(
@@ -38,19 +25,17 @@ class DetectDomain
      */
     public function handle($request, Closure $next)
     {
-        if (Config::get('app.url') != $request->root()) {
+        if (config()->get('app.url') != $request->root()) {
             $root = $request->root();
-            Config::set('app.url', $root);
+            config()->set('app.url', $root);
         }
 
-        $shopId = $this->shop->checkByUrl(Config::get('app.url'));
-
-        Config::set('app.shop_id', $shopId);
+        $shopId = $this->shop->checkByUrl(config()->get('app.url'));
+        config()->set('app.shop_id', $shopId);
         
-        if (!$shopId) {
+        if(!$shopId) {
             abort(404, "shop cannot be found");
         }
-
 
         return $next($request);
     }
