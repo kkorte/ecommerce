@@ -82,6 +82,9 @@ var sources = {
 gulp.task('icons', function() { 
     return gulp.src(sources.admin.fonts) 
         .pipe(gulp.dest('public/fonts')); 
+
+
+
 });
 
 
@@ -94,7 +97,6 @@ gulp.task('adminjavascript', function() { 
 
 });
 
-
 gulp.task('frontendjavascript', function() { 
     return gulp.src(sources.site.scripts) 
         .pipe($.plumber())
@@ -104,15 +106,10 @@ gulp.task('frontendjavascript', function() { 
 
 });
 
-
-
-
 gulp.task('jstree', function() { 
     return gulp.src(config.nodePath + '/jstree/src/themes/default/**.*') 
         .pipe(gulp.dest('public/javascript/jstree')); 
 });
-
-
 
 gulp.task('backendcss', function() {
     return gulp.src('./resources/scss/backend/style.scss')
@@ -127,7 +124,6 @@ gulp.task('backendcss', function() {
         .pipe(gulp.dest('./public/css/admin/'));
 });
 
-
 gulp.task('frontendcss', function() {
     return gulp.src('./resources/scss/frontend/style.scss')
         .pipe($.sass({
@@ -141,10 +137,7 @@ gulp.task('frontendcss', function() {
         .pipe(gulp.dest('./public/css/'));
 });
 
-
-
-
-gulp.task('default', [ 'jstree', 'icons', 'frontendcss', 'backendcss', 'adminjavascript', 'frontendjavascript'], function() {
+gulp.task('default', ['jstree', 'icons', 'frontendcss', 'backendcss', 'adminjavascript', 'frontendjavascript'], function() {
 if (DO_WATCH) {
     gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
     gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
