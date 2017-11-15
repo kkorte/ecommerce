@@ -45,15 +45,17 @@ class ProductCategoryController extends Controller
             })
 
             ->addColumn('title', function ($productCategory) {
+
+                $categoryTitle = $productCategory->title;
                 if ($productCategory->refProductCategory) {
-                    return '<strong>Redirect:</strong> '.$productCategory->title.' &#8594; '.$productCategory->refProductCategory->title;
+                    $categoryTitle = '<strong>Redirect:</strong> '.$productCategory->title.' &#8594; '.$productCategory->refProductCategory->title;
                 } elseif ($productCategory->isRoot()) {
-                    return '<strong>Root:</strong> '.$productCategory->title;
+                    $categoryTitle = '<strong>Root:</strong> '.$productCategory->title;
                 } elseif ($productCategory->isChild()) {
-                    return '<strong>Child:</strong> '.$productCategory->title;
+                    $categoryTitle = '<strong>Child:</strong> '.$productCategory->title;
                 }
                 
-                return $productCategory->title;
+                return $categoryTitle;
             })
 
             ->addColumn('products', function ($productCategory) {
