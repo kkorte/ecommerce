@@ -7,7 +7,7 @@ var sassPaths = [
 
 var config = {
     jsPath: './resources/javascript',
-    adminJsPath: './resources/javascript/admin',
+    adminJsPath: './resources/javascript/backend',
 
      sassPath: './resources/scss',
      nodePath: './node_modules' 
