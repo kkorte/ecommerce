@@ -208,14 +208,6 @@ class ClientRepository implements ClientRepositoryInterface
         $attributes['active'] = 1;
         $attributes['type'] = 'consumer';
         $mailChimplistId = Config::get('mailchimp.consumerId');
-
-        if ($shop->wholesale) {
-            $attributes['confirmed'] = 0;
-            $attributes['active'] = 0;
-            $attributes['type'] = 'wholesale';
-            $mailChimplistId = Config::get('mailchimp.wholesaleId');
-        }
-
         $attributes['confirmed'] = 0;
         $attributes['active'] = 0;
 
@@ -233,24 +225,6 @@ class ClientRepository implements ClientRepositoryInterface
         $new['bill_client_address_id'] = $clientAddress->id;
         $this->model->fill($new);
         $this->model->save();
-
-        if ($shop->wholesale) { 
-            $error = false;
-            try {
-                $this->mailchimp
-                    ->lists
-                    ->subscribe(
-                        $mailChimplistId,
-                        ['email' => $attributes['email']]
-                    );
-            } catch (\Mailchimp_List_AlreadySubscribed $e) {
-                $error = true;
-            } catch (\Mailchimp_Error $e) {
-                $error = true;
-            }
-        }
-
-
         return $this->model;
     }
 
@@ -377,13 +351,6 @@ class ClientRepository implements ClientRepositoryInterface
                 $attributes['confirmed'] = 1;
                 $attributes['active'] = 1;
                 $attributes['type'] = 'consumer';
-
-                if ($shop->wholesale) {
-                    $attributes['confirmed'] = 0;
-                    $attributes['active'] = 0;
-                    $attributes['type'] = 'wholesale';
-                }
-
                 $attributes['confirmation_code'] = null;
                 $attributes['password'] = \Hash::make($attributes['password']);
                 $attributes['account_created'] = Carbon::now()->toDateTimeString();

@@ -249,14 +249,9 @@ class CartRepository implements CartRepositoryInterface
         $valueExTax = $paymentMethodArray['price_details']['original_price_ex_tax'];
         $valueIncTax = $paymentMethodArray['price_details']['original_price_inc_tax'];
         $shop = $this->shop->find(config()->get('app.shop_id'));
+        $value = $valueIncTax;
+        $freeSending = ( $paymentMethodArray['no_price_from'] - Cart::getSubTotalWithTax());
 
-        if($shop->wholesale) {
-            $value = $valueExTax;
-            $freeSending = ( $paymentMethodArray['no_price_from'] - Cart::getSubTotalWithoutTax());
-        } else {
-            $value = $valueIncTax;
-            $freeSending = ( $paymentMethodArray['no_price_from'] - Cart::getSubTotalWithTax());
-        }
 
         if ($freeSending < 0) {
             $value = 0;
@@ -307,15 +302,9 @@ class CartRepository implements CartRepositoryInterface
 
             $valueExTax = $sendingMethodArray['price_details']['original_price_ex_tax'];
             $valueIncTax = $sendingMethodArray['price_details']['original_price_inc_tax'];
-
-            if($shop->wholesale) {
-                $value = $valueExTax;
-                $freeSending = ( $sendingMethodArray['no_price_from'] - Cart::getSubTotalWithoutTax());
-            } else {
-                $value = $valueIncTax;
-                $freeSending = ( $sendingMethodArray['no_price_from'] - Cart::getSubTotalWithTax());
-            }
-
+            $value = $valueIncTax;
+            $freeSending = ( $sendingMethodArray['no_price_from'] - Cart::getSubTotalWithTax());
+      
             if ($freeSending < 0) {
                 $value = 0;
                 $valueIncTax = 0;

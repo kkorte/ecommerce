@@ -195,10 +195,6 @@ class OrderController extends Controller
                     
                     $pdfHtml .= view('admin.order.bodypdf', array('order' => $order, 'pdfText' => $pdfText))->render();
                    
-                    if ($order->shop->wholesale) {
-                        $pdfHtml .= view('admin.order.bodypdf-wholesale', array('order' => $order, 'pdfText' => $pdfText))->render();
-                    }
-
                     if ($i != $countOrders) {
                         $pdfHtml .= '<div style="page-break-before: always;"></div>';
                     }
