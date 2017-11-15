@@ -40,9 +40,8 @@ class HtmlBlockController extends Controller
             ->addColumn('active', function ($query) {
                 if ($query->active) {
                     return '<a href="#" class="change-active" data-url="/admin/html-block/change-active/'.$query->id.'"><span class="glyphicon glyphicon-ok icon-green"></span></a>';
-                } else {
-                    return '<a href="#" class="change-active" data-url="/admin/html-block/change-active/'.$query->id.'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
                 }
+                return '<a href="#" class="change-active" data-url="/admin/html-block/change-active/'.$query->id.'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
             })
             ->addColumn('image', function ($query) {
                 if ($query->image_file_name) {
@@ -51,11 +50,8 @@ class HtmlBlockController extends Controller
             })
             ->addColumn('action', function ($query) {
                 $deleteLink = Form::deleteajax(url()->route('html-block.destroy', $query->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                
                 $copy = '<a href="/admin/html-block/'.$query->id.'/copy" class="btn btn-default btn-sm btn-info"><i class="entypo-pencil"></i>Copy</a>';
-
                 $links = '<a href="'.url()->route('html-block.edit', $query->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a> '.$copy.' '.$deleteLink;
-            
                 return $links;
             });
 
