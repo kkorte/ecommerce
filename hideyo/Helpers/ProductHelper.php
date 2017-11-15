@@ -50,22 +50,19 @@ class ProductHelper
             if($combinationsIds) {
 
                 $imagesRelatedAttributes = ProductImage::
-                whereHas('relatedAttributes', function($query) use ($combinationsIds, $product, $productId) { $query->with(array('productImage'))->whereIn('attribute_id', $combinationsIds); })
-                ->where('product_id', '=', $productId)
-                
-                ->get();
+                whereHas('relatedAttributes', function($query) use ($combinationsIds, $product, $productId) { $query->with(array('productImage'))->whereIn('attribute_id', $combinationsIds); });
         
                 $images = $images->merge($imagesRelatedAttributes)->sortBy('rank');          
             }
 
             if($productAttributeId) {                
-                $imagesRelatedProductAttributes = ProductImage::
-                whereHas('relatedProductAttributes', function($query) use ($productAttributeId, $product) { $query->where('product_attribute_id', '=', $productAttributeId); })
-                ->where('product_id', '=', $productId)
-                
-                ->get();
+                $imagesRelatedAttributes = ProductImage::
+                whereHas('relatedProductAttributes', function($query) use ($productAttributeId, $product) { $query->where('product_attribute_id', '=', $productAttributeId); });
+            }
 
-                $images = $images->merge($imagesRelatedProductAttributes)->sortBy('rank');
+            if($combinationsIds OR $productAttributeId) {
+                $imagesRelatedAttributes->where('product_id', '=', $productId)->get();
+                $images = $images->merge($imagesRelatedAttributes)->sortBy('rank');
             }
 
             if(!$images->count()) {

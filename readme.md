@@ -20,7 +20,7 @@ Hideyo is designed to run on a machine with PHP 5.5.9 and MySQL 5.5.
     * Mbstring PHP Extension
     * Tokenizer PHP Extension
     * Elasticsearch
-    * Bower & Gulp
+    * Bower & Gulp (bower is dead, so i will change it)
     * Composer
 
 

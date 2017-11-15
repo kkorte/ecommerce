@@ -105,7 +105,6 @@ class CartController extends Controller
 
         if (app('cart')->getContent()->count()) {
 
-            $this->refreshCouponCode();
             return response()->json(array('result' => $result, 'totals' => true, 'producttotal' => app('cart')->getContent()->count()));
         }
         
@@ -124,7 +123,6 @@ class CartController extends Controller
                 $amountNa = view('frontend.cart.amount-na')->with(array('product' => $product))->render();
             }
             
-            $this->refreshCouponCode();
             return response()->json(array(
                 'amountNa' => $amountNa,
                 'product_id' => $productId,
