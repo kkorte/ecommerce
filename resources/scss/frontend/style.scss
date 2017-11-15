@@ -1,7 +1,7 @@
 $open-sans-path: "/fonts" !default;
 $roboto-font-path: '/fonts' !default;
-@import '../../../bower_components/open-sans/scss/open-sans.scss';
-@import '../../../bower_components/roboto-fontface/css/roboto-fontface.scss';
+@import '../../../node_modules/npm-font-open-sans/open-sans.scss';
+@import '../../../node_modules/roboto-fontface/css/roboto-fontface.scss';
 
 $font-family-base: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 
@@ -24,10 +24,10 @@ $fa-font-path: "/hideyo/fonts";
 
 
 $icon-font-path: "/fonts/";
-@import '../../../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
-@import '../../../bower_components/select2/src/scss/core.scss';
-@import '../../../bower_components/select2-bootstrap-css/lib/select2-bootstrap.scss';
-@import '../../../bower_components/font-awesome/scss/font-awesome.scss';
+@import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import '../../../node_modules/select2/src/scss/core.scss';
+@import '../../../node_modules/select2-bootstrap-css/lib/select2-bootstrap.scss';
+@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
 
 
 

@@ -20,7 +20,7 @@ Hideyo is designed to run on a machine with PHP 5.5.9 and MySQL 5.5.
     * Mbstring PHP Extension
     * Tokenizer PHP Extension
     * Elasticsearch
-    * Bower & Gulp (bower is dead, so i will change it)
+    * NPM & Gulp
     * Composer
 
 
@@ -51,7 +51,6 @@ php artisan migrate
 go to root in command line generate the stylesheet and javascript files with:
 ```bash
 npm install
-bower update
 gulp 
 ```
 

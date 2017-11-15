@@ -10,7 +10,7 @@ var config = {
     adminJsPath: './resources/javascript/admin',
 
      sassPath: './resources/scss',
-     bowerDir: './bower_components' 
+     nodePath: './node_modules' 
 }
 
 var DO_WATCH = ($.util.env.watch ? true : false);
@@ -18,61 +18,59 @@ var DO_WATCH = ($.util.env.watch ? true : false);
 var sources = {
   admin: {
     scripts: [
-        config.bowerDir + '/jquery/dist/jquery.min.js',
-        config.bowerDir + '/bootstrap-validator/dist/validator.js',
-        config.bowerDir + '/select2/dist/js/select2.js',
-        config.bowerDir + '/bootstrap-maxlength/src/bootstrap-maxlength.js',             
-        config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',
-        config.bowerDir + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
-        config.bowerDir + '/datatables/media/js/jquery.dataTables.js',
-        config.bowerDir + '/datatables-select/js/dataTables.select.js',
-        config.bowerDir + '/datatables-buttons/js/buttons.bootstrap.select.js',
-        config.bowerDir + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
-        config.bowerDir + '/jstree/dist/jstree.min.js',
-        config.bowerDir + '/summernote/dist/summernote.min.js',   
-        config.bowerDir + '/iCheck/icheck.min.js',
+        config.nodePath + '/jquery/dist/jquery.min.js',
+        config.nodePath + '/bootstrap-validator/dist/validator.js',
+        config.nodePath + '/select2/dist/js/select2.js',
+        config.nodePath + '/bootstrap-maxlength/src/bootstrap-maxlength.js',             
+        config.nodePath + '/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+        config.nodePath + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        config.nodePath + '/datatables/media/js/jquery.dataTables.js',
+        config.nodePath + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
+        config.nodePath + '/jstree/dist/jstree.min.js',
+        config.nodePath + '/summernote/dist/summernote.min.js',   
+        config.nodePath + '/iCheck/icheck.min.js',
         config.adminJsPath   + '/main.js',
-        config.bowerDir + '/codemirror/lib/codemirror.js',
-        config.bowerDir + '/sweetalert/dist/sweetalert.min.js',
-        config.bowerDir + '/wchar/wchar.min.js',
+        config.nodePath + '/codemirror/lib/codemirror.js',
+        config.nodePath + '/sweetalert/dist/sweetalert.min.js',
+        config.nodePath + '/wchar/wchar.min.js',
 
     ],
     resources: [
       'resources/assets/**/*'
     ],
     fonts: [
-        config.bowerDir + '/foundation-icon-fonts/**/**.*', 
-        config.bowerDir + '/font-awesome/fonts/**/**.*', 
-        config.bowerDir + '/roboto-fontface/fonts/**/**.*', 
-        config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
+        config.nodePath + '/foundation-icon-fonts/**/**.*', 
+        config.nodePath + '/font-awesome/fonts/**/**.*', 
+        config.nodePath + '/roboto-fontface/fonts/**/**.*', 
+        config.nodePath + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
     ]
   },
   site: {
     scripts: [
-        config.bowerDir + '/jquery/dist/jquery.min.js',           
-        config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',
-        config.bowerDir + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
-        config.bowerDir + '/datatables/media/js/jquery.dataTables.js',
-        config.bowerDir + '/datatables-select/js/dataTables.select.js',
-        config.bowerDir + '/datatables-buttons/js/buttons.bootstrap.select.js',
-        config.bowerDir + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
-        config.bowerDir + '/jstree/dist/jstree.min.js',
-        config.bowerDir + '/summernote/dist/summernote.min.js',   
-        config.bowerDir + '/iCheck/icheck.min.js',
+        config.nodePath + '/jquery/dist/jquery.min.js',           
+        config.nodePath + '/bootstrap-sass-official/assets/javascripts/bootstrap.min.js',
+        config.nodePath + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        config.nodePath + '/datatables/media/js/jquery.dataTables.js',
+        config.nodePath + '/datatables-select/js/dataTables.select.js',
+        config.nodePath + '/datatables-buttons/js/buttons.bootstrap.select.js',
+        config.nodePath + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
+        config.nodePath + '/jstree/dist/jstree.min.js',
+        config.nodePath + '/summernote/dist/summernote.min.js',   
+        config.nodePath + '/iCheck/icheck.min.js',
         config.jsPath   + '/main.js',
-        config.bowerDir + '/codemirror/lib/codemirror.js',
-        config.bowerDir + '/sweetalert/dist/sweetalert.min.js',
-        config.bowerDir + '/wchar/wchar.min.js',
+        config.nodePath + '/codemirror/lib/codemirror.js',
+        config.nodePath + '/sweetalert/dist/sweetalert.min.js',
+        config.nodePath + '/wchar/wchar.min.js',
 
     ],
     resources: [
       'resources/assets/**/*'
     ],
     fonts: [
-        config.bowerDir + '/foundation-icon-fonts/**/**.*', 
-        config.bowerDir + '/font-awesome/fonts/**/**.*', 
-        config.bowerDir + '/roboto-fontface/fonts/**/**.*', 
-        config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
+        config.nodePath + '/foundation-icon-fonts/**/**.*', 
+        config.nodePath + '/font-awesome/fonts/**/**.*', 
+        config.nodePath + '/roboto-fontface/fonts/**/**.*', 
+        config.nodePath + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
     ]
   }
 
@@ -107,13 +105,10 @@ gulp.task('frontendjavascript', function() { 
 });
 
 
-gulp.task('bower', function() { 
-    return $.bower()
-         .pipe(gulp.dest(config.bowerDir)) 
-});
+
 
 gulp.task('jstree', function() { 
-    return gulp.src(config.bowerDir + '/jstree/src/themes/default/**.*') 
+    return gulp.src(config.nodePath + '/jstree/src/themes/default/**.*') 
         .pipe(gulp.dest('public/javascript/jstree')); 
 });
 
@@ -149,7 +144,7 @@ gulp.task('frontendcss', function() {
 
 
 
-gulp.task('default', ['bower', 'jstree', 'icons', 'frontendcss', 'backendcss', 'adminjavascript', 'frontendjavascript'], function() {
+gulp.task('default', [ 'jstree', 'icons', 'frontendcss', 'backendcss', 'adminjavascript', 'frontendjavascript'], function() {
 if (DO_WATCH) {
     gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
     gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
