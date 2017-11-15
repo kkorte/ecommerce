@@ -18,22 +18,21 @@ var DO_WATCH = ($.util.env.watch ? true : false);
 var sources = {
   admin: {
     scripts: [
-        config.nodePath + '/jquery/dist/jquery.min.js',
-        config.nodePath + '/bootstrap-validator/dist/validator.js',
-        config.nodePath + '/select2/dist/js/select2.js',
-        config.nodePath + '/bootstrap-maxlength/src/bootstrap-maxlength.js',             
-        config.nodePath + '/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        config.nodePath + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
-        config.nodePath + '/datatables/media/js/jquery.dataTables.js',
-        config.nodePath + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
-        config.nodePath + '/jstree/dist/jstree.min.js',
-        config.nodePath + '/summernote/dist/summernote.min.js',   
-        config.nodePath + '/iCheck/icheck.min.js',
-        config.adminJsPath   + '/main.js',
-        config.nodePath + '/codemirror/lib/codemirror.js',
-        config.nodePath + '/sweetalert/dist/sweetalert.min.js',
-        config.nodePath + '/wchar/wchar.min.js',
-
+        config.nodePath     + '/jquery/dist/jquery.min.js',
+        config.nodePath     + '/bootstrap-validator/dist/validator.js',
+        config.nodePath     + '/select2/dist/js/select2.js',
+        config.nodePath     + '/bootstrap-maxlength/src/bootstrap-maxlength.js',             
+        config.nodePath     + '/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+        config.nodePath     + '/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        config.nodePath     + '/datatables/media/js/jquery.dataTables.js',
+        config.nodePath     + '/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',        
+        config.nodePath     + '/jstree/dist/jstree.min.js',
+        config.nodePath     + '/summernote/dist/summernote.min.js',   
+        config.nodePath     + '/iCheck/icheck.min.js',
+        config.nodePath     + '/codemirror/lib/codemirror.js',
+        config.nodePath     + '/sweetalert/dist/sweetalert.min.js',
+        config.nodePath     + '/wchar/wchar.min.js',
+        config.adminJsPath  + '/main.js'
     ],
     resources: [
       'resources/assets/**/*'
@@ -73,18 +72,12 @@ var sources = {
         config.nodePath + '/bootstrap-sass-official/assets/fonts/bootstrap/**/**.*'
     ]
   }
-
-
-
 };
 
 
 gulp.task('icons', function() { 
     return gulp.src(sources.admin.fonts) 
         .pipe(gulp.dest('public/fonts')); 
-
-
-
 });
 
 
@@ -93,8 +86,7 @@ gulp.task('adminjavascript', function() { 
         .pipe($.plumber())
         .pipe($.concat('site.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest('./public/javascript/admin/'))
-
+        .pipe(gulp.dest('./public/javascript/admin/'));
 });
 
 gulp.task('frontendjavascript', function() { 
@@ -102,8 +94,7 @@ gulp.task('frontendjavascript', function() { 
         .pipe($.plumber())
         .pipe($.concat('site.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest('./public/javascript/'))
-
+        .pipe(gulp.dest('./public/javascript/'));
 });
 
 gulp.task('jstree', function() { 
@@ -138,12 +129,10 @@ gulp.task('frontendcss', function() {
 });
 
 gulp.task('default', ['jstree', 'icons', 'frontendcss', 'backendcss', 'adminjavascript', 'frontendjavascript'], function() {
-if (DO_WATCH) {
-    gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
-    gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
-    gulp.watch([config.jsPath + '/main.js'], ['frontendjavascript']);
-    gulp.watch([config.jsPath + '/admin/main.js'], ['adminjavascript']);
-
-}
-
+    if (DO_WATCH) {
+        gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
+        gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
+        gulp.watch([config.jsPath + '/main.js'], ['frontendjavascript']);
+        gulp.watch([config.jsPath + '/admin/main.js'], ['adminjavascript']);
+    }
 });
