@@ -39,14 +39,14 @@ class SendingMethodRepository implements SendingMethodRepositoryInterface
 
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
                        
         $this->model->fill($attributes);
         $this->model->save();
@@ -61,13 +61,13 @@ class SendingMethodRepository implements SendingMethodRepositoryInterface
     public function updateById(array $attributes, $sendingMethodId)
     {
         $this->model = $this->find($sendingMethodId);
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules($sendingMethodId));
        
         if ($validator->fails()) {
             return $validator;
         }
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         return $this->updateEntity($attributes);
     }
 
@@ -95,12 +95,12 @@ class SendingMethodRepository implements SendingMethodRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectOneById($sendingMethodId)
     {
-        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $sendingMethodId)->get();
+        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $sendingMethodId)->get();
         
         if ($result->isEmpty()) {
             return false;

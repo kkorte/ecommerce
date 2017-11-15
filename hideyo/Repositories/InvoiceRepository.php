@@ -56,8 +56,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = Auth::user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = Auth::user()->id;
+        $attributes['shop_id'] = auth()->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = auth()->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
 
@@ -162,8 +162,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        $attributes['shop_id'] = Auth::user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = Auth::user()->id;
+        $attributes['shop_id'] = auth()->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = auth()->user()->id;
         return $this->updateEntity($attributes);
     }
 
@@ -198,7 +198,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', Auth::user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', auth()->user()->selected_shop_id)->get();
     }
     
     public function find($id)

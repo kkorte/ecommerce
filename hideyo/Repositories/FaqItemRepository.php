@@ -44,14 +44,14 @@ class FaqItemRepository implements FaqItemRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = \auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = \Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = \auth()->guard('hideyobackend')->user()->id;
             
         $this->model->fill($attributes);
         $this->model->save();
@@ -71,7 +71,7 @@ class FaqItemRepository implements FaqItemRepositoryInterface
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = \auth()->guard('hideyobackend')->user()->id;
         $this->model = $this->find($faqItemId);
         return $this->updateEntity($attributes);
     }
@@ -96,17 +96,17 @@ class FaqItemRepository implements FaqItemRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', \auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     public function selectAllGroups()
     {
-        return $this->modelFaqItemGroup->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->modelFaqItemGroup->where('shop_id', '=', \auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectOneById($faqItemId)
     {
-        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $faqItemId)->get();
+        $result = $this->model->with(array('relatedPaymentMethods'))->where('shop_id', '=', \auth()->guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $faqItemId)->get();
         
         if ($result->isEmpty()) {
             return false;

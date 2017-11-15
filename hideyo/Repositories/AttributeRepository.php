@@ -41,12 +41,12 @@ class AttributeRepository implements AttributeRepositoryInterface
 
         if ($validator->fails()) {
             return $validator;
-        } else {
-            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
-            $this->model->fill($attributes);
-            $this->model->save();
-            return $this->model;
         }
+
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
+        $this->model->fill($attributes);
+        $this->model->save();
+        return $this->model;
     }
 
     public function updateById(array $attributes, $attributeGroupId, $id)
@@ -56,11 +56,11 @@ class AttributeRepository implements AttributeRepositoryInterface
 
         if ($validator->fails()) {
             return $validator;
-        } else {
-            $this->model = $this->find($id);
-            $attributes['modified_by_user_id'] = \Auth::guard('hideyobackend')->user()->id;
-            return $this->updateEntity($attributes);
         }
+
+        $this->model = $this->find($id);
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
+        return $this->updateEntity($attributes);
     }
 
     private function updateEntity(array $attributes = array())
@@ -83,7 +83,7 @@ class AttributeRepository implements AttributeRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
     
     public function find($id)

@@ -39,13 +39,13 @@ class GeneralSettingRepository implements GeneralSettingRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
         
@@ -55,13 +55,13 @@ class GeneralSettingRepository implements GeneralSettingRepositoryInterface
     public function updateById(array $attributes, $settingId)
     {
         $this->model = $this->find($settingId);
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules($settingId));
 
         if ($validator->fails()) {
             return $validator;
         }
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         return $this->updateEntity($attributes);
     }
 
@@ -85,7 +85,7 @@ class GeneralSettingRepository implements GeneralSettingRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
     
     public function find($settingId)

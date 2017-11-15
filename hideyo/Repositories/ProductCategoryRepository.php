@@ -59,14 +59,14 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
     public function create(array $attributes)
     {
 
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules());
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
         $this->model->rebuild();
@@ -75,8 +75,8 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function createImage(array $attributes, $productCategoryId)
     {
-        $userId = Auth::guard('hideyobackend')->user()->id;
-        $shopId = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $userId = auth()->guard('hideyobackend')->user()->id;
+        $shopId = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
         $attributes['modified_by_user_id'] = $userId;
 
@@ -160,14 +160,14 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function updateById(array $attributes, $id)
     {
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules($id, $attributes));
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model = $this->find($id);
 
         $oldTitle = $this->model->title;
@@ -218,7 +218,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function updateImageById(array $attributes, $productCategoryId, $imageId)
     {
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model = $this->findImage($imageId);
         return $this->updateImageEntity($attributes);
     }
@@ -268,7 +268,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
     {
         $this->imageModel = $this->findImage($imageId);
         $filename = storage_path() ."/app/files/product_category/".$this->imageModel->product_category_id."/".$this->imageModel->file;
-        $shopId = Auth::guard('hideyobackend')->user()->selected_shop_id;
+        $shopId = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $shop = $this->shop->find($shopId);
 
         if (File::exists($filename)) {
@@ -293,17 +293,17 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
+        return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
     }
 
     public function selectAllProductPullDown()
     {
-        return $this->model->whereNull('redirect_product_category_id')->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
+        return $this->model->whereNull('redirect_product_category_id')->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
     }
 
     public function ajaxSearchByTitle($query)
     {
-        return $this->model->where('title', 'LIKE', '%'.$query.'%')->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
+        return $this->model->where('title', 'LIKE', '%'.$query.'%')->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->orderBy('title', 'asc')->get();
     }
 
     function selectAllByShopId($shopId)

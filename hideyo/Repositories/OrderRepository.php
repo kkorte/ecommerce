@@ -42,8 +42,8 @@ class OrderRepository implements OrderRepositoryInterface
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
 
@@ -70,9 +70,9 @@ class OrderRepository implements OrderRepositoryInterface
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        if (Auth::guard('hideyobackend')->check()) {
-            $attributes['shop_id'] = Auth::guard('hideyobackend')->user()->selected_shop_id;
-            $attributes['modified_by_user_id'] = Auth::guard('hideyobackend')->user()->id;
+        if (auth()->guard('hideyobackend')->check()) {
+            $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
+            $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         }
 
         return $this->updateEntity($attributes);
@@ -105,7 +105,7 @@ class OrderRepository implements OrderRepositoryInterface
     public function selectAllByShopIdAndStatusId($orderStatusId, $startDate = false, $endDate = false, $shopId = false)
     {
         $query = $this->model
-        ->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)
+        ->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)
         ->where('order_status_id', '=', $orderStatusId);
 
         if ($startDate) {
@@ -134,7 +134,7 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function selectAll()
     {
-        return $this->model->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
 
