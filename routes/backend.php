@@ -61,7 +61,7 @@
 
     Route::resource('error', 'ErrorController');
 
-    Route::resource('content/{contentId}/images', 'ContentImageController');
+    Route::resource('content/{contentId}/images', 'ContentImageController', array('as' => 'content'));
 
     Route::get('content/edit/{contentId}/seo', array('as' => 'content.edit_seo', 'uses' => 'ContentController@editSeo'));
 

@@ -203,7 +203,6 @@ class NewsRepository implements NewsRepositoryInterface
         }
     }
 
-
     public function updateById(array $attributes, $newsId)
     {
         $validator = Validator::make($attributes, $this->rules($newsId, $attributes));

@@ -144,8 +144,7 @@ class HtmlBlockController extends Controller
             }
 
             Notification::success('HtmlBlock was updated.');
-            return redirect()->route('html-block.edit', $htmlBlockId);
-            
+            return redirect()->route('html-block.edit', $htmlBlockId);  
         }
 
         foreach ($result->errors()->all() as $error) {

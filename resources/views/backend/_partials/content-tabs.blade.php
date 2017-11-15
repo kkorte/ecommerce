@@ -33,7 +33,7 @@
     @else
     <li>
     @endif
-        <a href="{!! URL::route('content-image.index', $content->id) !!}">
+        <a href="{!! URL::route('content.images.index', $content->id) !!}">
             <span class="visible-xs"><i class="entypo-user"></i></span>
             <span class="hidden-xs">Images</span>
         </a>

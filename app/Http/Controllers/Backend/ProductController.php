@@ -215,57 +215,38 @@ class ProductController extends Controller
                 'brand.title as brandtitle', 
                 'product_category.title as categorytitle']
             )->with(array('productCategory', 'brand', 'subcategories', 'attributes',  'productImages','taxRate'))
-
             ->leftJoin('product_category as product_category', 'product_category.id', '=', 'product.product_category_id')
-
             ->leftJoin('brand as brand', 'brand.id', '=', 'product.brand_id')
-
             ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
-
             $datatables = \Datatables::of($product)
-
-
-
             ->addColumn('rank', function ($product) {
-           
                 return '<input type="text" class="change-rank" value="'.$product->rank.'" style="width:50px;" data-url="'.url()->route('product.change-rank', array('productId' => $product->id)).'">';
-              
             })
-
             ->filterColumn('categorytitle', function ($query, $keyword) {
                 $query->whereRaw("product_category.title like ?", ["%{$keyword}%"]);
             })
-
-
-
-
             ->addColumn('title', function ($product) {
                 if ($product->brand) {
                     return $product->brand->title.' | '.$product->title;
-                } else {
-                    return $product->title;
                 }
+                
+                return $product->title;      
             })
-
-
-
-
             ->addColumn('categorytitle', function ($product) {
                 if ($product->subcategories()->count()) {
                     $subcategories = $product->subcategories()->pluck('title')->toArray();
-            
                     return $product->categorytitle.', <small> '.implode(', ', $subcategories).'</small>';
-                } else {
-                    return $product->categorytitle;
                 }
+                
+                return $product->categorytitle;
             });
 
             return $datatables->make(true);
 
-        } else {
-            return view('backend.product.rank')->with('product', $this->product->selectAll());
         }
+        
+        return view('backend.product.rank')->with('product', $this->product->selectAll());
     }
 
     public function refactorAllImages()

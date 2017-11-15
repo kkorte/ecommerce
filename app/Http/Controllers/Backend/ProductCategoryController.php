@@ -133,7 +133,6 @@ class ProductCategoryController extends Controller
             $array['parent_id'] = null;
         }
 
-
         return $array;
     }
 
@@ -170,7 +169,6 @@ class ProductCategoryController extends Controller
         $products = $this->product->selectAll()->pluck('title', 'id');
         return view('backend.product_category.edit-highlight')->with(array('products' => $products, 'productCategory' => $this->productCategory->find($productCategoryId), 'categories' => $this->productCategory->selectAll()->pluck('title', 'id')));
     }
-
 
     public function editSeo($productCategoryId)
     {
