@@ -47,7 +47,7 @@ class ClientController extends Controller
                 'email', 'last_login']
             )->where('shop_id', '=', Auth::guard('hideyobackend')->user()->selected_shop_id);
             
-            $datatables = \Datatables::of($clients)
+            $datatables = Datatables::of($clients)
 
 
             ->addColumn('last_login', function ($clients) {
@@ -55,7 +55,7 @@ class ClientController extends Controller
             })
 
             ->addColumn('action', function ($clients) {
-                $deleteLink = \Form::deleteajax(url()->route('client.destroy', $clients->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                $deleteLink = Form::deleteajax(url()->route('client.destroy', $clients->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
                 $links = '<a href="'.url()->route('client.edit', $clients->id).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Show</a>  '.$deleteLink;
             
                 if (!$clients->active || !$clients->confirmed) {
@@ -80,48 +80,31 @@ class ClientController extends Controller
 
     public function getActivate($clientId)
     {
-
         return view('backend.client.activate')->with(array('client' => $this->client->find($clientId), 'addresses' => $this->clientAddress->selectAllByClientId($clientId)->pluck('firstname', 'id')));
     }
 
     public function getDeActivate($clientId)
     {
-
         return view('backend.client.de-activate')->with(array('client' => $this->client->find($clientId), 'addresses' => $this->clientAddress->selectAllByClientId($clientId)->pluck('firstname', 'id')));
     }
-
 
     public function postActivate($clientId)
     {
         $input = $this->request->all();
-
         $result  = $this->client->activate($clientId);
-
-
         $shop  = Auth::guard('hideyobackend')->user()->shop;
 
-        if ($shop->wholesale and $result) {
-            if ($input['send_mail']) {
-                    Mail::send('frontend.email.activate-mail-wholesale', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
-                        $message->to($result['email'])->from('info@foodelicious.nl', 'Foodelicious')->subject('Toegang tot groothandel.');
-                    });
+        if ($input['send_mail']) {
+                Mail::send('frontend.email.activate-mail', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
+                    $message->to($result['email'])->from('info@hideyo.nl', 'Hideyo')->subject('Toegang tot account.');
+                });
 
-                    Notification::container('foundation')->success('U heeft zich geregistreerd voor de groothandels bestel website van Foodelicious. U aanvraag zal zo snel mogelijk bekeken worden en na goedkeuring ontvangt u daarover een email.');
-            }
-        } else {
-            if ($input['send_mail']) {
-                    Mail::send('frontend.email.activate-mail', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
-                        $message->to($result['email'])->from('info@foodelicious.nl', 'Foodelicious')->subject('Toegang tot groothandel.');
-                    });
-
-                    Notification::container('foundation')->success('Uw account is geactiveerd.');
-            }
+                Notification::container('foundation')->success('Uw account is geactiveerd.');
         }
-
+        
         Notification::success('The client was activate.');
         return redirect()->route('client.index');
     }
-
 
     public function postDeActivate($clientId)
     {
@@ -172,7 +155,6 @@ class ClientController extends Controller
 
     public function postExport()
     {
-
         $result  =  $this->client->selectAllExport();
         Excel::create('export', function ($excel) use ($result) {
 
@@ -194,19 +176,13 @@ class ClientController extends Controller
                         $gender = $row->clientBillAddress->gender;
                     }
 
-
                     $newArray[$row->id] = array(
-                    'email' => $row->email,
-                    'company' => $row->company,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'gender' => $gender
-
-
+                        'email' => $row->email,
+                        'company' => $row->company,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'gender' => $gender
                     );
-
-
-           
                 }
 
                 $sheet->fromArray($newArray);
@@ -218,8 +194,6 @@ class ClientController extends Controller
         return redirect()->route('product.index');
     }
 
-
-
     public function update($clientId)
     {
         $result  = $this->client->updateById($this->request->all(), $clientId);
@@ -228,26 +202,15 @@ class ClientController extends Controller
             if ($result->active) {
                 $shop  = Auth::guard('hideyobackend')->user()->shop;
 
-                if ($shop->wholesale and $result) {
-                    if ($input['send_mail']) {
-                        Mail::send('frontend.email.activate-mail-wholesale', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
-                            $message->to($result['email'])->from('info@foodelicious.nl', 'Foodelicious')->subject('Toegang tot groothandel.');
-                        });
+                if ($input['send_mail']) {
+                    Mail::send('frontend.email.activate-mail', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
+                        $message->to($result['email'])->from('info@hideyo.nl', 'Hideyo')->subject('Toegang tot account.');
+                    });
 
-                        Notification::container('foundation')->success('U heeft zich geregistreerd voor de groothandels bestel website van Foodelicious. U aanvraag zal zo snel mogelijk bekeken worden en na goedkeuring ontvangt u daarover een email.');
-                    }
-                } else {
-                    if ($input['send_mail']) {
-                        Mail::send('frontend.email.activate-mail', array('user' => $result->toArray(), 'billAddress' => $result->clientBillAddress->toArray()), function ($message) use ($result) {
-                            $message->to($result['email'])->from('info@foodelicious.nl', 'Foodelicious')->subject('Toegang tot groothandel.');
-                        });
-
-                        Notification::container('foundation')->success('Uw account is geactiveerd.');
-                    }
+                    Notification::container('foundation')->success('Uw account is geactiveerd.');
                 }
+                
             }
-
-
 
             Notification::success('The client was updated.');
             return redirect()->route('client.index');

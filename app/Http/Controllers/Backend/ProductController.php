@@ -60,11 +60,9 @@ class ProductController extends Controller
 
             ->where('product.shop_id', '=', \Auth::guard('hideyobackend')->user()->selected_shop_id);
             
-
             $datatables = \Datatables::of($product)
             ->filterColumn('reference_code', function ($query, $keyword) {
                 $query->whereRaw("product.reference_code like ?", ["%{$keyword}%"]);
-                ;
             })
             ->filterColumn('active', function ($query, $keyword) {
                 $query->whereRaw("product.active like ?", ["%{$keyword}%"]);
@@ -72,7 +70,6 @@ class ProductController extends Controller
             })
 
             ->addColumn('rank', function ($product) {
-           
                 return '<input type="text" class="change-rank" value="'.$product->rank.'" style="width:50px;" data-url="/admin/product/change-rank/'.$product->id.'">';
               
             })
@@ -96,28 +93,27 @@ class ProductController extends Controller
             ->addColumn('active', function ($product) {
                 if ($product->active) {
                     return '<a href="#" class="change-active" data-url="'.url()->route('product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-ok icon-green"></span></a>';
-                } else {
-                    return '<a href="#" class="change-active" data-url="'.url()->route('product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
                 }
+                
+                return '<a href="#" class="change-active" data-url="'.url()->route('product.change-active', array('productId' => $product->id)).'"><span class="glyphicon glyphicon-remove icon-red"></span></a>';
             })
 
             ->addColumn('title', function ($product) {
                 if ($product->brand) {
                     return $product->brand->title.' | '.$product->title;
-                } else {
-                    return $product->title;
                 }
+                
+                return $product->title;
             })
 
 
             ->addColumn('amount', function ($product) {
                 if ($product->attributes->count()) {
                     return '<a href="/admin/product/'.$product->id.'/product-combination">combinations</a>';
-                } else {
-                    return '<input type="text" class="change-amount" value="'.$product->amount.'" style="width:50px;" data-url="'.url()->route('product.change-amount', array('productId' => $product->id)).'">';
                 }
+                
+                return '<input type="text" class="change-amount" value="'.$product->amount.'" style="width:50px;" data-url="'.url()->route('product.change-amount', array('productId' => $product->id)).'">';
             })
-
 
             ->addColumn('image', function ($product) {
                 if ($product->productImages->count()) {
@@ -189,14 +185,11 @@ class ProductController extends Controller
             ->addColumn('categorytitle', function ($product) {
                 if ($product->subcategories()->count()) {
                     $subcategories = $product->subcategories()->pluck('title')->toArray();
-            
                     return $product->categorytitle.', <small> '.implode(', ', $subcategories).'</small>';
-                } else {
-                    return $product->categorytitle;
                 }
+                
+                return $product->categorytitle;
             })
-
-
 
             ->addColumn('action', function ($product) {
                 $deleteLink = \Form::deleteajax(url()->route('product.destroy', $product->id), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'), $product->title);
@@ -208,13 +201,10 @@ class ProductController extends Controller
             });
 
             return $datatables->make(true);
-
-
         }
         
         return view('backend.product.index')->with('product', $this->product->selectAll());
     }
-
 
     public function getRank()
     {
@@ -294,12 +284,12 @@ class ProductController extends Controller
         $result  = $this->product->create($this->request->all());
 
         if (isset($result->id)) {
-            \Notification::success('The product was inserted.');
+            Notification::success('The product was inserted.');
             return redirect()->route('product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -378,7 +368,7 @@ class ProductController extends Controller
                         $i = 0;
                         foreach ($row->productImages as $image) {
                             $i++;
-                            $newArray[$row->id]['image_'.$i] =  'https://www.foodelicious.nl/files/product/800x800/'.$row->id.'/'.$image->file;
+                            $newArray[$row->id]['image_'.$i] =  url('/').'/files/product/800x800/'.$row->id.'/'.$image->file;
                         }
                     }
                 }
@@ -388,7 +378,7 @@ class ProductController extends Controller
         })->download('xls');
 
 
-        \Notification::success('The product export is completed.');
+        Notification::success('The product export is completed.');
         return redirect()->route('product.index');
     }
 
@@ -424,12 +414,12 @@ class ProductController extends Controller
                 }
             }
 
-            \Notification::success('The product copy is inserted.');
+            Notification::success('The product copy is inserted.');
             return redirect()->route('product.index');
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
         
         return redirect()->back()->withInput();
@@ -450,24 +440,27 @@ class ProductController extends Controller
         $input = $this->request->all();
         $result  = $this->product->updateById($input, $productId);
 
+        $redirect = redirect()->route('product.index');
+
         if (isset($result->id)) {
             if ($this->request->get('seo')) {
                 Notification::success('Product seo was updated.');
-                return redirect()->route('product.edit_seo', $productId);
+                $redirect = redirect()->route('product.edit_seo', $productId);
             } elseif ($this->request->get('price')) {
                 Notification::success('Product price was updated.');
-                return redirect()->route('product.edit_price', $productId);
+                $redirect = redirect()->route('product.edit_price', $productId);
             } elseif ($this->request->get('product-combination')) {
                 Notification::success('Product combination leading attribute group was updated.');
-                return redirect()->route('product-combination.index', $productId);
+                $redirect = redirect()->route('product-combination.index', $productId);
+            } else {
+                Notification::success('Product was updated.');
             }
 
-            Notification::success('Product was updated.');
-            return redirect()->route('product.index');
+            return $redirect;
         }
 
         foreach ($result->errors()->all() as $error) {
-            \Notification::error($error);
+            Notification::error($error);
         }
 
         return redirect()->back()->withInput()->withErrors($result->errors()->all());
