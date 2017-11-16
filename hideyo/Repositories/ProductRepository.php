@@ -782,26 +782,22 @@ class ProductRepository implements ProductRepositoryInterface
             }
         }
 
-        return array('productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
-    }
 
-    // complex shizzle
-    public function mergingPulldowns($attributeGroup, $defaultOption, $newPullDowns) 
-    {
         $defaultPulldown = array();
-        if ($attributeGroup AND isset($newPullDowns[$attributeGroup->title])) {
-            $defaultOption[$attributeGroup->title] = $newPullDowns[$attributeGroup->title];
+        if ($attributeLeadingGroup AND isset($newPullDowns[$attributeLeadingGroup->title])) {
+            $defaultOption[$attributeLeadingGroup->title] = $newPullDowns[$attributeLeadingGroup->title];
             $newPullDowns = $defaultOption;
         }
 
-        if ($attributeGroup AND isset($defaultOption[$attributeGroup->title])) {
-            $defaultPulldown = $newPullDowns[$attributeGroup->title];
-            $defaultPulldownFirstKey = key($newPullDowns[$attributeGroup->title]);
-            unset($newPullDowns[$attributeGroup->title]);
-            $newPullDowns = array_merge(array($attributeGroup->title => $defaultPulldown), $newPullDowns);
+        if ($attributeLeadingGroup AND isset($defaultOption[$attributeLeadingGroup->title])) {
+            $defaultPulldown = $newPullDowns[$attributeLeadingGroup->title];
+            $defaultPulldownFirstKey = key($newPullDowns[$attributeLeadingGroup->title]);
+            unset($newPullDowns[$attributeLeadingGroup->title]);
+            $newPullDowns = array_merge(array($attributeLeadingGroup->title => $defaultPulldown), $newPullDowns);
         }
 
-        return array('newPullDowns' => $newPullDowns, 'defaultPullDown' => $defaultPulldown);
+
+        return array('productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
     }
 
     // complex shizzle

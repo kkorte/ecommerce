@@ -45,11 +45,8 @@ class ProductController extends Controller
                     $attributeLeadingGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
                 }
 
-                $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);
-                $allPulldownOptions = $pullDowns['newPullDowns'];
-                $defaultOption = $pullDowns['defaultOption'];            
-                $mergingPulldowns = $this->product->mergingPulldowns($attributeLeadingGroup, $defaultOption, $allPulldownOptions);
-                $newPullDowns = $mergingPulldowns['newPullDowns'];            
+                $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
+                $newPullDowns = $pullDowns['newPullDowns'];            
                 $productAttribute = $this->product->getProductAttribute($product, $productAttributeId)->first();
                 $priceDetails = $productAttribute->getPriceDetails();
                 $productAttributeId = $pullDowns['productAttributeId']; 
@@ -107,11 +104,8 @@ class ProductController extends Controller
         if ($product) {
             if ($product->attributes->count()) {      
 
-                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId);
+                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId, $product->attributeGroup);
                 $newPullDowns = $pullDowns['newPullDowns'];
-                $defaultOption = $pullDowns['defaultOption'];    
-                $mergingPulldowns = $this->product->mergingPulldowns($product->attributeGroup, $defaultOption, $newPullDowns);      
-                $newPullDowns = $mergingPulldowns['newPullDowns'];
                 $priceDetails = $product->getPriceDetails();
                 $productAttribute = $this->product->getProductAttribute($product, $leadingAttributeId, $secondAttributeId)->first();
                 $priceDetails = $productAttribute->getPriceDetails();
