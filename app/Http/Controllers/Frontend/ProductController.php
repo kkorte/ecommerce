@@ -38,23 +38,24 @@ class ProductController extends Controller
             }
 
             if ($product->attributes->count()) {
-                $check = false;
+                
                 if ($product->attributeGroup) {
                     $attributeLeadingGroup = $product->attributeGroup;
                 } else {
                     $attributeLeadingGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
                 }
 
-                $productAttributeResult = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);
-                $allPulldownOptions = $productAttributeResult['newPullDowns'];
-                $productAttributeId = $productAttributeResult['productAttributeId']; 
-                $defaultOption = $productAttributeResult['defaultOption'];            
-                $resultDuplicate2 = $this->product->mergingPulldowns($attributeLeadingGroup, $defaultOption, $allPulldownOptions, $defaultOption);
-                $newPullDowns = $resultDuplicate2['newPullDowns'];            
+                $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);
+                $allPulldownOptions = $pullDowns['newPullDowns'];
+                $defaultOption = $pullDowns['defaultOption'];            
+                $mergingPulldowns = $this->product->mergingPulldowns($attributeLeadingGroup, $defaultOption, $allPulldownOptions);
+                $newPullDowns = $mergingPulldowns['newPullDowns'];            
                 $productAttribute = $this->product->getProductAttribute($product, $productAttributeId)->first();
                 $priceDetails = $productAttribute->getPriceDetails();
-                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);       
+                $productAttributeId = $pullDowns['productAttributeId']; 
                 
+                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);       
+                                
                 $template = 'frontend.product.combinations';
 
                 if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
@@ -106,14 +107,11 @@ class ProductController extends Controller
         if ($product) {
             if ($product->attributes->count()) {      
 
-                $productAttributeResult = $this->product->generatePulldowns($product, $leadingAttributeId);
-                $newPullDowns = $productAttributeResult['newPullDowns'];
-                if ($leadingAttributeId) { 
-                    $defaultOption = $productAttributeResult['defaultOption'];
-                }
-   
-                $resultDuplicate2 = $this->product->mergingPulldowns($product->attributeGroup, $defaultOption, $newPullDowns);      
-                $newPullDowns = $resultDuplicate2['newPullDowns'];
+                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId);
+                $newPullDowns = $pullDowns['newPullDowns'];
+                $defaultOption = $pullDowns['defaultOption'];    
+                $mergingPulldowns = $this->product->mergingPulldowns($product->attributeGroup, $defaultOption, $newPullDowns);      
+                $newPullDowns = $mergingPulldowns['newPullDowns'];
                 $priceDetails = $product->getPriceDetails();
                 $productAttribute = $this->product->getProductAttribute($product, $leadingAttributeId, $secondAttributeId)->first();
                 $priceDetails = $productAttribute->getPriceDetails();
