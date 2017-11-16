@@ -650,6 +650,53 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
 
+    function selectOneByIdAndAttributeId($id, $attributeId) 
+    {
+        return $this->model
+        ->with(
+            array(
+                'attributeGroup',
+                'attributes' => function($query) use ($attributeId) {
+                    $query->with(
+                        array(
+                            'combinations' => function($query)
+                            {
+                                $query->with(
+                                    array(
+                                        'productAttribute', 
+                                        'attribute' => function($query){
+                                            $query->with(
+                                                array(
+                                                    'attributeGroup'
+                                                )
+                                            );
+                                        }
+                                    )
+                                );
+                            }
+                        )
+                    )->orderBy('default_on', 'desc');
+                },
+                'extraFields' => function($query){$query->where('value', '!=', '')
+                ->orWhereNotNull('extra_field_default_value_id')
+                ->with(
+                    array(
+                        'extraField', 
+                        'extraFieldDefaultValue'
+                    )
+                )
+                ->orderBy('id', 'desc');}, 
+                    'taxRate', 
+                    'productCategory',  
+                    'relatedProducts' => function($query){$query->with('productImages')->orderBy('rank', 'asc');}
+                )
+            )
+
+           ->where('active', '=', 1)
+           ->where('id', '=', $id)->get()->first();             
+    }
+
+
     function ajaxProductImages($product, $combinationsIds, $productAttributeId = false) 
     {
         $images = array();

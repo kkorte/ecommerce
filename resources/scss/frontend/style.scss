@@ -12,7 +12,7 @@ $headings-font-weight: 300 !default;
 $font-size-base:          15px !default;
 $navbar-default-bg: blue;
 $navbar-inverse-bg: #009688;
-$navbar-height: 60px;
+
 
 $navbar-inverse-brand-color: white;
 $navbar-inverse-link-color: white;
@@ -29,7 +29,6 @@ $icon-font-path: "/fonts/";
 @import '../../../node_modules/select2-bootstrap-css/lib/select2-bootstrap.scss';
 @import '../../../node_modules/font-awesome/scss/font-awesome.scss';
 
+body { padding-top: 60px; }
 
 
-
-body { padding-top: 70px; }

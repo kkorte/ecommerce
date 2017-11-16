@@ -21,7 +21,7 @@
 
 
 <div class="row">
-    <div class="col-sm-3 col-md-2">
+    <div class="col-sm-12 col-md-12">
         <ol class="breadcrumb">
             <li class="show-for-medium"><a href="/">Home</a></li>
             @if($product->productCategory->ancestors()->count())

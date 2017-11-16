@@ -1,5 +1,6 @@
 <?php 
 
+Route::get('product/select-leading-pulldown/{productId}/{attributeId}', array('as' => 'product.select-leading-pulldown', 'uses' => 'ProductController@getSelectLeadingPulldown'));
 Route::get('cart/delete-product/{productId}', array('as' => 'cart.delete.product', 'uses' => 'CartController@deleteProduct'));
 Route::get('cart', array('as' => 'cart.index', 'uses' => 'CartController@getIndex'));
 
@@ -11,10 +12,8 @@ Route::get('{productCategorySlug}/{productId}/{productSlug}/{leadingAttributeId?
 Route::get('/{slug}', array('as' => 'product-category.item', 'uses' => 'ProductCategoryController@getItem'));
 
 //Cart
-
 Route::post('cart/post-product/{productId}/{productCombinationId?}', array('as' => 'cart.add.product', 'uses' => 'CartController@postProduct'));
 Route::get('cart/delete-product/{productId}', array('as' => 'cart.delete.product', 'uses' => 'CartController@deleteProduct'));
-
 
 
 //other
