@@ -427,7 +427,7 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $result = $this->model->with(array('productCategory', 'relatedProducts', 'productImages' => function ($query) {
             $query->orderBy('rank', 'asc');
-        }))->where('shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->where('active', '=', 1)->where('id', '=', $productId)->get()->first();
+        }))->where('active', '=', 1)->where('id', '=', $productId)->get()->first();
         return $result;
     }
 
