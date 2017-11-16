@@ -57,6 +57,7 @@ var sources = {
         config.nodePath + '/summernote/dist/summernote.min.js',   
         config.nodePath + '/iCheck/icheck.min.js',
         config.jsPath   + '/main.js',
+        config.jsPath   + '/cart.js',
         config.nodePath + '/codemirror/lib/codemirror.js',
         config.nodePath + '/sweetalert/dist/sweetalert.min.js',
         config.nodePath + '/wchar/wchar.min.js',
@@ -133,6 +134,7 @@ gulp.task('default', ['jstree', 'icons', 'frontendcss', 'backendcss', 'adminjava
         gulp.watch(['./resources/scss/**/*.scss'], ['backendcss']);
         gulp.watch(['./resources/scss/**/*.scss'], ['frontendcss']);
         gulp.watch([config.jsPath + '/main.js'], ['frontendjavascript']);
+        gulp.watch([config.jsPath + '/cart.js'], ['javascript']);
         gulp.watch([config.jsPath + '/admin/main.js'], ['adminjavascript']);
     }
 });

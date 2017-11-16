@@ -45,8 +45,7 @@ class ProductController extends Controller
 
                 $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
                 $newPullDowns = $pullDowns['newPullDowns'];            
-                $productAttribute = $pullDowns['productAttribute'];
-                
+                $productAttribute = $pullDowns['productAttribute']; 
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);       
                                 
                 $template = 'frontend.product.combinations';
