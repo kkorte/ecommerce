@@ -59,7 +59,17 @@ class ProductController extends Controller
             }
         }
 
-        return array('check' => $check, 'defaultOption' => $defaultOption);
+
+        foreach ($product->attributes as $row) {
+            if ($row['combinations']) {
+                foreach ($row['combinations'] as $key => $value) {
+                    $newPullDowns[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
+                }
+            }
+        }
+
+
+        return array('check' => $check, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
     }
 
     // complex shizzle
@@ -131,16 +141,9 @@ class ProductController extends Controller
                     $attributeGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
                 }
 
-                foreach ($product->attributes as $row) {
-                    if ($row['combinations']) {
-                        foreach ($row['combinations'] as $key => $value) {
-                            $newPullDowns[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
-                        }
-                    }
-                }
-
+                $productAttributeResult = $this->duplicate1($product, $productAttributeId);
+                $newPullDowns = $productAttributeResult['newPullDowns'];
                 if ($productAttributeId) {
-                    $productAttributeResult = $this->duplicate1($product, $productAttributeId);
                     $check = $productAttributeResult['check'];
                     $defaultOption = $productAttributeResult['defaultOption'];
                 }
@@ -191,7 +194,6 @@ class ProductController extends Controller
                     $resultDuplicate3 = $this->duplicate3($product, $productAttributeId);
                     $productAttribute = $resultDuplicate3['productAttribute'];
                     $priceDetails = $resultDuplicate3['priceDetails'];
-
                 }
 
                 $productAttributeId = $productAttribute->id;
@@ -217,7 +219,6 @@ class ProductController extends Controller
                         'product' => $product        
                     )
                 );
-
             }
 
             $productImages = $product->productImages;
@@ -250,23 +251,16 @@ class ProductController extends Controller
         $product = $this->product->selectOneByIdAndAttributeId($productId, $leadingAttributeId);
      
         if ($product) {
-            if ($product->attributes->count()) {
-      
+            if ($product->attributes->count()) {      
+
+                $productAttributeResult = $this->duplicate1($product, $leadingAttributeId);
+                $newPullDowns = $productAttributeResult['newPullDowns'];
                 if ($leadingAttributeId) {
-                    $productAttributeResult = $this->duplicate1($product, $leadingAttributeId);
                     $check = $productAttributeResult['check'];
                     $defaultOption = $productAttributeResult['defaultOption'];
                 }
 
-                $defaultLeadingAttributeId = $leadingAttributeId;
-
-                foreach ($product->attributes as $row) {
-                    if ($row['combinations']) {
-                        foreach ($row['combinations'] as $key => $value) {
-                            $newPullDowns[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
-                        }
-                    }
-                }
+                $defaultLeadingAttributeId = $leadingAttributeId;      
 
                 $resultDuplicate2 = $this->duplicate2($product->attributeGroup, $defaultOption, $newPullDowns, $check);
         
@@ -274,15 +268,9 @@ class ProductController extends Controller
 
                 $priceDetails = $product->getPriceDetails();
 
-                if ($leadingAttributeId and $secondAttributeId) {
-                    $resultDuplicate3 = $this->duplicate3($product, $leadingAttributeId, $secondAttributeId);
-                    $productAttribute = $resultDuplicate3['productAttribute'];
-                    $priceDetails = $resultDuplicate3['priceDetails'];
-                } else {
-                    $resultDuplicate3 = $this->duplicate3($product, $leadingAttributeId);
-                    $productAttribute = $resultDuplicate3['productAttribute'];
-                    $priceDetails = $resultDuplicate3['priceDetails'];
-                }
+                $resultDuplicate3 = $this->duplicate3($product, $leadingAttributeId, $secondAttributeId);
+                $productAttribute = $resultDuplicate3['productAttribute'];
+                $priceDetails = $resultDuplicate3['priceDetails'];
      
                 $productAttributeId = $productAttribute->id;
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);
@@ -306,5 +294,4 @@ class ProductController extends Controller
             }
         }
     }
-
 }
