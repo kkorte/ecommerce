@@ -10,11 +10,9 @@ use Hideyo\Repositories\ProductRepositoryInterface;
 use Hideyo\Repositories\ProductCategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use BrowserDetect;
-use Notification;
 
 class ProductController extends Controller
 {
-
     public function __construct(ProductRepositoryInterface $product, ProductCategoryRepositoryInterface $productCategory)
     {
         $this->product = $product;
