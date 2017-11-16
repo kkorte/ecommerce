@@ -48,8 +48,7 @@ class ProductController extends Controller
                 $productAttributeResult = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);
                 $allPulldownOptions = $productAttributeResult['newPullDowns'];
                 $productAttributeId = $productAttributeResult['productAttributeId']; 
-                $defaultOption = $productAttributeResult['defaultOption'];      
-                $defaultLeadingAttributeId = $productAttributeId;       
+                $defaultOption = $productAttributeResult['defaultOption'];            
                 $resultDuplicate2 = $this->product->mergingPulldowns($attributeLeadingGroup, $defaultOption, $allPulldownOptions, $defaultOption);
                 $newPullDowns = $resultDuplicate2['newPullDowns'];            
                 $productAttribute = $this->product->getProductAttribute($product, $productAttributeId)->first();
@@ -63,13 +62,11 @@ class ProductController extends Controller
                 } 
 
                 return view($template)->with(
-                    array(
-                        'newPullDowns' => $newPullDowns,
+                    array(                     
                         'productImages' => $productImages,    
-                        'leadAttributeId' => $defaultLeadingAttributeId,
-                        'productAttributeId' => $productAttributeId,
-                        'productAttribute' => $productAttribute,
+                        'leadAttributeId' => $productAttributeId,
                         'firstPulldown' => key($newPullDowns),
+                        'newPullDowns' => $newPullDowns,
                         'priceDetails' => $priceDetails,
                         'childrenProductCategories' => $productCategories,                        
                         'product' => $product        
@@ -114,8 +111,7 @@ class ProductController extends Controller
                 if ($leadingAttributeId) { 
                     $defaultOption = $productAttributeResult['defaultOption'];
                 }
-
-                $defaultLeadingAttributeId = $leadingAttributeId;      
+   
                 $resultDuplicate2 = $this->product->mergingPulldowns($product->attributeGroup, $defaultOption, $newPullDowns);      
                 $newPullDowns = $resultDuplicate2['newPullDowns'];
                 $priceDetails = $product->getPriceDetails();

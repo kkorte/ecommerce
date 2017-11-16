@@ -65,8 +65,8 @@
 
 
 
-                @if($productAttributeId)
-                {!! Form::open(array('route' => array('cart.add.product', $product['id'], $productAttributeId), 'class' => 'add-product')) !!}
+                @if($leadAttributeId)
+                {!! Form::open(array('route' => array('cart.add.product', $product['id'], $leadAttributeId), 'class' => 'add-product')) !!}
                 @else
                 {!! Form::open(array('route' => array('cart.add.product', $product['id']), 'class' => 'add-product')) !!}
                 @endif                 
