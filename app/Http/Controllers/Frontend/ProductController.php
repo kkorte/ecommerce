@@ -122,7 +122,9 @@ class ProductController extends Controller
                 $productAttribute = $this->product->getProductAttribute($product, $leadingAttributeId, $secondAttributeId)->first();
                 $priceDetails = $productAttribute->getPriceDetails();
                 $productAttributeId = $productAttribute->id;
+                
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);
+                
                 $typeTemplate = "";
 
                 if (BrowserDetect::isMobile()) {   
