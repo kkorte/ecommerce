@@ -21,7 +21,7 @@ class ProductController extends Controller
         $this->productCategory = $productCategory;
     }
 
-    // to complex
+    // complex shizzle
     function duplicate1($product, $productAttributeId) 
     {
         $defaultOption = array();
@@ -62,7 +62,7 @@ class ProductController extends Controller
         return array('check' => $check, 'defaultOption' => $defaultOption);
     }
 
-    // to complex
+    // complex shizzle
     function duplicate2($attributeGroup, $defaultOption, $newPullDowns, $check) 
     {
         $defaultPulldown = array();
@@ -82,7 +82,7 @@ class ProductController extends Controller
 
     }
 
-    // to complex
+    // complex shizzle
     function duplicate3($product, $productAttributeId, $secondAttributeId = false) {   
         $productAttribute =  ProductAttributeCombination::select('product_attribute.*')->leftJoin('product_attribute', 'product_attribute_combination.product_attribute_id', '=', 'product_attribute.id')->where('product_attribute.product_id', '=', $product->id)->where('product_attribute_combination.attribute_id', '=', $productAttributeId)->first();
         $productAttribute = ProductAttribute::where('product_id', '=', $product->id)
