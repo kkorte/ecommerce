@@ -741,7 +741,7 @@ class ProductRepository implements ProductRepositoryInterface
 
 
     // complex shizzle
-    public function generatePulldowns($product, $productAttributeId, $attributeLeadingGroup = false) 
+    public function generatePulldowns($product, $productAttributeId, $attributeLeadingGroup = false, $secondAttributeId = false) 
     {
         $defaultOption = array();
         $check = array();
@@ -796,12 +796,13 @@ class ProductRepository implements ProductRepositoryInterface
             $newPullDowns = array_merge(array($attributeLeadingGroup->title => $defaultPulldown), $newPullDowns);
         }
 
+        $productAttribute = $this->getProductAttribute($product, $productAttributeId, $secondAttributeId)->first();
 
-        return array('productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
+        return array('productAttribute' => $productAttribute, 'productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
     }
 
     // complex shizzle
-    public function getProductAttribute($product, $productAttributeId, $secondAttributeId = false) {   
+    function getProductAttribute($product, $productAttributeId, $secondAttributeId = false) {   
        $productAttribute = ProductAttribute::where('product_id', '=', $product->id)
         ->whereHas('combinations', function ($query) use ($productAttributeId, $secondAttributeId) {
             if ($productAttributeId) {

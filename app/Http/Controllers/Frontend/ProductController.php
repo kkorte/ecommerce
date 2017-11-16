@@ -47,11 +47,9 @@ class ProductController extends Controller
 
                 $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
                 $newPullDowns = $pullDowns['newPullDowns'];            
-                $productAttribute = $this->product->getProductAttribute($product, $productAttributeId)->first();
-                $priceDetails = $productAttribute->getPriceDetails();
-                $productAttributeId = $pullDowns['productAttributeId']; 
+                $productAttribute = $pullDowns['productAttribute'];
                 
-                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);       
+                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);       
                                 
                 $template = 'frontend.product.combinations';
 
@@ -62,10 +60,10 @@ class ProductController extends Controller
                 return view($template)->with(
                     array(                     
                         'productImages' => $productImages,    
-                        'leadAttributeId' => $productAttributeId,
+                        'leadAttributeId' => $productAttribute->id,
                         'firstPulldown' => key($newPullDowns),
                         'newPullDowns' => $newPullDowns,
-                        'priceDetails' => $priceDetails,
+                        'priceDetails' => $productAttribute->getPriceDetails(),
                         'childrenProductCategories' => $productCategories,                        
                         'product' => $product        
                     )
@@ -104,14 +102,10 @@ class ProductController extends Controller
         if ($product) {
             if ($product->attributes->count()) {      
 
-                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId, $product->attributeGroup);
+                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId, $product->attributeGroup, $secondAttributeId);
                 $newPullDowns = $pullDowns['newPullDowns'];
-                $priceDetails = $product->getPriceDetails();
-                $productAttribute = $this->product->getProductAttribute($product, $leadingAttributeId, $secondAttributeId)->first();
-                $priceDetails = $productAttribute->getPriceDetails();
-                $productAttributeId = $productAttribute->id;
-                
-                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);
+                $productAttribute = $pullDowns['productAttribute'];                
+                $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);
                 
                 $typeTemplate = "";
 
@@ -123,10 +117,10 @@ class ProductController extends Controller
                     'newPullDowns' => $newPullDowns,
                     'productImages' => $productImages,            
                     'leadAttributeId' => $leadingAttributeId,
-                    'productAttributeId' => $productAttributeId,
+                    'productAttributeId' => $productAttribute->id,
                     'firstPulldown' => key($newPullDowns),
                     'secondAttributeId' => $secondAttributeId,
-                    'priceDetails' => $priceDetails,
+                    'priceDetails' => $productAttribute->getPriceDetails(),
                     'product' => $product
                 ));  
             }
