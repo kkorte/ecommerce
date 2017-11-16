@@ -85,10 +85,10 @@
                         <div class="col-lg-12">
                             
                             @if($leadAttributeId)
-                            {!! Form::select('pulldown['.$key.']', array('0' => 'selecteer een optie') + $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id']."/".$leadAttributeId, "class" => "selectpicker pulldown pulldown-$key")) !!}
+                            {!! Form::select('pulldown['.$key.']', array('0' => 'selecteer een optie') + $row, null, array("data-url" => "/product/select-second-pulldown/".$product['id']."/".$leadAttributeId, "class" => "selectpicker pulldown pulldown-$key")) !!}
 
                             @else 
-                            {!! Form::select('pulldown['.$key.']', array('0' => 'selecteer een optie') + $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id'], "class" => "selectpicker pulldown pulldown-$key")) !!}
+                            {!! Form::select('pulldown['.$key.']', array('0' => 'selecteer een optie') + $row, null, array("data-url" => "/product/select-second-pulldown/".$product['id'], "class" => "selectpicker pulldown pulldown-$key")) !!}
                             @endif
                             <label>{!! $key !!}</label>
                         </div>

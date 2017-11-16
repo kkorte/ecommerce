@@ -6,6 +6,7 @@ use Hideyo\Repositories\RedirectRepositoryInterface;
 use Hideyo\Repositories\ShopRepositoryInterface;
 use Hideyo\Models\Product;
 use Hideyo\Models\ProductImage;
+use Hideyo\Models\ProductAttribute;
 use Image;
 use File;
 use Auth;
@@ -737,5 +738,94 @@ class ProductRepository implements ProductRepositoryInterface
 
         return $images;
     }
+
+
+    // complex shizzle
+    public function generatePulldowns($product, $productAttributeId, $attributeLeadingGroup = false) 
+    {
+        $defaultOption = array();
+        $check = array();
+
+        //create all pulldowns
+        foreach ($product->attributes as $row) {
+            if ($row['combinations']) {
+                foreach ($row['combinations'] as $key => $value) {
+                    $newPullDowns[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
+                }
+            }
+        }
+
+        if(!$productAttributeId AND $attributeLeadingGroup) {
+            $productAttributeId = key($newPullDowns[$attributeLeadingGroup->title]);
+        }
+
+        $productAttributeResultWithAttributeId =  $this->getProductAttribute($product, $productAttributeId);   
+
+        if ($productAttributeResultWithAttributeId->get()->first()) {
+            foreach ($productAttributeResultWithAttributeId->get()->first()->combinations as $combination) {
+                $defaultOption[$combination->attribute->attributeGroup->title][$combination->attribute->id] = $combination->attribute->value;
+            }
+        } else {
+            $productAttributeId = false;
+        }
+
+        $productAttributeResultWithAttributeId = $productAttributeResultWithAttributeId->get();
+
+        if ($productAttributeResultWithAttributeId) {
+
+            foreach ($productAttributeResultWithAttributeId as $row) {
+                if ($row['combinations']) {
+                    foreach ($row['combinations'] as $key => $value) {
+                        $defaultOption[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
+                    }
+                }
+            }
+        }
+
+        return array('productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
+    }
+
+    // complex shizzle
+    public function mergingPulldowns($attributeGroup, $defaultOption, $newPullDowns) 
+    {
+        $defaultPulldown = array();
+        if ($attributeGroup AND isset($newPullDowns[$attributeGroup->title])) {
+            $defaultOption[$attributeGroup->title] = $newPullDowns[$attributeGroup->title];
+            $newPullDowns = $defaultOption;
+        }
+
+        if ($attributeGroup AND isset($defaultOption[$attributeGroup->title])) {
+            $defaultPulldown = $newPullDowns[$attributeGroup->title];
+            $defaultPulldownFirstKey = key($newPullDowns[$attributeGroup->title]);
+            unset($newPullDowns[$attributeGroup->title]);
+            $newPullDowns = array_merge(array($attributeGroup->title => $defaultPulldown), $newPullDowns);
+        }
+
+        return array('newPullDowns' => $newPullDowns, 'defaultPullDown' => $defaultPulldown);
+    }
+
+    // complex shizzle
+    public function getProductAttribute($product, $productAttributeId, $secondAttributeId = false) {   
+       $productAttribute = ProductAttribute::where('product_id', '=', $product->id)
+        ->whereHas('combinations', function ($query) use ($productAttributeId, $secondAttributeId) {
+            if ($productAttributeId) {
+                $query->where('attribute_id', '=', $productAttributeId);
+            }
+        })
+        ->whereHas('combinations', function ($query) use ($secondAttributeId) {
+            if ($secondAttributeId) {
+                $query->where('attribute_id', '=', $secondAttributeId);
+            }
+        })
+        ->with(array('combinations' => function ($query) {
+            $query->with(array('attribute' => function ($query) {
+                $query->with(array('attributeGroup'));
+            }));
+        }))        
+        ->with(array('product'));
+
+        return $productAttribute;
+    }
+
 
 }

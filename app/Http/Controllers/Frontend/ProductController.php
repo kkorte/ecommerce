@@ -21,102 +21,6 @@ class ProductController extends Controller
         $this->productCategory = $productCategory;
     }
 
-    // complex shizzle
-    function duplicate1($product, $productAttributeId) 
-    {
-        $defaultOption = array();
-        $check = array();
-
-        $productAttributeResultWithAttributeId =  ProductAttribute::where('product_attribute.product_id', '=', $product->id)->where('product_attribute.amount', '!=', 0)
-        ->whereHas('combinations', function ($query) use ($productAttributeId) {
-            if ($productAttributeId) {
-                $query->where('attribute_id', '=', $productAttributeId);
-            }
-        })
-        ->with(array('combinations' => function ($query) use ($productAttributeId) {
-            $query->with(array('attribute' => function ($query) {
-                $query->with(array('attributeGroup'));
-            }));
-        }));
-
-        if ($productAttributeResultWithAttributeId->get()->first()) {
-            foreach ($productAttributeResultWithAttributeId->get()->first()->combinations as $combination) {
-                $defaultOption[$combination->attribute->attributeGroup->title][$combination->attribute->id] = $combination->attribute->value;
-            }
-        } else {
-            $productAttributeId = false;
-        }
-
-        $productAttributeResultWithAttributeId = $productAttributeResultWithAttributeId->get();
-
-        if ($productAttributeResultWithAttributeId) {
-            foreach ($productAttributeResultWithAttributeId as $row) {
-                if ($row['combinations']) {
-                    foreach ($row['combinations'] as $key => $value) {
-                        $check[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
-                    }
-                }
-            }
-        }
-
-
-        foreach ($product->attributes as $row) {
-            if ($row['combinations']) {
-                foreach ($row['combinations'] as $key => $value) {
-                    $newPullDowns[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
-                }
-            }
-        }
-
-
-        return array('check' => $check, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
-    }
-
-    // complex shizzle
-    function duplicate2($attributeGroup, $defaultOption, $newPullDowns, $check) 
-    {
-        $defaultPulldown = array();
-        if ($attributeGroup AND isset($newPullDowns[$attributeGroup->title])) {
-            $check[$attributeGroup->title] = $newPullDowns[$attributeGroup->title];
-            $newPullDowns = $check;
-        }
-
-        if ($attributeGroup AND isset($defaultOption[$attributeGroup->title])) {
-            $defaultPulldown = $newPullDowns[$attributeGroup->title];
-            $defaultPulldownFirstKey = key($newPullDowns[$attributeGroup->title]);
-            unset($newPullDowns[$attributeGroup->title]);
-            $newPullDowns = array_merge(array($attributeGroup->title => $defaultPulldown), $newPullDowns);
-        }
-
-        return array('newPullDowns' => $newPullDowns, 'defaultPullDown' => $defaultPulldown);
-
-    }
-
-    // complex shizzle
-    function duplicate3($product, $productAttributeId, $secondAttributeId = false) {   
-        $productAttribute =  ProductAttributeCombination::select('product_attribute.*')->leftJoin('product_attribute', 'product_attribute_combination.product_attribute_id', '=', 'product_attribute.id')->where('product_attribute.product_id', '=', $product->id)->where('product_attribute_combination.attribute_id', '=', $productAttributeId)->first();
-        $productAttribute = ProductAttribute::where('product_id', '=', $product->id)
-        ->whereHas('combinations', function ($query) use ($productAttributeId, $secondAttributeId) {
-            if ($productAttributeId) {
-                $query->where('attribute_id', '=', $productAttributeId);
-            }
-        })
-        ->whereHas('combinations', function ($query) use ($secondAttributeId) {
-            if ($secondAttributeId) {
-                $query->where('attribute_id', '=', $secondAttributeId);
-            }
-        })
-        ->with(array('product'))
-        ->first();
-
-        $priceDetails = array();
-        if ($productAttribute->getPriceDetails()) {
-            $priceDetails = $productAttribute->getPriceDetails();
-        }
-
-        return array('priceDetails' => $priceDetails, 'productAttribute' => $productAttribute);
-    }
-
     public function getIndex(Request $request, $categorySlug, $productId, $productSlug, $productAttributeId = false)
     {     
         $product = $this->product->selectOneByShopIdAndId(config()->get('app.shop_id'), $productId, $request->get('combination_id'));
@@ -136,68 +40,22 @@ class ProductController extends Controller
             if ($product->attributes->count()) {
                 $check = false;
                 if ($product->attributeGroup) {
-                    $attributeGroup = $product->attributeGroup;
+                    $attributeLeadingGroup = $product->attributeGroup;
                 } else {
-                    $attributeGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
+                    $attributeLeadingGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
                 }
 
-                $productAttributeResult = $this->duplicate1($product, $productAttributeId);
-                $newPullDowns = $productAttributeResult['newPullDowns'];
-                if ($productAttributeId) {
-                    $check = $productAttributeResult['check'];
-                    $defaultOption = $productAttributeResult['defaultOption'];
-                }
-
-                if (!isset($defaultOption)) {
-                    $first = $product->attributes->first();
-
-                    foreach ($first->combinations as $combination) {
-                        $defaultOption[$combination->attribute->attributeGroup->title][$combination->attribute->id] = $combination->attribute->value;
-                    }
-
-                    $productAttributeId = key($defaultOption[$attributeGroup->title]);
-                }
-
-                $defaultLeadingAttributeId = $productAttributeId;
-
-                if ($product->attributeGroup and isset($defaultOption[$product->attributeGroup->title])) {
-
-                    if (!isset($check)) {
-                        $productAttributeResultWithAttributeId =  ProductAttribute::where('product_attribute.product_id', '=', $product->id)->where('product_attribute.amount', '!=', 0)
-                        ->whereHas('combinations', function ($query) use ($productAttributeId) {
-                            if ($productAttributeId) {
-                                $query->where('attribute_id', '=', $productAttributeId);
-                            }
-                        })
-                        ->with(array('combinations' => function ($query) use ($productAttributeId) {
-                            $query->with(array('attribute' => function ($query) {
-                                $query->with(array('attributeGroup'));
-                            }));
-                        }))->get();
-
-                        if ($productAttributeResultWithAttributeId) {
-                            foreach ($productAttributeResultWithAttributeId as $row) {
-                                if ($row['combinations']) {
-                                    foreach ($row['combinations'] as $key => $value) {
-                                        $check[$value->attribute->attributeGroup->title][$value->attribute->id] = $value->attribute->value;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                $resultDuplicate2 = $this->duplicate2($attributeGroup, $defaultOption, $newPullDowns, $check);
-                $newPullDowns = $resultDuplicate2['newPullDowns'];
-
-                if ($productAttributeId) {
-                    $resultDuplicate3 = $this->duplicate3($product, $productAttributeId);
-                    $productAttribute = $resultDuplicate3['productAttribute'];
-                    $priceDetails = $resultDuplicate3['priceDetails'];
-                }
-
-                $productAttributeId = $productAttribute->id;
+                $productAttributeResult = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);
+                $allPulldownOptions = $productAttributeResult['newPullDowns'];
+                $productAttributeId = $productAttributeResult['productAttributeId']; 
+                $defaultOption = $productAttributeResult['defaultOption'];      
+                $defaultLeadingAttributeId = $productAttributeId;       
+                $resultDuplicate2 = $this->product->mergingPulldowns($attributeLeadingGroup, $defaultOption, $allPulldownOptions, $defaultOption);
+                $newPullDowns = $resultDuplicate2['newPullDowns'];            
+                $productAttribute = $this->product->getProductAttribute($product, $productAttributeId)->first();
+                $priceDetails = $productAttribute->getPriceDetails();
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);       
+                
                 $template = 'frontend.product.combinations';
 
                 if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
@@ -207,15 +65,13 @@ class ProductController extends Controller
                 return view($template)->with(
                     array(
                         'newPullDowns' => $newPullDowns,
-                        'productImages' => $productImages,
-                        'countPullDowns' => count($newPullDowns),
-                        'pullDownsCount' => count($newPullDowns),
-                        'leadAttributeId' => $productAttributeId,
+                        'productImages' => $productImages,    
+                        'leadAttributeId' => $defaultLeadingAttributeId,
                         'productAttributeId' => $productAttributeId,
                         'productAttribute' => $productAttribute,
                         'firstPulldown' => key($newPullDowns),
                         'priceDetails' => $priceDetails,
-                        'childrenProductCategories' => $productCategories,
+                        'childrenProductCategories' => $productCategories,                        
                         'product' => $product        
                     )
                 );
@@ -253,25 +109,18 @@ class ProductController extends Controller
         if ($product) {
             if ($product->attributes->count()) {      
 
-                $productAttributeResult = $this->duplicate1($product, $leadingAttributeId);
+                $productAttributeResult = $this->product->generatePulldowns($product, $leadingAttributeId);
                 $newPullDowns = $productAttributeResult['newPullDowns'];
-                if ($leadingAttributeId) {
-                    $check = $productAttributeResult['check'];
+                if ($leadingAttributeId) { 
                     $defaultOption = $productAttributeResult['defaultOption'];
                 }
 
                 $defaultLeadingAttributeId = $leadingAttributeId;      
-
-                $resultDuplicate2 = $this->duplicate2($product->attributeGroup, $defaultOption, $newPullDowns, $check);
-        
+                $resultDuplicate2 = $this->product->mergingPulldowns($product->attributeGroup, $defaultOption, $newPullDowns);      
                 $newPullDowns = $resultDuplicate2['newPullDowns'];
-
                 $priceDetails = $product->getPriceDetails();
-
-                $resultDuplicate3 = $this->duplicate3($product, $leadingAttributeId, $secondAttributeId);
-                $productAttribute = $resultDuplicate3['productAttribute'];
-                $priceDetails = $resultDuplicate3['priceDetails'];
-     
+                $productAttribute = $this->product->getProductAttribute($product, $leadingAttributeId, $secondAttributeId)->first();
+                $priceDetails = $productAttribute->getPriceDetails();
                 $productAttributeId = $productAttribute->id;
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttributeId);
                 $typeTemplate = "";
@@ -282,8 +131,7 @@ class ProductController extends Controller
 
                 return view('frontend.product.ajax'.$typeTemplate)->with(array(
                     'newPullDowns' => $newPullDowns,
-                    'productImages' => $productImages,
-                    'pullDownsCount' => count($newPullDowns),
+                    'productImages' => $productImages,            
                     'leadAttributeId' => $leadingAttributeId,
                     'productAttributeId' => $productAttributeId,
                     'firstPulldown' => key($newPullDowns),
