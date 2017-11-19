@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Hideyo\Models\ProductAttributeCombination;
 use Hideyo\Models\ProductAttribute;
 use Hideyo\Repositories\ProductRepositoryInterface;
+use Hideyo\Repositories\ProductCombinationRepositoryInterface;
+
+
 
 use Hideyo\Repositories\ProductCategoryRepositoryInterface;
 use Illuminate\Http\Request;
@@ -13,10 +16,11 @@ use BrowserDetect;
 
 class ProductController extends Controller
 {
-    public function __construct(ProductRepositoryInterface $product, ProductCategoryRepositoryInterface $productCategory)
+    public function __construct(ProductRepositoryInterface $product, ProductCombinationRepositoryInterface $productCombination, ProductCategoryRepositoryInterface $productCategory)
     {
         $this->product = $product;
         $this->productCategory = $productCategory;
+        $this->productCombination = $productCombination;
     }
 
     public function getIndex(Request $request, $categorySlug, $productId, $productSlug, $productAttributeId = false)
@@ -43,7 +47,7 @@ class ProductController extends Controller
                     $attributeLeadingGroup = $product->attributes->first()->combinations->first()->attribute->attributeGroup;
                 }
 
-                $pullDowns = $this->product->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
+                $pullDowns = $this->productCombination->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
                 $newPullDowns = $pullDowns['newPullDowns'];            
                 $productAttribute = $pullDowns['productAttribute']; 
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);       
@@ -99,7 +103,7 @@ class ProductController extends Controller
         if ($product) {
             if ($product->attributes->count()) {      
 
-                $pullDowns = $this->product->generatePulldowns($product, $leadingAttributeId, $product->attributeGroup, $secondAttributeId);
+                $pullDowns = $this->productCombination->generatePulldowns($product, $leadingAttributeId, $product->attributeGroup, $secondAttributeId);
                 $newPullDowns = $pullDowns['newPullDowns'];
                 $productAttribute = $pullDowns['productAttribute'];                
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);
