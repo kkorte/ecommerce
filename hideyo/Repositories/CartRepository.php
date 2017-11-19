@@ -98,7 +98,6 @@ class CartRepository implements CartRepositoryInterface
         }
     }
    
-
     public function postProduct($productId, $productCombinationId = false, $leadingAttributeId, $productAttributeId, $amount)
     {
         $product = $this->product->selectOneByShopIdAndId(config()->get('app.shop_id'), $productId);
@@ -194,15 +193,11 @@ class CartRepository implements CartRepositoryInterface
                 ));
             }
 
-
-            Cart::add($productId, $productArray,  $amount, $discountCondition);
-
-            return true;
+            return Cart::add($productId, $productArray,  $amount, $discountCondition);
         }
 
         return false;
     }
-
 
     public function updateSendingMethod($sendingMethodId)
     {
@@ -233,8 +228,6 @@ class CartRepository implements CartRepositoryInterface
 
         return true;
     }
-
- 
 
     public function updatePaymentMethod($paymentMethodId)
     {
@@ -522,7 +515,6 @@ class CartRepository implements CartRepositoryInterface
         ));
 
         Cart::condition($condition);
-
     }
 
     public function replaceTags($content, $order)

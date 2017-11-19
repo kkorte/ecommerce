@@ -170,9 +170,7 @@ class NewsRepository implements NewsRepositoryInterface
    
         return $this->modelGroup;
     }
-
-
-
+    
     public function refactorAllImagesByShopId($shopId)
     {
         $result = $this->modelImage->get();
@@ -226,7 +224,6 @@ class NewsRepository implements NewsRepositoryInterface
         return $this->model;
     }
 
-
     public function updateImageById(array $attributes, $newsId, $newsImageId)
     {
         $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
@@ -243,7 +240,6 @@ class NewsRepository implements NewsRepositoryInterface
 
         return $this->modelImage;
     }
-
 
     public function updateGroupById(array $attributes, $newsGroupId)
     {
@@ -310,7 +306,6 @@ class NewsRepository implements NewsRepositoryInterface
     {
         $this->modelGroup = $this->findGroup($newsGroupId);
         $this->modelGroup->save();
-
         return $this->modelGroup->delete();
     }
 

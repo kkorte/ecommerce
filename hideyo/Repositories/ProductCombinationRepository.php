@@ -299,7 +299,6 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
             }
         }
 
-
         $defaultPulldown = array();
         if ($attributeLeadingGroup AND isset($newPullDowns[$attributeLeadingGroup->title])) {
             $defaultOption[$attributeLeadingGroup->title] = $newPullDowns[$attributeLeadingGroup->title];
@@ -317,8 +316,6 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
 
         return array('productAttribute' => $productAttribute, 'productAttributeId' => $productAttributeId, 'defaultOption' => $defaultOption, 'newPullDowns' => $newPullDowns);
     }
-
-
 
     // complex shizzle
     function getProductAttribute($product, $productAttributeId, $secondAttributeId = false) {   
@@ -342,6 +339,4 @@ class ProductCombinationRepository implements ProductCombinationRepositoryInterf
 
         return $productAttribute;
     }
-
-
 }

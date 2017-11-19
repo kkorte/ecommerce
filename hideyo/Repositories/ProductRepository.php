@@ -512,7 +512,6 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function changeAmount($productId, $amount)
     {
-
         $this->model = $this->find($productId);
 
         if ($this->model) {
@@ -521,9 +520,6 @@ class ProductRepository implements ProductRepositoryInterface
             );
 
             $this->model->fill($attributes);
-
-
-
             return $this->model->save();
         }
 
@@ -567,7 +563,6 @@ class ProductRepository implements ProductRepositoryInterface
         return $this->modelImage;
     }
 
-
     function selectAllByShopIdAndProductCategoryId($shopId, $productCategoryId, $filters = false)
     {
 
@@ -593,7 +588,6 @@ class ProductRepository implements ProductRepositoryInterface
 
         return $result->get();
     }
-
 
     function selectOneByShopIdAndId($shopId, $productId)
     {
@@ -650,7 +644,6 @@ class ProductRepository implements ProductRepositoryInterface
            )->where('shop_id', '=', $shopId)->where('active', '=', 1)->whereNotNull('product_category_id')->where('id', '=', $productId)->get()->first();
     }
 
-
     function selectOneByIdAndAttributeId($id, $attributeId) 
     {
         return $this->model
@@ -696,7 +689,6 @@ class ProductRepository implements ProductRepositoryInterface
            ->where('active', '=', 1)
            ->where('id', '=', $id)->get()->first();             
     }
-
 
     function ajaxProductImages($product, $combinationsIds, $productAttributeId = false) 
     {
