@@ -25,6 +25,7 @@ class ProductTableSeeder extends Seeder
         $product->meta_title = 'Cotton pants';
         $product->meta_description = 'Cotton pants';   
         $product->price = '99.50';
+        $product->amount = 10;
         $product->reference_code = '12343443';        
         $product->shop_id = $shop->id;
         $product->product_category_id = $productCategory->id;
@@ -44,6 +45,7 @@ class ProductTableSeeder extends Seeder
         $product2->meta_title = 'Jeans';
         $product2->meta_description = 'Slimfit jeans';   
         $product2->price = '124.99'; 
+        $product->amount = 0;
         $product2->reference_code = '12343445';       
         $product2->shop_id = $shop->id;
         $product2->product_category_id = $productCategory->id;
