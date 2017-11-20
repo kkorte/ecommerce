@@ -10,7 +10,7 @@ class ProductTableSeeder extends Seeder
 {
     public function run()
     {
-        $productCategory = ProductCategory::where('title', '=', 'Fruit')->first();
+        $productCategory = ProductCategory::where('title', '=', 'Pants')->first();
         $taxRate = TaxRate::where('title', '=', '6%')->first();
 
         $product = new Product;
@@ -19,12 +19,12 @@ class ProductTableSeeder extends Seeder
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
         $product->active = 1;
-        $product->title = 'Green apple';
-        $product->short_description = 'Tasty green apple';
-        $product->description = 'Tasty green apple';
-        $product->meta_title = 'Green apple';
-        $product->meta_description = 'Tasty green apple';   
-        $product->price = '0.20';
+        $product->title = 'Cotton pants';
+        $product->short_description = 'Cotton pants';
+        $product->description = 'Cotton pants';
+        $product->meta_title = 'Cotton pants';
+        $product->meta_description = 'Cotton pants';   
+        $product->price = '99.50';
         $product->reference_code = '12343443';        
         $product->shop_id = $shop->id;
         $product->product_category_id = $productCategory->id;
@@ -38,12 +38,12 @@ class ProductTableSeeder extends Seeder
 
         $product2 = new Product;
         $product2->active = 1;
-        $product2->title = 'Red apple';
-        $product2->short_description = 'Tasty red apple';
-        $product2->description = 'Tasty red apple';
-        $product2->meta_title = 'Red apple';
-        $product2->meta_description = 'Tasty red apple';   
-        $product2->price = '0.10'; 
+        $product2->title = 'Jeans';
+        $product2->short_description = 'Slimfit jeans';
+        $product2->description = 'Slimfit jeans';
+        $product2->meta_title = 'Jeans';
+        $product2->meta_description = 'Slimfit jeans';   
+        $product2->price = '124.99'; 
         $product2->reference_code = '12343445';       
         $product2->shop_id = $shop->id;
         $product2->product_category_id = $productCategory->id;

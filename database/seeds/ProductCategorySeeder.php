@@ -94,11 +94,11 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory6 = new ProductCategory;
         $productCategory6->active = 1;
-        $productCategory6->title = 'Soda';
-        $productCategory6->short_description = 'Nice soda drinks';
-        $productCategory6->description = 'Nice soda drinks';         
-        $productCategory6->meta_title = 'Soda';
-        $productCategory6->meta_description = 'Nice soda drinks';
+        $productCategory6->title = 'Shoes';
+        $productCategory6->short_description = 'Leather shoes';
+        $productCategory6->description = 'Leather shoes';         
+        $productCategory6->meta_title = 'Shoes';
+        $productCategory6->meta_description = 'Leather shoes';
         $productCategory6->shop_id = $shop->id;
         $productCategory6->parent_id = $productCategory5->id;
 
@@ -106,22 +106,6 @@ class ProductCategoryTableSeeder extends Seeder
             Log::info('Unable to create category '.$productCategory6->title, (array)$productCategory6->errors());
         } else {
             Log::info('Created category "'.$productCategory6->title.'" <'.$productCategory3->title.'>');
-        }
-
-        $productCategory7 = new ProductCategory;
-        $productCategory7->active = 1;
-        $productCategory7->title = 'Coffee & thea';
-        $productCategory7->short_description = 'Coffee & thea';
-        $productCategory7->description = 'Coffee & thea';         
-        $productCategory7->meta_title = 'Coffee & thea';
-        $productCategory7->meta_description = 'Coffee & thea';
-        $productCategory7->shop_id = $shop->id;
-        $productCategory7->parent_id = $productCategory5->id;
-
-        if (! $productCategory7->save()) {
-            Log::info('Unable to create category '.$productCategory7->title, (array)$productCategory7->errors());
-        } else {
-            Log::info('Created category "'.$productCategory7->title.'" <'.$productCategory7->title.'>');
         }
     }
 }
