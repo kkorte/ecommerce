@@ -15,7 +15,6 @@ class TaxRateTableSeeder extends Seeder
         DB::table($taxRate->getTable())->delete();
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
-
         $taxRate->title = '21%';
         $taxRate->rate = '21';     
         $taxRate->shop_id = $shop->id;
@@ -25,8 +24,6 @@ class TaxRateTableSeeder extends Seeder
         } else {
             Log::info('Created tax rate "'.$taxRate->title.'" <'.$taxRate->title.'>');     
         }
-
-
 
         $taxRate2 = new TaxRate;
         $taxRate2->title = '6%';
@@ -38,13 +35,5 @@ class TaxRateTableSeeder extends Seeder
         } else {
             Log::info('Created tax rate "'.$taxRate2->title.'" <'.$taxRate2->title.'>');     
         }
-
-
-
-
-
-
-
-
     }
 }

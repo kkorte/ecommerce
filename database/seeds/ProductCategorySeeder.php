@@ -15,13 +15,12 @@ class ProductCategoryTableSeeder extends Seeder
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
         $productCategory->active = 1;
-        $productCategory->title = 'Fruit';
-        $productCategory->short_description = 'Delicious fresh fruit';
-        $productCategory->description = 'Delicious fresh fruit';
-        $productCategory->meta_title = 'Fruit';
-        $productCategory->meta_description = 'Delicious fresh fruit';          
+        $productCategory->title = 'Pants';
+        $productCategory->short_description = 'Great pants';
+        $productCategory->description = 'Great pants';
+        $productCategory->meta_title = 'Pants';
+        $productCategory->meta_description = 'Great pants';          
         $productCategory->shop_id = $shop->id;
-
 
         if (! $productCategory->save()) {
             Log::info('Unable to create category '.$productCategory->title, (array)$productCategory->errors());
@@ -31,13 +30,12 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory2 = new ProductCategory;
         $productCategory2->active = 1;
-        $productCategory2->title = 'Vegetables';
-        $productCategory2->short_description = 'Healthy vegetables';
-        $productCategory2->description = 'Healthy vegetables';
-        $productCategory2->meta_title = 'Vegetables';
-        $productCategory2->meta_description = 'Healthy vegetables';         
+        $productCategory2->title = 'T-shirts';
+        $productCategory2->short_description = 'Soft t-shirts';
+        $productCategory2->description = 'Soft t-shirts';
+        $productCategory2->meta_title = 'T-shirts';
+        $productCategory2->meta_description = 'Soft t-shirts';         
         $productCategory2->shop_id = $shop->id;
-
 
         if (! $productCategory2->save()) {
             Log::info('Unable to create category '.$productCategory2->title, (array)$productCategory2->errors());
@@ -45,14 +43,13 @@ class ProductCategoryTableSeeder extends Seeder
             Log::info('Created category "'.$productCategory2->title.'" <'.$productCategory2->title.'>');
         }
 
-
         $productCategory3 = new ProductCategory;
         $productCategory3->active = 1;
-        $productCategory3->title = 'Bread';
-        $productCategory3->short_description = 'Fresh healthy bread';
-        $productCategory3->description = 'Fresh healthy bread';   
-        $productCategory3->meta_title = 'Bread';
-        $productCategory3->meta_description = 'Fresh healthy bread';             
+        $productCategory3->title = 'Underwear';
+        $productCategory3->short_description = 'Good underwear';
+        $productCategory3->description = 'Good underwear';   
+        $productCategory3->meta_title = 'Underwear';
+        $productCategory3->meta_description = 'Good underwear';             
         $productCategory3->shop_id = $shop->id;
 
 
@@ -65,11 +62,11 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory4 = new ProductCategory;
         $productCategory4->active = 1;
-        $productCategory4->title = 'Candy';
-        $productCategory4->short_description = 'Unhealthy addicting candy';
-        $productCategory4->description = 'Unhealthy addicting candy';    
-        $productCategory4->meta_title = 'Candy';
-        $productCategory4->meta_description = 'Unhealthy addicting candy';
+        $productCategory4->title = 'Dresses';
+        $productCategory4->short_description = 'Lovely dresses';
+        $productCategory4->description = 'Lovely dresses';    
+        $productCategory4->meta_title = 'Dresses';
+        $productCategory4->meta_description = 'Lovely dresses';
         $productCategory4->shop_id = $shop->id;
 
 
@@ -82,11 +79,11 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory5 = new ProductCategory;
         $productCategory5->active = 1;
-        $productCategory5->title = 'Drinks';
-        $productCategory5->short_description = 'Nice drinks';
-        $productCategory5->description = 'Nice drinks';         
-        $productCategory5->meta_title = 'Drinks';
-        $productCategory5->meta_description = 'Nice drinks';
+        $productCategory5->title = 'Hats';
+        $productCategory5->short_description = 'Nice hats';
+        $productCategory5->description = 'Nice hats';         
+        $productCategory5->meta_title = 'Hats';
+        $productCategory5->meta_description = 'Nice hats';
         $productCategory5->shop_id = $shop->id;
 
         if (! $productCategory5->save()) {
@@ -94,8 +91,6 @@ class ProductCategoryTableSeeder extends Seeder
         } else {
             Log::info('Created category "'.$productCategory5->title.'" <'.$productCategory3->title.'>');
         }
-
-
 
         $productCategory6 = new ProductCategory;
         $productCategory6->active = 1;
@@ -113,7 +108,6 @@ class ProductCategoryTableSeeder extends Seeder
             Log::info('Created category "'.$productCategory6->title.'" <'.$productCategory3->title.'>');
         }
 
-
         $productCategory7 = new ProductCategory;
         $productCategory7->active = 1;
         $productCategory7->title = 'Coffee & thea';
@@ -129,13 +123,5 @@ class ProductCategoryTableSeeder extends Seeder
         } else {
             Log::info('Created category "'.$productCategory7->title.'" <'.$productCategory7->title.'>');
         }
-
-
-
-
-
-
-
-
     }
 }

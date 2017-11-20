@@ -10,7 +10,6 @@ class ProductTableSeeder extends Seeder
 {
     public function run()
     {
-
         $productCategory = ProductCategory::where('title', '=', 'Fruit')->first();
         $taxRate = TaxRate::where('title', '=', '6%')->first();
 
@@ -18,8 +17,6 @@ class ProductTableSeeder extends Seeder
 
         DB::table($product->getTable())->delete();
         $shop = Shop::where('title', '=', 'hideyo')->first();
-
-
 
         $product->active = 1;
         $product->title = 'Green apple';
@@ -33,13 +30,11 @@ class ProductTableSeeder extends Seeder
         $product->product_category_id = $productCategory->id;
         $product->tax_rate_id = $taxRate->id;
 
-
         if (! $product->save()) {
             Log::info('Unable to create product '.$product->title, (array)$product->errors());
         } else {
             Log::info('Created product "'.$product->title.'" <'.$product->title.'>');
         }
-
 
         $product2 = new Product;
         $product2->active = 1;
@@ -54,18 +49,10 @@ class ProductTableSeeder extends Seeder
         $product2->product_category_id = $productCategory->id;
         $product2->tax_rate_id = $taxRate->id;
 
-
         if (! $product2->save()) {
             Log::info('Unable to create product '.$product2->title, (array)$product2->errors());
         } else {
             Log::info('Created product "'.$product2->title.'" <'.$product2->title.'>');
         }
-
-
-
-
-
-
-
     }
 }
