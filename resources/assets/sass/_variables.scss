@@ -14,16 +14,22 @@ $brand-primary: #3097D1;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
-$brand-danger:  #bf5329;
+$brand-danger: #bf5329;
 
 // Typography
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;
 
 // Navbar
-$navbar-default-bg: #fff;
+$navbar-default-bg: blue;
+$navbar-inverse-bg: #009688;
+
+
+$navbar-inverse-brand-color: white;
+$navbar-inverse-link-color: white;
 
 // Buttons
 $btn-default-color: $text-color;
@@ -35,3 +41,7 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+
+
+body { padding-top: 60px; }

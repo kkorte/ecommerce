@@ -20,7 +20,7 @@ Hideyo is designed to run on a machine with PHP 5.5.9 and MySQL 5.5.
     * Mbstring PHP Extension
     * Tokenizer PHP Extension
     * Elasticsearch
-    * NPM & Gulp
+    * NPM
     * Composer
 
 
@@ -46,12 +46,14 @@ php artisan migrate
 
 ----
 
-## Generate stylesheet and JavaScript
+## Compiling stylesheets and JavaScripts
 
-go to root in command line generate the stylesheet and javascript files with:
+go to root in command line and generate the stylesheets and JavaScripts files with:
 ```bash
 npm install
-gulp 
+npm run dev
+
+See also https://laravel.com/docs/5.5/mix for more information about compiling your stylesheets and JavaScript.
 ```
 
 ---

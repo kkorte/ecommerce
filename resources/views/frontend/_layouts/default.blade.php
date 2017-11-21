@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Frontend" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('meta_title')</title>
-		<link rel="stylesheet" href="{{ URL::asset('/css/style.css')}}">  
+		<link rel="stylesheet" href="{{ URL::asset('/css/frontend.css')}}">  
     </head>
     <body>
         @include('frontend._partials.header')
@@ -16,6 +17,6 @@
         </div>
 
         @include('frontend._partials.footer')
-        <script src="{{ URL::asset('/javascript/site.js')}}"></script>
+        <script src="{{ URL::asset('/js/frontend.js')}}"></script>
     </body>
 </html>
