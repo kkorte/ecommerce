@@ -11,7 +11,7 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         $productCategory = ProductCategory::where('title', '=', 'Pants')->first();
-        $taxRate = TaxRate::where('title', '=', '6%')->first();
+        $taxRate = TaxRate::where('title', '=', '21%')->first();
 
         $product = new Product;
 

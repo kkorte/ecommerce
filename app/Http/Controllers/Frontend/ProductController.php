@@ -39,7 +39,7 @@ class ProductController extends Controller
                 $productCategories = $this->productCategory->selectRootCategories(false, array('from_stock'));
             }
 
-            if ($product->attributes->count()) {
+            if ($product->attributes->count() AND $product->attributeGroup AND $product->attributes->first()->combinations->count()) {
                 
                 if ($product->attributeGroup) {
                     $attributeLeadingGroup = $product->attributeGroup;
