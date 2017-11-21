@@ -53,8 +53,10 @@ go to root in command line and generate the stylesheets and JavaScripts files wi
 npm install
 npm run dev
 ```
+
 See also https://laravel.com/docs/5.5/mix for more information about compiling your stylesheets and JavaScript.
----
+
+----
 
 ## Seeding database with User
 Before you can login to the backend you need a default user. Laravel database seeding will help you: 
