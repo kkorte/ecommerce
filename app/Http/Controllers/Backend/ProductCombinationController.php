@@ -39,98 +39,103 @@ class ProductCombinationController extends Controller
     public function index($productId)
     {
         $product = $this->product->find($productId);
-        if (Request::wantsJson()) {
 
-            $query = $this->productCombination->getModel()->select(
-                ['id', 'tax_rate_id', 'amount', 'price', 'product_id', 'reference_code',
-                'default_on']
-            )->where('product_id', '=', $productId);
+        if($product) {
+            if (Request::wantsJson()) {
 
-            $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($productId) {
-                $deleteLink = \Form::deleteajax(url()->route('product-combination.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
-                $links = '<a href="'.url()->route('product-combination.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
-            
-                return $links;
-            })
+                $query = $this->productCombination->getModel()->select(
+                    ['id', 'tax_rate_id', 'amount', 'price', 'product_id', 'reference_code',
+                    'default_on']
+                )->where('product_id', '=', $productId);
 
-            ->addColumn('amount', function ($query) {
-                return '<input type="text" class="change-amount-product-attribute" value="'.$query->amount.'" data-url="/admin/product/'.$query->product_id.'/product-combination/change-amount-attribute/'.$query->id.'">';
-            })
+                $datatables = \Datatables::of($query)->addColumn('action', function ($query) use ($productId) {
+                    $deleteLink = \Form::deleteajax(url()->route('product-combination.destroy', array('productId' => $productId, 'id' => $query->id)), 'Delete', '', array('class'=>'btn btn-default btn-sm btn-danger'));
+                    $links = '<a href="'.url()->route('product-combination.edit', array('productId' => $productId, 'id' => $query->id)).'" class="btn btn-default btn-sm btn-success"><i class="entypo-pencil"></i>Edit</a>  '.$deleteLink;
+                
+                    return $links;
+                })
 
-            ->addColumn('price', function ($query) {
-                $result = 0;
-                if ($query->price) {
+                ->addColumn('amount', function ($query) {
+                    return '<input type="text" class="change-amount-product-attribute" value="'.$query->amount.'" data-url="/admin/product/'.$query->product_id.'/product-combination/change-amount-attribute/'.$query->id.'">';
+                })
 
-                    $taxRate = 0;
-                    $priceInc = 0;
-                    $taxValue = 0;
+                ->addColumn('price', function ($query) {
+                    $result = 0;
+                    if ($query->price) {
 
-                    if (isset($query->taxRate->rate)) {
-                        $taxRate = $query->taxRate->rate;
-                        $priceInc = (($query->taxRate->rate / 100) * $query->price) + $query->price;
-                        $taxValue = $priceInc - $query->price;
-                    }
+                        $taxRate = 0;
+                        $priceInc = 0;
+                        $taxValue = 0;
 
-                    $discountPriceInc = false;
-                    $discountPriceEx = false;
-                    $discountTaxRate = 0;
-                    if ($query->discount_value) {
-                        if ($query->discount_type == 'amount') {
-                            $discountPriceInc = $priceInc - $query->discount_value;
-                            $discountPriceEx = $discountPriceInc / 1.21;
-                        } elseif ($query->discount_type == 'percent') {
-                            $tax = ($query->discount_value / 100) * $priceInc;
-                            $discountPriceInc = $priceInc - $tax;
-                            $discountPriceEx = $discountPriceInc / 1.21;
+                        if (isset($query->taxRate->rate)) {
+                            $taxRate = $query->taxRate->rate;
+                            $priceInc = (($query->taxRate->rate / 100) * $query->price) + $query->price;
+                            $taxValue = $priceInc - $query->price;
                         }
-                        $discountTaxRate = $discountPriceInc - $discountPriceEx;
-                        $discountPriceInc = $discountPriceInc;
-                        $discountPriceEx = $discountPriceEx;
+
+                        $discountPriceInc = false;
+                        $discountPriceEx = false;
+                        $discountTaxRate = 0;
+                        if ($query->discount_value) {
+                            if ($query->discount_type == 'amount') {
+                                $discountPriceInc = $priceInc - $query->discount_value;
+                                $discountPriceEx = $discountPriceInc / 1.21;
+                            } elseif ($query->discount_type == 'percent') {
+                                $tax = ($query->discount_value / 100) * $priceInc;
+                                $discountPriceInc = $priceInc - $tax;
+                                $discountPriceEx = $discountPriceInc / 1.21;
+                            }
+                            $discountTaxRate = $discountPriceInc - $discountPriceEx;
+                            $discountPriceInc = $discountPriceInc;
+                            $discountPriceEx = $discountPriceEx;
+                        }
+
+
+                        $output = array(
+                            'orginal_price_ex_tax'  => $query->price,
+                            'orginal_price_ex_tax_number_format'  => number_format($query->price, 2, '.', ''),
+                            'orginal_price_inc_tax' => $priceInc,
+                            'orginal_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
+                            'tax_rate' => $taxRate,
+                            'tax_value' => $taxValue,
+                            'currency' => 'EU',
+                            'discount_price_inc' => $discountPriceInc,
+                            'discount_price_inc_number_format' => number_format($discountPriceInc, 2, '.', ''),
+                            'discount_price_ex' => $discountPriceEx,
+                            'discount_price_ex_number_format' => number_format($discountPriceEx, 2, '.', ''),
+                            'discount_tax_value' => $discountTaxRate,
+                            'discount_value' => $query->discount_value,
+                            'amount' => $query->amount
+                            );
+
+                        $result =  '&euro; '.$output['orginal_price_ex_tax_number_format'].' / &euro; '.$output['orginal_price_inc_tax_number_format'];
+
+
+                        if ($query->discount_value) {
+                            $result .= '<br/> discount: yes';
+                        }
                     }
 
+                    return $result;
+                })
 
-                    $output = array(
-                        'orginal_price_ex_tax'  => $query->price,
-                        'orginal_price_ex_tax_number_format'  => number_format($query->price, 2, '.', ''),
-                        'orginal_price_inc_tax' => $priceInc,
-                        'orginal_price_inc_tax_number_format' => number_format($priceInc, 2, '.', ''),
-                        'tax_rate' => $taxRate,
-                        'tax_value' => $taxValue,
-                        'currency' => 'EU',
-                        'discount_price_inc' => $discountPriceInc,
-                        'discount_price_inc_number_format' => number_format($discountPriceInc, 2, '.', ''),
-                        'discount_price_ex' => $discountPriceEx,
-                        'discount_price_ex_number_format' => number_format($discountPriceEx, 2, '.', ''),
-                        'discount_tax_value' => $discountTaxRate,
-                        'discount_value' => $query->discount_value,
-                        'amount' => $query->amount
-                        );
-
-                    $result =  '&euro; '.$output['orginal_price_ex_tax_number_format'].' / &euro; '.$output['orginal_price_inc_tax_number_format'];
-
-
-                    if ($query->discount_value) {
-                        $result .= '<br/> discount: yes';
+                ->addColumn('combinations', function ($query) use ($productId) {
+                    $items = array();
+                    foreach ($query->combinations as $row) {
+                        $items[] = $row->attribute->attributeGroup->title.': '.$row->attribute->value;
                     }
-                }
+           
+                    return implode(', ', $items);
+                });
 
-                return $result;
-            })
+                return $datatables->make(true);
 
-            ->addColumn('combinations', function ($query) use ($productId) {
-                $items = array();
-                foreach ($query->combinations as $row) {
-                    $items[] = $row->attribute->attributeGroup->title.': '.$row->attribute->value;
-                }
-       
-                return implode(', ', $items);
-            });
-
-            return $datatables->make(true);
-
+            }
+            
+            return view('backend.product-combination.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
         }
         
-        return view('backend.product-combination.index')->with(array('product' => $product, 'attributeGroups' => $this->attributeGroup->selectAll()->pluck('title', 'id')));
+        return Redirect::route('product.index');            
     }
 
     public function create($productId)
