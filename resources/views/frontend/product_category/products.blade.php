@@ -30,19 +30,20 @@
     </div>
 </div>
 
-
-
-@if (isset($category->products))
+@if($products)
 <div class="row">
-    @if( $products )
     @foreach ($products as $product)
-
-
-        @include('frontend.product_category._product-row-item')
+    @include('frontend.product_category._product-row-item')
     @endforeach
-    @endif
 </div>
-@endif
+@else
 
+<div class="row ">
+    <div class="col-sm-12 col-md-12">
+        <p>no products</p>
+    </div>
+</div>
+
+@endif
 
 @stop
