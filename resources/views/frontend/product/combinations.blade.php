@@ -17,9 +17,6 @@
 
 @section('main')
 
-
-
-
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <ol class="breadcrumb">

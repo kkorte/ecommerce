@@ -24,7 +24,6 @@ require('./bootstrap');
 
 
 $("body .product-container").on("click", ".add-to-cart-button", function(e){
-    console.log('test');
    $('body .product-container .add-product').submit();
 });
 
@@ -54,17 +53,10 @@ $("body .product-container").on("submit", ".add-product", function(e){
                 var dialogUrl = $('.cart-dialog').attr('data-url');
                 $.get(dialogUrl, {}, function(data){
                     if(data) {
-                        $('.cart-dialog .cart-dialog-container').html(data);
-                        $('.cart-dialog').show();
+              console.log(data);
+          
+$('.cart-dialog').modal();
 
-                        $('.cart-button-ajax').trigger('click');
-                                     
-
-                        $(window).scroll(function() {
-                            var timeoutHandle = setTimeout(function() {
-                                    $('.small-menu [data-dropdown]').trigger('close');
-                            }, 1000); 
-                        });
 
                     }
                 }, 'html');

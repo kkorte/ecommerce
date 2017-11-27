@@ -81,7 +81,7 @@
 					</ul>
 				</li>
 
-				<li><a href="{{ URL::route('security.logout') }}">Log-out</a></li>
+				<li><a href="{{ URL::route('security.logout') }}" title="logout"><span class="glyphicon glyphicon-log-out "></span></a></li>
 			</ul>
 
 		</div>

@@ -31708,7 +31708,6 @@ __webpack_require__(8);
 
 
 $("body .product-container").on("click", ".add-to-cart-button", function (e) {
-    console.log('test');
     $('body .product-container .add-product').submit();
 });
 
@@ -31737,16 +31736,9 @@ $("body .product-container").on("submit", ".add-product", function (e) {
                     var dialogUrl = $('.cart-dialog').attr('data-url');
                     $.get(dialogUrl, {}, function (data) {
                         if (data) {
-                            $('.cart-dialog .cart-dialog-container').html(data);
-                            $('.cart-dialog').show();
+                            console.log(data);
 
-                            $('.cart-button-ajax').trigger('click');
-
-                            $(window).scroll(function () {
-                                var timeoutHandle = setTimeout(function () {
-                                    $('.small-menu [data-dropdown]').trigger('close');
-                                }, 1000);
-                            });
+                            $('.cart-dialog').modal();
                         }
                     }, 'html');
                 }

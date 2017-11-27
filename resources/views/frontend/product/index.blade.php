@@ -14,11 +14,7 @@
 
 @section('meta_keywords', $product['meta_keywords'])
 
-
 @section('main')
-
-
-
 
 <div class="row">
     <div class="col-sm-12 col-md-12">

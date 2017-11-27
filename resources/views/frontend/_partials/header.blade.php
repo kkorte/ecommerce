@@ -20,7 +20,7 @@
 	</ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/cart">cart</a></li>
+      <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart "></span></a></li>
     </ul>
   </div><!--/.nav-collapse -->
 </div>

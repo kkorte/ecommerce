@@ -8,6 +8,9 @@ $font-family-base: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 // Typography
 $font-family-sans-serif: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 $headings-font-weight: 300 !default;
+$screen-sm-min: 1300px;
+
+//** Padding between columns. Gets divided in half for the left and right.
 
 $font-size-base:          15px !default;
 $navbar-default-bg: blue;
