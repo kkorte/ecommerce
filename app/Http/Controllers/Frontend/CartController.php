@@ -134,5 +134,11 @@ class CartController extends Controller
         return response()->json(false);
     }
 
+    public function getBasketDialog()
+    {        
+        return view('frontend.cart.basket-dialog');
+    }
+
+
 
 }

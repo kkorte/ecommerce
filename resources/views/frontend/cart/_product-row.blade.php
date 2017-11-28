@@ -1,7 +1,7 @@
 <tr class="product-row">
 
     <td class="image show-for-medium">   
-        <a href="/{!! Lang::getLocale() !!}/{{ $product['attributes']['product_category_slug'] }}/{{ $product['id'] }}/{{ $product['attributes']['slug'] }}" title="terug naar product">   
+        <a href="/{{ $product['attributes']['product_category_slug'] }}/{{ $product['id'] }}/{{ $product['attributes']['slug'] }}" title="terug naar product">   
             @if(isset($product['attributes']['attributeIds']) AND ProductHelper::getImage($product['attributes']['id'], $product['attributes']['attributeIds'])) 
             <img src="/files/product/100x100/{!! $product['attributes']['id'] !!}/{!! ProductHelper::getImage($product['attributes']['id'], $product['attributes']['attributeIds']) !!}" alt="">
             @else
