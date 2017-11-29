@@ -206,7 +206,10 @@ class CartRepository implements CartRepositoryInterface
         if (isset($sendingMethod->id)) {
             $sendingMethodArray = $sendingMethod->toArray();          
             $sendingMethodArray['price_details'] = $sendingMethod->getPriceDetails();
-            $sendingMethodArray['related_payment_methods_list'] = $sendingMethod->relatedPaymentMethodsActive->pluck('title', 'id');
+            if($sendingMethod->relatedPaymentMethodsActive) {
+                $sendingMethodArray['related_payment_methods_list'] = $sendingMethod->relatedPaymentMethodsActive->pluck('title', 'id');                
+            }
+
         }
 
         Cart::removeConditionsByType('sending_method');
@@ -222,7 +225,7 @@ class CartRepository implements CartRepositoryInterface
 
         Cart::condition($condition);
 
-        if (!Cart::getConditionsByType('payment_method')->count() and $sendingMethod->relatedPaymentMethodsActive->first()->id) {
+        if (!Cart::getConditionsByType('payment_method')->count() and $sendingMethod->relatedPaymentMethodsActive) {
             $this->updatePaymentMethod($sendingMethod->relatedPaymentMethodsActive->first()->id);
         }
 

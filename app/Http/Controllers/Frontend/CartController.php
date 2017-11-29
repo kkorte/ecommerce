@@ -42,7 +42,7 @@ class CartController extends Controller
                 self::updateSendingMethod($sendingMethodsList->first()->id);
             }      
 
-            if ($paymentMethodsList->count() AND !app('cart')->getConditionsByType('payment_method')->count()) {
+            if ($paymentMethodsList AND !app('cart')->getConditionsByType('payment_method')->count()) {
                 $this->cart->updatePaymentMethod($paymentMethodsList->first()->id);
             }
 
@@ -146,6 +146,18 @@ class CartController extends Controller
         $paymentMethodsList = $this->getPaymentMethodsList($sendingMethodsList);
         
         return view('frontend.cart._totals')->with(array('sendingMethodsList' => $sendingMethodsList));  
+    }
+
+    public function updateSendingMethod($sendingMethodId)
+    {
+        $this->cart->updateSendingMethod($sendingMethodId);
+        return response()->json(array('sending_method' => app('cart')->getConditionsByType('sending_method')));
+    }
+
+    public function updatePaymentMethod($paymentMethodId)
+    {
+        $this->cart->updatePaymentMethod($paymentMethodId);
+        return response()->json(array('payment_method' => app('cart')->getConditionsByType('payment_method')));
     }
 
 

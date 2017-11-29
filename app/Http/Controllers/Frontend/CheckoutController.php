@@ -4,7 +4,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use BrowserDetect;
 use Hideyo\Repositories\ShopRepositoryInterface;
-
+use Hideyo\Repositories\SendingMethodRepositoryInterface;
+use Hideyo\Repositories\PaymentMethodRepositoryInterface;
+use Cart;
+use Notification;
 
 class CheckoutController extends Controller
 {
@@ -15,15 +18,69 @@ class CheckoutController extends Controller
      */
     public function __construct(
         Request $request,
-        ShopRepositoryInterface $shop)
+        ShopRepositoryInterface $shop,
+        SendingMethodRepositoryInterface $sendingMethod,
+        PaymentMethodRepositoryInterface $paymentMethod)
     {
         $this->request = $request;
         $this->shop = $shop;
+        $this->sendingMethod = $sendingMethod;
+        $this->paymentMethod = $paymentMethod;
         $this->shopId = config()->get('app.shop_id');
     }
 
-    public function index()
+    public function checkout()
     {
-    
+        $sendingMethodsList = $this->sendingMethod->selectAllActiveByShopId(config()->get('app.shop_id'));
+
+        if (Cart::getContent()->count()) {
+
+          //  $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods_list'];
+         
+            if(!Cart::getConditionsByType('sending_method')->count()) {
+                Notification::container('foundation')->error('Selecteer een verzendwijze');
+                return redirect()->to('cart');
+            }
+
+            if(!Cart::getConditionsByType('payment_method')->count()) {
+                Notification::container('foundation')->error('Selecteer een betaalwijze');
+                return redirect()->to('cart');
+            }
+
+        } else {
+            return redirect()->to('cart');
+        }
+
+        if (auth('web')->guest()) {
+            $noAccountUser = session()->get('noAccountUser');
+            if ($noAccountUser) {
+                if (!isset($noAccountUser['delivery'])) {
+                    $noAccountUser['delivery'] = $noAccountUser;
+                    session()->put('noAccountUser', $noAccountUser);
+                }
+
+                self::checkCountryPrice($noAccountUser['delivery']['country']);
+
+                return view('frontend.cart.checkout-no-account')->with(array( 
+                    'noAccountUser' =>  $noAccountUser, 
+                    'sendingMethodsList' => $sendingMethodsList, 
+                    'paymentMethodsList' => $paymentMethodsList));
+            }
+              
+             return view('frontend.cart.login')->with(array(  'sendingMethodsList' => $sendingMethodsList, 'paymentMethodsList' => $paymentMethodsList));
+        }
+
+        $user = auth('web')->user();
+        self::checkCountryPrice($user->clientDeliveryAddress->country);
+
+        if (!$user->clientDeliveryAddress()->count()) {
+            $this->client->setBillOrDeliveryAddress(config()->get('app.shop_id'), $user->id, $user->clientBillAddress->id, 'delivery');
+            return redirect()->to(LaravelLocalization::getLocalizedURL(null, 'cart/checkout'));
+        }
+
+        return view('frontend.cart.checkout')->with(array(
+            'user' =>  $user, 
+            'sendingMethodsList' => $sendingMethodsList, 
+            'paymentMethodsList' => $paymentMethodsList));
     }
 }
