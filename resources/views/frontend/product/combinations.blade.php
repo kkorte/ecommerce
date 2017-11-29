@@ -74,7 +74,8 @@
                     @foreach($newPullDowns as $key => $row)
 
                     @if($firstPulldown === $key)
-                    <label>{!! $key !!}</label>        
+                    <label>{!! $key !!}</label>    
+ 
                     {!! Form::select('first_pulldown['.$key.']', $row, $leadAttributeId, array("data-url" => "/product/select-leading-pulldown/".$product['id'], "class" => "leading-product-combination-select selectpicker pulldown-$key")) !!}
           
                     @else

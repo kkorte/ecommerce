@@ -56,12 +56,14 @@ class ProductController extends Controller
 
                 if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
                     $template = 'frontend.product.combinations-mobile';
-                } 
+                }
+
+                    $leadingAttributeId = key(reset($newPullDowns));
 
                 return view($template)->with(
                     array(                     
                         'productImages' => $productImages,    
-                        'leadAttributeId' => $productAttribute->id,
+                        'leadAttributeId' => $leadingAttributeId,
                         'firstPulldown' => key($newPullDowns),
                         'newPullDowns' => $newPullDowns,
                         'priceDetails' => $productAttribute->getPriceDetails(),

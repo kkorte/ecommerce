@@ -29,12 +29,22 @@
         </ol>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+
+        <h1>{!! $category->title !!}</h1>
+
+    </div>
+</div>
 
 @if($products)
 <div class="row">
-    @foreach ($products as $product)
-    @include('frontend.product_category._product-row-item')
-    @endforeach
+
+
+        @foreach ($products as $product)
+        @include('frontend.product_category._product-row-item')
+        @endforeach
+   
 </div>
 @else
 
