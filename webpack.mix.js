@@ -19,7 +19,8 @@ mix.js('resources/assets/js/backend.js', 'public/js')
 
 .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts')
 .copy('node_modules/font-awesome/fonts', 'public/fonts')
-.copy('node_modules/roboto-fontface/fonts', 'public/fonts');
+.copy('node_modules/roboto-fontface/fonts', 'public/fonts')
+.copy('resources/assets/images', 'public/images');
 
 
    

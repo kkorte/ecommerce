@@ -35,8 +35,9 @@
 
 <div class="row">
     <div class="col-sm-3 col-md-2 product-container">
-        <h1>{!! $product->title !!}</h1>
 
+        <h1>{!! $product->title !!}</h1>
+        <img src="/images/default-product-thumb.png"  />
         <div class="description">
             <p>{!! $product->short_description !!}</p>
         </div>
@@ -75,7 +76,7 @@
 
                     @if($firstPulldown === $key)
                     <label>{!! $key !!}</label>    
- 
+
                     {!! Form::select('first_pulldown['.$key.']', $row, $leadAttributeId, array("data-url" => "/product/select-leading-pulldown/".$product['id'], "class" => "leading-product-combination-select selectpicker pulldown-$key")) !!}
           
                     @else
