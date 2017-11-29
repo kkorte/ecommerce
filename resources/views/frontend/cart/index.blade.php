@@ -12,7 +12,7 @@
 </div>
 
 
-<h1>Shoppingcart</h1>
+
 
 
 
@@ -22,7 +22,7 @@
 @if (app('cart')->getContent()->count())
 
 <div class="main-cart">
-
+    <h1>Shoppingcart</h1>
     <div class="cart-details">
 
         <table class="table details">

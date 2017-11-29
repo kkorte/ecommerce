@@ -22,7 +22,7 @@
             app('cart')->getConditionsByType('sending_method_country_price')->first()->getAttributes()['data']['country_list']->toArray(), 
             app('cart')->getConditionsByType('sending_method_country_price')->first()->getAttributes()['data']['sending_method_country_price_id'], 
             array("data-url" => '/cart/update-sending-method-country-price', 
-            "class" => "custom-selectbox selectpicker sending_method_country_price_id")) 
+            "class" => "form-control custom-selectbox selectpicker sending_method_country_price_id")) 
             !!}
 
         </div>
@@ -35,7 +35,7 @@
     <td colspan="3" class="select">
         <label>{!! trans('titles.sending-way') !!}</label>
         <div class="sending_block">
-            {!! Form::select('sending_method_id', $sendingMethodsList->pluck('title', 'id')->toArray(), null, array("data-url" => '/cart/update-sending-method', "class" => "custom-selectbox selectpicker sending_method_id")) !!}
+            {!! Form::select('sending_method_id', $sendingMethodsList->pluck('title', 'id')->toArray(), null, array("data-url" => '/cart/update-sending-method', "class" => "form-control custom-selectbox selectpicker sending_method_id")) !!}
 
         </div>
     </td>
