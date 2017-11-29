@@ -18,11 +18,15 @@ return [
     'home'                      => 'Home',
     'description'               => 'Omschrijving',
     'unit_price'                => 'Stukprijs',
-    'amount'                    => 'Aantal',
-    'total'                     => 'Totaal',
+    'amount'                    => 'Amount',
+    'total'                     => 'Total',
     'sending'                   => 'Verzending',
     'specifications'            => 'Specificaties',
     'wholesale_account_request' => 'b2b account aanvragen',
     'forgot-password'           => 'Wachtwoord vergeten?',
-    'register'                  => 'Registreer'
+    'register'                  => 'Registreer',
+    'tax-included'              => 'Tax included',
+    'sending-cost'              => 'Sending cost',
+    'sending-way'               => 'Ship to'
+
 ];

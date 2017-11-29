@@ -20,7 +20,22 @@
 	</ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart "></span></a></li>
+
+
+      <li>
+        <a href="#" id="cart">
+          <i class="glyphicon glyphicon-shopping-cart cart-button"></i> {!! Cart::getContent()->count() !!} items
+            <div class="shopping-cart cart-dialog  " data-url="/cart/dialog">              
+                
+              @include('frontend.cart.basket-dialog')
+            </div> <!--end shopping-cart -->
+        </a>
+
+
+      </li>
+   
+
+
     </ul>
   </div><!--/.nav-collapse -->
 </div>

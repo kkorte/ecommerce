@@ -189,7 +189,7 @@ return [
         App\Providers\EventServiceProvider::class,
         Hideyo\Providers\RouteServiceProvider::class,
         Hideyo\Providers\CartServiceProvider::class,
-        Hideyo\Providers\BackendServiceProvider::class,
+        Hideyo\Providers\RepositoryServiceProvider::class,
         Hideyo\Providers\ComposerServiceProvider::class,
         Hideyo\Providers\HtmlServiceProvider::class
     ],

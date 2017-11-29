@@ -31,7 +31,7 @@
                 @include('frontend.cart._product-row')                      
                 @endforeach
 
-                <tfoot class="cart-reload" data-url="" >
+                <tfoot class="cart-reload" data-url="{!! URL::route('cart.total-reload') !!}" >
                     @include('frontend.cart._totals')
                 </tfoot>
 

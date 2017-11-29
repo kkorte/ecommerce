@@ -7,3 +7,35 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+$main-color: #6394F8;
+$light-text: #ABB0BE;
+
+.cart-button {
+    position: relative;
+}
+
+.shopping-cart {
+    display: none;
+    margin: 20px 0;
+  
+    background: white;
+    width: 320px;
+    position: absolute;
+    right:20px;
+    border-radius: 3px;
+    padding: 20px;  
+
+    table{
+        font-size: 14px;
+
+        ul {
+            font-size:13px;
+            padding:0;
+            margin:0;
+            list-style-type: none;
+        }
+    }
+}
+
+

@@ -53,9 +53,9 @@ $("body .product-container").on("submit", ".add-product", function(e){
                 var dialogUrl = $('.cart-dialog').attr('data-url');
                 $.get(dialogUrl, {}, function(data){
                     if(data) {
-              console.log(data);
-          
-$('.cart-dialog').modal();
+   
+                        $(".cart-dialog").html(data);
+                        $(".shopping-cart").fadeIn( "slow");
 
 
                     }
@@ -229,10 +229,10 @@ $("body .main-cart").on("click", ".delete-product", function(e){
         if(data) {  
          
             $($this).parents('.product-row').remove();  
-            $('.cart-count').html(data.producttotal); 
+  
             
             if(data.totals) {                
-                updateCart();           
+                //updateCart();           
             }                
         }else {            
             $('.cart-details').html('<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p>Winkelwagen is leeg.</p></div>');
@@ -285,4 +285,20 @@ $("body .main-cart").on("keyup change", ".update-amount", function(e){
         }
     }, 'json');
 });
+
+
+(function(){
+ 
+$('#cart').click(function(e) {
+    e.stopPropagation();
+    $('.shopping-cart').fadeToggle();
+    return false;
+});
+
+$(document).click(function() {
+    $('.shopping-cart').fadeOut();
+});
+  
+})();
+
 

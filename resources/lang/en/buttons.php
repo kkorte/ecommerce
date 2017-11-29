@@ -18,6 +18,6 @@ return [
     'login'                => 'Inloggen',
     'create'                => 'Create',
     'edit'                => 'Wijzig',
-
+    'order-continue'       => 'Order now',
     'account_request'             => 'Account aanvragen'
     ];

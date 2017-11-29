@@ -1,6 +1,6 @@
 <h3>{!! trans('titles.cart_dialog') !!}</h3>
 @if (app('cart')->getContent()->count())
-<table>
+<table class="table">
     <tbody>
 
         @foreach (app('cart')->getContent() as $product)
@@ -28,14 +28,12 @@
                     <li>{!! $title !!}: {!! $value !!}</li>
                     @endforeach
                 </ul>
-                @endif
-                    
+                @endif                    
 
             </td>
             <td class="price">
-                <ul>
-                    <li>&euro; <span class="total_price_inc_tax_{{ $product['attributes']['id'] }}">{!! $product->getOriginalPriceWithTaxSum() !!}</span></li>
-                </ul>
+                &euro; <span class="total_price_inc_tax_{{ $product['attributes']['id'] }}">{!! $product->getOriginalPriceWithTaxSum() !!}</span></li>
+             
             </td>
         </tr>
 
@@ -47,8 +45,8 @@
 
     </tbody>    
 </table>
-<a href="{!! URL::route('cart.index') !!}" class="button button-light-grey show-cart-button">{!! trans('buttons.show-shopping-cart') !!}</a>                           
-<a href="{!! URL::route('cart.index') !!}" class="button button-black order-now-button">{!! trans('buttons.order_now') !!}</a>
+<a href="{!! URL::route('cart.index') !!}" class="btn btn-info">Show shoppingcart</a>                           
+<a href="{!! URL::route('cart.index') !!}" class="btn btn-success">Order now</a>
 @else 
 <p>{!! trans('text.cart-no-items') !!}</p>
 @endif

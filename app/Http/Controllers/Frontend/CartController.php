@@ -140,5 +140,13 @@ class CartController extends Controller
     }
 
 
+    public function getTotalReload()
+    {
+        $sendingMethodsList = $this->sendingMethod->selectAllActiveByShopId(config()->get('app.shop_id'));
+        $paymentMethodsList = $this->getPaymentMethodsList($sendingMethodsList);
+        
+        return view('frontend.cart._totals')->with(array('sendingMethodsList' => $sendingMethodsList));  
+    }
+
 
 }

@@ -75,7 +75,7 @@ use Hideyo\Repositories\UserRepository;
 use Hideyo\Repositories\ExceptionRepositoryInterface;
 use Hideyo\Repositories\ExceptionRepository;
 
-class BackendServiceProvider extends ServiceProvider {
+class RepositoryServiceProvider extends ServiceProvider {
     
     /**
      * Note: please keep logic in this repository. Put logic not in models,
