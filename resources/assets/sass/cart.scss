@@ -1,0 +1,611 @@
+
+
+.main-cart {
+    h1 {
+        text-transform: uppercase;
+        font-size:24px;
+        margin-bottom:30px;
+    }    
+
+    .cart-details {
+        .totals {
+            td {
+                text-align: right;   
+                border:0;
+            }           
+        }
+
+      table {      
+
+
+
+        tfoot {
+            td {
+                font-weight: normal;
+            }
+        }
+
+
+        tbody, tfoot {       
+
+            tr {
+
+                td {
+
+                    border-bottom:1px solid $primary-color;
+                    padding:20px 0px 20px 0px;
+                    vertical-align: middle;
+
+                    ul {
+                        padding:0px;
+                        margin:0px;
+                        list-style-type: none;
+                        li {
+
+                        }
+                    }
+                }
+
+                .total_price {                     
+                    text-align: right;
+                    padding-right:50px;
+                }
+
+                .amount {
+
+
+                    text-align: center;
+                    input {
+                        width:50px;
+                        text-align: center;
+                        margin:0px;
+                        float: left;
+                    } 
+
+                    select {
+
+                        text-align: center;
+                        margin:0px;
+                        float: left;
+                        line-height: inherit;
+                    }                
+                }
+
+                .title {
+
+                    p {
+                        font-weight: 700;
+                        padding:0px;
+                        margin: 0px;
+                    }
+                }
+
+
+
+
+                .image {
+
+                    padding-right:40px;
+
+                    img {
+                        vertical-align: middle;
+                    }
+
+                }
+
+                .amount-input {
+                    width: 60px;
+                }
+
+
+            }
+
+            .subtotal-block {
+
+                td {
+
+                    border:0;
+                    text-align: right;
+
+
+                    h5 {
+                        text-transform: none;
+                        font-weight: 700;
+                        font-size:14px;
+                    }
+
+                    ul {
+                        font-size: 14px;
+                    }
+                }
+
+                td {        
+                    text-align: right;
+                }
+
+                .price {
+                    padding-right:50px;
+                }
+            }
+
+
+            .sending-method, .payment-method {
+                td {        
+                    padding-top:0;
+                    padding-bottom:0;
+                    border: 0;
+                    vertical-align: middle;
+
+                    label {
+                        float:left;
+                        line-height: 40px;
+                        width:120px;
+                        font-size: inherit;
+                    }
+
+                    select {
+                        float:left;
+                        width:300px;
+                        line-height: inherit;
+                        margin-bottom:0px;
+                    }
+                }
+
+
+                .sending_block {
+
+                    float:left;
+                    position: relative;
+                    height:75px;
+
+              
+
+
+                    .sending_method_alert {
+                        position: absolute;
+                        bottom:15px;
+                        left:0px;
+                        float: left;
+                
+                        width: 100%;
+
+                    }
+
+
+                }
+
+
+
+
+
+            }
+
+            .tr-total, .tr-tax {
+                td {
+                    border:0;
+                    padding-top:0px;
+                }
+            }
+
+            .discount-block {
+                td {
+                    border:0;
+                    padding-top:0px;
+                }
+
+                .input-group {
+                    margin:0;
+                }
+
+                .coupon {
+                    label {
+                        float: left;
+                        text-transform: none;
+                        width: 120px;
+                        line-height: 40px;
+                        font-size: inherit;
+                    }
+
+                    input[type="text"] {
+                        float: left;
+                        width:210px;
+                        border-right: 0px;
+                    }
+
+                    @media screen and (max-width: 39.9375em) {
+                        input[type="text"] {
+                            width:120px;
+
+                        }
+
+                        small {
+                            float: left;
+             
+                    
+                        }
+    
+                    }
+
+                    button {
+                        background-color: $light-gray;
+                        color: black;
+                        width:90px;
+                        float: left;
+                        border:1px solid $medium-gray;
+
+                    }
+
+                    .input-group {
+                        float: left;
+                        width:auto;
+
+                        small {
+                            display: block;
+                        }
+                    }
+                }   
+
+            }
+
+            .tr-total {
+                td {
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    vertical-align: top;
+
+                    small {
+                        font-weight: 300;
+
+                    }
+                }
+
+
+            }
+
+            .next-button {
+   
+                form {
+                 
+                 padding-top:15px;
+                }
+                td {
+                    border:0;
+                    padding-right:50px;
+
+                }
+            }
+
+
+
+            .product-row-wholesale {
+                td {
+                    font-size:12px;
+                    padding:0px;
+                }
+
+                .title {
+
+                }
+
+                .amount {
+                    padding-top:10px;
+                    padding-bottom:10px;
+
+                }
+            }
+
+
+
+
+        }
+
+
+
+        thead {
+            border-color: $primary-color;
+            border-left:0px;
+            border-right:0px;
+
+            tr {
+                th {
+                    padding:10px 0px 10px 0px;
+                    text-transform: uppercase;
+                    color: $black;
+                }
+        
+
+                .price {
+                    padding-right:50px;
+                    width: 200px;
+                }
+
+                .amount {
+                    width:100px;
+
+                }
+
+                .image {
+                    width:120px;
+                }
+
+            }
+        }
+
+
+    }
+}
+
+
+.cart-details-mobile {
+
+    table {
+        .total_price, .price {
+            padding-right:0!important;       
+            white-space: nowrap!important;
+
+
+
+        }
+
+        select {
+           width:auto!important;
+       }
+
+
+
+       .amount {
+
+        vertical-align: middle;
+        padding:0!important;
+
+        select {
+            margin:0;
+            width:60px!important;
+
+        }
+    }
+
+    .delete {
+        padding: 20px 10px 20px 10px!important;
+        vertical-align: middle;
+        font-size:20px!important;
+    }
+
+    .title {
+
+    }
+
+    .btw {
+        td {
+            border:0;
+            padding:0;
+        }
+    }
+
+    .tr-total {
+        td {
+            padding:0;
+            font-size:18px;
+        }
+    }
+}
+
+
+.sending-method, .payment-method {
+    td {        
+        padding-top:0;
+        padding-bottom:0;
+        border: 0;
+        vertical-align: middle;
+        padding-right: 0px;
+
+        label {
+            float:left;
+            line-height: 40px;
+            width:100%!important;
+            font-size: inherit;;
+        }
+
+        select {
+
+  
+               
+                margin:0px;
+               
+              
+            
+
+            width:auto!important;
+        }
+    }
+
+
+
+}
+
+.no-line {
+    border:0!important;
+
+    td {
+        border:0;
+    }
+}
+
+.next-button {
+
+
+    td {
+        padding-right: 0px!important;
+
+    form {
+        padding-top:15px;
+    }
+
+    }
+
+}
+
+}
+
+}
+
+
+.order-summary {
+
+    background-color: $light-gray;
+    padding: 20px;
+
+    @media screen and (max-width: 39.9375em) {
+
+        margin-bottom:30px;
+
+
+    }
+
+
+    h5 {
+        text-transform: uppercase;
+        font-size:16px;
+    }
+
+    .product-row {
+
+        padding-top:10px;
+        padding-bottom:10px;
+
+        ul {
+            padding:0;
+            margin:0;
+
+            li {
+              list-style-type: none;  
+          }
+
+      }
+
+      span {
+        font-weight: 300;
+    }
+
+
+}
+
+hr {
+    padding:0;
+    margin:0;
+}
+
+.totals {
+    padding-top:30px;
+
+    .row {
+        padding-bottom:15px;
+    }
+
+    .button-row {
+        padding-bottom: 0px!important;
+    }
+
+    span {
+        font-weight: 300;
+    }
+
+    strong {
+        span {
+            font-weight: 600;
+        }
+    }
+
+}
+
+
+
+
+
+
+}
+
+
+.paymentway {
+    padding-bottom:30px;
+    table {
+        margin:0;
+        padding:0;
+
+        td {
+            padding:0;
+
+            label {
+                padding-bottom:10px;
+                font-size: inherit;
+            }
+
+            select{
+               
+                margin:0px;
+                                 line-height: inherit!important;
+              
+            }
+        }
+    }
+}
+
+.gift-voucher {
+float: left;
+padding-bottom:30px;
+
+.input-group {
+margin:0;
+}
+
+
+label {
+    float: left;
+    text-transform: none;
+    width: 120px;
+    line-height: 40px;
+}
+
+input[type="text"] {
+    float: left;
+    width:210px;
+    margin-right: 5px;
+}
+
+button {
+    background-color: $light-gray;
+    color: black;
+}
+
+.input-group {
+    float: left;
+    width:auto;
+}
+                  
+
+            
+
+}
+
+
+
+.confirm-page {
+    h3 {
+        text-transform: uppercase;
+        font-size:24px;
+    }
+
+    ul {
+        padding:0;
+        margin:0; 
+
+        li {
+            list-style-type: none;
+            list-style-position: outside;
+        }
+    }
+
+    .reveal {
+        z-index: 999999999;
+    }
+}

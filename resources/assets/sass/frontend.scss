@@ -10,6 +10,13 @@
 
 $main-color: #6394F8;
 $light-text: #ABB0BE;
+$mid-gray: #f6f6f6;
+$medium-gray: #f6f6f6;
+$light-gray: #f6f6f6;
+$black: #000000;
+$primary-color: #000000;
+
+body { padding-top: 60px; }
 
 .cart-button {
     position: relative;
@@ -37,5 +44,10 @@ $light-text: #ABB0BE;
         }
     }
 }
+
+//pages
+@import "cart";
+
+
 
 
