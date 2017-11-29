@@ -41,6 +41,7 @@ bower_components
 
 /public/images
 /public/javascript
+/public/js
 /public/css
 /public/fonts
 /public/upload
