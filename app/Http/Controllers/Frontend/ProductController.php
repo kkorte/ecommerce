@@ -7,9 +7,6 @@ use Hideyo\Models\ProductAttributeCombination;
 use Hideyo\Models\ProductAttribute;
 use Hideyo\Repositories\ProductRepositoryInterface;
 use Hideyo\Repositories\ProductCombinationRepositoryInterface;
-
-
-
 use Hideyo\Repositories\ProductCategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use BrowserDetect;
@@ -58,8 +55,11 @@ class ProductController extends Controller
                     $template = 'frontend.product.combinations-mobile';
                 }
 
-                    $leadingAttributeId = key(reset($newPullDowns));
-
+                $leadingAttributeId = key(reset($newPullDowns));
+                if($productAttributeId) {
+                    $leadingAttributeId = $productAttributeId;
+                }                 
+                    
                 return view($template)->with(
                     array(                     
                         'productImages' => $productImages,    
