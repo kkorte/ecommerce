@@ -12,7 +12,7 @@
     </head>
     <body>
         @include('frontend._partials.header')
-        <div class=" container-fluid">      
+        <div class=" container">      
             @yield('main')
         </div>
 

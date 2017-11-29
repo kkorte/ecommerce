@@ -2,7 +2,20 @@
 
 @section('main')
 
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Cart</a></li>
+        </ol>
+    </div>
+</div>
+
+
 <h1>Shoppingcart</h1>
+
+
+
 
 @notification('foundation')
 

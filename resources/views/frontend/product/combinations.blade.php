@@ -34,7 +34,7 @@
 
 
 <div class="row">
-    <div class="col-sm-3 col-md-2 product-container">
+    <div class="col-sm-12 col-md-12 col-lg-12 product-container">
 
         <h1>{!! $product->title !!}</h1>
         <img src="/images/default-product-thumb.png"  />
