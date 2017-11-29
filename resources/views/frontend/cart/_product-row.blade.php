@@ -47,6 +47,6 @@
     </td>
     
     <td class="delete">             
-        <a href="/cart/delete-product/{!! $product['id'] !!}" class="delete-product" title="verwijder een product">X</a>
+        <a href="/cart/delete-product/{!! $product['id'] !!}" class="delete-product" title="verwijder een product"><span class="glyphicon glyphicon-remove"></span></a>
     </td>
 </tr>

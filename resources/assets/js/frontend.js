@@ -232,7 +232,7 @@ $("body .main-cart").on("click", ".delete-product", function(e){
   
             
             if(data.totals) {                
-                //updateCart();           
+                updateCart();           
             }                
         }else {            
             $('.cart-details').html('<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p>Winkelwagen is leeg.</p></div>');
