@@ -7,7 +7,7 @@
 
 require('../src/index');
 require(Mix.paths.mix());
-
+Mix.Paths.setRootPath( path.resolve(__dirname) );
 /**
  * Just in case the user needs to hook into this point
  * in the build process, we'll make an announcement.
