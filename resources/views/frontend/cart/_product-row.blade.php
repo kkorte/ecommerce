@@ -5,8 +5,8 @@
 
 
         <a href="/{{ $product['attributes']['product_category_slug'] }}/{{ $product['id'] }}/{{ $product['attributes']['slug'] }}" title="terug naar product">   
-            @if(isset($product['attributes']['attributeIds']) AND ProductHelper::getImage($product['attributes']['id'], $product['attributes']['attributeIds'])) 
-            <img src="/files/product/100x100/{!! $product['attributes']['id'] !!}/{!! ProductHelper::getImage($product['attributes']['id'], $product['attributes']['attributeIds']) !!}" alt="">
+            @if(ProductHelper::getImage($product['attributes']['id'], array())) 
+            <img src="/files/product/100x100/{!! $product['attributes']['id'] !!}/{!! ProductHelper::getImage($product['attributes']['id'], array()) !!}" alt="">
             @else
             <img src="/images/default-product-thumb.png" style="width:100px;"  />
             @endif                                       

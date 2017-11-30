@@ -31,11 +31,12 @@ body { padding-top: 60px; }
     margin: 20px 0;
   
     background: white;
-    width: 320px;
+
     position: absolute;
     right:20px;
     border-radius: 3px;
     padding: 20px;  
+    z-index:20;
 
     table{
         font-size: 14px;

@@ -1,5 +1,5 @@
-<h1>{!! $product->title !!}</h1>
-<img src="/images/default-product-thumb.png"  />
+        <h1>{!! $product->title !!}</h1>
+        @include('frontend.product._images')
 
 <div class="description">
     <p>{!! $product->short_description !!}</p>
