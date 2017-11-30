@@ -51,3 +51,6 @@ bower_components
 /log/
 /log/capistrano.log
 package-lock.json
+/config/deploy
+/config/deploy.rb
+/CapFile
