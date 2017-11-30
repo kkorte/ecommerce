@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
 
 //window.Vue = require('vue');
 
@@ -21,6 +22,14 @@ require('./bootstrap');
 //     el: '#app'
 // });
 
+
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox({
+        showArrows: true,
+        alwaysShowClose: true
+    });
+});
 
 
 $("body .product-container").on("click", ".add-to-cart-button", function(e){

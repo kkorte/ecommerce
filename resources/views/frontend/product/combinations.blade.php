@@ -37,7 +37,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12 product-container">
 
         <h1>{!! $product->title !!}</h1>
-        <img src="/images/default-product-thumb.png"  />
+        @include('frontend.product._images')
         <div class="description">
             <p>{!! $product->short_description !!}</p>
         </div>

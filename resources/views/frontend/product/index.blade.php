@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col-sm-3 col-md-2 product-container">
         <h1>{!! $product->title !!}</h1>
-
+        @include('frontend.product._images')
         <div class="description">
             <p>{!! $product->short_description !!}</p>
         </div>
