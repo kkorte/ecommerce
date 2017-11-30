@@ -5,11 +5,27 @@ use Illuminate\Database\Eloquent\Model;
 use Hideyo\Models\Shop as Shop;
 use Hideyo\Models\Product as Product;
 use Hideyo\Models\ProductCategory as ProductCategory;
+use Hideyo\Models\ProductImage as ProductImage;
 use Hideyo\Models\TaxRate as TaxRate;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as Image;
+
 class ProductTableSeeder extends Seeder
 {
     public function run()
     {
+
+        Illuminate\Support\Facades\File::deleteDirectory(storage_path().'/app/files/product');
+        Illuminate\Support\Facades\File::deleteDirectory(public_path().'/files/product');
+        $directory = resource_path('assets/images/product');
+
+        $productFiles = Illuminate\Support\Facades\File::allFiles($directory);
+
+
+        $storageImagePath = "/files/product/";
+        $publicImagePath = public_path() .config('hideyo.public_path'). "/product/";
+
+
         $productCategory = ProductCategory::where('title', '=', 'Pants')->first();
         $taxRate = TaxRate::where('title', '=', '21%')->first();
 
@@ -37,6 +53,77 @@ class ProductTableSeeder extends Seeder
             Log::info('Created product "'.$product->title.'" <'.$product->title.'>');
         }
 
+
+        $productImage = new productImage;
+        $productImage->product_id = $product->id;
+        $productImage->extension = 'jpg';
+        $productImage->size = '0';
+        Storage::put($storageImagePath.$product->id.'/'.$productFiles[0]->getFileName(), $productFiles[0]->getContents());
+        $productImage->file = $productFiles[0]->getFileName();
+        $productImage->path = $storageImagePath.$product->id.'/'.$productFiles[0]->getFileName();
+        $productImage->save();
+
+
+        if ($shop->thumbnail_square_sizes) {
+            $sizes = explode(',', $shop->thumbnail_square_sizes);
+            if ($sizes) {
+                foreach ($sizes as $valueSize) {
+
+                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product->id.'/'.$productFiles[0]->getFileName());
+                    $explode = explode('x', $valueSize);
+
+                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                        $image->resize($explode[0], $explode[1]);
+                    }
+
+                    if (!File::exists($publicImagePath.$valueSize."/".$product->id."/")) {
+                        File::makeDirectory($publicImagePath.$valueSize."/".$product->id."/", 0777, true);
+                    }
+
+                    $image->interlace();
+
+                    $image->save($publicImagePath.$valueSize."/".$product->id."/".$productFiles[0]->getFileName());
+                }
+            }
+        }
+
+
+
+        $productImage2 = new productImage;
+        $productImage2->product_id = $product->id;
+        $productImage2->extension = 'jpg';
+        $productImage2->size = '0';
+        Storage::put($storageImagePath.$product->id.'/'.$productFiles[1]->getFileName(), $productFiles[1]->getContents());
+        $productImage2->file = $productFiles[1]->getFileName();
+        $productImage2->path = $storageImagePath.$product->id.'/'.$productFiles[1]->getFileName();
+        $productImage2->save();
+
+
+        if ($shop->thumbnail_square_sizes) {
+            $sizes = explode(',', $shop->thumbnail_square_sizes);
+            if ($sizes) {
+                foreach ($sizes as $valueSize) {
+
+                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product->id.'/'.$productFiles[1]->getFileName());
+                    $explode = explode('x', $valueSize);
+
+                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                        $image->resize($explode[0], $explode[1]);
+                    }
+
+                    if (!File::exists($publicImagePath.$valueSize."/".$product->id."/")) {
+                        File::makeDirectory($publicImagePath.$valueSize."/".$product->id."/", 0777, true);
+                    }
+
+                    $image->interlace();
+
+                    $image->save($publicImagePath.$valueSize."/".$product->id."/".$productFiles[1]->getFileName());
+                }
+            }
+        }
+
+
+
         $product2 = new Product;
         $product2->active = 1;
         $product2->title = 'Jeans';
@@ -56,5 +143,44 @@ class ProductTableSeeder extends Seeder
         } else {
             Log::info('Created product "'.$product2->title.'" <'.$product2->title.'>');
         }
+
+
+
+        $productImage = new productImage;
+        $productImage->product_id = $product2->id;
+        $productImage->extension = 'jpg';
+        $productImage->size = '0';
+        Storage::put($storageImagePath.$product2->id.'/'.$productFiles[2]->getFileName(), $productFiles[2]->getContents());
+        $productImage->file = $productFiles[2]->getFileName();
+        $productImage->path = $storageImagePath.$product2->id.'/'.$productFiles[2]->getFileName();
+        $productImage->save();
+
+
+        if ($shop->thumbnail_square_sizes) {
+            $sizes = explode(',', $shop->thumbnail_square_sizes);
+            if ($sizes) {
+                foreach ($sizes as $valueSize) {
+
+                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product2->id.'/'.$productFiles[2]->getFileName());
+                    $explode = explode('x', $valueSize);
+
+                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                        $image->resize($explode[0], $explode[1]);
+                    }
+
+                    if (!File::exists($publicImagePath.$valueSize."/".$product2->id."/")) {
+                        File::makeDirectory($publicImagePath.$valueSize."/".$product2->id."/", 0777, true);
+                    }
+
+                    $image->interlace();
+
+                    $image->save($publicImagePath.$valueSize."/".$product2->id."/".$productFiles[2]->getFileName());
+                }
+            }
+        }
+
+
+
+
     }
 }
