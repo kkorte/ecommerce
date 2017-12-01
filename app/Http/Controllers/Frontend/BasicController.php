@@ -30,11 +30,7 @@ class BasicController extends Controller
     }
 
     public function index()
-    {
-        if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
-            return view('frontend.basic.index-mobile')->with(array());
-        }
-        
+    {        
         $populairProducts = $this->productTagGroup->selectAllByTagAndShopId($this->shopId, 'home-populair');
         return view('frontend.basic.index')->with(array('populairProducts' => $populairProducts));
     }

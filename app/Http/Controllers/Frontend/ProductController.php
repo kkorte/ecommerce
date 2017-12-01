@@ -81,10 +81,6 @@ class ProductController extends Controller
 
             $template = 'frontend.product.index';
 
-            if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
-                $template = 'frontend.product.index-mobile';
-            } 
-
             return view($template)->with(
                 array(
                     'priceDetails' => $product->getPriceDetails(),
@@ -111,10 +107,6 @@ class ProductController extends Controller
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);
                 
                 $typeTemplate = "";
-
-                if (BrowserDetect::isMobile()) {   
-                    $typeTemplate = '-mobile';
-                }    
 
                 return view('frontend.product.ajax'.$typeTemplate)->with(array(
                     'newPullDowns' => $newPullDowns,
