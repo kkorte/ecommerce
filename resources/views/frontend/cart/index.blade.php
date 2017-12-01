@@ -37,7 +37,6 @@
                 </tr>
             </thead>
 
-
             <tbody class="cart-details-container">
 
                 @foreach (app('cart')->getContent()->sortBy('id') as $product)
