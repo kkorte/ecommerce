@@ -6,7 +6,7 @@
         <div class="large-photo">    
             <div class="col-sm-12 col-md-12 col-lg-12 ">
                 <a href="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" data-toggle="lightbox"  data-gallery="example-gallery">
-                    <img src="/files/product/200x200/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-fluid main-photo" alt="{!! $image['file'] !!}" />
+                    <img src="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-responsive img-fluid main-photo" alt="{!! $image['file'] !!}" />
                 </a>
             </div>    
 

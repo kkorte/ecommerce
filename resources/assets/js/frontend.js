@@ -47,8 +47,6 @@ $("body .product-container").on("submit", ".add-product", function(e){
         } else if (data.result == true) {
 
             $('.cart-count').html(data.producttotal);
-            $('.cart-total-inc-price').html(data.total_inc_tax_number_format);
-            $('.cart-total-price-ex').html(data.total_ex_tax_number_format);
             $.ajax({
                 type: 'GET',
                 url: $('.cart-button-ajax').attr('data-url'),

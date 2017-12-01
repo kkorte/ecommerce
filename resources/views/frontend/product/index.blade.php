@@ -32,10 +32,16 @@
 </div>
 
 
-<div class="row">
-    <div class="col-sm-3 col-md-2 product-container">
-        <h1>{!! $product->title !!}</h1>
+<div class="row product-container">
+
+    <div class="col-sm-5 col-md-5 col-lg-5">
+
         @include('frontend.product._images')
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-6 col-lg-offset-1">
+        <h1>{!! $product->title !!}</h1>
+      
         <div class="description">
             <p>{!! $product->short_description !!}</p>
         </div>

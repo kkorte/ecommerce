@@ -33,11 +33,17 @@
 </div>
 
 
-<div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 product-container">
+<div class="row product-container">
+
+    <div class="col-sm-5 col-md-5 col-lg-5">
+
+        @include('frontend.product._images')
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-6 col-lg-offset-1">
 
         <h1>{!! $product->title !!}</h1>
-        @include('frontend.product._images')
+
         <div class="description">
             <p>{!! $product->short_description !!}</p>
         </div>

@@ -21,11 +21,10 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#" id="cart">
-                            <i class="glyphicon glyphicon-shopping-cart cart-button"></i> {!! Cart::getContent()->count() !!} items
-                      </a>
+                        <a href="#" id="cart">
+                            <i class="glyphicon glyphicon-shopping-cart cart-button"></i><span class="cart-count">{!! Cart::getContent()->count() !!}</span> items
+                        </a>
                     </li> 
-
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
