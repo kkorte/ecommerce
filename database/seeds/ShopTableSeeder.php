@@ -13,7 +13,7 @@ class ShopTableSeeder extends Seeder
         DB::table($shop->getTable())->delete();
 
         $shop->title = 'hideyo';
-        $shop->url = 'http://hideyo.dev';
+        $shop->url = 'http://demo.hideyo.io';
         $shop->secret_key = 'RQlqvrjpGWPVqY1gPerKstoO4X6xhGGE';
         $shop->active = 1;
         $shop->description = "description";
