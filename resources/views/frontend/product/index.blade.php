@@ -72,7 +72,7 @@
                 <input type="hidden" class="form-control"  name="amount" value="1" size="2" maxlength="2" >
                 
                 @endif
-                <button type="button" class="button add-to-cart-button btn-blue btn-long">
+                <button type="button" class="btn btn-success add-to-cart-button btn-blue btn-long">
                     <span class="icon icon-cart"></span> In winkelwagen
                 </button>
                 @endif

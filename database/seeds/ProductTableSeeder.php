@@ -132,7 +132,7 @@ class ProductTableSeeder extends Seeder
         $product2->meta_title = 'Jeans';
         $product2->meta_description = 'Slimfit jeans';   
         $product2->price = '124.99'; 
-        $product->amount = 0;
+        $product2->amount = 5;
         $product2->reference_code = '12343445';       
         $product2->shop_id = $shop->id;
         $product2->product_category_id = $productCategory->id;

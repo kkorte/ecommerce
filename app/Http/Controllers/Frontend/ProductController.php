@@ -45,24 +45,24 @@ class ProductController extends Controller
                 }
 
                 $pullDowns = $this->productCombination->generatePulldowns($product, $productAttributeId, $attributeLeadingGroup);        
-                $newPullDowns = $pullDowns['newPullDowns'];            
+                $newPullDowns = $pullDowns['newPullDowns'];   
+
                 $productAttribute = $pullDowns['productAttribute']; 
                 $productImages = $this->product->ajaxProductImages($product, $productAttribute->combinations->pluck('attribute_id')->toArray(), $productAttribute->id);       
                                 
                 $template = 'frontend.product.combinations';
 
-                if (BrowserDetect::isMobile() OR BrowserDetect::deviceModel() == 'iPhone') {
-                    $template = 'frontend.product.combinations-mobile';
-                }
-
                 $leadingAttributeId = key(reset($newPullDowns));
-                if($productAttributeId) {
+                if($productAttributeId) { 
                     $leadingAttributeId = $productAttributeId;
+                } else {
+                    $productAttributeId = $pullDowns['productAttribute']->first()->id;
                 }                 
                     
                 return view($template)->with(
                     array(                     
                         'productImages' => $productImages,    
+                        'productAttributeId' => $productAttributeId,
                         'leadAttributeId' => $leadingAttributeId,
                         'firstPulldown' => key($newPullDowns),
                         'newPullDowns' => $newPullDowns,

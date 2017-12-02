@@ -54,10 +54,6 @@ class CartController extends Controller
         $shop = $this->shop->find(config()->get('app.shop_id'));
         $template = "frontend.cart.index";
 
-        if (BrowserDetect::isMobile()) {
-            $template = "frontend.cart.index-mobile";
-        }
-
         return view($template)->with(array( 
             'user' => auth('web')->user(), 
             'sendingMethodsList' => $sendingMethodsList
