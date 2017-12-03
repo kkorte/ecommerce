@@ -8,9 +8,7 @@
     <h1>{!! $product->title !!}</h1>
 
 
-    <div class="description">
-        <p>{!! $product->short_description !!}</p>
-    </div>
+
     <h3 class="price">
         @if($priceDetails['discount_price_inc'])                        
         &euro; {!! $priceDetails['discount_price_inc_number_format'] !!}
@@ -19,6 +17,10 @@
         &euro; {!! $priceDetails['original_price_inc_tax_number_format'] !!}
         @endif         
     </h3>
+
+    <div class="description">
+        <p>{!! $product->short_description !!}</p>
+    </div>
 
     <div class="order-block">
         <hr/>

@@ -1,7 +1,7 @@
 $open-sans-path: "/fonts" !default;
 $roboto-font-path: '/fonts' !default;
-@import '../../../node_modules/npm-font-open-sans/open-sans.scss';
-@import '../../../node_modules/roboto-fontface/css/roboto-fontface.scss';
+@import '../../../../node_modules/npm-font-open-sans/open-sans.scss';
+@import '../../../../node_modules/roboto-fontface/css/roboto-fontface.scss';
 
 $font-family-base: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 
@@ -32,19 +32,19 @@ $fa-font-path: "/fonts";
 
 
 $icon-font-path: "/fonts/";
-@import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-@import '../../../node_modules/select2/src/scss/core.scss';
-@import '../../../node_modules/select2-bootstrap-css/lib/select2-bootstrap.scss';
-@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
-@import '../../../node_modules/datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.css';
-@import 'backend/materialdesign';
-@import "backend/datatables";
-@import "backend/login";
+@import '../../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import '../../../../node_modules/select2/src/scss/core.scss';
+@import '../../../../node_modules/select2-bootstrap-css/lib/select2-bootstrap.scss';
+@import '../../../../node_modules/font-awesome/scss/font-awesome.scss';
+@import '../../../../node_modules/datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.css';
+@import 'materialdesign';
+@import "datatables";
+@import "login";
 
-@import "backend/colorpicker";
-@import "backend/sweetalert";
-@import "backend/icheck";
-@import "backend/wchar";
+@import "colorpicker";
+@import "sweetalert";
+@import "icheck";
+@import "wchar";
 
 
 //@import "backend/jstree";
