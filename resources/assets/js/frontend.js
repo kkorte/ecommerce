@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
-
+require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
 //window.Vue = require('vue');
 
 /**
@@ -22,6 +22,7 @@ require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
 //     el: '#app'
 // });
 
+$('.selectpicker').selectpicker();
 
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
@@ -96,13 +97,6 @@ $("body .product-container").on("change", ".leading-product-combination-select",
         dataType: 'html',
         success: function (data) {
             $('.product-container').html(data);
-                        $('.product-container').html(data).foundation();
-            $('body .product-container .photo-container').magnificPopup({
-              delegate: 'a', // child items selector, by clicking on it popup will open
-              type: 'image',
-              gallery:{enabled:true}
-              // other options
-            }); 
         }
     });
 });
@@ -126,14 +120,7 @@ $("body .product-container").on("change", ".pulldown", function(e){
         type: 'get',
         dataType: 'html',
         success: function (data) {
-            $('.product-container').html(data);
-              $('.product-container').html(data).foundation();
-            $('body .product-container .photo-container').magnificPopup({
-              delegate: 'a', // child items selector, by clicking on it popup will open
-              type: 'image',
-              gallery:{enabled:true}
-              // other options
-            });       
+            $('.product-container').html(data);      
         }
     });
 });
