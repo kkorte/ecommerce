@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
-require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
+//require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
 //window.Vue = require('vue');
 
 /**
@@ -22,7 +22,7 @@ require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
 //     el: '#app'
 // });
 
-$('.selectpicker').selectpicker();
+// $('.selectpicker').selectpicker();
 
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
