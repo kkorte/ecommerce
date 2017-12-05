@@ -7,8 +7,7 @@
 
 require('./bootstrap');
 require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
-require('../../../node_modules/photoswipe/dist/photoswipe.js');
-require('../../../node_modules/photoswipe/dist/photoswipe-ui-default.min.js');
+require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
 //window.Vue = require('vue');
 
 /**
@@ -22,13 +21,6 @@ require('../../../node_modules/photoswipe/dist/photoswipe-ui-default.min.js');
 // const app = new Vue({
 //     el: '#app'
 // });
-
-// $( document ).ready(function() {
-//     $('.selectpicker').selectpicker();
-// });
-
-
-
 
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
@@ -89,48 +81,57 @@ $("body .product-container").on("submit", ".add-product", function(e){
 
 
 $("body .product-container").on("change", ".leading-product-combination-select", function(e){
-    $(".pulldown").prop('disabled', true);
-    $(".add-to-cart-button").prop('disabled', true);
+    
+    if($(this).attr('data-url')) {
+        $(".pulldown").prop('disabled', true);
+        $(".add-to-cart-button").prop('disabled', true);
 
-    var amount = $(this).val();
-    var url = $(this).attr('data-url') + '/' + amount;
-    var name = $(this).attr('name');
-    $this = $(this);
-
-    $.ajax({
-        async: true,  
-        url: url,
-        type: 'get',
-        dataType: 'html',
-        success: function (data) {
-            $('body .product-container').html(data);
-        }
-    });
+        var amount = $(this).val();
+        var url = $(this).attr('data-url') + '/' + amount;
+        var name = $(this).attr('name');
+        $this = $(this);
+        
+        $.ajax({
+            async: true,  
+            url: url,
+            type: 'get',
+            dataType: 'html',
+            success: function (data) {
+                $('body .product-container').html(data);
+                                 $('.selectpicker').selectpicker('refresh'); 
+            }
+        });
+    }
 });
 
 
 
 
 $("body .product-container").on("change", ".pulldown", function(e){
-    $(".add-to-cart-button").prop('disabled', true);
+    
+    if($(this).attr('data-url')) {
 
-    var lead = $(".leading-product-combination-select");
-    var leadValue = lead.val();
+        $(".add-to-cart-button").prop('disabled', true);
 
-    var value = $(".pulldown").val();
-        var amount = $(this).val();
+        var lead = $(".leading-product-combination-select");
+        var leadValue = lead.val();
 
-    var url = $(this).attr('data-url') + '/' + amount;
+        var value = $(".pulldown").val();
+            var amount = $(this).val();
 
-    $.ajax({
-        async: true, 
-        url: url,
-        type: 'get',
-        dataType: 'html',
-        success: function (data) {
-            $('body .product-container').html(data);      
-        }
-    });
+        var url = $(this).attr('data-url') + '/' + amount;
+
+        $.ajax({
+            async: true, 
+            url: url,
+            type: 'get',
+            dataType: 'html',
+            success: function (data) {
+                $('body .product-container').html(data); 
+                  $('.selectpicker').selectpicker('refresh');     
+            }
+        });
+    }
 });
 
 
