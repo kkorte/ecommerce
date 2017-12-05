@@ -1,0 +1,33 @@
+.highlight {
+	height:400px;
+	position: relative;
+	margin-top:30px;
+
+	h3 {
+		position: absolute;
+		background-color: white;
+		line-height: 50px;
+		padding-left:30px;
+		padding-right:30px;
+
+
+	}
+}
+
+.homepage-highlight-big {
+	background: url('/images/homepage/homepage-big.jpg') center center;
+
+	h3 {
+		right:0px;
+		bottom:30px;
+		width:200px;	
+	}
+}
+
+.homepage-highlight-small {
+	background: url('/images/homepage/homepage-small.jpg') top center;
+}
+
+.homepage-highlight-small2 {
+	background: url('/images/homepage/homepage-small-2.jpg') center center;
+}
