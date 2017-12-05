@@ -7,7 +7,8 @@
 
 require('./bootstrap');
 require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
-//require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
+require('../../../node_modules/photoswipe/dist/photoswipe.js');
+require('../../../node_modules/photoswipe/dist/photoswipe-ui-default.min.js');
 //window.Vue = require('vue');
 
 /**
@@ -22,7 +23,12 @@ require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');
 //     el: '#app'
 // });
 
-// $('.selectpicker').selectpicker();
+// $( document ).ready(function() {
+//     $('.selectpicker').selectpicker();
+// });
+
+
+
 
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
@@ -92,11 +98,12 @@ $("body .product-container").on("change", ".leading-product-combination-select",
     $this = $(this);
 
     $.ajax({
+        async: true,  
         url: url,
         type: 'get',
         dataType: 'html',
         success: function (data) {
-            $('.product-container').html(data);
+            $('body .product-container').html(data);
         }
     });
 });
@@ -116,11 +123,12 @@ $("body .product-container").on("change", ".pulldown", function(e){
     var url = $(this).attr('data-url') + '/' + amount;
 
     $.ajax({
+        async: true, 
         url: url,
         type: 'get',
         dataType: 'html',
         success: function (data) {
-            $('.product-container').html(data);      
+            $('body .product-container').html(data);      
         }
     });
 });
