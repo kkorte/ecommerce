@@ -32,6 +32,22 @@
 	</div>
 </div>
 
+@if($populairProducts)
+
+<div class="populair-products">	
+	<div class="row">
+		<div class="col-md-12">
+		    <h2>Populair products</h2>
+		</div>
+
+
+	    @foreach ($populairProducts as $product)
+	    @include('frontend.product_category._product-row-item')
+	    @endforeach
+	</div>
+</div>
+
+@endif
 
 
 @stop
