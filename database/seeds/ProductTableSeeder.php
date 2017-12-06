@@ -183,7 +183,7 @@ class ProductTableSeeder extends Seeder
         $productCategory = ProductCategory::where('title', '=', 'T-shirts')->first();
         $product3 = new Product;
         $product3->active = 1;
-        $product3->title = 'T-shirt';
+        $product3->title = 'Cotton t-shirt';
         $product3->short_description = 'Cotton t-shirt';
         $product3->description = 'Cotton t-shirt';
         $product3->meta_title = 'T-shirt';
@@ -235,6 +235,65 @@ class ProductTableSeeder extends Seeder
                 }
             }
         }
+
+
+
+        $productCategory = ProductCategory::where('title', '=', 'T-shirts')->first();
+        $product4 = new Product;
+        $product4->active = 1;
+        $product4->title = 'Sport t-shirt';
+        $product4->short_description = 'Sport t-shirt';
+        $product4->description = 'Sport t-shirt';
+        $product4->meta_title = 'T-shirt';
+        $product4->meta_description = 'Sport t-shirt';   
+        $product4->price = '89'; 
+        $product4->amount = 5;
+        $product4->reference_code = '222343445';       
+        $product4->shop_id = $shop->id;
+        $product4->product_category_id = $productCategory->id;
+        $product4->tax_rate_id = $taxRate->id;
+
+        if (! $product4->save()) {
+            Log::info('Unable to create product '.$product4->title, (array)$product4->errors());
+        } else {
+            Log::info('Created product "'.$product4->title.'" <'.$product4->title.'>');
+        }
+
+
+
+        $productImage = new productImage;
+        $productImage->product_id = $product4->id;
+        $productImage->extension = 'jpg';
+        $productImage->size = '0';
+        Storage::put($storageImagePath.$product4->id.'/'.$productFiles[2]->getFileName(), $productFiles[2]->getContents());
+        $productImage->file = $productFiles[2]->getFileName();
+        $productImage->path = $storageImagePath.$product4->id.'/'.$productFiles[2]->getFileName();
+        $productImage->save();
+
+
+        if ($shop->thumbnail_square_sizes) {
+            $sizes = explode(',', $shop->thumbnail_square_sizes);
+            if ($sizes) {
+                foreach ($sizes as $valueSize) {
+
+                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product4->id.'/'.$productFiles[2]->getFileName());
+                    $explode = explode('x', $valueSize);
+
+                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                        $image->resize($explode[0], $explode[1]);
+                    }
+
+                    if (!File::exists($publicImagePath.$valueSize."/".$product4->id."/")) {
+                        File::makeDirectory($publicImagePath.$valueSize."/".$product4->id."/", 0777, true);
+                    }
+
+                    $image->interlace();
+
+                    $image->save($publicImagePath.$valueSize."/".$product4->id."/".$productFiles[2]->getFileName());
+                }
+            }
+        }
+
 
 
 
