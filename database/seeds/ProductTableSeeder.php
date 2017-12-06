@@ -180,6 +180,64 @@ class ProductTableSeeder extends Seeder
         }
 
 
+        $productCategory = ProductCategory::where('title', '=', 'T-shirts')->first();
+        $product3 = new Product;
+        $product3->active = 1;
+        $product3->title = 'T-shirt';
+        $product3->short_description = 'Cotton t-shirt';
+        $product3->description = 'Cotton t-shirt';
+        $product3->meta_title = 'T-shirt';
+        $product3->meta_description = 'Cotton t-shirt';   
+        $product3->price = '99'; 
+        $product3->amount = 5;
+        $product3->reference_code = '1222343445';       
+        $product3->shop_id = $shop->id;
+        $product3->product_category_id = $productCategory->id;
+        $product3->tax_rate_id = $taxRate->id;
+
+        if (! $product3->save()) {
+            Log::info('Unable to create product '.$product3->title, (array)$product3->errors());
+        } else {
+            Log::info('Created product "'.$product3->title.'" <'.$product3->title.'>');
+        }
+
+
+
+        $productImage = new productImage;
+        $productImage->product_id = $product3->id;
+        $productImage->extension = 'jpg';
+        $productImage->size = '0';
+        Storage::put($storageImagePath.$product3->id.'/'.$productFiles[2]->getFileName(), $productFiles[2]->getContents());
+        $productImage->file = $productFiles[2]->getFileName();
+        $productImage->path = $storageImagePath.$product3->id.'/'.$productFiles[2]->getFileName();
+        $productImage->save();
+
+
+        if ($shop->thumbnail_square_sizes) {
+            $sizes = explode(',', $shop->thumbnail_square_sizes);
+            if ($sizes) {
+                foreach ($sizes as $valueSize) {
+
+                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product3->id.'/'.$productFiles[2]->getFileName());
+                    $explode = explode('x', $valueSize);
+
+                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                        $image->resize($explode[0], $explode[1]);
+                    }
+
+                    if (!File::exists($publicImagePath.$valueSize."/".$product3->id."/")) {
+                        File::makeDirectory($publicImagePath.$valueSize."/".$product3->id."/", 0777, true);
+                    }
+
+                    $image->interlace();
+
+                    $image->save($publicImagePath.$valueSize."/".$product3->id."/".$productFiles[2]->getFileName());
+                }
+            }
+        }
+
+
+
 
 
     }
