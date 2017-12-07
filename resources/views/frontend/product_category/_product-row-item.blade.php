@@ -9,7 +9,7 @@
             @endif
 
             <div class="text-block">
-                <h3>{{ $product->title }}</h3>
+                <h5>{{ $product->title }}</h5>
 
 
                 @if(ProductHelper::priceDetails($product, 'discount_tax_value'))
