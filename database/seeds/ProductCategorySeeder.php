@@ -94,11 +94,11 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory6 = new ProductCategory;
         $productCategory6->active = 1;
-        $productCategory6->title = 'Shoes';
-        $productCategory6->short_description = 'Leather shoes';
-        $productCategory6->description = 'Leather shoes';         
-        $productCategory6->meta_title = 'Shoes';
-        $productCategory6->meta_description = 'Leather shoes';
+        $productCategory6->title = 'Hats';
+        $productCategory6->short_description = 'Leather hats';
+        $productCategory6->description = 'Leather hats';         
+        $productCategory6->meta_title = 'Hats';
+        $productCategory6->meta_description = 'Leather hats';
         $productCategory6->shop_id = $shop->id;
         $productCategory6->parent_id = $productCategory5->id;
 

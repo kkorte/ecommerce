@@ -85,9 +85,10 @@ class ProductHelper
             $priceInc = 0;
             $taxValue = 0;
 
-            if (isset($product->rate)) {
-                $taxRate = $product->rate;
-                $priceInc = (($product->rate / 100) * $product->price) + $product->price;
+            if (isset($product->taxRate)) {
+                $taxRate = $product->taxRate->rate;
+        
+                $priceInc = (($product->taxRate->rate / 100) * $product->price) + $product->price;
                 $taxValue = $priceInc - $product->price;
             }
 
@@ -147,8 +148,6 @@ class ProductHelper
             }
 
             $productArray = array(
-                'wholesale_price_ex_tax'  => $product->wholesale_price,
-                'wholesale_price_ex_tax_number_format'  => number_format($product->wholesale_price, 2, '.', ''),
                 'original_price_ex_tax'  => $product->price,
                 'original_price_ex_tax_number_format'  => number_format($product->price, 2, '.', ''),
                 'original_price_inc_tax' => $priceInc,
@@ -164,7 +163,7 @@ class ProductHelper
                 'discount_value' => $product->discount_value,
                 'amount' => $product->amount
             );
-            
+        
             if (isset($productArray[$field])) {
                 return $productArray[$field];
             }         

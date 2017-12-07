@@ -26,12 +26,12 @@ class BasicController extends Controller
         $this->content = $content;
         $this->shop = $shop;
         $this->productTagGroup = $productTagGroup;
-        $this->shopId = config()->get('app.shop_id');
+
     }
 
     public function index()
     {        
-        $populairProducts = $this->productTagGroup->selectAllByTagAndShopId($this->shopId, 'home-populair');
+        $populairProducts = $this->productTagGroup->selectAllByTagAndShopId(config()->get('app.shop_id'), 'home-populair');
         return view('frontend.basic.index')->with(array('populairProducts' => $populairProducts));
     }
 }

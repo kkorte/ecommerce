@@ -20,7 +20,7 @@
 
 <div class="row">
 	<div class="col-sm-3 col-md-2">
-		<p>categories</p>
+		<h1>{!! $category->title !!}</h1>
 	</div>
 </div>
 
