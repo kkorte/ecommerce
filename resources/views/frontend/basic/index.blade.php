@@ -32,6 +32,12 @@
 	</div>
 </div>
 
+@if($populairProducts)
+<h3>Populair products</h3>
+
+@endif
+
+
 
 
 @stop
