@@ -32,71 +32,64 @@ class ProductTableSeeder extends Seeder
 
         DB::table($product->getTable())->delete();
 
-for ($x = 0; $x <= 10; $x++) {
+        for ($x = 0; $x <= 10; $x++) {
   
-  $product = new Product;
-        $shop = Shop::where('title', '=', 'hideyo')->first();
+            $product = new Product;
+            $shop = Shop::where('title', '=', 'hideyo')->first();
+            $product->id = 1 + $x;
+            $product->active = 1;
+            $product->title = 'Cotton pants '.$x;
+            $product->short_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+            $product->description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec nulla dignissim, tempus neque quis, pharetra orci. Pellentesque scelerisque odio vitae dolor pretium, in luctus eros convallis. Etiam nec leo porta, dapibus lectus a, convallis ligula. Morbi in dui aliquet, mattis justo at, egestas nisi. Suspendisse lobortis felis enim, venenatis venenatis elit pretium id. Duis a magna eros. Proin auctor orci eu posuere tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam ac tempus urna. Quisque mattis mauris quis elit elementum, porta tincidunt erat scelerisque. Donec ornare lacus quis purus consequat cursus. Maecenas fringilla interdum purus id semper. Donec non eros sem. Maecenas sit amet augue ut lacus commodo venenatis.';
+            $product->meta_title = 'Cotton pants';
+            $product->meta_description = 'Cotton pants';   
+            $product->price = '99.50' * $x;
+            $product->amount = 10;
+            $product->reference_code = '12343443';        
+            $product->shop_id = $shop->id;
+            $product->product_category_id = $productCategory->id;
+            $product->tax_rate_id = $taxRate->id;
 
-        $product->active = 1;
-        $product->title = 'Cotton pants '.$x;
-        $product->short_description = 'Cotton pants';
-        $product->description = 'Cotton pants';
-        $product->meta_title = 'Cotton pants';
-        $product->meta_description = 'Cotton pants';   
-        $product->price = '99.50';
-        $product->amount = 10;
-        $product->reference_code = '12343443';        
-        $product->shop_id = $shop->id;
-        $product->product_category_id = $productCategory->id;
-        $product->tax_rate_id = $taxRate->id;
-
-        if (! $product->save()) {
-            Log::info('Unable to create product '.$product->title, (array)$product->errors());
-        } else {
-            Log::info('Created product "'.$product->title.'" <'.$product->title.'>');
-        }
-
-
-        $productImage = new productImage;
-        $productImage->product_id = $product->id;
-        $productImage->extension = 'jpg';
-        $productImage->size = '0';
-        Storage::put($storageImagePath.$product->id.'/'.$productFiles[0]->getFileName(), $productFiles[0]->getContents());
-        $productImage->file = $productFiles[0]->getFileName();
-        $productImage->path = $storageImagePath.$product->id.'/'.$productFiles[0]->getFileName();
-        $productImage->save();
+            if (! $product->save()) {
+                Log::info('Unable to create product '.$product->title, (array)$product->errors());
+            } else {
+                Log::info('Created product "'.$product->title.'" <'.$product->title.'>');
+            }
 
 
-        if ($shop->thumbnail_square_sizes) {
-            $sizes = explode(',', $shop->thumbnail_square_sizes);
-            if ($sizes) {
-                foreach ($sizes as $valueSize) {
+            $productImage = new productImage;
+            $productImage->product_id = $product->id;
+            $productImage->extension = 'jpg';
+            $productImage->size = '0';
+            Storage::put($storageImagePath.$product->id.'/'.$productFiles[0]->getFileName(), $productFiles[0]->getContents());
+            $productImage->file = $productFiles[0]->getFileName();
+            $productImage->path = $storageImagePath.$product->id.'/'.$productFiles[0]->getFileName();
+            $productImage->save();
 
-                    $image = Image::make(storage_path().'/app/'.$storageImagePath.$product->id.'/'.$productFiles[0]->getFileName());
-                    $explode = explode('x', $valueSize);
 
-                    if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
-                        $image->resize($explode[0], $explode[1]);
+            if ($shop->thumbnail_square_sizes) {
+                $sizes = explode(',', $shop->thumbnail_square_sizes);
+                if ($sizes) {
+                    foreach ($sizes as $valueSize) {
+
+                        $image = Image::make(storage_path().'/app/'.$storageImagePath.$product->id.'/'.$productFiles[0]->getFileName());
+                        $explode = explode('x', $valueSize);
+
+                        if ($image->width() >= $explode[0] and $image->height() >= $explode[1]) {
+                            $image->resize($explode[0], $explode[1]);
+                        }
+
+                        if (!File::exists($publicImagePath.$valueSize."/".$product->id."/")) {
+                            File::makeDirectory($publicImagePath.$valueSize."/".$product->id."/", 0777, true);
+                        }
+
+                        $image->interlace();
+
+                        $image->save($publicImagePath.$valueSize."/".$product->id."/".$productFiles[0]->getFileName());
                     }
-
-                    if (!File::exists($publicImagePath.$valueSize."/".$product->id."/")) {
-                        File::makeDirectory($publicImagePath.$valueSize."/".$product->id."/", 0777, true);
-                    }
-
-                    $image->interlace();
-
-                    $image->save($publicImagePath.$valueSize."/".$product->id."/".$productFiles[0]->getFileName());
                 }
             }
-        }
-
-
-
-} 
-
-
-
-
+        } 
 
         $productImage2 = new productImage;
         $productImage2->product_id = $product->id;
@@ -106,7 +99,6 @@ for ($x = 0; $x <= 10; $x++) {
         $productImage2->file = $productFiles[1]->getFileName();
         $productImage2->path = $storageImagePath.$product->id.'/'.$productFiles[1]->getFileName();
         $productImage2->save();
-
 
         if ($shop->thumbnail_square_sizes) {
             $sizes = explode(',', $shop->thumbnail_square_sizes);
@@ -302,11 +294,5 @@ for ($x = 0; $x <= 10; $x++) {
                 }
             }
         }
-
-
-
-
-
-
     }
 }
