@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductAttributeTableSeeder::class);        
         $this->call(SendingMethodTableSeeder::class);
         $this->call(ProductTagGroupTableSeeder::class);
-
+        $this->call(HtmlBlockTableSeeder::class);
         Model::reguard();
     }
 }

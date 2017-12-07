@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Hideyo\Models\Shop as Shop;
 use Hideyo\Models\TaxRate as TaxRate;
-use Hideyo\Models\ProductCategory as ProductCategory;
+
 
 class TaxRateTableSeeder extends Seeder
 {

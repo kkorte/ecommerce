@@ -177,6 +177,7 @@ return [
         'hisorange\BrowserDetect\Provider\BrowserDetectService',
         Yajra\Datatables\DatatablesServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        'Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider',
 
 
         /*
@@ -246,7 +247,10 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'BrowserDetect' => 'hisorange\BrowserDetect\Facade\Parser',
         'Cart' => Hideyo\Facades\CartFacade::class,
-        'ProductHelper'       => Hideyo\Helpers\ProductHelper::class,
+        'ProductHelper'     => Hideyo\Helpers\ProductHelper::class,
+        'HtmlBlockHelper'   => Hideyo\Helpers\HtmlBlockHelper::class,
+        'DbView'          => 'Flynsarmy\DbBladeCompiler\Facades\DbView'
+
 
     ],
 
