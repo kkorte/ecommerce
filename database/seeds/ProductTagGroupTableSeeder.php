@@ -22,6 +22,7 @@ class ProductTagGroupTableSeeder extends Seeder
 
         $productIds = array();
         foreach ($products as $product) {
+
             $productIds[] = $product->id;
         }
 
@@ -34,7 +35,7 @@ class ProductTagGroupTableSeeder extends Seeder
             Log::info('Unable to create tax rate '.$tagGroup->id, (array)$tagGroup->errors());
         } else {
             Log::info('Created tax rate "'.$tagGroup->id.'" <'.$tagGroup->id.'>'); 
-                    $tagGroup->relatedProducts()->sync($productIds);    
+                    $tagGroup->relatedProducts()->sync(array_slice($productIds, 0, 4));    
         }
 
 

@@ -28,14 +28,17 @@ class ProductTableSeeder extends Seeder
 
         $productCategory = ProductCategory::where('title', '=', 'Pants')->first();
         $taxRate = TaxRate::where('title', '=', '21%')->first();
-
         $product = new Product;
 
         DB::table($product->getTable())->delete();
+
+for ($x = 0; $x <= 10; $x++) {
+  
+  $product = new Product;
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
         $product->active = 1;
-        $product->title = 'Cotton pants';
+        $product->title = 'Cotton pants '.$x;
         $product->short_description = 'Cotton pants';
         $product->description = 'Cotton pants';
         $product->meta_title = 'Cotton pants';
@@ -86,6 +89,12 @@ class ProductTableSeeder extends Seeder
                 }
             }
         }
+
+
+
+} 
+
+
 
 
 

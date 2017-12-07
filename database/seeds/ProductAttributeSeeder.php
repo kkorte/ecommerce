@@ -19,7 +19,13 @@ class ProductAttributeTableSeeder extends Seeder
         $productAttribute = new ProductAttribute;
         DB::table($productAttribute->getTable())->delete();
         $shop = Shop::where('title', '=', 'hideyo')->first();
-        $product = Product::where('title', '=', 'Cotton pants')->first();
+
+
+
+for ($x = 0; $x <= 10; $x++) {
+
+        $productAttribute = new ProductAttribute;
+        $product = Product::where('title', '=', 'Cotton pants '.$x)->first();
 
 
 
@@ -44,15 +50,11 @@ class ProductAttributeTableSeeder extends Seeder
         $attribute = Attribute::where('value', '=', 'S')->first();
         $productAttributeCombination->attribute_id = $attribute->id; 
 
-
-
         if (! $productAttributeCombination->save()) {
             Log::info('Unable to create attribute group '.$productAttributeCombination->id, (array)$productAttributeCombination->errors());
         } else {
             Log::info('Created attribute group "'.$productAttributeCombination->id.'" <'.$productAttributeCombination->id.'>');     
         }
-
-
 
         $productAttributeCombination2 = new ProductAttributeCombination;  
         $productAttributeCombination2->product_attribute_id = $productAttribute->id; 
@@ -151,6 +153,16 @@ class ProductAttributeTableSeeder extends Seeder
 
         $product->leading_atrribute_group_id = $attribute->attributeGroup->id;
         $product->save();
+
+
+}
+
+
+
+
+
+
+
 
 
     }
