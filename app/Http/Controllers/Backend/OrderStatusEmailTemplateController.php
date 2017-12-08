@@ -72,19 +72,19 @@ class OrderStatusEmailTemplateController extends Controller
         return redirect()->back()->withInput();
     }
 
-    public function edit($id)
+    public function edit($templateId)
     {
-        return view('backend.order-status-email-template.edit')->with(array('orderHtmlTemplate' => $this->orderHtmlTemplate->find($id)));
+        return view('backend.order-status-email-template.edit')->with(array('orderHtmlTemplate' => $this->orderHtmlTemplate->find($templateId)));
     }
 
-    public function showAjaxTemplate($id)
+    public function showAjaxTemplate($templateId)
     {
-        return response()->json($this->orderHtmlTemplate->find($id));
+        return response()->json($this->orderHtmlTemplate->find($templateId));
     }
 
-    public function update($id)
+    public function update($templateId)
     {
-        $result  = $this->orderHtmlTemplate->updateById($this->request->all(), $id);
+        $result  = $this->orderHtmlTemplate->updateById($this->request->all(), $templateId);
 
         if (isset($result->id)) {
             Notification::success('template was updated.');
@@ -98,9 +98,9 @@ class OrderStatusEmailTemplateController extends Controller
         return redirect()->back()->withInput()->withErrors($result->errors()->all());
     }
 
-    public function destroy($id)
+    public function destroy($templateId)
     {
-        $result  = $this->orderHtmlTemplate->destroy($id);
+        $result  = $this->orderHtmlTemplate->destroy($templateId);
 
         if ($result) {
             Notification::success('template was deleted.');

@@ -67,14 +67,14 @@ class InvoiceController extends Controller
         return view('backend.invoice.index')->with('invoice', $this->invoice->selectAll());
     }
 
-    public function show($id)
+    public function show($invoiceId)
     {
-        return view('backend.invoice.show')->with('invoice', $this->invoice->find($id));
+        return view('backend.invoice.show')->with('invoice', $this->invoice->find($invoiceId));
     }
 
-    public function download($id)
+    public function download($invoiceId)
     {
-        $invoice = $this->invoice->find($id);
+        $invoice = $this->invoice->find($invoiceId);
         $pdf = \PDF::loadView('invoice.pdf', array('invoice' => $invoice));
         return $pdf->download('invoice-'.$invoice->generated_custom_invoice_id.'.pdf');
     }
@@ -101,18 +101,18 @@ class InvoiceController extends Controller
         return \Redirect::back()->withInput();
     }
 
-    public function edit($id)
+    public function edit($invoiceId)
     {
         return view('backend.invoice.edit')->with(array(
             'taxRates' => $this->taxRate->selectAll()->pluck('title', 'id'),
-            'invoice' => $this->invoice->find($id),
+            'invoice' => $this->invoice->find($invoiceId),
             'paymentMethods' => $this->paymentMethod->selectAll()->pluck('title', 'id'),
         ));
     }
 
-    public function update($id)
+    public function update($invoiceId)
     {
-        $result  = $this->invoice->updateById(Request::all(), $id);
+        $result  = $this->invoice->updateById(Request::all(), $invoiceId);
 
         if (isset($result->id)) {
             \Notification::success('The invoice was updated.');
@@ -123,9 +123,9 @@ class InvoiceController extends Controller
         return \Redirect::back()->withInput();
     }
 
-    public function destroy($id)
+    public function destroy($invoiceId)
     {
-        $result  = $this->invoice->destroy($id);
+        $result  = $this->invoice->destroy($invoiceId);
 
         if ($result) {
             Notification::success('The invoice was deleted.');

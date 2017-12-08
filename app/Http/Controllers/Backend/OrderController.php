@@ -250,9 +250,9 @@ class OrderController extends Controller
         return Response::json(false);
     }
 
-    public function show($id)
+    public function show($orderId)
     {
-        $order = $this->order->find($id);
+        $order = $this->order->find($orderId);
         return view('backend.order.show')->with(array('order' => $order, 'orderStatuses' => $this->orderStatus->selectAll()->pluck('title', 'id')));
     }
 
@@ -268,9 +268,9 @@ class OrderController extends Controller
         return redirect()->route('admin.order.show', $orderId);
     }
 
-    public function download($id)
+    public function download($orderId)
     {
-        $order = $this->order->find($id);
+        $order = $this->order->find($orderId);
         $text = $this->sendingPaymentMethodRelated->selectOneByPaymentMethodIdAndSendingMethodIdAdmin($order->orderSendingMethod->sending_method_id, $order->orderPaymentMethod->payment_method_id);
         
         $pdfText = "";
@@ -283,9 +283,9 @@ class OrderController extends Controller
     }
 
 
-    public function downloadLabel($id)
+    public function downloadLabel($orderId)
     {
-        $order = $this->order->find($id);
+        $order = $this->order->find($orderId);
         if($order->orderLabel()->count()) {
           header("Content-type: application/octet-stream");
           header("Content-disposition: attachment;filename=label.pdf");
@@ -324,14 +324,14 @@ class OrderController extends Controller
         return $content;
     }
 
-    public function edit($id)
+    public function edit($orderId)
     {
-        return view('backend.order.edit')->with(array('order' => $this->order->find($id)));
+        return view('backend.order.edit')->with(array('order' => $this->order->find($orderId)));
     }
 
-    public function update($id)
+    public function update($orderId)
     {
-        $result  = $this->order->updateById(Request::all(), $id);
+        $result  = $this->order->updateById(Request::all(), $orderId);
 
         if ($result->errors()->all()) {
             return redirect()->back()->withInput()->withErrors($result->errors()->all());

@@ -62,14 +62,14 @@ class LanguageController extends BaseController
         return Redirect::back()->withInput()->withErrors($result->errors()->all());
     }
 
-    public function edit($id)
+    public function edit($languageId)
     {
-        return \View::make('language.edit')->with(array('language' => $this->language->find($id)));
+        return \View::make('language.edit')->with(array('language' => $this->language->find($languageId)));
     }
 
-    public function update($id)
+    public function update($languageId)
     {
-        $result  = $this->language->updateById(Request::all(), $id);
+        $result  = $this->language->updateById(Request::all(), $languageId);
 
         if ($result->errors()->all()) {
             return Redirect::back()->withInput()->withErrors($result->errors()->all());
@@ -80,9 +80,9 @@ class LanguageController extends BaseController
         }
     }
 
-    public function destroy($id)
+    public function destroy($languageId)
     {
-        $result  = $this->language->destroy($id);
+        $result  = $this->language->destroy($languageId);
 
         if ($result) {
             Notification::success('The product was deleted.');

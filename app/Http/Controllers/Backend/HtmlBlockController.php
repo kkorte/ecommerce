@@ -120,14 +120,14 @@ class HtmlBlockController extends Controller
         return response()->json($result);
     }
 
-    public function edit($id)
+    public function edit($htmlBlockId)
     {
-        return view('backend.html-block.edit')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
+        return view('backend.html-block.edit')->with(array('htmlBlock' => $this->htmlBlock->find($htmlBlockId)));
     }
 
-    public function editSeo($id)
+    public function editSeo($htmlBlockId)
     {
-        return view('backend.html-block.edit_seo')->with(array('htmlBlock' => $this->htmlBlock->find($id)));
+        return view('backend.html-block.edit_seo')->with(array('htmlBlock' => $this->htmlBlock->find($htmlBlockId)));
     }
 
     public function update($htmlBlockId)
@@ -154,9 +154,9 @@ class HtmlBlockController extends Controller
         return redirect()->back()->withInput();
     }
 
-    public function destroy($id)
+    public function destroy($htmlBlockId)
     {
-        $result  = $this->htmlBlock->destroy($id);
+        $result  = $this->htmlBlock->destroy($htmlBlockId);
 
         if ($result) {
             Notification::success('The html block was deleted.');
