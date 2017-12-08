@@ -20,11 +20,6 @@ class ShopTableSeeder extends Seeder
         $shop->currency_code = "EUR";
         $shop->thumbnail_widescreen_sizes = "100x100,200x200,500x500,800x800";
         $shop->thumbnail_square_sizes = "100x100,200x200,500x500,800x800";        
-        
-        if (! $shop->save()) {
-            Log::info('Unable to create shop '.$shop->title, (array)$shop->errors());
-        } else {
-            Log::info('Created shop "'.$shop->title);
-        }
+        $shop->save();    
     }
 }

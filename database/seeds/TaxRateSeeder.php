@@ -18,22 +18,12 @@ class TaxRateTableSeeder extends Seeder
         $taxRate->title = '21%';
         $taxRate->rate = '21';     
         $taxRate->shop_id = $shop->id;
-
-        if (! $taxRate->save()) {
-            Log::info('Unable to create tax rate '.$taxRate->title, (array)$taxRate->errors());
-        } else {
-            Log::info('Created tax rate "'.$taxRate->title.'" <'.$taxRate->title.'>');     
-        }
+        $taxRate->save();
 
         $taxRate2 = new TaxRate;
         $taxRate2->title = '6%';
         $taxRate2->rate = '6';     
         $taxRate2->shop_id = $shop->id;
-
-        if (! $taxRate2->save()) {
-            Log::info('Unable to create tax rate '.$taxRate2->title, (array)$taxRate2->errors());
-        } else {
-            Log::info('Created tax rate "'.$taxRate2->title.'" <'.$taxRate2->title.'>');     
-        }
+        $taxRate2->save();
     }
 }

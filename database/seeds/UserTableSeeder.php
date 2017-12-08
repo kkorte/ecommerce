@@ -22,11 +22,6 @@ class UserTableSeeder extends Seeder
 
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
         $user->confirmed = 1;
-
-        if (! $user->save()) {
-            Log::info('Unable to create user '.$user->email, (array)$user->errors());
-        } else {
-            Log::info('Created user "'.$user->email.'" <'.$user->email.'>');
-        }
+        $user->save();
     }
 }

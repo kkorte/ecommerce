@@ -49,13 +49,7 @@ class ProductTableSeeder extends Seeder
             $product->shop_id = $shop->id;
             $product->product_category_id = $productCategory->id;
             $product->tax_rate_id = $taxRate->id;
-
-            if (! $product->save()) {
-                Log::info('Unable to create product '.$product->title, (array)$product->errors());
-            } else {
-                Log::info('Created product "'.$product->title.'" <'.$product->title.'>');
-            }
-
+            $product->save();
 
             $productImage = new productImage;
             $productImage->product_id = $product->id;
@@ -195,14 +189,7 @@ class ProductTableSeeder extends Seeder
         $product3->shop_id = $shop->id;
         $product3->product_category_id = $productCategory->id;
         $product3->tax_rate_id = $taxRate->id;
-
-        if (! $product3->save()) {
-            Log::info('Unable to create product '.$product3->title, (array)$product3->errors());
-        } else {
-            Log::info('Created product "'.$product3->title.'" <'.$product3->title.'>');
-        }
-
-
+        $product3->save();
 
         $productImage = new productImage;
         $productImage->product_id = $product3->id;
@@ -212,7 +199,6 @@ class ProductTableSeeder extends Seeder
         $productImage->file = $productFiles[2]->getFileName();
         $productImage->path = $storageImagePath.$product3->id.'/'.$productFiles[2]->getFileName();
         $productImage->save();
-
 
         if ($shop->thumbnail_square_sizes) {
             $sizes = explode(',', $shop->thumbnail_square_sizes);
@@ -253,14 +239,7 @@ class ProductTableSeeder extends Seeder
         $product4->shop_id = $shop->id;
         $product4->product_category_id = $productCategory->id;
         $product4->tax_rate_id = $taxRate->id;
-
-        if (! $product4->save()) {
-            Log::info('Unable to create product '.$product4->title, (array)$product4->errors());
-        } else {
-            Log::info('Created product "'.$product4->title.'" <'.$product4->title.'>');
-        }
-
-
+        $product4->save();
 
         $productImage = new productImage;
         $productImage->product_id = $product4->id;

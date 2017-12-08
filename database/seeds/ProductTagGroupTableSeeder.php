@@ -15,29 +15,16 @@ class ProductTagGroupTableSeeder extends Seeder
         $tagGroup = new ProductTagGroup;
         DB::table($tagGroup->getTable())->delete();
 
-
-
-
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
         $productIds = array();
         foreach ($products as $product) {
-
             $productIds[] = $product->id;
         }
-
 
         $tagGroup->active = 1;
         $tagGroup->tag = 'home-populair';
         $tagGroup->shop_id = $shop->id;
-
-        if (! $tagGroup->save()) {
-            Log::info('Unable to create tax rate '.$tagGroup->id, (array)$tagGroup->errors());
-        } else {
-            Log::info('Created tax rate "'.$tagGroup->id.'" <'.$tagGroup->id.'>'); 
-                    $tagGroup->relatedProducts()->sync(array_slice($productIds, 0, 4));    
-        }
-
-
+        $tagGroup->save();
     }
 }

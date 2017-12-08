@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HtmlBlockTableSeeder::class);
         $this->call(ProductRelatedProductTableSeeder::class);
 
-        
         Model::reguard();
     }
 }
