@@ -20,7 +20,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Account</a></li>
+                    <li><a href="/account">Account</a></li>
                     <li>
                         <a href="#" id="cart">
                             <i class="glyphicon glyphicon-shopping-cart cart-button"></i><span class="cart-count">{!! Cart::getContent()->count() !!}</span> items

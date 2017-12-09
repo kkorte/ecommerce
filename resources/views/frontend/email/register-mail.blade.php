@@ -1,0 +1,1 @@
+register-mail.blade.php

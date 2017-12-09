@@ -26,5 +26,10 @@ class ProductTagGroupTableSeeder extends Seeder
         $tagGroup->tag = 'home-populair';
         $tagGroup->shop_id = $shop->id;
         $tagGroup->save();
+
+        if ($productIds) {
+            $tagGroup->relatedProducts()->sync(array_slice($productIds, 0, 4));
+        }
+
     }
 }

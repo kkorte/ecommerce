@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class ShopTable extends Migration
 {
-
     /**
      * Make changes to the table.
      *
@@ -36,15 +35,5 @@ class ShopTable extends Migration
             $table->integer('language_id')->unsigned()->nullable();
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
     }
 }

@@ -49,7 +49,6 @@ class CouponTable extends Migration
             $table->timestamps();
         });
 
-
         Schema::table('coupon', function (Blueprint $table) {
             $table->integer('coupon_group_id')->unsigned()->nullable();
             $table->foreign('coupon_group_id')->references('id')->on('coupon_group')->onDelete('set null');

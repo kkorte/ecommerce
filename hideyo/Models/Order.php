@@ -20,7 +20,6 @@ class Order extends BaseModel
 
     public static function boot()
     {
-
         static::creating(function ($model) {
 
             if ($model->created_at) {

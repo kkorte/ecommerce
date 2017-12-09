@@ -1,4 +1,3 @@
-[![Code Climate](https://codeclimate.com/github/hideyo/ecommerce.png)](https://codeclimate.com/github/hideyo/ecommerce)
 <a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/hideyo/ecommerce"><img src="https://poser.pugx.org/hideyo/ecommerce/license.svg" alt="License"></a>
 
@@ -22,8 +21,6 @@ Hideyo is designed to run on a machine with PHP 5.5.9 and MySQL 5.5.
     * Elasticsearch
     * NPM
     * Composer
-
-
 
 ## Installation
 
@@ -79,3 +76,6 @@ Login url for the backend is:
 ## License
 
 GNU General Public License version 3 (GPLv3)
+
+
+

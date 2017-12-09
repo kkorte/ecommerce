@@ -27,6 +27,7 @@ class ProductAttributeTableSeeder extends Seeder
 
             $taxRate = TaxRate::where('title', '=', '21%')->first();
 
+            $productAttribute = new ProductAttribute;
             $productAttribute->product_id = $product->id;   
             $productAttribute->price = '199.50';
             $productAttribute->tax_rate_id = $taxRate->id;

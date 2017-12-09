@@ -1,6 +1,39 @@
 <?php 
   
 
+Route::get('account/login', array('as' => 'account.login', 'uses' => 'AccountController@getLogin'));
+
+//Account    
+Route::post('account/login', array('as' => 'account.login', 'uses' => 'AccountController@postLogin'));
+Route::get('account/logout', 'AccountController@getLogout');
+
+Route::get('account/forgot-password', 'AccountController@getForgotPassword');
+Route::post('account/forgot-password', 'AccountController@postForgotPassword');
+
+Route::get('account/reset-password/{code}/{email}', 'AccountController@getResetPassword');
+Route::post('account/reset-password/{code}/{email}', 'AccountController@postResetPassword');
+
+Route::post('account/subscribe-newsletter', array('as' => 'account.newsletter.subscribe', 'uses' => 'AccountController@postSubscriberNewsletter'));
+
+Route::get('account/confirm/{code}/{email}', 'AccountController@getConfirm');
+Route::get('account/check-zipcode/{zipcode?}/{housenumber?}', 'AccountController@getZipcode');
+
+Route::get('account/register', array('as' => 'account.register', 'uses' => 'AccountController@getRegister'));
+Route::post('account/register', array('as' => 'account.register', 'uses' => 'AccountController@postRegister'));
+Route::get('account/forgot-password', array('as' => 'account.forgot.password', 'uses' => 'AccountController@getForgotPassword'));
+Route::post('account/forgot-password', array('as' => 'account.forgot.password', 'uses' => 'AccountController@postForgotPassword'));
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/account', 'AccountController@getIndex');
+    Route::get('/account/edit-account', 'AccountController@getEditAccount');
+    Route::post('/account/edit-account', 'AccountController@postEditAccount');
+    Route::get('/account/edit-address/{type}', 'AccountController@getEditAddress');
+    Route::post('/account/edit-address/{type}', 'AccountController@postEditAddress');
+    Route::get('/account/download-order/{orderId}', 'AccountController@getDownloadOrder');
+});
+
+
+
 Route::get('product/select-second-pulldown/{productId}/{leadingAttributeId}/{SecondAttributeId}', array('as' => 'product.select-second-pulldown', 'uses' => 'ProductController@getSelectLeadingPulldown'));
 Route::get('product/select-leading-pulldown/{productId}/{attributeId}', array('as' => 'product.select-leading-pulldown', 'uses' => 'ProductController@getSelectLeadingPulldown'));
 
