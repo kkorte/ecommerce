@@ -65,7 +65,7 @@ class ProductCategoryTableSeeder extends Seeder
 
         $productCategory6 = new ProductCategory;
         $productCategory6->active = 1;
-        $productCategory6->title = 'Hats';
+        $productCategory6->title = 'Leather hats';
         $productCategory6->short_description = 'Leather hats';
         $productCategory6->description = 'Leather hats';         
         $productCategory6->meta_title = 'Hats';
@@ -73,5 +73,18 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory6->shop_id = $shop->id;
         $productCategory6->parent_id = $productCategory5->id;
         $productCategory6->save();
+
+
+        $productCategory7 = new ProductCategory;
+        $productCategory7->active = 1;
+        $productCategory7->title = 'Cotton hats';
+        $productCategory7->short_description = 'Cotton hats';
+        $productCategory7->description = 'Cotton hats';         
+        $productCategory7->meta_title = 'Hats';
+        $productCategory7->meta_description = 'Cotton hats';
+        $productCategory7->shop_id = $shop->id;
+        $productCategory7->parent_id = $productCategory5->id;
+        $productCategory7->save();
+
     }
 }

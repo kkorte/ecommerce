@@ -12,7 +12,6 @@
     </div>
 </div>
 
-
 <div class="account">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-7 login">
@@ -25,17 +24,16 @@
 
                 <div class="form-control">
          
-
-                        <label for="middle-label">{!! trans('form.password') !!}</label>
-                        {!! Form::password('password', array('required' => '')) !!}
+                    <label for="middle-label">{!! trans('form.password') !!}</label>
+                    {!! Form::password('password', array('required' => '')) !!}
                      
-           
                 </div>               
 
                 <div class="form-control">
 
-                            <button type="submit" class="button button-black">Change</button>
-             </div>
+                	<button type="submit" class="button button-black">Change</button>
+             	
+             	</div>
            
 
                 </form>
@@ -45,6 +43,5 @@
 
     </div>
 </div>
-
 
 @stop

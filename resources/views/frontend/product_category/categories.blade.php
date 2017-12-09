@@ -30,7 +30,7 @@
 @foreach ($childrenProductCategories->chunk(3) as $categories)
 <div class="row ">
     @foreach ($categories as $category)
-    <div class="col-sm-3 col-md-2">
+    <div class="col-sm-3 col-md-2 col-lg-2">
         <div class="category-block">
             <div class="row">
                 <a href="/{{ $category['slug'] }}" title="ga naar {{ $category['title'] }}">
@@ -40,6 +40,9 @@
                             @if($category->productCategoryImages->count())
                             <img src="/files/product_category/200x200/{!! $category->productCategoryImages->first()->product_category_id !!}/{!! $category->productCategoryImages->first()->file !!}" class="img-responsive main-photo" alt="" />          
                             <div class="overlay"></div>
+
+                            @else
+                                <img src="/images/default-product-thumb.png" style="width:200px; height:200px;" />
                             @endif
                         </div>
 
