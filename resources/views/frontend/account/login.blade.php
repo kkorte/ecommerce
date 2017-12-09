@@ -4,11 +4,11 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <ol class="breadcrumb">
+        <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
             <li><a href="/account">Account</a></li>
             <li><a href="#">Login</a></li>
-        </ol>
+        </ul>
     </div>
 </div>
 
