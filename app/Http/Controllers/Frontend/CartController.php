@@ -35,7 +35,7 @@ class CartController extends Controller
     {
         $sendingMethodsList = $this->sendingMethod->selectAllActiveByShopId(config()->get('app.shop_id'));
         $paymentMethodsList = $this->getPaymentMethodsList($sendingMethodsList);
-
+  
         if (app('cart')->getContent()->count()) {
             
             if($sendingMethodsList->count() AND !app('cart')->getConditionsByType('sending_method')->count()) {
@@ -43,6 +43,7 @@ class CartController extends Controller
             }      
 
             if ($paymentMethodsList AND !app('cart')->getConditionsByType('payment_method')->count()) {
+
                 $this->cart->updatePaymentMethod($paymentMethodsList->first()->id);
             }
 
@@ -64,7 +65,8 @@ class CartController extends Controller
     public function getPaymentMethodsList($sendingMethodsList) 
     {
         if ($sendingMethodsList->first()) {
-            return $paymentMethodsList = $sendingMethodsList->first()->relatedPaymentMethodsActive;
+     
+            return $paymentMethodsList = $sendingMethodsList->first()->relatedPaymentMethods;
         }
         
         return $paymentMethodsList = $this->paymentMethod->selectAllActiveByShopId(config()->get('app.shop_id'));       

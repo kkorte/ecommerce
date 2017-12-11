@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-3 col-lg-3">
+<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
     <a href="{!! URL::route('product.item', array('productCategorySlug' => $product->productCategory->slug, 'productId' => $product->id, 'productSlug' => $product->slug)) !!}" title="">
         <div class="product-col">
 
@@ -10,7 +10,6 @@
 
             <div class="text-block">
                 <h5>{{ $product->title }}</h5>
-
 
                 @if(ProductHelper::priceDetails($product, 'discount_tax_value'))
 

@@ -17,7 +17,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory->active = 1;
         $productCategory->title = 'Pants';
         $productCategory->short_description = 'Great pants';
-        $productCategory->description = 'Great pants';
+        $productCategory->description = '<p>Great pants</p>';
         $productCategory->meta_title = 'Pants';
         $productCategory->meta_description = 'Great pants';          
         $productCategory->shop_id = $shop->id;
@@ -27,7 +27,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory2->active = 1;
         $productCategory2->title = 'T-shirts';
         $productCategory2->short_description = 'Soft t-shirts';
-        $productCategory2->description = 'Soft t-shirts';
+        $productCategory2->description = '<p>Soft t-shirts</p>';
         $productCategory2->meta_title = 'T-shirts';
         $productCategory2->meta_description = 'Soft t-shirts';         
         $productCategory2->shop_id = $shop->id;
@@ -37,7 +37,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory3->active = 1;
         $productCategory3->title = 'Underwear';
         $productCategory3->short_description = 'Good underwear';
-        $productCategory3->description = 'Good underwear';   
+        $productCategory3->description = '<p>Good underwear</p>';   
         $productCategory3->meta_title = 'Underwear';
         $productCategory3->meta_description = 'Good underwear';             
         $productCategory3->shop_id = $shop->id;
@@ -47,7 +47,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory4->active = 1;
         $productCategory4->title = 'Dresses';
         $productCategory4->short_description = 'Lovely dresses';
-        $productCategory4->description = 'Lovely dresses';    
+        $productCategory4->description = '<p>Lovely dresses</p>';    
         $productCategory4->meta_title = 'Dresses';
         $productCategory4->meta_description = 'Lovely dresses';
         $productCategory4->shop_id = $shop->id;
@@ -57,7 +57,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory5->active = 1;
         $productCategory5->title = 'Hats';
         $productCategory5->short_description = 'Nice hats';
-        $productCategory5->description = 'Nice hats';         
+        $productCategory5->description = '<p>Nice hats</p>';         
         $productCategory5->meta_title = 'Hats';
         $productCategory5->meta_description = 'Nice hats';
         $productCategory5->shop_id = $shop->id;
@@ -67,7 +67,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory6->active = 1;
         $productCategory6->title = 'Leather hats';
         $productCategory6->short_description = 'Leather hats';
-        $productCategory6->description = 'Leather hats';         
+        $productCategory6->description = '<p>Leather hats</p>';         
         $productCategory6->meta_title = 'Hats';
         $productCategory6->meta_description = 'Leather hats';
         $productCategory6->shop_id = $shop->id;
@@ -79,7 +79,7 @@ class ProductCategoryTableSeeder extends Seeder
         $productCategory7->active = 1;
         $productCategory7->title = 'Cotton hats';
         $productCategory7->short_description = 'Cotton hats';
-        $productCategory7->description = 'Cotton hats';         
+        $productCategory7->description = '<p>Cotton hats</p>';         
         $productCategory7->meta_title = 'Hats';
         $productCategory7->meta_description = 'Cotton hats';
         $productCategory7->shop_id = $shop->id;

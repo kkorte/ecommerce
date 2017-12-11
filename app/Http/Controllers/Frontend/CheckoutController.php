@@ -35,7 +35,7 @@ class CheckoutController extends Controller
 
         if (Cart::getContent()->count()) {
 
-          //  $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods_list'];
+            $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods'];
          
             if(!Cart::getConditionsByType('sending_method')->count()) {
                 Notification::container('foundation')->error('Selecteer een verzendwijze');
@@ -43,6 +43,7 @@ class CheckoutController extends Controller
             }
 
             if(!Cart::getConditionsByType('payment_method')->count()) {
+
                 Notification::container('foundation')->error('Selecteer een betaalwijze');
                 return redirect()->to('cart');
             }
@@ -61,13 +62,13 @@ class CheckoutController extends Controller
 
                 self::checkCountryPrice($noAccountUser['delivery']['country']);
 
-                return view('frontend.cart.checkout-no-account')->with(array( 
+                return view('frontend.checkout.checkout-no-account')->with(array( 
                     'noAccountUser' =>  $noAccountUser, 
                     'sendingMethodsList' => $sendingMethodsList, 
                     'paymentMethodsList' => $paymentMethodsList));
             }
               
-             return view('frontend.cart.login')->with(array(  'sendingMethodsList' => $sendingMethodsList, 'paymentMethodsList' => $paymentMethodsList));
+             return view('frontend.checkout.login')->with(array(  'sendingMethodsList' => $sendingMethodsList, 'paymentMethodsList' => $paymentMethodsList));
         }
 
         $user = auth('web')->user();
@@ -78,7 +79,7 @@ class CheckoutController extends Controller
             return redirect()->to(LaravelLocalization::getLocalizedURL(null, 'cart/checkout'));
         }
 
-        return view('frontend.cart.checkout')->with(array(
+        return view('frontend.checkout.checkout')->with(array(
             'user' =>  $user, 
             'sendingMethodsList' => $sendingMethodsList, 
             'paymentMethodsList' => $paymentMethodsList));

@@ -21,6 +21,7 @@
 <div class="row">
 	<div class="col-sm-3 col-md-2">
 		<h1>{!! $category->title !!}</h1>
+        {!! $category->description !!}
 	</div>
 </div>
 
