@@ -7,6 +7,7 @@ use Hideyo\Repositories\ShopRepositoryInterface;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
 use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 use Cart;
+use Validator;
 use Notification;
 
 class CheckoutController extends Controller
@@ -38,13 +39,13 @@ class CheckoutController extends Controller
             $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods'];
          
             if(!Cart::getConditionsByType('sending_method')->count()) {
-                Notification::container('foundation')->error('Selecteer een verzendwijze');
+                Notification::error('Selecteer een verzendwijze');
                 return redirect()->to('cart');
             }
 
             if(!Cart::getConditionsByType('payment_method')->count()) {
 
-                Notification::container('foundation')->error('Selecteer een betaalwijze');
+                Notification::error('Selecteer een betaalwijze');
                 return redirect()->to('cart');
             }
 
@@ -84,4 +85,45 @@ class CheckoutController extends Controller
             'sendingMethodsList' => $sendingMethodsList, 
             'paymentMethodsList' => $paymentMethodsList));
     }
+
+
+    public function postCheckoutLogin(Request $request)
+    {
+        // create the validation rules ------------------------
+        $rules = array(
+            'email'         => 'required|email',     // required and must be unique in the ducks table
+            'password'      => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+
+            foreach ($validator->errors()->all() as $error) {
+                Notification::error($error);
+            }
+
+            return redirect()->to('cart/checkout')
+            ->withErrors(true, 'login')->withInput();
+        }
+
+        $userdata = array(
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+            'confirmed' => 1,
+            'active' => 1,
+            'shop_id' => config()->get('app.shop_id')
+        );
+
+        /* Try to authenticate the credentials */
+        if (auth('web')->attempt($userdata)) {
+            // we are now logged in, go to admin
+            return redirect()->to('cart/checkout');
+        }
+
+        Notification::error(trans('message.error.data-is-incorrect'));
+        return redirect()->to('cart/checkout')->withErrors(true, 'login')->withInput(); 
+    }
+
+
 }

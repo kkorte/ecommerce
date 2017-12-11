@@ -114,15 +114,6 @@ return array(
     | :message - message text.
     |
     */
-    'formats'                       => array(
-        'foundation' => array(
-            'info'                  => '<div class="callout primary">:message</div>',
-            'success'               => '<div class="callout success">:message</div>',
-            'warning'               => '<div class="callout warning">:message</div>',
-            'error'                 => '<div class="callout alert">:message</div>',
 
-        )
-
-    ),
 
 );

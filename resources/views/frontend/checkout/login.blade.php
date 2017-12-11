@@ -14,6 +14,13 @@
 
 <div class="main-cart main-cart-login">
     <div class="row">
+
+
+        @if ($errors->register)
+        <div class="col-lg-12  ">
+        @notification()
+        </div>
+        @endif
     
 
         <div class="col-lg-4  ">
@@ -57,10 +64,7 @@
         <div class="col-lg-offset-1  col-lg-4">
             <h3>New client</h3>  
 
-            @if ($errors->register)
-            @notification('foundation')
-            @endif
-        
+
 
             <?php echo Form::open(array('url' => '/cart/checkout-register', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')); ?>
 
