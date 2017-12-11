@@ -228,6 +228,15 @@ class CheckoutController extends Controller
 
     public function postComplete(Request $request)
     {
+        $noAccountUser = session()->get('noAccountUser');
+        if (auth('web')->guest() and !$noAccountUser) {
+            return view('frontend.checkout.login')->with(array('products' => $products, 'totals' => $totals, 'sendingMethodsList' => $sendingMethodsList, 'paymentMethodsList' => $paymentMethodsList));
+        } else {
+            if (!Cart::getContent()->count()) {        
+                return redirect()->to('cart/checkout');
+            }
+
+        }
 
 
     }
