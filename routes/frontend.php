@@ -45,14 +45,17 @@ Route::post('cart/checkout', array('as' => 'cart.checkout', 'uses' => 'CheckoutC
 
 
 Route::post('cart/checkout-register', array('as' => 'cart.checkout-register', 'uses' => 'CheckoutController@postCheckoutRegister'));
-
+    Route::get('cart/edit-address/{type}', array('as' => 'cart.edit.address', 'uses' => 'CheckoutController@getEditAddress'));
+    Route::post('cart/edit-address/{type}', array('as' => 'cart.edit.address', 'uses' => 'CheckoutController@postEditAddress'));
+ 
 
 Route::post('cart/complete', array('as' => 'cart.complete', 'uses' => 'CheckoutController@postComplete'));
 
 Route::post('cart/checkout-login', array('as' => 'cart.checkout.login', 'uses' => 'CheckoutController@postCheckoutLogin'));
 
 
-
+Route::get('cart/summary-reload', array('as' => 'cart.summary.reload', 'uses' => 'CartController@getSummaryReload'));
+    
 Route::get('cart/total-reload', array('as' => 'cart.total-reload', 'uses' => 'CartController@getTotalReload'));
 Route::get('cart/dialog', array('as' => 'cart.dialog', 'uses' => 'CartController@getBasketDialog'));
 Route::get('cart/update-amount-product/{productId}/{amount}', array('as' => 'cart.update.amount.product', 'uses' => 'CartController@updateAmountProduct'));
@@ -69,6 +72,10 @@ Route::get('/{slug}', array('as' => 'product-category.item', 'uses' => 'ProductC
 //Cart
 Route::post('cart/post-product/{productId}/{productCombinationId?}', array('as' => 'cart.add.product', 'uses' => 'CartController@postProduct'));
 Route::get('cart/delete-product/{productId}', array('as' => 'cart.delete.product', 'uses' => 'CartController@deleteProduct'));
+
+
+    Route::get('/text/{slug}', array('as' => 'text', 'uses' => 'ContentController@getItem'));
+    Route::get('/text-overview/{slug}', 'ContentController@getOverview');
 
 
 //other
