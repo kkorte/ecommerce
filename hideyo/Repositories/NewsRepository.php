@@ -348,4 +348,69 @@ class NewsRepository implements NewsRepositoryInterface
     {
         return $this->modelImage;
     }
+
+
+    function selectOneBySlug($shopId, $slug)
+    {
+        $dt = Carbon::now('Europe/Amsterdam');
+        return $this->model->where('slug', '=', $slug)->where('published_at', '<=', $dt->toDateString('Y-m-d'))->get()->first();
+    }
+
+    function selectAllByBlogCategoryId($newsCategoryId)
+    {
+           return $this->model->with(array('extraFields' => function ($query) {
+           }, 'taxRate', 'newsCategory',  'relatedBlogs' => function ($query) {
+            $query->with('newsImages')->orderBy('rank', 'asc');
+           }, 'newsImages' => function ($query) {
+            $query->orderBy('rank', 'asc');
+           }))->where('active', '=', 1)->where('news_category_id', '=', $newsCategoryId)->get();
+    }
+
+    function selectOneById($shopId, $slug)
+    {
+        $dt = Carbon::now('Europe/Amsterdam');
+        $result = $this->model->with(array('newsCategory', 'relatedBlogs', 'newsImages' => function ($query) {
+            $query->orderBy('rank', 'asc');
+        }))->where('published_at', '<=', $dt->toDateString('Y-m-d'))->where('active', '=', 1)->where('id', '=', $id)->get()->first();
+        return $result;
+    }
+
+
+
+    function selectAllActiveGroupsByShopId($shopId)
+    {
+         return $this->modelGroup->where('shop_id', '=', $shopId)->where('active', '=', 1)->get();
+    }
+
+
+
+    function selectOneGroupByShopIdAndSlug($shopId, $slug)
+    {
+        $result = $this->modelGroup->where('shop_id', '=', $shopId)->where('slug', '=', $slug)->get();
+        
+        if ($result->isEmpty()) {
+            return false;
+        }
+        return $result->first();
+    }
+
+
+    public function selectByLimitAndOrderBy($shopId, $limit, $orderBy)
+    {
+
+        $dt = Carbon::now('Europe/Amsterdam');
+
+
+        return $this->model->with(
+            array('newsImages' => function ($query) {
+                $query->orderBy('rank', 'asc');
+            })
+        )
+            ->limit($limit)
+           ->where('shop_id', '=', $shopId)
+           ->where('published_at', '<=', $dt->toDateString('Y-m-d'))
+            ->orderBy('created_at', $orderBy)->get();
+    }
+
+
 }

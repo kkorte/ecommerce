@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Hideyo\Models\Shop as Shop;
 use Hideyo\Models\News as News;
+use Hideyo\Models\NewsGroup as NewsGroup;
 
 class NewsTableSeeder extends Seeder
 {
@@ -14,21 +15,44 @@ class NewsTableSeeder extends Seeder
         DB::table($news->getTable())->delete();
         $shop = Shop::where('title', '=', 'hideyo')->first();
 
+        $newsGroup = new NewsGroup;
+        $newsGroup->title = "general";
+        $newsGroup->active = 1;
+        $newsGroup->shop_id = $shop->id;
+        $newsGroup->save();
+
         $news->title = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
         $news->content = '
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.
             </p>';     
         $news->shop_id = $shop->id;
+        $news->news_group_id = $newsGroup->id;
+        $news->published_at = '2016-01-01';
         $news->save();
 
         $news2 = new News;
         $news2->title = 'Integer fermentum venenatis tempus';
-        $news->content = '
+        $news2->content = '
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.
             </p>';      
         $news2->shop_id = $shop->id;
+        $news2->news_group_id = $newsGroup->id;
+        $news2->published_at = '2016-01-01';
         $news2->save();
+
+
+        $news3 = new News;
+        $news3->title = 'Suspendisse scelerisque urna bibendum';
+        $news3->content = '
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.
+            </p>';      
+        $news3->shop_id = $shop->id;
+        $news3->news_group_id = $newsGroup->id;
+        $news3->published_at = '2016-01-01';
+        $news3->save();
+
     }
 }
