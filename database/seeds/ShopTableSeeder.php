@@ -19,7 +19,9 @@ class ShopTableSeeder extends Seeder
         $shop->description = "description";
         $shop->currency_code = "EUR";
         $shop->thumbnail_widescreen_sizes = "100x100,200x200,500x500,800x800";
-        $shop->thumbnail_square_sizes = "100x100,200x200,500x500,800x800";        
+        $shop->thumbnail_square_sizes = "100x100,200x200,500x500,800x800"; 
+        $shop->meta_title = "Hideyo - laravel e-commerce platform";
+        $shop->meta_description = "Clean Laravel e-commerce platform for building your custom and unique webshop";     
         $shop->save();    
     }
 }

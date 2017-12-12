@@ -1,5 +1,6 @@
 @extends('frontend._layouts.default')
-
+@section('meta_title', $shop->meta_title)
+@section('meta_description', $shop->meta_description)
 @section('main')
 
 <div class="homepage-highlights">

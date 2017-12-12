@@ -159,10 +159,11 @@ class ShopRepository implements ShopRepositoryInterface
         $result = $this->model->where('url', '=', $shopUrl)->get()->first();
 
         if (isset($result->id)) {
-            return $result->id;
-        } else {
-            return false;
+            return $result;
         }
+        
+        return false;
+        
     }
     
 }

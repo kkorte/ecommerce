@@ -30,12 +30,14 @@ class DetectDomain
             config()->set('app.url', $root);
         }
 
-        $shopId = $this->shop->checkByUrl(config()->get('app.url'));
-        config()->set('app.shop_id', $shopId);
-        
-        if(!$shopId) {
+        $shop = $this->shop->checkByUrl(config()->get('app.url'));
+        config()->set('app.shop_id', $shop->id);
+
+        if(!$shop) {
             abort(404, "shop cannot be found");
         }
+
+        view()->share('shop', $shop);
 
         return $next($request);
     }
