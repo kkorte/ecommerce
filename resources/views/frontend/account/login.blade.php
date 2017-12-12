@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-5 login">
             <h1>Login</h1>
-
+            <hr/> 
             @notification('foundation')
 
             <div class="block">
@@ -26,18 +26,18 @@
             	<?php echo Form::open(array('route' => 'account.login', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')); ?>
 
 					<div class="form-group">
-						<label for="middle-label">{!! trans('form.email') !!}</label>
+						<label>{!! trans('form.email') !!}</label>
 						{!! Form::email('email', null, array('required' => '', 'pattern' => 'email', 'class' => 'form-control')) !!}
 					</div>
 
 
 					<div class="form-group">
-					    <label for="middle-label">{!! trans('form.password') !!}</label>
+					    <label>{!! trans('form.password') !!}</label>
 					    {!! Form::password('password', array('required' => '', 'class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">
-				        <a href="{!! URL::route('account.forgot.password') !!}" class="forgot-password-link">forgot password?</a>
+				        <a href="{!! URL::route('account.forgot.password') !!}" class="btn btn-link">forgot password?</a>
 				        <button type="submit" class="btn btn-success">{!! trans('buttons.login') !!}</button>
 					</div>
        
@@ -50,6 +50,7 @@
 
         <div class="col-sm-12 col-md-12 col-lg-offset-2 col-lg-5 login">
         	<h1>Register</h1>
+            <hr/>
 			<a href="/account/register" class="btn btn-success">click here</a>
 
         </div>
