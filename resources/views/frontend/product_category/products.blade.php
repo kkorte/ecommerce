@@ -30,12 +30,14 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-12">
+    <div class="col-sm-12 col-md-12 col-lg-12">
 
         <h1>{!! $category->title !!}</h1>
         {!! $category->description !!}
     </div>
 </div>
+
+<hr/>
 
 @if($products)
 <div class="row">

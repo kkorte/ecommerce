@@ -45,8 +45,11 @@
 
     </tbody>    
 </table>
-<a href="{!! URL::route('cart.index') !!}" class="btn btn-info">Show shoppingcart</a>                           
-<a href="{!! URL::route('cart.index') !!}" class="btn btn-success">Order now</a>
+<div class="text-right">
+    <a href="{!! URL::route('cart.index') !!}" class="btn btn-link">Show shoppingcart</a>                           
+    <a href="{!! URL::route('cart.index') !!}" class="btn btn-success">Order now</a>
+</div>
+
 @else 
 <p>{!! trans('text.cart-no-items') !!}</p>
 @endif

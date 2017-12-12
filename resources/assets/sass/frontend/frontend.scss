@@ -32,6 +32,19 @@ a {
     color: black;
 }
 
+
+.btn-link {
+    color: $primary-color;
+    text-decoration: underline;
+    padding-right:0;
+    padding-left:0;
+}
+
+.btn {
+    text-transform: uppercase;
+    font-size:12px;
+}
+
 .navbar {
     text-transform: uppercase;
 }
@@ -47,10 +60,11 @@ a {
     background: white;
 
     position: absolute;
+    top:40px;
     right:20px;
     border-radius: 3px;
     padding: 20px;  
-    z-index:20;
+    z-index:9999;
 
     table{
         font-size: 14px;

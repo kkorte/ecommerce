@@ -19,13 +19,13 @@
 
 
 <div class="row">
-	<div class="col-sm-3 col-md-2">
+	<div class="col-sm-12 col-md-12">
 		<h1>{!! $category->title !!}</h1>
         {!! $category->description !!}
 	</div>
 </div>
 
-
+<hr/>
 @if ($childrenProductCategories)
 
 @foreach ($childrenProductCategories->chunk(3) as $categories)

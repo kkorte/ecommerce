@@ -48,7 +48,7 @@
         </div>
 
 
-        <div class="col-sm-12 col-md-12 col-lg-5 login">
+        <div class="col-sm-12 col-md-12 col-lg-offset-2 col-lg-5 login">
         	<h1>Register</h1>
 			<a href="/account/register" class="btn btn-success">click here</a>
 

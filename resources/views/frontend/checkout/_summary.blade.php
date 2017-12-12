@@ -102,7 +102,7 @@
         <div class="row">
               <div class="col-lg-12 text-right">
       
-                <a href="{!! URL::route('cart.index') !!} " class="btn btn-info">edit cart</a>
+                <a href="{!! URL::route('cart.index') !!} " class="btn btn-link">edit cart</a>
             </div>
         </div>
     </div>
