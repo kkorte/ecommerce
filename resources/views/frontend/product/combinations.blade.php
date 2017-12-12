@@ -43,6 +43,7 @@
     <div class="col-sm-6 col-md-6 col-lg-6 col-lg-offset-1">
 
         <h1>{!! $product->title !!}</h1>
+        <hr/>
 
         <h3 class="price">
             @if($priceDetails['discount_price_inc'])                        
