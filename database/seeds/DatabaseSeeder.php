@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductTagGroupTableSeeder::class);
         $this->call(HtmlBlockTableSeeder::class);
         $this->call(ProductRelatedProductTableSeeder::class);
-
+        $this->call(NewsTableSeeder::class);
         Model::reguard();
     }
 }
