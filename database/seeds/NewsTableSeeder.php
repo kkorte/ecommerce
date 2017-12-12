@@ -22,6 +22,7 @@ class NewsTableSeeder extends Seeder
         $newsGroup->save();
 
         $news->title = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+        $news->short_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus.';
         $news->content = '
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.
@@ -36,6 +37,8 @@ class NewsTableSeeder extends Seeder
 
         $news2 = new News;
         $news2->title = 'Integer fermentum venenatis tempus';
+        $news2->short_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus.';
+        
         $news2->content = '
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.
@@ -51,6 +54,9 @@ class NewsTableSeeder extends Seeder
 
         $news3 = new News;
         $news3->title = 'Suspendisse scelerisque urna bibendum';
+        $news3->short_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus.';
+        
+        
         $news3->content = '
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum venenatis tempus. Suspendisse scelerisque urna bibendum pretium consectetur. Fusce eu enim tempus odio imperdiet pharetra. Ut varius nunc eget condimentum auctor. Morbi lacinia augue est, id tristique augue faucibus a.

@@ -413,4 +413,46 @@ class NewsRepository implements NewsRepositoryInterface
     }
 
 
+
+    function selectAllByShopIdAndPaginate($shopId, $totalPage, $filters = false)
+    {
+
+
+        $dt = Carbon::now('Europe/Amsterdam');
+
+           $result = $this->model
+           ->where('shop_id', '=', $shopId)
+           ->where('published_at', '<=', $dt->toDateString('Y-m-d'));
+
+            return array(
+                'totals' => $result->get()->count(),
+                'totalPages' => ceil($result->get()->count() / $totalPage),
+                'result' => $result->paginate($totalPage),
+                'totalOnPage' => $totalPage
+            );
+    }
+
+
+    function selectByGroupAndByShopIdAndPaginate($shopId, $newsGroupSlug, $totalPage, $filters = false)
+    {
+
+
+        $dt = Carbon::now('Europe/Amsterdam');
+
+           $result = $this->model
+           ->where('shop_id', '=', $shopId)
+           ->where('published_at', '<=', $dt->toDateString('Y-m-d'))
+           ->whereHas('newsGroup', function ($query) use ($newsGroupSlug) {
+            $query->where('slug', '=', $newsGroupSlug);
+           });
+
+            return array(
+                'totals' => $result->get()->count(),
+                'totalPages' => ceil($result->get()->count() / $totalPage),
+                'result' => $result->paginate($totalPage),
+                'totalOnPage' => $totalPage
+            );
+    }
+
+
 }

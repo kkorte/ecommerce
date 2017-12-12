@@ -16,13 +16,13 @@ class NewsController extends Controller
         NewsRepositoryInterface $news
     ) {
         $this->news = $news;
-        $this->shopId = config()->get('app.shop_id');
+
     }
 
     public function getItem(Request $request, $newsGroupSlug, $slug)
     {
-        $news = $this->news->selectOneBySlug($this->shopId, $slug);
-        $newsGroups =  $this->news->selectAllActiveGroupsByShopId($this->shopId);     
+        $news = $this->news->selectOneBySlug(config()->get('app.shop_id'), $slug);
+        $newsGroups =  $this->news->selectAllActiveGroupsByShopId(config()->get('app.shop_id'));     
 
         if ($news) {
             if ($news->slug != $slug or $news->newsGroup->slug != $newsGroupSlug) {
@@ -38,10 +38,10 @@ class NewsController extends Controller
     public function getByGroup(Request $request, $newsGroupSlug)
     {
         $page = $request->get('page', 1);
-        $news = $this->news->selectByGroupAndByShopIdAndPaginate($this->shopId, $newsGroupSlug, 25);
+        $news = $this->news->selectByGroupAndByShopIdAndPaginate(config()->get('app.shop_id'), $newsGroupSlug, 25);
 
-        $newsGroup = $this->news->selectOneGroupByShopIdAndSlug($this->shopId, $newsGroupSlug);
-        $newsGroups =  $this->news->selectAllActiveGroupsByShopId($this->shopId);
+        $newsGroup = $this->news->selectOneGroupByShopIdAndSlug(config()->get('app.shop_id'), $newsGroupSlug);
+        $newsGroups =  $this->news->selectAllActiveGroupsByShopId(config()->get('app.shop_id'));
         
         if ($newsGroup) {
             return view('frontend.news.group')->with(array('selectedPage' => $page, 'news' => $news, 'newsGroups' => $newsGroups, 'newsGroup' => $newsGroup));
@@ -53,8 +53,8 @@ class NewsController extends Controller
     public function getIndex(Request $request)
     {
         $page = $request->get('page', 1);
-        $news = $this->news->selectAllByShopIdAndPaginate($this->shopId, 25);
-        $newsGroups =  $this->news->selectAllActiveGroupsByShopId($this->shopId);
+        $news = $this->news->selectAllByShopIdAndPaginate(config()->get('app.shop_id'), 25);
+        $newsGroups =  $this->news->selectAllActiveGroupsByShopId(config()->get('app.shop_id'));
         if ($news) {
             return view('frontend.news.index')->with(array('selectedPage' => $page, 'news' => $news, 'newsGroups' => $newsGroups));
         }
