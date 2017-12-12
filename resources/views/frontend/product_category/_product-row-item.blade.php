@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
     <a href="{!! URL::route('product.item', array('productCategorySlug' => $product->productCategory->slug, 'productId' => $product->id, 'productSlug' => $product->slug)) !!}" title="">
         <div class="product-col">
 
