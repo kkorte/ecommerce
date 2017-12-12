@@ -9,6 +9,7 @@
         <div class="col-sm-4 col-md-4 col-lg-4 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
             <div class="login">
                 <h1>Login</h1>
+                
                 {!! Form::open(array('class' => 'form-signin validate')) !!}
                 {!! Notification::showAll() !!}
                 {{ csrf_field() }}

@@ -15,6 +15,7 @@
     </head>
     <body>
         @yield('main')
+        
         @include('backend._partials.footer')
     </body>
 </html>
