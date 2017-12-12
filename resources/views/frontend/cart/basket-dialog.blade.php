@@ -39,7 +39,7 @@
 
         @endforeach 
 
-        <tr class="total">
+        <tr class="total text-right">
             <td colspan="3"><strong>{!! trans('titles.total') !!}: &euro; {!! app('cart')->getSubTotalWithTax() !!}</strong></td>
         </tr>
 
