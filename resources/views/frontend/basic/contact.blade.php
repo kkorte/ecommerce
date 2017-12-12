@@ -35,7 +35,7 @@
         
       <div class="block">
 
-            {!! Form::open(array('method' => 'put', 'route' => array('contact'), 'class' => 'form', 'data-abide' => '', 'novalidate' => '')) !!}
+            {!! Form::open(array('method' => 'put', 'route' => array('contact'), 'class' => 'form', 'data-toggle' => 'validator')) !!}
                   
                 <div class="form-group">
                     

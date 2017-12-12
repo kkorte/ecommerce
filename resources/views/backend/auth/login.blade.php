@@ -25,7 +25,9 @@
                 <button type="submit" class="btn btn-default">Login</button> 
                 {!! Form::close() !!}
             </div>
-
+            <p class="text-center">
+                <small>Hideyo.io</small>
+            </p>
         </div>
     </div>
 

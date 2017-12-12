@@ -151,7 +151,6 @@
     Route::resource('product/{productId}/product-amount-option', 'ProductAmountOptionController', ['as' => 'product']);
     Route::resource('product/{productId}/product-amount-series', 'ProductAmountSeriesController', ['as' => 'product']);
 
-    Route::get('product/{productId}/copy', array('as' => 'product.copy', 'users' => 'ProductController@copy', 'as' => 'product.copy'));
 
     Route::resource('product/{productId}/product-combination', 'ProductCombinationController');
 
@@ -162,6 +161,9 @@
     Route::resource('product/{productId}/product-extra-field-value', 'ProductExtraFieldValueController', ['as' => 'product']);
 
     Route::resource('product/{productId}/related-product', 'ProductRelatedProductController', ['as' => 'product']);
+
+    Route::get('product/{productId}/copy', array('as' => 'product.copy', 'uses' => 'ProductController@copy', 'as' => 'product.copy'));
+
 
     Route::get('product-category/refactor-images', array('as' => 'product-category.refactor-images', 'uses' => 'ProductCategoryController@refactorAllImages'));
     Route::get('product-category/re-directory-images', array('as' => 'product-category.re-directory-images', 'uses' => 'ProductCategoryController@reDirectoryAllImages'));

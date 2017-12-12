@@ -23,7 +23,7 @@
             <div class="block">
 
 
-            	<?php echo Form::open(array('route' => 'account.login', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')); ?>
+            	<?php echo Form::open(array('route' => 'account.login', 'class' => 'form', 'data-toggle' => 'validator')); ?>
 
 					<div class="form-group">
 						<label>{!! trans('form.email') !!}</label>

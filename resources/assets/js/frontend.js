@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('../../../node_modules/ekko-lightbox/dist/ekko-lightbox.js');//
+require('../../../node_modules/bootstrap-validator/dist/validator.js');
 //require('../../../node_modules/bootstrap-select/dist/js/bootstrap-select.js');
 //window.Vue = require('vue');
 

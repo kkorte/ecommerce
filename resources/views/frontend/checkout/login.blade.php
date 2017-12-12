@@ -33,7 +33,7 @@
        
             <h3>Existing client</h3>  
 
-            {!!  Form::open(array('url' => '/cart/checkout-login', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')) !!}
+            {!!  Form::open(array('url' => '/cart/checkout-login', 'class' => 'form', 'data-toggle' => 'validator')) !!}
 
                 <div class="form-group">         
                     <label for="middle-label">{!! trans('form.email') !!}</label>
@@ -64,7 +64,7 @@
 
 
 
-            <?php echo Form::open(array('url' => '/cart/checkout-register', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')); ?>
+            <?php echo Form::open(array('url' => '/cart/checkout-register', 'class' => 'form', 'data-toggle' => 'validator')); ?>
 
 <div class="form-group">
                         <label for="middle-label">{!! trans('form.email') !!}</label>
