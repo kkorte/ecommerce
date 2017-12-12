@@ -1,6 +1,14 @@
 <?php 
   
 
+Route::get('/text/{slug}', array('as' => 'text', 'uses' => 'ContentController@getItem'));
+Route::get('/text-overview/{slug}', 'ContentController@getOverview');
+
+Route::get('/contact', array('as' => 'contact', 'uses' => 'BasicController@getContact'));
+Route::put('/contact', array('as' => 'contact', 'uses' => 'BasicController@postContact'));
+
+
+
 Route::get('account/login', array('as' => 'account.login', 'uses' => 'AccountController@getLogin'));
 
 //Account    
@@ -74,10 +82,13 @@ Route::post('cart/post-product/{productId}/{productCombinationId?}', array('as' 
 Route::get('cart/delete-product/{productId}', array('as' => 'cart.delete.product', 'uses' => 'CartController@deleteProduct'));
 
 
-    Route::get('/text/{slug}', array('as' => 'text', 'uses' => 'ContentController@getItem'));
-    Route::get('/text-overview/{slug}', 'ContentController@getOverview');
 
 
 //other
 Route::get('/', array('as' => 'index', 'uses' => 'BasicController@index'));
+
+
+
+
+
 

@@ -9,7 +9,7 @@ class NewsTableSeeder extends Seeder
 {
     public function run()
     {
-        $htmlBlock = new News;
+        $news = new News;
 
         DB::table($news->getTable())->delete();
         $shop = Shop::where('title', '=', 'hideyo')->first();
