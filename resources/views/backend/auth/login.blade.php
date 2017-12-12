@@ -10,17 +10,17 @@
             <div class="login">
                 <h1>Login</h1>
                 
-                {!! Form::open(array('class' => 'form-signin validate')) !!}
+                {!! Form::open(array('class' => 'form-signin', 'data-toggle' => 'validator')) !!}
                 {!! Notification::showAll() !!}
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="inputEmail" class="sr-only">Email address</label>
-                    {!! Form::text('email',  null, array('data-validate' => 'required,email', 'class' =>'form-control', 'placeholder'=>'Email')) !!}
+                    {!! Form::text('email',  null, array('required' => '', 'class' =>'form-control', 'placeholder'=>'Email')) !!}
                 </div> 
 
                 <div class="form-group">
                     <label for="inputPassword" class="sr-only">Password</label>
-                    {!! Form::password('password', array('class' =>'form-control', 'placeholder'=>'Password')) !!}
+                    {!! Form::password('password', array('required' => '', 'class' =>'form-control', 'placeholder'=>'Password')) !!}
                 </div>           
                 <button type="submit" class="btn btn-default">Login</button> 
                 {!! Form::close() !!}
