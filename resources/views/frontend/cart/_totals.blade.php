@@ -35,7 +35,8 @@
     <td colspan="3" class="select">
         <label>{!! trans('titles.sending-way') !!}</label>
         <div class="sending_block">
-            {!! Form::select('sending_method_id', $sendingMethodsList->pluck('title', 'id')->toArray(), null, array("data-url" => '/cart/update-sending-method', "class" => "form-control custom-selectbox selectpicker sending_method_id")) !!}
+  
+            {!! Form::select('sending_method_id', $sendingMethodsList->pluck('title', 'id')->toArray(), app('cart')->getConditionsByType('sending_method')->first()->getAttributes()['data']['id'], array("data-url" => '/cart/update-sending-method', "class" => "form-control  sending_method_id")) !!}
 
         </div>
     </td>

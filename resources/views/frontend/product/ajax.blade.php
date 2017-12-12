@@ -45,20 +45,20 @@
 
             @if($firstPulldown === $key)
                 <div class="row"> 
-                    <div class="col-lg-12">
+                    <div class="col-lg-5">
                         <label>{!! $key !!}</label>    
-                        {!! Form::select('first_pulldown['.$key.']', $row, $leadAttributeId, array("data-url" => "/product/select-leading-pulldown/".$product['id'], "class" => "leading-product-combination-select selectpicker pulldown-$key")) !!}
+                        {!! Form::select('first_pulldown['.$key.']', $row, $leadAttributeId, array("data-url" => "/product/select-leading-pulldown/".$product['id'], "class" => "leading-product-combination-select form-control pulldown-$key")) !!}
                     </div>
                 </div>
             @else
             <div class="row"> 
-                <div class="col-lg-12">
+                <div class="col-lg-5">
                     <label>{!! $key !!}</label>
                     @if($leadAttributeId)
-                    {!! Form::select('pulldown['.$key.']', $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id']."/".$leadAttributeId, "class" => "selectpicker pulldown pulldown-$key")) !!}
+                    {!! Form::select('pulldown['.$key.']', $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id']."/".$leadAttributeId, "class" => "form-control pulldown pulldown-$key")) !!}
 
                     @else 
-                    {!! Form::select('pulldown['.$key.']', $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id'], "class" => "selectpicker pulldown pulldown-$key")) !!}
+                    {!! Form::select('pulldown['.$key.']', $row, $secondAttributeId, array("data-url" => "/product/select-second-pulldown/".$product['id'], "class" => "form-control pulldown pulldown-$key")) !!}
                     @endif
 
                 </div>

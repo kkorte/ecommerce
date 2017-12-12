@@ -47,7 +47,22 @@
 
 
 
-  
+        <div class="row">  
+            <div class="col-lg-8">
+               {!! trans('titles.sending-cost') !!} ({!! app('cart')->getConditionsByType('sending_method')->first()->getAttributes()['data']['title'] !!})
+            </div>
+            <div class="col-lg-4 text-right">
+
+                @if(app('cart')->getConditionsByType('sending_cost')->count()) 
+
+              
+                    &euro; <span class="sending_method_cost_inc_tax">{!! app('cart')->getConditionsByType('sending_cost')->first()->getValue() !!}</span>
+            
+
+                @endif
+
+            </div>  
+        </div>  
 
 
 
