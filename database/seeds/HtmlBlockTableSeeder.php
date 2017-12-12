@@ -35,7 +35,7 @@ class HtmlBlockTableSeeder extends Seeder
                 De Binderij 34<br>
                 1321 EJ Almere<br>
                 +31682008200<br>
-                <a href="/contact">contact form</a>
+                <a href="https://github.com/hideyo/ecommerce">github</a>
             </p>';     
         $htmlBlock2->shop_id = $shop->id;
         $htmlBlock2->save();

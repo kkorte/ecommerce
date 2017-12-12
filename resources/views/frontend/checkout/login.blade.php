@@ -33,8 +33,6 @@
        
             <h3>Existing client</h3>  
 
-
-
             {!!  Form::open(array('url' => '/cart/checkout-login', 'class' => 'form', 'data-abide' => '', 'novalidate' => '')) !!}
 
                 <div class="form-group">         
@@ -50,8 +48,8 @@
                 </div>
               
                 <div class="form-group text-right">
-                    <a href="{!! URL::route('account.forgot.password') !!}" class="btn btn-link">{!! trans('titles.forgot-password') !!}</a>
-                    <button type="submit" class="btn btn-success">{!! trans('buttons.login') !!}</button>
+                    <a href="{!! URL::route('account.forgot.password') !!}" class="btn btn-link">forgot password?</a>
+                    <button type="submit" class="btn btn-success">Login</button>
          
                 </div>
 

@@ -37,7 +37,7 @@
 					</div>
 
 					<div class="form-group">
-				        <a href="{!! URL::route('account.forgot.password') !!}" class="forgot-password-link">{!! trans('titles.forgot-password') !!}</a>
+				        <a href="{!! URL::route('account.forgot.password') !!}" class="forgot-password-link">forgot password?</a>
 				        <button type="submit" class="btn btn-success">{!! trans('buttons.login') !!}</button>
 					</div>
        

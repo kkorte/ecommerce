@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">                   
+                <a class="navbar-brand" href="/" title="back to homepage">                   
                     <img src="/images/hideyo.png" />
                 </a>
 
