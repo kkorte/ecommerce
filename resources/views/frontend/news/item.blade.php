@@ -7,7 +7,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="/nieuws">Nieuws</a></li>
+            <li><a href="/nieuws">News</a></li>
             <li><a href="{!! URL::route('news.group', array($news->newsGroup->slug)) !!}">{{ $news->newsGroup->title }}</a></li>
             <li><a href="/{{ $news->slug }}">{{ $news->title }}</a></li>
         </ul>
@@ -21,8 +21,8 @@
 
         <div class="col-lg-3">
 
-            <div class="news-sidebar">
-                <h3>Nieuwsgroepen</h3>
+            <div class="sidebar jumbotron">
+                <h3>Groups</h3>
                 @if($newsGroups)
                 <ul>
                 @foreach($newsGroups as $group)
@@ -42,16 +42,16 @@
         <div class="col-lg-9">
 
 
-            <div class="row product-container">
+            <div class="row ">
 
-                <div class="large-3 columns">
-                    @if ($news->newsImages)
+                <div class="col-lg-3">
+                    @if ($news->newsImages->count())
                     <div class="photos photo-container">
                         <div class="row">
                             @foreach ($news->newsImages as $key => $image)
                             @if ($key === 0)
                             <div class="large-photo">    
-                                <div class="large-15 columns">
+                                <div class="col-lg-15">
                                     <a href="/files/news/800x800/{!! $image['news_id'] !!}/{!! $image['file'] !!}">
                                         <img src="/files/news/400x400/{!! $image['news_id'] !!}/{!! $image['file'] !!}" class="img-responsive main-photo" alt="" />
                                     </a>
@@ -62,7 +62,7 @@
                             @else
                             <div class="small-photo">
 
-                                <div class="large-5 columns">
+                                <div class="col-lg-5">
                                     <a href="/files/news/800x800/{!! $image['news_id'] !!}/{!! $image['file'] !!}">
                                         <img src="/files/news/400x400/{!! $image['news_id'] !!}/{!! $image['file'] !!}" class="img-responsive" alt="" />
                                     </a>
@@ -78,14 +78,14 @@
                     </div>
                     @else
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <img src="{!! URL::asset('images/default-thumb.jpg') !!}" alt="no image" class="img-responsive">
+                        <div class="col-lg12">
+                            <img src="{!! URL::asset('/images/default-product-thumb.png') !!}" alt="no image" class="img-responsive">
                         </div>
                     </div>
                     @endif
                 </div>
 
-                <div class="columns large-offset-1  large-11">
+                <div class="col-lg-9">
                     <h1>{!! $news->title !!}</h1>
                     <div class="description">
 
