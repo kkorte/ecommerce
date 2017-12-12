@@ -49,17 +49,9 @@ body {
 	background: url('/images/homepage/homepage-big.jpg') center center;
 
 
-        @media (max-width: $screen-sm-min) { 
-
-
-
-                margin-bottom:30px;
-           
-
-
-        }
-
-
+    @media (max-width: $screen-sm-min) { 
+            margin-bottom:30px;        
+    }
 
 	h3 {
 		right:0px;
