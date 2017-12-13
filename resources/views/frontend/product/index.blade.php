@@ -76,7 +76,7 @@
                 
                 @endif
                 <button type="button" class="btn btn-success add-to-cart-button btn-blue btn-long">
-                    <span class="icon icon-cart"></span> In winkelwagen
+                    <span class="icon icon-cart"></span> Add to cart
                 </button>
                 @endif
             </form>
