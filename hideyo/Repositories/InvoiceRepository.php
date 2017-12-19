@@ -69,8 +69,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     }
 
     public function generateInvoiceFromOrder($orderId)
-    {
-        
+    {        
         $order = $this->order->find($orderId);
 
         if ($order->count()) {
@@ -82,7 +81,6 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             if ($validator->fails()) {
                 return $validator;
             }
-
 
             $this->model->fill($attributes);
             $this->model->save();
@@ -187,7 +185,6 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     {
         $this->model = $this->find($id);
         $this->model->save();
-
         return $this->model->delete();
     }
 

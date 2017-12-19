@@ -79,7 +79,6 @@ class TaxRateRepository implements TaxRateRepositoryInterface
     {
         $this->model = $this->find($taxRateId);
         $this->model->save();
-
         return $this->model->delete();
     }
 

@@ -17,8 +17,8 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
   
     public function create(array $attributes)
     {
-        $attributes['shop_id'] = \auth()->guard('hideyobackend')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \auth()->guard('hideyobackend')->user()->id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
             
         $this->model->fill($attributes);
         $this->model->save();
@@ -33,8 +33,8 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
     public function updateById(array $attributes, $id)
     {
         $this->model = $this->find($id);
-        $attributes['shop_id'] = \auth()->guard('hideyobackend')->user()->selected_shop_id;
-        $attributes['modified_by_user_id'] = \auth()->guard('hideyobackend')->user()->id;
+        $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
+        $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         return $this->updateEntity($attributes);
     }
 
@@ -62,7 +62,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
 
     public function selectAll()
     {
-        return $this->model->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', \auth()->guard('hideyobackend')->user()->selected_shop_id)->where('payment_method.shop_id', '=', \auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
+        return $this->model->leftJoin('sending_method', 'sending_payment_method_related.sending_method_id', '=', 'sending_method.id')->leftJoin('payment_method', 'sending_payment_method_related.payment_method_id', '=', 'payment_method.id')->where('sending_method.shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->where('payment_method.shop_id', '=', auth()->guard('hideyobackend')->user()->selected_shop_id)->get();
     }
 
     function selectAllActiveByShopId($shopId)
@@ -81,9 +81,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
     }
 
     function selectOneByShopIdAndPaymentMethodIdAndSendingMethodId($shopId, $paymentMethodId, $sendingMethodId)
-    {
-       
-
+    {     
         $result = $this->model
         ->with(array('sendingMethod'
             => function ($query) use ($shopId) {
@@ -95,8 +93,8 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
                 $query->where('shop_id', '=', $shopId);
             }
         ))
-            ->where('sending_method_id', '=', $sendingMethodId)
-            ->where('payment_method_id', '=', $paymentMethodId)->get();
+        ->where('sending_method_id', '=', $sendingMethodId)
+        ->where('payment_method_id', '=', $paymentMethodId)->get();
        
         if ($result->isEmpty()) {
             return false;
@@ -106,7 +104,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
 
     function selectOneByPaymentMethodIdAndSendingMethodIdAdmin($sendingPaymentMethodId, $paymentMethodId)
     {
-         $shopId = \auth()->guard('hideyobackend')->user()->selected_shop_id;
+        $shopId = auth()->guard('hideyobackend')->user()->selected_shop_id;
 
         $result = $this->model->with(array('sendingMethod' => function ($query) use ($shopId) {
             $query->where('shop_id', '=', $shopId);
@@ -123,7 +121,7 @@ class SendingPaymentMethodRelatedRepository implements SendingPaymentMethodRelat
     
     function selectOneByPaymentMethodIdAndSendingMethodId($sendingPaymentMethodId, $paymentMethodId)
     {
-         $shopId = \auth()->guard('web')->user()->selected_shop_id;
+         $shopId = auth()->guard('web')->user()->selected_shop_id;
 
         $result = $this->model->with(array('sendingMethod' => function ($query) use ($shopId) {
             $query->where('shop_id', '=', $shopId);

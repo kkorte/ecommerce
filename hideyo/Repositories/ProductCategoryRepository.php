@@ -52,13 +52,10 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         $this->shop = $shop;
         $this->storageImagePath = storage_path() .config('hideyo.storage_path'). "/product_category/";
         $this->publicImagePath = public_path() .config('hideyo.public_path'). "/product_category/";
-
-
     }
   
     public function create(array $attributes)
     {
-
         $attributes['shop_id'] = auth()->guard('hideyobackend')->user()->selected_shop_id;
         $validator = Validator::make($attributes, $this->rules());
 
@@ -233,8 +230,6 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         return $this->model;
     }
 
-
-
     public function destroy($productCategoryId)
     {
         $this->model = $this->find($productCategoryId);
@@ -331,7 +326,7 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
                 }
                     $query->orderBy('rank', 'asc');
             }
-            )
+        )
         )
         ->where('product_category.shop_id', '=', $shopId)
         ->where('product_category.parent_id', '=', $parentId)
@@ -339,9 +334,9 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
         if ($result->count()) {
             return $result;
-        } else {
-            return false;
         }
+        
+        return false;
     }
 
     function selectRootCategories($shopId, $imageTag)
@@ -362,9 +357,9 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
         if ($result) {
             return $result;
-        } else {
-            return false;
         }
+        
+        return false;
     }
 
     public function find($productCategoryId)
@@ -374,19 +369,18 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
 
     public function entireTreeStructure($shopId)
     {
-         return $this->model->where('shop_id', '=', $shopId)->get()->toHierarchy();
+        return $this->model->where('shop_id', '=', $shopId)->get()->toHierarchy();
     }
-
 
     public function changeActive($productCategoryId)
     {
         $this->model = $this->find($productCategoryId);
 
         if ($this->model) {
+
+            $active = 1;
             if ($this->model->active) {
                 $active = 0;
-            } else {
-                $active = 1;
             }
 
             $attributes = array(
@@ -426,24 +420,26 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         return $this->imageModel;
     }
 
-
     function selectOneByShopIdAndSlug($shopId, $slug, $imageTag = false)
-    {
-
- 
+    { 
         $result = $this->model->
-        with(array('products' => function ($query) {
-            $query->where('active', '=', 1)->with(
-                array('productImages' => function ($query) {
-                    $query->orderBy('rank', 'asc');
-                })
-            );
-        },
-        'productCategoryImages' => function ($query) use ($imageTag) {
-            if ($imageTag) {
-                $query->where('tag', '=', $imageTag);
-            } $query->orderBy('rank', 'asc');
-        }, 'refProductCategory'))
+        with(
+            array(
+                'products' => function ($query) {
+                    $query->where('active', '=', 1)->with(
+                        array('productImages' => function ($query) {
+                            $query->orderBy('rank', 'asc');
+                        })
+                    );
+                },
+                'productCategoryImages' => function ($query) use ($imageTag) {
+                    if ($imageTag) {
+                        $query->where('tag', '=', $imageTag);
+                    } $query->orderBy('rank', 'asc');
+                }, 
+                'refProductCategory'
+            )
+        )
         ->where('product_category.shop_id', '=', $shopId)
         ->where('product_category.slug', '=', $slug)
         ->where('product_category.active', '=', 1)
@@ -464,9 +460,8 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
             }
 
             return $result;
-        } else {
-            return false;
         }
+        
+        return false;        
     }
-
 }

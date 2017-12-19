@@ -416,8 +416,6 @@ class NewsRepository implements NewsRepositoryInterface
 
     function selectAllByShopIdAndPaginate($shopId, $totalPage, $filters = false)
     {
-
-
         $dt = Carbon::now('Europe/Amsterdam');
 
            $result = $this->model
@@ -432,11 +430,8 @@ class NewsRepository implements NewsRepositoryInterface
             );
     }
 
-
     function selectByGroupAndByShopIdAndPaginate($shopId, $newsGroupSlug, $totalPage, $filters = false)
     {
-
-
         $dt = Carbon::now('Europe/Amsterdam');
 
            $result = $this->model
@@ -453,6 +448,4 @@ class NewsRepository implements NewsRepositoryInterface
                 'totalOnPage' => $totalPage
             );
     }
-
-
 }

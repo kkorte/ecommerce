@@ -17,7 +17,6 @@ class ShopRepository implements ShopRepositoryInterface
         $this->model = $model;
         $this->storageImagePath = storage_path() .config('hideyo.storage_path'). "/shop/";
         $this->publicImagePath = public_path() .config('hideyo.public_path'). "/shop/";
-
     }
   
     /**
@@ -162,8 +161,6 @@ class ShopRepository implements ShopRepositoryInterface
             return $result;
         }
         
-        return false;
-        
-    }
-    
+        return false;        
+    }    
 }
