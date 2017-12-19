@@ -349,7 +349,6 @@ class NewsRepository implements NewsRepositoryInterface
         return $this->modelImage;
     }
 
-
     function selectOneBySlug($shopId, $slug)
     {
         $dt = Carbon::now('Europe/Amsterdam');
@@ -375,14 +374,10 @@ class NewsRepository implements NewsRepositoryInterface
         return $result;
     }
 
-
-
     function selectAllActiveGroupsByShopId($shopId)
     {
          return $this->modelGroup->where('shop_id', '=', $shopId)->where('active', '=', 1)->get();
     }
-
-
 
     function selectOneGroupByShopIdAndSlug($shopId, $slug)
     {
@@ -394,12 +389,9 @@ class NewsRepository implements NewsRepositoryInterface
         return $result->first();
     }
 
-
     public function selectByLimitAndOrderBy($shopId, $limit, $orderBy)
     {
-
         $dt = Carbon::now('Europe/Amsterdam');
-
 
         return $this->model->with(
             array('newsImages' => function ($query) {
@@ -411,8 +403,6 @@ class NewsRepository implements NewsRepositoryInterface
            ->where('published_at', '<=', $dt->toDateString('Y-m-d'))
             ->orderBy('created_at', $orderBy)->get();
     }
-
-
 
     function selectAllByShopIdAndPaginate($shopId, $totalPage, $filters = false)
     {
