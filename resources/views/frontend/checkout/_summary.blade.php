@@ -24,9 +24,7 @@
         
             </div>
             <div  class="col-lg-4 text-right">
-    
                 &euro; <span class="total_price_inc_tax_{!! $product['id'] !!}">{!! $product->getOriginalPriceWithTaxSum() !!}</span>
-             
             </div>  
 
     </div>
@@ -102,12 +100,8 @@
             </div>
 
             <div class="col-lg-4 text-right">
-                <strong>
-
-         
-                    &euro; <span class="payment_method_cost_inc_tax">{!! app('cart')->getToPayWithTax() !!}</span>
-          
-            
+                <strong>         
+                    &euro; <span class="payment_method_cost_inc_tax">{!! app('cart')->getToPayWithTax() !!}</span>            
                 </strong>
             </div>  
         </div>

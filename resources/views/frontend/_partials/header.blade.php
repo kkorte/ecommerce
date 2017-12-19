@@ -17,16 +17,15 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ">
                       @foreach($frontendProductCategories as $productCategory)
-                      <li><a href="{!! URL::route('product-category.item', $productCategory->slug) !!}">{!! $productCategory->title !!}</a></li>
+                      <li><a href="{!! URL::route('product-category.item', $productCategory->slug) !!}" title="{!! $productCategory->title !!}">{!! $productCategory->title !!}</a></li>
                       @endforeach
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/account">Account</a></li>
-
+                    <li><a href="/account" title="account">Account</a></li>
                     @if (Auth::guard('web')->check())
                     <li class="logout">
-                        <a href="/account/logout">logout</a>
+                        <a href="/account/logout" title="logout">logout</a>
                     </li>
                     @endif
 

@@ -22,26 +22,25 @@
 
                 <?php echo Form::open(array('url' => '/account/reset-password/'.$confirmationCode.'/'.$email, 'class' => 'form')); ?>
 
-                <div class="form-control">
-         
-                    <label for="middle-label">{!! trans('form.password') !!}</label>
-                    {!! Form::password('password', array('required' => '')) !!}
-                     
-                </div>               
+                    <div class="form-control">
+             
+                        <label for="middle-label">{!! trans('form.password') !!}</label>
+                        {!! Form::password('password', array('required' => '')) !!}
+                         
+                    </div>               
 
-                <div class="form-control">
+                    <div class="form-control">
 
-                	<button type="submit" class="button button-black">Change</button>
-             	
-             	</div>
-           
+                    	<button type="submit" class="button button-black">Change</button>
+                 	
+                 	</div>           
 
                 </form>
+
             </div>
 
         </div>
 
     </div>
 </div>
-
 @stop

@@ -18,7 +18,6 @@
         <div class=" container">      
             @yield('main')
         </div>
-
         @include('frontend._partials.footer')
         <script src="{{ URL::asset('/js/frontend.js')}}"></script>
     </body>

@@ -4,22 +4,18 @@
         @foreach ($productImages as $key => $image)
         @if ($key === 0)
  
-            <div class="col-sm-12 col-md-12 col-lg-12 large-photo">
-                <a href="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" data-toggle="lightbox"  data-gallery="example-gallery">
-                    <img src="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-responsive img-fluid main-photo" alt="{!! $image['file'] !!}" />
-                </a>
-            </div>    
-
-            
+        <div class="col-sm-12 col-md-12 col-lg-12 large-photo">
+            <a href="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" data-toggle="lightbox"  data-gallery="example-gallery">
+                <img src="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-responsive img-fluid main-photo" alt="{!! $image['file'] !!}" />
+            </a>
+        </div>             
 
         @else
-
-
-            <div class="col-sm-12 col-md-12 col-lg-12 small-photo">
-                <a href="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" data-toggle="lightbox"  data-gallery="example-gallery">
-                    <img src="/files/product/100x100/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-fluid" alt="{!! $image['file'] !!}" />
-                </a>
-            </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 small-photo">
+            <a href="/files/product/800x800/{!! $image['product_id'] !!}/{!! $image['file'] !!}" data-toggle="lightbox"  data-gallery="example-gallery">
+                <img src="/files/product/100x100/{!! $image['product_id'] !!}/{!! $image['file'] !!}" class="img-fluid" alt="{!! $image['file'] !!}" />
+            </a>
+        </div>
 
         @endif
         @endforeach

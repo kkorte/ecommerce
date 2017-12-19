@@ -1,9 +1,6 @@
 <tr class="product-row">
 
     <td class="image show-for-medium">   
-
-
-
         <a href="/{{ $product['attributes']['product_category_slug'] }}/{{ $product['id'] }}/{{ $product['attributes']['slug'] }}" title="terug naar product">   
             @if(ProductHelper::getImage($product['attributes']['id'], array())) 
             <img src="/files/product/100x100/{!! $product['attributes']['id'] !!}/{!! ProductHelper::getImage($product['attributes']['id'], array()) !!}" alt="">
@@ -14,9 +11,6 @@
     </td>
 
     <td class="title">
-
-
-
         <a href="/{{ $product['attributes']['product_category_slug'] }}/{{ $product['id'] }}/{{ $product['attributes']['slug'] }}" title="terug naar product"> 
             <p>{!! $product['attributes']['title'] !!}</p>
             <ul>
@@ -33,7 +27,6 @@
     <td class="price show-for-medium">
         &euro; {!! $product->getOriginalPriceWithTaxAndConditions() !!}
         @if($product->hasConditions())
-
         @endif
     </td>
 

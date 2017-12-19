@@ -17,32 +17,16 @@
                 @if($product->total_amount == 0)
                 <p class="sold-out">sold out</p>
                 @else
-
-
-
                 <p>from <small class="discount-price">&euro; {!! ProductHelper::priceDetails($product, 'original_price_inc_tax_number_format') !!}</small> &euro; {!! ProductHelper::priceDetails($product, 'discount_price_inc_number_format') !!}</p>
-
-             
-
                 @endif
 
                 @else
-
-
                 @if($product->amount == 0)
                 <p class="sold-out">sold out {!! ProductHelper::priceDetails($product, 'discount_price_inc_number_format') !!}</p>
                 @else
-
-
-
                 <p>from &euro; {!! ProductHelper::priceDetails($product, 'discount_price_inc_number_format') !!}</p>
-               
-           
                 @endif
-
                 @endif 
-
-
             </div>
         </div>
     </a>

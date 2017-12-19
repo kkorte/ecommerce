@@ -11,12 +11,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
 @notification('foundation')
 
 @if (app('cart')->getContent()->count())
@@ -53,8 +47,6 @@
     </div>
 
 </div>
-
-
 
 @endif
 

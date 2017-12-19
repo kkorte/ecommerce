@@ -6,12 +6,12 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <ul class="breadcrumb">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/nieuws">News</a></li>
-                    <li><a href="{!! URL::route('news.group', array($newsGroup->slug)) !!}">{{ $newsGroup->title }}</a></li>
-                    <li><a href="/nieuws">Overview</a></li>
-        </ul>
+        <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/nieuws">News</a></li>
+            <li><a href="{!! URL::route('news.group', array($newsGroup->slug)) !!}">{{ $newsGroup->title }}</a></li>
+            <li><a href="/nieuws">Overview</a></li>
+        </ol>
     </div>
 </div>
 

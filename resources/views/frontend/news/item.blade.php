@@ -14,8 +14,6 @@
     </div>
 </div>
 
-
-
 <div class="news">
     <div class="row">
 
@@ -31,13 +29,9 @@
                 </ul>
                 @endif
 
-            </div>
-       
+            </div>      
      
         </div>  
-
-
-
 
         <div class="col-lg-9">
 

@@ -4,10 +4,7 @@
 		<h3>Related products</h3>
 	</div>
 	@foreach($product->relatedProductsActive as $product)
-
-        @include('frontend.product_category._product-row-item')
-
+    @include('frontend.product_category._product-row-item')
 	@endforeach
-
 </div>
 @endif
