@@ -35,26 +35,18 @@
         <div class="category-block">
             <div class="row">
                 <a href="/{{ $category['slug'] }}" title="ga naar {{ $category['title'] }}">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-
-                     
-                            @if($category->productCategoryImages->count())
-                            <img src="/files/product_category/200x200/{!! $category->productCategoryImages->first()->product_category_id !!}/{!! $category->productCategoryImages->first()->file !!}" class="img-responsive main-photo" alt="" />          
-                      
-
-                            @else
-                                <img src="/images/default-product-thumb.png" style="width:200px; height:200px;" />
-                            @endif
-           
+                    <div class="col-sm-12 col-md-12 col-lg-12">                     
+                        @if($category->productCategoryImages->count())
+                        <img src="/files/product_category/200x200/{!! $category->productCategoryImages->first()->product_category_id !!}/{!! $category->productCategoryImages->first()->file !!}" class="img-responsive main-photo" alt="" />          
+                        @else
+                        <img src="/images/default-product-thumb.png" style="width:200px; height:200px;" />
+                        @endif          
 
                     </div>
                     
                     <div class="col-sm-12 col-md-12 col-lg-12">
-              
-                            <h3>{{ str_limit($category['title'],21) }}</h3>
-                            <p class="hide-for-medium-only">{{ $category->short_description  }}</p>
-
-                 
+                        <h3>{{ str_limit($category['title'],21) }}</h3>
+                        <p class="hide-for-medium-only">{{ $category->short_description  }}</p>                 
                     </div>
                 </a>
             </div>
@@ -72,6 +64,4 @@
 </div>
 
 @endif
-
-
 @stop
