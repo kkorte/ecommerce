@@ -32,11 +32,6 @@ class User extends Authenticatable
         $this->table = $this->table;  
         parent::__construct($attributes);
     }
-    
-    public function getUserProfileData()
-    {
-        return $this->hasMany('Hideyo\Models\UserProfileData');
-    }
 
     public function shop()
     {

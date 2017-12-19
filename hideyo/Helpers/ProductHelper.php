@@ -2,7 +2,6 @@
 
 namespace Hideyo\Helpers;
 
-use Hideyo\Repositories\ProductRepositoryInterface;
 use Config;
 use Hideyo\Models\Product;
 use Hideyo\Models\ProductAttribute;
@@ -13,11 +12,6 @@ use Illuminate\Support\Facades\Request;
 
 class ProductHelper
 {
-    public function __construct(ProductRepositoryInterface $product)
-    {
-        $this->product = $product;
-    }
-
     public static function getProductAttributeId($productId, $attributeIds) 
     {
         $productAttributeResultWithAttributeId =  ProductAttribute::
@@ -28,7 +22,6 @@ class ProductHelper
         ->with('combinations')
         ->where('product_attribute.product_id', '=', $productId)
         ->get();
-
 
         if($productAttributeResultWithAttributeId) {
             return $productAttributeResultWithAttributeId->toArray();
@@ -51,7 +44,7 @@ class ProductHelper
 
                 $imagesRelatedAttributes = ProductImage::
                 whereHas('relatedAttributes', function($query) use ($combinationsIds, $product, $productId) { $query->with(array('productImage'))->whereIn('attribute_id', $combinationsIds); });
-        
+                
                 $images = $images->merge($imagesRelatedAttributes)->sortBy('rank');          
             }
 
@@ -86,8 +79,7 @@ class ProductHelper
             $taxValue = 0;
 
             if (isset($product->taxRate)) {
-                $taxRate = $product->taxRate->rate;
-        
+                $taxRate = $product->taxRate->rate;        
                 $priceInc = (($product->taxRate->rate / 100) * $product->price) + $product->price;
                 $taxValue = $priceInc - $product->price;
             }

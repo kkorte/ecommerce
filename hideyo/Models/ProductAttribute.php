@@ -23,7 +23,6 @@ class ProductAttribute extends BaseModel
 
         if ($value) {
             $date = explode('/', $value);
-
             $value = Carbon::createFromDate($date[2], $date[1], $date[0])->toDateTimeString();
             $this->attributes['discount_start_date'] = $value;
         }
@@ -84,7 +83,6 @@ class ProductAttribute extends BaseModel
     {
         return $this->belongsTo('Hideyo\Models\Product');
     }
-
 
     public function getPriceDetails()
     {  

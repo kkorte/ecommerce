@@ -1,8 +1,6 @@
 <?php
 
 namespace Hideyo\Helpers;
-
-use Hideyo\Repositories\HtmlBlockRepositoryInterface;
 use Hideyo\Models\HtmlBlock;
 use DbView;
 
