@@ -24,7 +24,9 @@ public/uploads/
 
 /public/hideyo
 /public/files
-storage/framework/
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
 
 
 /vendor
@@ -40,7 +42,6 @@ node_modules
 bower_components
 
 /public/images
-/public/javascript
 /public/js
 /public/css
 /public/fonts
