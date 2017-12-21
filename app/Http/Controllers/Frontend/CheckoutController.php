@@ -298,43 +298,35 @@ class CheckoutController extends Controller
         $orderInsertAttempt = $this->order->createByUserAndShopId($data, config()->get('app.shop_id'), $noAccountUser);
 
         if ($orderInsertAttempt AND $orderInsertAttempt->count()) {
-                if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
-                    $orderStatus = $this->order->updateStatus($orderInsertAttempt->id, $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id);
-                    if ($orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
-                        Event::fire(new OrderChangeStatus($orderStatus));
-                    }
+            if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
+                $orderStatus = $this->order->updateStatus($orderInsertAttempt->id, $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id);
+                if ($orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
+                    Event::fire(new OrderChangeStatus($orderStatus));
                 }
+            }
 
-                if ($orderInsertAttempt->OrderPaymentMethod) {
-                    $paymentMethodId = $orderInsertAttempt->OrderPaymentMethod->payment_method_id;
-                }
-    
-                if ($orderInsertAttempt->OrderSendingMethod) {
-                    $sendingMethodId = $orderInsertAttempt->OrderSendingMethod->sending_method_id;
-                }
+            if ($orderInsertAttempt->OrderPaymentMethod) {
+                $paymentMethodId = $orderInsertAttempt->OrderPaymentMethod->payment_method_id;
+            }
 
-                session()->put('orderData', $orderInsertAttempt);
+            if ($orderInsertAttempt->OrderSendingMethod) {
+                $sendingMethodId = $orderInsertAttempt->OrderSendingMethod->sending_method_id;
+            }
 
+            session()->put('orderData', $orderInsertAttempt);
 
-                if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->payment_external) {
-                    return redirect()->to(LaravelLocalization::getLocalizedURL(null, 'cart/payment'));
-                } else {
+            if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->payment_external) {
+                return redirect()->to('cart/payment');
+            }
 
-  
-                    app('cart')->clear();
-                    app('cart')->clearCartConditions();  
-                    session()->flush('noAccountUser');
-                    return view('frontend.checkout.complete')->with(array('body' => $body));
-                }
-
-
+            app('cart')->clear();
+            app('cart')->clearCartConditions();  
+            session()->flush('noAccountUser');
+            return view('frontend.checkout.complete')->with(array('body' => $body));            
         }
 
         return redirect()->to('cart/checkout');
-
-
     }
-
 
     public function postEditAddress(Request $request, $type)
     {
@@ -346,12 +338,12 @@ class CheckoutController extends Controller
 
         // create the validation rules ------------------------
         $rules = array(
-        'firstname'     => 'required',
-        'lastname'      => 'required',
-        'zipcode'       => 'required',
-        'housenumber'   => 'required|numeric',
-        'street'        => 'required',
-        'city'          => 'required'
+            'firstname'     => 'required',
+            'lastname'      => 'required',
+            'zipcode'       => 'required',
+            'housenumber'   => 'required|numeric',
+            'street'        => 'required',
+            'city'          => 'required'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -366,7 +358,6 @@ class CheckoutController extends Controller
             return redirect()->to('cart/edit-address/'.$type)
             ->with(array('type' => $type))->withInput();
         }
-
 
         if (auth('web')->guest()) {
             $noAccountUser = session()->get('noAccountUser');
