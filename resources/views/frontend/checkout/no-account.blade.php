@@ -37,7 +37,7 @@
                                 <li>{!! $noAccountUser['zipcode']  !!} {!! $noAccountUser['city']  !!}</li>
                                 <li>{!! $noAccountUser['country'] !!}</li>
                             </ul>
-                            <a href="{!! URL::route('cart.edit.address', 'bill') !!}" class="button button-simple">edit</a>
+                            <a href="{!! URL::route('cart.edit.address', 'bill') !!}" class="btn btn-success">edit</a>
 
                         </div>
 
@@ -58,18 +58,15 @@
 
 
                             </ul>
-                            <a href="{!! URL::route('cart.edit.address', 'delivery') !!}" class="button button-simple">edit</a>
+                            <a href="{!! URL::route('cart.edit.address', 'delivery') !!}" class="btn btn-success">edit</a>
 
                         </div>                      
                         
                     </div>
 
-
-
-
                     <hr/>
 
-              <div class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="paymentway">
                             <h3>Payment way</h3>
              
@@ -95,15 +92,13 @@
                     <hr/>
                     {!! Form::open(array('route' => array('cart.complete'), 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                        
-               <div class="col-lg-12">
-               
+                    <div class="col-lg-12">               
                         <h3>Comments</h3>
                         <p>place a comment</p>
                          {!! Form::textarea('comments', null, array('rows' => 5)) !!}  
                     </div>
 
-
-                                  <div class="col-lg-12 text-right">
+                    <div class="col-lg-12 text-right">
                         @if(Lang::getLocale() == 'nl')
                         <p><a href="{!! URL::route('text', 'algemene-voorwaarden') !!}" target="_blank">general conditions</a>.</p>
                     

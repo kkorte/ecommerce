@@ -79,7 +79,7 @@ class CheckoutController extends Controller
 
         if (!$user->clientDeliveryAddress()->count()) {
             $this->client->setBillOrDeliveryAddress(config()->get('app.shop_id'), $user->id, $user->clientBillAddress->id, 'delivery');
-            return redirect()->to(LaravelLocalization::getLocalizedURL(null, 'cart/checkout'));
+            return redirect()->to('cart/checkout');
         }
 
         return view('frontend.checkout.index')->with(array(
@@ -150,9 +150,7 @@ class CheckoutController extends Controller
         if (!$userdata['password']) {
             unset($rules['email']);
             unset($rules['password']);
-        }
-
- 
+        } 
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -164,65 +162,96 @@ class CheckoutController extends Controller
             // redirect our user back to the form with the errors from the validator
             return redirect()->to('cart/checkout')
             ->withErrors(true, 'register')->withInput();
-        } else {
+        }
 
-            if ($userdata['password']) {
-                $registerAttempt = $this->client->validateRegister($userdata, config()->get('app.shop_id'));
+        if ($userdata['password']) {
+            $registerAttempt = $this->client->validateRegister($userdata, config()->get('app.shop_id'));
 
-                if ($registerAttempt) {
-                    $register = $this->client->register($userdata, config()->get('app.shop_id'));
-                } else {
-                    $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
-
-                    if ($client->account_created) {
-                        Notification::error('Je hebt al een account. Login aan de linkerkant of vraag een nieuw wachtwoord aan.');
-                        return redirect()->to('cart/checkout')->withInput()->withErrors('Dit emailadres is al in gebruik. Je kan links inloggen.', 'register');
-                    } else {
-                        $register = $this->client->createAccount($userdata, config()->get('app.shop_id'));
-                    }
-                }
-
-                if ($register) {
-                    $data = $register;
-                    $data['shop'] = $this->shop->find(config()->get('app.shop_id'));
-            
-                    Mail::send('frontend.email.register-mail', array('password' => $userdata['password'], 'user' => $data->toArray(), 'billAddress' => $data->clientBillAddress->toArray()), function ($message) use ($data) {
-                
-                        $message->to($data['email'])->from($data['shop']->email, $data['shop']->title)->subject('Je bent geregistreerd.');
-                    });
-
-                    $userdata = array(
-                        'email' => $request->get('email'),
-                        'password' => $request->get('password'),
-                        'confirmed' => 1,
-                        'active' => 1
-                    );
-
-                    auth('web')->attempt($userdata);
-
-                    return redirect()->to('cart/checkout')->withErrors('Je bent geregistreerd. Er is een bevestigingsmail gestuurd.', 'login');
-                } else {
-                    Notification::error('Je hebt al een account');
-                    return redirect()->to('cart/checkout')->withErrors(true, 'register')->withInput();
-                }
+            if ($registerAttempt) {
+                $register = $this->client->register($userdata, config()->get('app.shop_id'));
             } else {
-                unset($userdata['password']);
-                $registerAttempt = $this->client->validateRegisterNoAccount($userdata, config()->get('app.shop_id'));
+                $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
 
-                if ($registerAttempt) {
-                    $register = $this->client->register($userdata, config()->get('app.shop_id'));   
-                    $userdata['client_id'] = $register->id;
+                if ($client->account_created) {
+                    Notification::error('Je hebt al een account. Login aan de linkerkant of vraag een nieuw wachtwoord aan.');
+                    return redirect()->to('cart/checkout')->withInput()->withErrors('Dit emailadres is al in gebruik. Je kan links inloggen.', 'register');
                 } else {
-                    $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
-                    if ($client) {
-                        $userdata['client_id'] = $client->id;
-                    }
+                    $register = $this->client->createAccount($userdata, config()->get('app.shop_id'));
                 }
+            }
 
-                session()->put('noAccountUser', $userdata);
-                return redirect()->to('cart/checkout');
+            if ($register) {
+                $data = $register;
+                $data['shop'] = $this->shop->find(config()->get('app.shop_id'));
+        
+                Mail::send('frontend.email.register-mail', array('password' => $userdata['password'], 'user' => $data->toArray(), 'billAddress' => $data->clientBillAddress->toArray()), function ($message) use ($data) {
+            
+                    $message->to($data['email'])->from($data['shop']->email, $data['shop']->title)->subject('Je bent geregistreerd.');
+                });
+
+                $userdata = array(
+                    'email' => $request->get('email'),
+                    'password' => $request->get('password'),
+                    'confirmed' => 1,
+                    'active' => 1
+                );
+
+                auth('web')->attempt($userdata);
+
+                return redirect()->to('cart/checkout')->withErrors('Je bent geregistreerd. Er is een bevestigingsmail gestuurd.', 'login');
+            } else {
+                Notification::error('Je hebt al een account');
+                return redirect()->to('cart/checkout')->withErrors(true, 'register')->withInput();
             }
         }
+        
+        unset($userdata['password']);
+        $registerAttempt = $this->client->validateRegisterNoAccount($userdata, config()->get('app.shop_id'));
+
+        if ($registerAttempt) {
+            $register = $this->client->register($userdata, config()->get('app.shop_id'));   
+            $userdata['client_id'] = $register->id;
+        } else {
+            $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
+            if ($client) {
+                $userdata['client_id'] = $client->id;
+            }
+        }
+
+        session()->put('noAccountUser', $userdata);
+        return redirect()->to('cart/checkout');
+       
+        
+    }
+
+    public function getEditAddress(Request $request, $type) {
+
+        if (!Cart::getContent()->count()) {        
+            return redirect()->to('cart/checkout');
+        }              
+
+        if (auth('web')->guest()) {
+            $noAccountUser = session()->get('noAccountUser');
+            if ($noAccountUser) {
+                
+                $address = $noAccountUser;
+                if ($type == 'delivery') {
+                    $address = $noAccountUser['delivery'];
+                }
+
+                return view('frontend.checkout.edit-address-no-account')->with(array('type' => $type, 'noAccountUser' =>  $noAccountUser, 'clientAddress' => $address));
+            }
+        }
+
+        $user = auth('web')->user();
+
+        if ($type == 'delivery') {
+            $address = $user->clientDeliveryAddress->toArray();
+        } else {
+            $address = $user->clientBillAddress->toArray();
+        }
+
+        return view('frontend.checkout.edit-address')->with(array('type' => $type, 'user' => $user, 'clientAddress' => $address));
     }
 
     public function postComplete(Request $request)
@@ -235,5 +264,76 @@ class CheckoutController extends Controller
         if (!Cart::getContent()->count()) {        
             return redirect()->to('cart/checkout');
         }
+    }
+
+
+    public function postEditAddress(Request $request, $type)
+    {
+        if (!Cart::getContent()->count()) {        
+            return redirect()->to('cart/checkout');
+        } 
+        
+        $userdata = $request->all();
+
+        // create the validation rules ------------------------
+        $rules = array(
+        'firstname'     => 'required',
+        'lastname'      => 'required',
+        'zipcode'       => 'required',
+        'housenumber'   => 'required|numeric',
+        'street'        => 'required',
+        'city'          => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            // get the error messages from the validator
+            foreach ($validator->errors()->all() as $error) {
+                Notification::container('foundation')->error($error);
+            }
+
+            // redirect our user back to the form with the errors from the validator
+            return redirect()->to('cart/edit-address/'.$type)
+            ->with(array('type' => $type))->withInput();
+        }
+
+
+        if (auth('web')->guest()) {
+            $noAccountUser = session()->get('noAccountUser');
+            if ($noAccountUser) {
+                if ($type == 'bill') {
+                    $noAccountUser = array_merge($noAccountUser, $userdata);
+                } elseif ($type == 'delivery') {
+                    $noAccountUser['delivery'] = array_merge($noAccountUser['delivery'], $userdata);
+                }
+
+                session()->put('noAccountUser', $noAccountUser);
+            }
+        } else {
+            $user = auth('web')->user();
+
+            if ($type == 'bill') {
+                $id = $user->clientBillAddress->id;
+
+                if ($user->clientDeliveryAddress->id == $user->clientBillAddress->id) {
+                    $clientAddress = $this->clientAddress->createByClient($userdata, $user->id);
+                    $this->client->setBillOrDeliveryAddress(config()->get('app.shop_id'), $user->id, $clientAddress->id, $type);
+                } else {
+                    $clientAddress = $this->client->editAddress(config()->get('app.shop_id'), $user->id, $id, $userdata);
+                }
+            } elseif ($type == 'delivery') {
+                $id = $user->clientDeliveryAddress->id;
+
+                if ($user->clientDeliveryAddress->id == $user->clientBillAddress->id) {
+                    $clientAddress = $this->clientAddress->createByClient($userdata, $user->id);
+                    $this->client->setBillOrDeliveryAddress(config()->get('app.shop_id'), $user->id, $clientAddress->id, $type);
+                } else {
+                    $clientAddress = $this->client->editAddress(config()->get('app.shop_id'), $user->id, $id, $userdata);
+                }
+            }
+        }
+
+        return redirect()->to('cart/checkout');        
     }
 }
