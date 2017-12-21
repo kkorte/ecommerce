@@ -51,7 +51,7 @@ class ClientTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
             $table->string('company')->nullable();
-            $table->enum('gender', array('male', 'female'));
+            $table->enum('gender', array('male', 'female'))->nullable();
             $table->string('initials')->nullable();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
