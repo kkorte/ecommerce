@@ -25,7 +25,7 @@ class SendingMethodTable extends Migration
             $table->decimal('maximal_weight', 12, 4)->nullable();
             $table->integer('tax_rate_id')->unsigned()->nullable();
             $table->foreign('tax_rate_id')->references('id')->on('tax_rate')->onDelete('set null');
-            $table->enum('total_price_discount_type', array('amount', 'percent'));
+            $table->enum('total_price_discount_type', array('amount', 'percent'))->nullable();
             $table->decimal('total_price_discount_value', 12, 4)->nullable();
             $table->date('total_price_discount_start_date')->nullable();
             $table->date('total_price_discount_end_date')->nullable();

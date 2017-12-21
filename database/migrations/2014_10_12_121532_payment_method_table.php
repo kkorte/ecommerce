@@ -29,7 +29,7 @@ class PaymentMethodTable extends Migration
             $table->enum('mollie_external_payment_way', array('ideal', 'paysafecard', 'creditcard', 'mistercash', 'sofort', 'banktransfer', 'paypal', 'bitcoin', 'belfius'))->nullable();
             $table->string('mollie_api_key')->nullable();
 
-            $table->enum('total_price_discount_type', array('amount', 'percent'));
+            $table->enum('total_price_discount_type', array('amount', 'percent'))->nullable();
             $table->decimal('total_price_discount_value', 12, 4)->nullable();
             $table->date('total_price_discount_start_date')->nullable();
             $table->date('total_price_discount_end_date')->nullable();

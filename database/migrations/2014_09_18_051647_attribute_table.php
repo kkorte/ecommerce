@@ -16,8 +16,8 @@ class AttributeTable extends Migration
         Schema::create('attribute_group', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->enum('type', array('selectbox'));
-            $table->enum('filter_type', array('selectbox', 'checkbox'));
+            $table->enum('type', array('selectbox'))->default('selectbox');
+            $table->enum('filter_type', array('selectbox', 'checkbox'))->nullable();
             $table->boolean('filter')->default(false);            
             $table->integer('shop_id')->unsigned();
             $table->foreign('shop_id')->references('id')->on('shop')->onDelete('cascade');

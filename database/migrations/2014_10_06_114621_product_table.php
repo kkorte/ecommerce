@@ -17,7 +17,7 @@ class ProductTable extends Migration
         Schema::create('product', function ($table) {
             $table->increments('id');
             $table->boolean('active')->default(false);
-            $table->enum('type', array('single', 'group', 'variation'));
+            $table->enum('type', array('single', 'group', 'variation'))->default('single');
             $table->string('reference_code')->nullable();
             $table->string('ean_code')->nullable();
             $table->string('mpn_code')->nullable();
@@ -34,7 +34,7 @@ class ProductTable extends Migration
             $table->decimal('commercial_price', 12, 4)->nullable();
             $table->boolean('discount_promotion')->default(true);
 
-            $table->enum('discount_type', array('amount', 'percent'));
+            $table->enum('discount_type', array('amount', 'percent'))->nullable();
             $table->decimal('discount_value', 12, 4)->nullable();
             $table->date('discount_start_date')->nullable();
             $table->date('discount_end_date')->nullable();
