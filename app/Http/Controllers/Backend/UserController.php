@@ -19,9 +19,7 @@ use Hideyo\Repositories\ShopRepositoryInterface;
 use Auth;
 use Notification;
 use Redirect;
-
-
-use \Request;
+use Request;
 
 class UserController extends Controller
 {
@@ -133,9 +131,7 @@ class UserController extends Controller
         }
 
         $shop = $this->shop->find($shopId);
-
         $result  = $this->user->updateShopProfileById($shop, $id);
-
         Notification::success('The shop changed.');
         return Redirect::route('shop.index');
     }
@@ -170,8 +166,6 @@ class UserController extends Controller
         if ($validator->passes()) {
             Session::put('language', $language);
             App::setLocale($language);
-        } else {
-/**/
         }
     }
 

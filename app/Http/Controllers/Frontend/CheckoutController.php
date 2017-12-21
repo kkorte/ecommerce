@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use BrowserDetect;
 use Hideyo\Repositories\ShopRepositoryInterface;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
 use Hideyo\Repositories\PaymentMethodRepositoryInterface;
@@ -10,6 +9,7 @@ use Hideyo\Repositories\ClientRepositoryInterface;
 use Cart;
 use Validator;
 use Notification;
+use BrowserDetect;
 
 class CheckoutController extends Controller
 {
@@ -127,7 +127,7 @@ class CheckoutController extends Controller
         return redirect()->to('cart/checkout')->withErrors(true, 'login')->withInput(); 
     }
 
-
+    //to-do: transfer logic to repo
     public function postCheckoutRegister(Request $request)
     {
         if (!Cart::getContent()->count()) {  
@@ -225,21 +225,15 @@ class CheckoutController extends Controller
         }
     }
 
-
     public function postComplete(Request $request)
     {
         $noAccountUser = session()->get('noAccountUser');
         if (auth('web')->guest() and !$noAccountUser) {
             return view('frontend.checkout.login')->with(array('products' => $products, 'totals' => $totals, 'sendingMethodsList' => $sendingMethodsList, 'paymentMethodsList' => $paymentMethodsList));
-        } else {
-            if (!Cart::getContent()->count()) {        
-                return redirect()->to('cart/checkout');
-            }
-
         }
 
-
+        if (!Cart::getContent()->count()) {        
+            return redirect()->to('cart/checkout');
+        }
     }
-
-
 }

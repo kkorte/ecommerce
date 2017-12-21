@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use BrowserDetect;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
 use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 use Hideyo\Repositories\ShopRepositoryInterface;
 use Hideyo\Repositories\CartRepositoryInterface;
 
+use BrowserDetect;
 
 class CartController extends Controller
 {

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *

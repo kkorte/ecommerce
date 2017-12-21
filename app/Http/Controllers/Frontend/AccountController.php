@@ -1,9 +1,6 @@
 <?php namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Validator;
-use Mail;
-use Notification;
 use Illuminate\Http\Request;
 use Hideyo\Repositories\ClientRepositoryInterface;
 use Hideyo\Repositories\ClientAddressRepositoryInterface;
@@ -12,21 +9,13 @@ use Hideyo\Repositories\OrderRepositoryInterface;
 use Hideyo\Repositories\ProductRepositoryInterface;
 use Hideyo\Repositories\SendingPaymentMethodRelatedRepositoryInterface;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
+use Validator;
+use Mail;
+use Notification;
 
 class AccountController extends Controller
 {
-
-    /**
-     * The Guard implementation.
-     *
-     * @var Guard
-     */
-    protected $auth;
-
-    /**
-     * Create a new filter instance.
-     *
-     */
+    
     public function __construct(SendingMethodRepositoryInterface $sendingMethod, ProductRepositoryInterface $product, SendingPaymentMethodRelatedRepositoryInterface $sendingPaymentMethodRelated, OrderRepositoryInterface $order, ClientRepositoryInterface $client, ClientAddressRepositoryInterface $clientAddress, ShopRepositoryInterface $shop)
     {
         $this->auth = auth('web');

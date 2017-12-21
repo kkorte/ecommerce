@@ -7,15 +7,6 @@ use Hideyo\Repositories\FaqItemRepositoryInterface;
 
 class ContentController extends Controller
 {
-
-    /*
-    |--------------------------------------------------------------------------
-    | Content Controller
-    |--------------------------------------------------------------------------
-    |
-    |
-    */
-
     /**
      * Create a new controller instance.
      *
@@ -31,11 +22,6 @@ class ContentController extends Controller
         $this->faqItem = $faqItem;
     }
 
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
     public function getItem($slug)
     {
         $content = $this->content->selectOneByShopIdAndSlug(config()->get('app.shop_id'), $slug);
@@ -51,11 +37,6 @@ class ContentController extends Controller
         abort(404);
     }
 
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
     public function getOverview($slug)
     {
         $category = $this->category->selectOneByShopIdAndSlug(config()->get('app.shop_id'), $slug);
@@ -66,12 +47,6 @@ class ContentController extends Controller
         abort(404);
     }
 
-
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
     public function getFaq()
     {
         $faqItems = $this->faqItem->selectAllActiveByShopId(config()->get('app.shop_id'));

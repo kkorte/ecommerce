@@ -80,8 +80,6 @@ class SendingPaymentMethodRelatedController extends Controller
             });
 
             return $datatables->make(true);
-
-
         }
         
         return view('backend.sending_payment_method_related.index');
@@ -89,9 +87,11 @@ class SendingPaymentMethodRelatedController extends Controller
 
     public function edit($sendingPaymentRelatedId)
     {
-        return view('backend.sending_payment_method_related.edit')->with(array(
-            'sendingPaymentMethodRelated' => $this->sendingPaymentMethodRelated->find($sendingPaymentRelatedId)
-            ));
+        return view('backend.sending_payment_method_related.edit')->with(
+            array(
+                'sendingPaymentMethodRelated' => $this->sendingPaymentMethodRelated->find($sendingPaymentRelatedId)
+            )
+        );
     }
 
     public function update($sendingPaymentRelatedId)

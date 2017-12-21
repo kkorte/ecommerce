@@ -28,9 +28,7 @@ class NewsImageController extends Controller
         if ($this->request->wantsJson()) {
 
             $image = $this->news->getImageModel()->select(
-                [
-                
-                'id',
+                ['id',
                 'file', 'news_id']
             )->where('news_id', '=', $newsId);
             

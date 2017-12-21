@@ -1,15 +1,15 @@
 <?php namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Mail;
+
 use Illuminate\Http\Request;
-use BrowserDetect;
 use Hideyo\Repositories\ContentRepositoryInterface;
 use Hideyo\Repositories\ProductTagGroupRepositoryInterface;
 use Hideyo\Repositories\ShopRepositoryInterface;
 use Validator;
 use Notification;
-
+use Mail;
+use BrowserDetect;
 
 class BasicController extends Controller
 {
@@ -28,7 +28,6 @@ class BasicController extends Controller
         $this->content = $content;
         $this->shop = $shop;
         $this->productTagGroup = $productTagGroup;
-
     }
 
     public function index()
@@ -37,11 +36,6 @@ class BasicController extends Controller
         return view('frontend.basic.index')->with(array('populairProducts' => $populairProducts));
     }
 
-    /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
     public function getContact()
     {
         return view('frontend.basic.contact');
@@ -76,5 +70,4 @@ class BasicController extends Controller
         Notification::success(trans('thnx for your contact!'));
         return redirect()->route('contact');  
     }
-
 }

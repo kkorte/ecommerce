@@ -20,6 +20,8 @@ class ProductCategoryController extends Controller
         $this->productExtraFieldValue = $productExtraFieldValue; 
     }
 
+
+    //to-do transfer logic to repo
     public function getItem(Request $request, $slug)
     {
         $category = $this->productCategory->selectOneByShopIdAndSlug(config()->get('app.shop_id'), $slug);

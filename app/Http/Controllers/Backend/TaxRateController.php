@@ -30,7 +30,6 @@ class TaxRateController extends Controller
             });
 
             return $datatables->make(true);
-
         }
         
         return view('backend.tax_rate.index')->with('taxRate', $this->taxRate->selectAll());

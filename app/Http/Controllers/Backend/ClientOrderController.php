@@ -13,14 +13,17 @@ use App\Http\Controllers\Controller;
 use Hideyo\Repositories\ClientAddressRepositoryInterface;
 use Hideyo\Repositories\ClientRepositoryInterface;
 use Hideyo\Repositories\OrderRepositoryInterface;
-
 use Illuminate\Http\Request;
 use Form;
 use Datatables;
 
 class ClientOrderController extends Controller
 {
-    public function __construct(Request $request, ClientAddressRepositoryInterface $clientAddress, ClientRepositoryInterface $client, OrderRepositoryInterface $order)
+    public function __construct(
+        Request $request, 
+        ClientAddressRepositoryInterface $clientAddress, 
+        ClientRepositoryInterface $client, 
+        OrderRepositoryInterface $order)
     {
         $this->clientAddress = $clientAddress;
         $this->client = $client;
@@ -58,7 +61,6 @@ class ClientOrderController extends Controller
                     return $order->orderStatus->title;
                 }
             })
-
             ->addColumn('client', function ($order) {
                 if ($order->client) {
                     if ($order->orderBillAddress) {
@@ -75,8 +77,6 @@ class ClientOrderController extends Controller
                 $money = '&euro; '.$order->getPriceWithTaxNumberFormat();
                 return $money;
             })
-
-
             ->addColumn('paymentMethod', function ($order) {
                 if ($order->orderPaymentMethod) {
                     return $order->orderPaymentMethod->title;

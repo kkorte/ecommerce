@@ -25,7 +25,7 @@ class ProductRelatedProductController extends Controller
         $this->productRelatedProduct    = $productRelatedProduct;
         $this->product                  = $product;
         $this->request                  = $request;
-    }
+    }    
 
     public function index($productId)
     {
@@ -60,7 +60,7 @@ class ProductRelatedProductController extends Controller
 
         return view('backend.product_related_product.create')->with(array('products' => $products, 'product' => $product));
     }
-
+    
     public function store($productId)
     {
         $result  = $this->productRelatedProduct->create($this->request->all(), $productId);

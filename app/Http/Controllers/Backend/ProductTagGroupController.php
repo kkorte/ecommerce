@@ -42,8 +42,6 @@ class ProductTagGroupController extends Controller
             });
 
             return $datatables->make(true);
-
-
         }
         
         return view('backend.product_tag_group.index')->with('productTagGroup', $this->productTagGroup->selectAll());
@@ -74,10 +72,12 @@ class ProductTagGroupController extends Controller
 
     public function edit($productTagGroupId)
     {
-        return view('backend.product_tag_group.edit')->with(array(
-            'products' => $this->product->selectAll()->pluck('title', 'id'),
-            'productTagGroup' => $this->productTagGroup->find($productTagGroupId)
-            ));
+        return view('backend.product_tag_group.edit')->with(
+            array(
+                'products' => $this->product->selectAll()->pluck('title', 'id'),
+                'productTagGroup' => $this->productTagGroup->find($productTagGroupId)
+            )
+        );
     }
 
     public function update($productTagGroupId)

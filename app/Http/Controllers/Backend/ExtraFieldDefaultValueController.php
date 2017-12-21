@@ -60,11 +60,11 @@ class ExtraFieldDefaultValueController extends Controller
         if (isset($result->id)) {
             Notification::success('The extra field was inserted.');
             return redirect()->route('extra-field-values.index', $extraFieldId);
-        } else {
-            foreach ($result->errors()->all() as $error) {
-                Notification::error($error);
-            }
         }
+
+        foreach ($result->errors()->all() as $error) {
+            Notification::error($error);
+        }  
 
         return redirect()->back()->withInput();
     }
@@ -81,11 +81,11 @@ class ExtraFieldDefaultValueController extends Controller
         if (isset($result->id)) {
             Notification::success('The extra field was updated.');
             return redirect()->route('extra-field-values.index', $extraFieldId);
-        } else {
-            foreach ($result->errors()->all() as $error) {
-                Notification::error($error);
-            }
         }
+
+        foreach ($result->errors()->all() as $error) {
+            Notification::error($error);
+        }      
 
         return redirect()->back()->withInput();
     }
