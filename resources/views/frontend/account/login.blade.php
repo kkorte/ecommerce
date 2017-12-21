@@ -27,7 +27,7 @@
 
 					<div class="form-group">
 						<label>{!! trans('form.email') !!}</label>
-						{!! Form::email('email', null, array('required' => '', 'pattern' => 'email', 'class' => 'form-control')) !!}
+						{!! Form::email('email', null, array('required' => '',  'class' => 'form-control')) !!}
 					</div>
 
 
@@ -46,7 +46,6 @@
             </div>
 
         </div>
-
 
         <div class="col-sm-12 col-md-12 col-lg-offset-2 col-lg-5 login">
         	<h1>Register</h1>

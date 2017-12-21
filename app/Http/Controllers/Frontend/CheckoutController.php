@@ -227,36 +227,6 @@ class CheckoutController extends Controller
         
     }
 
-    public function getEditAddress(Request $request, $type) {
-
-        if (!Cart::getContent()->count()) {        
-            return redirect()->to('cart/checkout');
-        }              
-
-        if (auth('web')->guest()) {
-            $noAccountUser = session()->get('noAccountUser');
-            if ($noAccountUser) {
-                
-                $address = $noAccountUser;
-                if ($type == 'delivery') {
-                    $address = $noAccountUser['delivery'];
-                }
-
-                return view('frontend.checkout.edit-address-no-account')->with(array('type' => $type, 'noAccountUser' =>  $noAccountUser, 'clientAddress' => $address));
-            }
-        }
-
-        $user = auth('web')->user();
-
-        if ($type == 'delivery') {
-            $address = $user->clientDeliveryAddress->toArray();
-        } else {
-            $address = $user->clientBillAddress->toArray();
-        }
-
-        return view('frontend.checkout.edit-address')->with(array('type' => $type, 'user' => $user, 'clientAddress' => $address));
-    }
-
     public function postComplete(Request $request)
     {
         $noAccountUser = session()->get('noAccountUser');
@@ -326,6 +296,36 @@ class CheckoutController extends Controller
         }
 
         return redirect()->to('cart/checkout');
+    }
+
+    public function getEditAddress(Request $request, $type) {
+
+        if (!Cart::getContent()->count()) {        
+            return redirect()->to('cart/checkout');
+        }              
+
+        if (auth('web')->guest()) {
+            $noAccountUser = session()->get('noAccountUser');
+            if ($noAccountUser) {
+                
+                $address = $noAccountUser;
+                if ($type == 'delivery') {
+                    $address = $noAccountUser['delivery'];
+                }
+
+                return view('frontend.checkout.edit-address-no-account')->with(array('type' => $type, 'noAccountUser' =>  $noAccountUser, 'clientAddress' => $address));
+            }
+        }
+
+        $user = auth('web')->user();
+
+        if ($type == 'delivery') {
+            $address = $user->clientDeliveryAddress->toArray();
+        } else {
+            $address = $user->clientBillAddress->toArray();
+        }
+
+        return view('frontend.checkout.edit-address')->with(array('type' => $type, 'user' => $user, 'clientAddress' => $address));
     }
 
     public function postEditAddress(Request $request, $type)

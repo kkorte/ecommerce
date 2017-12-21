@@ -189,44 +189,7 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 
-    public function register(array $attributes, $shopId)
-    {
-        $shop = $this->shop->find($shopId);
 
-        $client = $this->model->where('shop_id', '=', $shopId)->where('email', '=', $attributes['email'])->get()->first();
-        $result = array();
-        $result['result'] = false;
-
-        if ($client) {
-            return false;
-        }
-
-        $attributes['shop_id'] = $shopId;
-        $attributes['modified_by_user_id'] = null;
-
-        $attributes['confirmed'] = 1;
-        $attributes['active'] = 1;
-        $attributes['type'] = 'consumer';
-        $mailChimplistId = Config::get('mailchimp.consumerId');
-        $attributes['confirmed'] = 0;
-        $attributes['active'] = 0;
-
-        //$attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
-        if (isset($attributes['password'])) {
-            $attributes['password'] = \Hash::make($attributes['password']);
-            $attributes['account_created'] = Carbon::now()->toDateTimeString();
-        }
-
-        $this->model->fill($attributes);
-        $this->model->save();
-
-        $clientAddress = $this->clientAddress->createByClient($attributes, $this->model->id);
-        $new['delivery_client_address_id'] = $clientAddress->id;
-        $new['bill_client_address_id'] = $clientAddress->id;
-        $this->model->fill($new);
-        $this->model->save();
-        return $this->model;
-    }
 
     function selectOneByShopIdAndId($shopId, $clientId)
     {
@@ -329,37 +292,44 @@ class ClientRepository implements ClientRepositoryInterface
         ->get()->first();
     }
 
-
-    public function createAccount(array $attributes, $shopId)
+    public function register(array $attributes, $shopId)
     {
-
         $result = array();
         $result['result'] = false;
 
-        $this->model = $this->model->where('shop_id', '=', $shopId)->where('email', '=', $attributes['email'])->whereNull('account_created')->get()->first();
+        $shop = $this->shop->find($shopId);
 
-        if ($this->model) {
-            $shop = $this->shop->find($shopId);
+        $client = $this->model->where('shop_id', '=', $shopId)->where('email', '=', $attributes['email'])->get()->first();
 
-            $clientAddress = $this->clientAddress->createByClient($attributes, $this->model->id);
-
-            $attributes['delivery_client_address_id'] = $clientAddress->id;
-            $attributes['bill_client_address_id'] = $clientAddress->id;
-
-            if ($attributes['password']) {
-
-                $attributes['confirmed'] = 1;
-                $attributes['active'] = 1;
-                $attributes['type'] = 'consumer';
-                $attributes['confirmation_code'] = null;
-                $attributes['password'] = \Hash::make($attributes['password']);
-                $attributes['account_created'] = Carbon::now()->toDateTimeString();
-            }
-
-            return $this->updateEntity($attributes);
+        if ($client) {
+            return false;
         }
 
-        return false;
+        $attributes['shop_id'] = $shopId;
+        $attributes['modified_by_user_id'] = null;
+
+        $attributes['confirmed'] = 1;
+        $attributes['active'] = 1;
+        $attributes['type'] = 'consumer';
+        $mailChimplistId = Config::get('mailchimp.consumerId');
+        $attributes['confirmed'] = 0;
+        $attributes['active'] = 0;
+
+        //$attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
+        if (isset($attributes['password'])) {
+            $attributes['password'] = \Hash::make($attributes['password']);
+            $attributes['account_created'] = Carbon::now()->toDateTimeString();
+        }
+
+        $this->model->fill($attributes);
+        $this->model->save();
+
+        $clientAddress = $this->clientAddress->createByClient($attributes, $this->model->id);
+        $new['delivery_client_address_id'] = $clientAddress->id;
+        $new['bill_client_address_id'] = $clientAddress->id;
+        $this->model->fill($new);
+        $this->model->save();
+        return $this->model;
     }
 
     public function resetAccount($code, $newEmail, $shopId)

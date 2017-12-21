@@ -85,9 +85,9 @@ class AccountController extends Controller
         $result = $this->client->resetAccount($code, $email, config()->get('app.shop_id'));
 
         if ($result) {
-            Notification::container('foundation')->success('Je account gegevens zijn gewijzigd en je dient opnieuw in te loggen met de nieuwe gegevens.');
+            Notification::success('Je account gegevens zijn gewijzigd en je dient opnieuw in te loggen met de nieuwe gegevens.');
         } else {
-            Notification::container('foundation')->error('Wijziging is niet mogelijk.');
+            Notification::error('Wijziging is niet mogelijk.');
         }
 
         $this->auth->logout();
@@ -121,7 +121,7 @@ class AccountController extends Controller
         if ($validator->fails()) {
             // get the error messages from the validator
             foreach ($validator->errors()->all() as $error) {
-                Notification::container('foundation')->error($error);
+                Notification::error($error);
             }
 
             // redirect our user back to the form with the errors from the validator
@@ -179,9 +179,9 @@ class AccountController extends Controller
                     $message->to($data['email'])->from('info@philandphae.com', 'Phil & Phae')->subject('Bevestig het wijzigen van jouw accountgegevens');
                 });
 
-                Notification::container('foundation')->success('Er is een e-mail gestuurd. Deze dient goedgekeurd te worden voor de wijzigingen.');
+                Notification::success('Er is een e-mail gestuurd. Deze dient goedgekeurd te worden voor de wijzigingen.');
             } else {
-                Notification::container('foundation')->error('Wij kunnen het niet veranderen. Een ander account maakt er gebruik van.');
+                Notification::error('Wij kunnen het niet veranderen. Een ander account maakt er gebruik van.');
             }
         }
 
@@ -223,7 +223,7 @@ class AccountController extends Controller
             return view('frontend.account.reset-password')->with(array('confirmationCode' => $confirmationCode, 'email' => $email));
         }
 
-        Notification::container('foundation')->error('wachtwoord vergeten is mislukt');
+        Notification::error('wachtwoord vergeten is mislukt');
         return redirect()->to('account/forgot-password')
           ->withErrors(true, 'forgot')->withInput();
     }
@@ -250,7 +250,7 @@ class AccountController extends Controller
 
         if ($result) {
             $result = $this->client->resetPasswordByConfirmationCodeAndEmail(array('confirmation_code' => $confirmationCode, 'email' => $email, 'password' => $request->get('password')), config()->get('app.shop_id'));
-            Notification::container('foundation')->success('Je wachtwoord is veranderd en je kan nu inloggen.');
+            Notification::success('Je wachtwoord is veranderd en je kan nu inloggen.');
             return redirect()->to('account/login');
         }
     }
@@ -309,11 +309,11 @@ class AccountController extends Controller
                 $message->to($data['email'])->from('info@philandphae.com', 'Phil & Phae')->subject('Wachtwoord vergeten');
             });
 
-            Notification::container('foundation')->success('Er is een e-mail gestuurd. Hiermee kan je je wachtwoord resetten.');
+            Notification::success('Er is een e-mail gestuurd. Hiermee kan je je wachtwoord resetten.');
 
             return redirect()->back();
         } else {
-            Notification::container('foundation')->error('Account komt niet bij ons voor.');
+            Notification::error('Account komt niet bij ons voor.');
             return redirect()->back()
             ->withErrors($forgotPassword['errors'], 'forgot')->withInput();
         }
@@ -327,11 +327,11 @@ class AccountController extends Controller
 
         if ($result->count()) {
             $this->client->confirm($code, $email, config()->get('app.shop_id'));
-            Notification::container('foundation')->success('Uw account is geactiveerd.');
+            Notification::success('Uw account is geactiveerd.');
             return redirect()->to('account/login');
         }
 
-        Notification::container('foundation')->error('Wij kunnen dit niet verwerken.');
+        Notification::error('Wij kunnen dit niet verwerken.');
         return redirect()->to('account/login');
     }
 
@@ -380,7 +380,7 @@ class AccountController extends Controller
         // we are now logged in, go to admin
             return redirect()->to('/');
         } else {
-            Notification::container('foundation')->error('De gegevens kloppen niet. ');
+            Notification::error('Not correct.');
             return redirect()->back()->withInput();
         }  
     }
@@ -410,7 +410,7 @@ class AccountController extends Controller
 
             foreach ($validator->errors()->all() as $error) {
 
-                Notification::container('foundation')->error($error);
+                Notification::error($error);
             }
 
             // redirect our user back to the form with the errors from the validator
@@ -425,10 +425,10 @@ class AccountController extends Controller
              $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
             
             if ($client->account_created) {
-                Notification::container('foundation')->error('Er is al een account op dit email-adres.');
+                Notification::error('Er is al een account op dit email-adres.');
                 return redirect()->back()->withInput()->withErrors('Dit emailadres is al in gebruik. Je kan AL inloggen.', 'register');
             } else {
-                $register = $this->client->createAccount($userdata, config()->get('app.shop_id'));
+                $register = $this->client->register($userdata, config()->get('app.shop_id'));
             }
         }
 
@@ -436,9 +436,9 @@ class AccountController extends Controller
             $data = $register;
             Mail::send('frontend.email.register-mail', array('user' => $data->toArray(), 'password' => $request->get('password'), 'billAddress' => $data->clientBillAddress->toArray()), function ($message) use ($data) {
             
-                $message->to($data['email'])->from('info@philandphae.com', 'Phil & Phae')->subject(trans('register-completed-subject'));
+                $message->to($data['email'])->from('info@hidey.io', 'Hideyo')->subject(trans('register-completed-subject'));
             });
-            Notification::container('foundation')->success(trans('you-are-registered-consumer'));
+            Notification::success(trans('you-are-registered-consumer'));
         
        
             return redirect()->to('account/login');
