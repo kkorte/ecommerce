@@ -63,8 +63,10 @@
                         </div>                      
                         
                     </div>
-
-                    <hr/>
+                    
+              </div>
+              <hr/>
+              <div class="row">
 
                     <div class="col-lg-12">
                         <div class="paymentway">
@@ -89,7 +91,12 @@
 
                     </div>
 
-                    <hr/>
+
+              </div>
+              <hr/>
+              <div class="row">
+
+
                     {!! Form::open(array('route' => array('cart.complete'), 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                        
                     <div class="col-lg-12">               
@@ -133,5 +140,6 @@
         </div>
 
     </div>
+
 </div>
 @stop
