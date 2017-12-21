@@ -66,7 +66,6 @@ class CheckoutController extends Controller
                     $noAccountUser['delivery'] = $noAccountUser;
                     session()->put('noAccountUser', $noAccountUser);
                 }
-
   
                 return view('frontend.checkout.no-account')->with(array( 
                     'noAccountUser' =>  $noAccountUser, 
@@ -171,7 +170,7 @@ class CheckoutController extends Controller
             $registerAttempt = $this->client->validateRegister($userdata, config()->get('app.shop_id'));
 
             if ($registerAttempt) {
-                $register = $this->client->register($userdata, config()->get('app.shop_id'));
+                $register = $this->client->register($userdata, config()->get('app.shop_id'), true);
             } else {
                 $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
 
@@ -351,7 +350,7 @@ class CheckoutController extends Controller
         if ($validator->fails()) {
             // get the error messages from the validator
             foreach ($validator->errors()->all() as $error) {
-                Notification::container('foundation')->error($error);
+                Notification::error($error);
             }
 
             // redirect our user back to the form with the errors from the validator

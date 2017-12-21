@@ -11,11 +11,6 @@ use BrowserDetect;
 
 class CartController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(
         Request $request,
         SendingMethodRepositoryInterface $sendingMethod,
@@ -64,14 +59,12 @@ class CartController extends Controller
 
     public function getPaymentMethodsList($sendingMethodsList) 
     {
-        if ($sendingMethodsList->first()) {
-     
+        if ($sendingMethodsList->first()) {     
             return $paymentMethodsList = $sendingMethodsList->first()->relatedPaymentMethods;
         }
         
         return $paymentMethodsList = $this->paymentMethod->selectAllActiveByShopId(config()->get('app.shop_id'));       
     }
-
 
     public function postProduct(Request $request, $productId, $productCombinationId = false)
     {
@@ -102,7 +95,6 @@ class CartController extends Controller
         $result = app('cart')->remove($productId);
 
         if (app('cart')->getContent()->count()) {
-
             return response()->json(array('result' => $result, 'totals' => true, 'producttotal' => app('cart')->getContent()->count()));
         }
         
@@ -121,12 +113,15 @@ class CartController extends Controller
                 $amountNa = view('frontend.cart.amount-na')->with(array('product' => $product))->render();
             }
             
-            return response()->json(array(
-                'amountNa' => $amountNa,
-                'product_id' => $productId,
-                'product' => $product, 
-                'total_price_inc_tax_number_format' => $product->getOriginalPriceWithTaxSum(),
-                'total_price_ex_tax_number_format' => $product->getOriginalPriceWithoutTaxSum()));
+            return response()->json(
+                array(
+                    'amountNa' => $amountNa,
+                    'product_id' => $productId,
+                    'product' => $product, 
+                    'total_price_inc_tax_number_format' => $product->getOriginalPriceWithTaxSum(),
+                    'total_price_ex_tax_number_format' => $product->getOriginalPriceWithoutTaxSum()
+                )
+            );
         }
         
         return response()->json(false);
@@ -136,7 +131,6 @@ class CartController extends Controller
     {        
         return view('frontend.cart.basket-dialog');
     }
-
 
     public function getTotalReload()
     {

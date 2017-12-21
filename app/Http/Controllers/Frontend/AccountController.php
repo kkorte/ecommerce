@@ -230,7 +230,6 @@ class AccountController extends Controller
 
     public function postResetPassword(Request $request, $confirmationCode, $email)
     {
-        // create the validation rules ------------------------
         $rules = array(
             'password'            => 'required'
         );
