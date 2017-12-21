@@ -42,7 +42,7 @@ class CheckoutController extends Controller
 
         if (Cart::getContent()->count()) {
 
-            $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods'];
+            $paymentMethodsList = Cart::getConditionsByType('sending_method')->first()->getAttributes()['data']['related_payment_methods_list'];
          
             if(!Cart::getConditionsByType('sending_method')->count()) {
                 Notification::error('Selecteer een verzendwijze');
@@ -58,6 +58,8 @@ class CheckoutController extends Controller
         } else {
             return redirect()->to('cart');
         }
+
+
 
         if (auth('web')->guest()) {
             $noAccountUser = session()->get('noAccountUser');

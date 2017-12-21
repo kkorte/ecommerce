@@ -22,6 +22,12 @@ class SendingMethod extends BaseModel
         return $this->belongsToMany('Hideyo\Models\PaymentMethod', 'sending_payment_method_related');
     }
 
+
+    public function relatedPaymentMethodsActive()
+    {
+        return $this->belongsToMany('Hideyo\Models\PaymentMethod', 'sending_payment_method_related')->where('active', '=', 1);
+    }
+
     public function getPriceDetails()
     {
         $taxRate = 0;

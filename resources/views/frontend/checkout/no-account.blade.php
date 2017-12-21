@@ -70,22 +70,19 @@
 
                     <div class="col-lg-12">
                         <div class="paymentway">
-                            <h3>Payment way</h3>
+                            <h3>Payment way</h3>            
+                    
+
+                            <div class="form-group payment_method_row select">
+                                <label>Select a payment way:</label>
+                                @if($paymentMethodsList)
+
+                                    {!! Form::select('payment_method_id', $paymentMethodsList, app('cart')->getConditionsByType('payment_method')->first()->getAttributes()['data']['id'], array("data-url" => '/cart/update-payment-method', "class" => "form-control  payment_method_id")) !!}
+                                @else
+                                {!! Form::select('payment_method_id', array('0' => '-- selecteer --'), null, array("disabled" => "disabled", "class" => "selectpicker custom-selectbox payment_method_id")) !!} 
+                                @endif
+                            </div>               
              
-                            <table>
-
-                                <tr class="payment-method">         
-
-                                    <td  colspan="3" class="payment_method_row select">
-                                        <label>Select a payment way:</label>
-                                        @if($paymentMethodsList)
-                                        @else
-                                        {!! Form::select('payment_method_id', array('0' => '-- selecteer --'), null, array("disabled" => "disabled", "class" => "selectpicker custom-selectbox payment_method_id")) !!} 
-                                        @endif
-                                    </td>               
-                                </tr>
-
-                            </table>
                         </div>
 
 
@@ -96,7 +93,6 @@
               <hr/>
               <div class="row">
 
-
                     {!! Form::open(array('route' => array('cart.complete'), 'class' => 'form-horizontal form-groups-bordered validate')) !!}
                        
                     <div class="col-lg-12">               
@@ -105,16 +101,9 @@
                          {!! Form::textarea('comments', null, array('rows' => 5)) !!}  
                     </div>
 
-                    <div class="col-lg-12 text-right">
-                        @if(Lang::getLocale() == 'nl')
-                        <p><a href="{!! URL::route('text', 'algemene-voorwaarden') !!}" target="_blank">general conditions</a>.</p>
-                    
-                        @elseif(Lang::getLocale() == 'fr') 
-                        <p>  <a href="{!! URL::route('text', 'general-terms-conditions') !!}" target="_blank">general conditions</a>.</p>
-                        @else
+                    <div class="col-lg-12 text-right"> 
                          <p><a href="{!! URL::route('text', 'general-terms-conditions') !!}" target="_blank">general conditions</a>.</p>
                                                                
-                        @endif
                     </div>
 
                     <div class="col-lg-12 text-right">
