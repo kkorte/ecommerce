@@ -425,8 +425,8 @@ class AccountController extends Controller
              $client = $this->client->findByEmail($userdata['email'], config()->get('app.shop_id'));
             
             if ($client->account_created) {
-                Notification::error('Er is al een account op dit email-adres.');
-                return redirect()->back()->withInput()->withErrors('Dit emailadres is al in gebruik. Je kan AL inloggen.', 'register');
+                Notification::error('Email already exists.');
+                return redirect()->back()->withInput();
             } else {
                 $register = $this->client->register($userdata, config()->get('app.shop_id'));
             }

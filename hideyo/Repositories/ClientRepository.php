@@ -315,8 +315,9 @@ class ClientRepository implements ClientRepositoryInterface
         $attributes['confirmed'] = 0;
         $attributes['active'] = 0;
 
-        //$attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
+        
         if (isset($attributes['password'])) {
+            $attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
             $attributes['password'] = \Hash::make($attributes['password']);
             $attributes['account_created'] = Carbon::now()->toDateTimeString();
         }

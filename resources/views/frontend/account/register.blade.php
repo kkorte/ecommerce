@@ -20,7 +20,7 @@
 			<h1>Register</h1>
             <hr/>
 			<div class="block">
-            	@notification('foundation')
+            	@notification()
 
 				<?php echo Form::open(array('route' => 'account.register')); ?>
 
