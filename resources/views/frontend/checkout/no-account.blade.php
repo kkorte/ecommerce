@@ -23,7 +23,7 @@
     
         <div class="col-lg-8 ">
             <div class="confirm-page">   
-                @notification('foundation')
+                @notification()
                 <div class="row">
                     <div class="col-lg-6 ">
                 

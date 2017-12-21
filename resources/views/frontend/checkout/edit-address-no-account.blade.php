@@ -24,13 +24,13 @@
     
         <div class="col-lg-8 ">
             <div class="confirm-page">   
-                @notification('foundation')
+                @notification()
                 <div class="row">
                     <div class="col-lg-6 ">
                 
 						<h3>Bill address</h3>
 						@if($type == 'bill')
-						@notification('foundation')
+						@notification()
 
 						{!! Form::model($clientAddress, array('method' => 'post', 'route' => array('cart.edit.address', 'bill'), 'files' => true, 'class' => 'box login')) !!}
 
@@ -64,7 +64,7 @@
                         <h3>Delivery address</h3>
 
 						@if($type == 'delivery')
-						@notification('foundation')
+						@notification()
 						{!! Form::model($clientAddress, array('method' => 'post', 'route' => array('cart.edit.address', 'delivery'), 'files' => true, 'class' => 'box login')) !!}
 
 						@include('frontend.checkout._default_account_fields')     

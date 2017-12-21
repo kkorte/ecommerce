@@ -11,7 +11,7 @@
     </div>
 </div>
 
-@notification('foundation')
+@notification()
 
 @if (app('cart')->getContent()->count())
 
