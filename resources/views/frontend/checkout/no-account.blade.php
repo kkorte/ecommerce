@@ -93,12 +93,12 @@
               <hr/>
               <div class="row">
 
-                    {!! Form::open(array('route' => array('cart.complete'), 'class' => 'form-horizontal form-groups-bordered validate')) !!}
+                    {!! Form::open(array('route' => array('cart.complete'), 'class' => 'form-group')) !!}
                        
                     <div class="col-lg-12">               
                         <h3>Comments</h3>
                         <p>place a comment</p>
-                         {!! Form::textarea('comments', null, array('rows' => 5)) !!}  
+                         {!! Form::textarea('comments', null, array('rows' => 5, 'class' => 'form-control')) !!}  
                     </div>
 
                     <div class="col-lg-12 text-right"> 
