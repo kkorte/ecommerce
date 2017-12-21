@@ -11,6 +11,7 @@ use Config;
 use Carbon\Carbon;
 use Validator;
 use Auth;
+use Hash;
 
 class ClientRepository implements ClientRepositoryInterface
 {
@@ -70,7 +71,7 @@ class ClientRepository implements ClientRepositoryInterface
             return $validator;
         }
 
-        $attributes['password'] = \Hash::make($attributes['password']);
+        $attributes['password'] = Hash::make($attributes['password']);
         $attributes['modified_by_user_id'] = auth()->guard('hideyobackend')->user()->id;
         $this->model->fill($attributes);
         $this->model->save();
@@ -98,7 +99,7 @@ class ClientRepository implements ClientRepositoryInterface
 
         if ($this->model) {
             $newAttributes['new_email'] = $attributes['email'];
-            $newAttributes['new_password'] = \Hash::make($attributes['password']);
+            $newAttributes['new_password'] = Hash::make($attributes['password']);
             $newAttributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
             return $this->updateEntity($newAttributes);
         }
@@ -119,7 +120,7 @@ class ClientRepository implements ClientRepositoryInterface
         unset($attributes['password']);
 
         if ($attributes['password']) {
-            $attributes['password'] = \Hash::make($attributes['password']);
+            $attributes['password'] = Hash::make($attributes['password']);
         }
 
         return $this->updateEntity($attributes);
@@ -292,7 +293,7 @@ class ClientRepository implements ClientRepositoryInterface
         ->get()->first();
     }
 
-    public function register(array $attributes, $shopId)
+    public function register(array $attributes, $shopId, $accountConfirmed = false)
     {
         $result = array();
         $result['result'] = false;
@@ -308,17 +309,20 @@ class ClientRepository implements ClientRepositoryInterface
         $attributes['shop_id'] = $shopId;
         $attributes['modified_by_user_id'] = null;
 
-        $attributes['confirmed'] = 1;
-        $attributes['active'] = 1;
-        $attributes['type'] = 'consumer';
-        $mailChimplistId = Config::get('mailchimp.consumerId');
-        $attributes['confirmed'] = 0;
         $attributes['active'] = 0;
+        $attributes['confirmed'] = 0;
+        $attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
+        $mailChimplistId = Config::get('mailchimp.consumerId');        
+
+        if($accountConfirmed) {
+            $attributes['confirmation_code'] = null;
+            $attributes['active'] = 1;
+            $attributes['confirmed'] = 1;
+        }
 
         
-        if (isset($attributes['password'])) {
-            $attributes['confirmation_code'] = md5(uniqid(mt_rand(), true));
-            $attributes['password'] = \Hash::make($attributes['password']);
+        if (isset($attributes['password'])) {            
+            $attributes['password'] = Hash::make($attributes['password']);
             $attributes['account_created'] = Carbon::now()->toDateTimeString();
         }
 
@@ -382,7 +386,7 @@ class ClientRepository implements ClientRepositoryInterface
                 $attributes['confirmed'] = 1;
                 $attributes['active'] = 1;
                 $attributes['confirmation_code'] = null;
-                $attributes['password'] = \Hash::make($attributes['password']);
+                $attributes['password'] = Hash::make($attributes['password']);
             }
 
             $this->updateEntity($attributes);
