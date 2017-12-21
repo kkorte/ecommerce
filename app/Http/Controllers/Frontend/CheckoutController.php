@@ -6,6 +6,7 @@ use Hideyo\Repositories\ShopRepositoryInterface;
 use Hideyo\Repositories\SendingMethodRepositoryInterface;
 use Hideyo\Repositories\PaymentMethodRepositoryInterface;
 use Hideyo\Repositories\ClientRepositoryInterface;
+use Hideyo\Repositories\OrderRepositoryInterface;
 use Cart;
 use Validator;
 use Notification;
@@ -23,13 +24,15 @@ class CheckoutController extends Controller
         ShopRepositoryInterface $shop,
         ClientRepositoryInterface $client,
         SendingMethodRepositoryInterface $sendingMethod,
-        PaymentMethodRepositoryInterface $paymentMethod)
+        PaymentMethodRepositoryInterface $paymentMethod,
+        OrderRepositoryInterface $order)
     {
         $this->request = $request;
         $this->shop = $shop;
         $this->client = $client;
         $this->sendingMethod = $sendingMethod;
         $this->paymentMethod = $paymentMethod;
+        $this->order = $order;
         $this->shopId = config()->get('app.shop_id');
     }
 
@@ -264,6 +267,72 @@ class CheckoutController extends Controller
         if (!Cart::getContent()->count()) {        
             return redirect()->to('cart/checkout');
         }
+
+        $data = array(
+            'products' => Cart::getContent()->toArray(),
+            'price_with_tax' => Cart::getTotalWithTax(false),
+            'price_without_tax' => Cart::getTotalWithoutTax(false),
+            'comments' => $request->get('comments'),
+            'browser_detect' => serialize(BrowserDetect::toArray())
+        );
+
+
+        if (auth('web')->check()) {
+            $data['user_id'] = auth('web')->user()->id;
+        } else {
+            $data['user_id'] = $noAccountUser['client_id'];
+        }     
+
+        if(Cart::getConditionsByType('sending_method')->count()) {
+            $data['sending_method'] = Cart::getConditionsByType('sending_method');
+        }
+
+        if(Cart::getConditionsByType('sending_method_country_price')->count()) {
+            $data['sending_method_country_price'] = Cart::getConditionsByType('sending_method_country_price');
+        }
+
+        if(Cart::getConditionsByType('payment_method')->count()) {
+            $data['payment_method'] = Cart::getConditionsByType('payment_method');
+        }
+
+        $orderInsertAttempt = $this->order->createByUserAndShopId($data, config()->get('app.shop_id'), $noAccountUser);
+
+        if ($orderInsertAttempt AND $orderInsertAttempt->count()) {
+                if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
+                    $orderStatus = $this->order->updateStatus($orderInsertAttempt->id, $orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id);
+                    if ($orderInsertAttempt->OrderPaymentMethod->paymentMethod->order_confirmed_order_status_id) {
+                        Event::fire(new OrderChangeStatus($orderStatus));
+                    }
+                }
+
+                if ($orderInsertAttempt->OrderPaymentMethod) {
+                    $paymentMethodId = $orderInsertAttempt->OrderPaymentMethod->payment_method_id;
+                }
+    
+                if ($orderInsertAttempt->OrderSendingMethod) {
+                    $sendingMethodId = $orderInsertAttempt->OrderSendingMethod->sending_method_id;
+                }
+
+                session()->put('orderData', $orderInsertAttempt);
+
+
+                if ($orderInsertAttempt->OrderPaymentMethod and $orderInsertAttempt->OrderPaymentMethod->paymentMethod->payment_external) {
+                    return redirect()->to(LaravelLocalization::getLocalizedURL(null, 'cart/payment'));
+                } else {
+
+  
+                    app('cart')->clear();
+                    app('cart')->clearCartConditions();  
+                    session()->flush('noAccountUser');
+                    return view('frontend.checkout.complete')->with(array('body' => $body));
+                }
+
+
+        }
+
+        return redirect()->to('cart/checkout');
+
+
     }
 
 

@@ -36,13 +36,13 @@
             {!!  Form::open(array('url' => '/cart/checkout-login', 'class' => 'form', 'data-toggle' => 'validator')) !!}
 
                 <div class="form-group">         
-                    <label for="middle-label">{!! trans('form.email') !!}</label>
+                    <label>{!! trans('form.email') !!}</label>
                     {!! Form::email('email', null, array('required' => '', 'class' => 'form-control')) !!}
                 </div>
 
                 <div class="form-group">
          
-                    <label for="middle-label">{!! trans('form.password') !!}</label>
+                    <label>{!! trans('form.password') !!}</label>
                     {!! Form::password('password', array('required' => '', 'class' => 'form-control')) !!}
                        
                 </div>
@@ -66,8 +66,8 @@
 
             <?php echo Form::open(array('url' => '/cart/checkout-register', 'class' => 'form', 'data-toggle' => 'validator')); ?>
 
-<div class="form-group">
-                        <label for="middle-label">{!! trans('form.email') !!}</label>
+                <div class="form-group">
+                        <label>{!! trans('form.email') !!}</label>
                         {!! Form::email('email', null, array('required' => '', 'class' => 'form-control')) !!}
 
              
@@ -75,14 +75,14 @@
 
                 
                     <div class="form-group">
-                        <label for="middle-label">{!! trans('form.firstname') !!}</label>
+                        <label>{!! trans('form.firstname') !!}</label>
                         {!! Form::text('firstname', null, array('required' => '', 'class' => "form-control")) !!}
                    
 
                     </div>
 
                     <div class="form-group">
-                        <label for="middle-label">{!! trans('form.lastname') !!}</label>
+                        <label>{!! trans('form.lastname') !!}</label>
                                 {!! Form::text('lastname', null, array('required' => '', 'class' => "form-control")) !!}
                    
 
@@ -93,26 +93,26 @@
 
 
                 <div class="form-group">
-                        <label for="middle-label">{!! trans('form.zipcode') !!}</label>
+                        <label>{!! trans('form.zipcode') !!}</label>
                         {!! Form::text('zipcode', null, array('class' => 'zipcode form-control checkzipcode', 'data-url' => '/account/check-zipcode', 'required' => '')) !!}
 
                     </div>
 
                              <div class="form-group">
-                        <label for="middle-label">{!! trans('form.housenumber') !!}</label>
+                        <label>{!! trans('form.housenumber') !!}</label>
                         {!! Form::text('housenumber', null, array('class' => 'housenumber form-control checkhousenumber', 'data-url' => '/account/check-zipcode', 'required' => '')) !!}
 
                     </div>
 
                                  <div class="form-group">
-                        <label for="middle-label">{!! trans('form.houseletter') !!}</label>
+                        <label>{!! trans('form.houseletter') !!}</label>
                         {!! Form::text('housenumber_suffix', null, array('class' => 'form-control')) !!}
 
                     </div>
            
 
 <div class="form-group">
-                        <label for="middle-label">{!! trans('form.street') !!}</label>
+                        <label>{!! trans('form.street') !!}</label>
                         {!! Form::text('street', null, array('class' => 'fillstreet', 'required' => '', 'class' => 'form-control')) !!}
                  
 
@@ -120,14 +120,14 @@
                 </div>
 
 <div class="form-group">
-                        <label for="middle-label">{!! trans('form.city') !!}</label>
+                        <label>{!! trans('form.city') !!}</label>
                         {!! Form::text('city', null, array('class' => 'fillcity', 'required' => '', 'class' => 'form-control')) !!}
 
                   
                 </div>
 
 <div class="form-group">
-                        <label for="middle-label">{!! trans('form.country') !!}</label>
+                        <label>{!! trans('form.country') !!}</label>
 
 
                             @if(app('cart')->getConditionsByType('sending_method_country_price')->count())
@@ -156,7 +156,7 @@
                 <p>Register account and get special offers.</p>
 
 <div class="form-group">
-                        <label for="middle-label">{!! trans('form.password') !!}</label>
+                        <label>{!! trans('form.password') !!}</label>
                         {!! Form::password('password', array('class' => 'form-control', 'placeholder' => 'wachtwoord')) !!}
            
 
