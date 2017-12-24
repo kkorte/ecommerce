@@ -120,6 +120,7 @@ class ProductTableSeeder extends Seeder
 
 
         $product2 = new Product;
+        $product2->id = 12;
         $product2->active = 1;
         $product2->title = 'Jeans';
         $product2->short_description = 'Slimfit jeans';
@@ -177,6 +178,7 @@ class ProductTableSeeder extends Seeder
 
         $productCategory = ProductCategory::where('title', '=', 'T-shirts')->first();
         $product3 = new Product;
+        $product3->id = 13;
         $product3->active = 1;
         $product3->title = 'Cotton t-shirt';
         $product3->short_description = 'Cotton t-shirt';
@@ -227,6 +229,7 @@ class ProductTableSeeder extends Seeder
 
         $productCategory = ProductCategory::where('title', '=', 'T-shirts')->first();
         $product4 = new Product;
+        $product4->id = 14;
         $product4->active = 1;
         $product4->title = 'Sport t-shirt';
         $product4->short_description = 'Sport t-shirt';

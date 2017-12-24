@@ -26,7 +26,7 @@ class ProductAttributeTable extends Migration
             $table->integer('tax_rate_id')->unsigned()->nullable();
             $table->foreign('tax_rate_id')->references('id')->on('tax_rate')->onDelete('set null');
             $table->boolean('discount_promotion')->default(true);
-            $table->enum('discount_type', array('amount', 'percent'));
+            $table->enum('discount_type', array('amount', 'percent'))->nullable();
             $table->decimal('discount_value', 12, 4)->nullable();
             $table->date('discount_start_date')->nullable();
             $table->date('discount_end_date')->nullable();
