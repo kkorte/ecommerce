@@ -4,19 +4,32 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
+use Hideyo\Models\Product;
 use Hideyo\Models\ProductCategory;
 
 class ProductCategoryController extends Controller
 {
 	public function index() {
-		return ProductCategory::all();
+		return [
+			'data' => ProductCategory::all()
+		];
 	}
 
 	public function show(ProductCategory $category) {
-		return $category;
+		return [
+			'data' => $category
+		];
 	}
 
 	public function products(ProductCategory $category) {
-		return $category->products;
+		// TODO: https://laravel.com/docs/5.5/eloquent-resources#pagination
+		$data = Product::where('active', true)->where('product_category_id', $category->id)
+				->with('productImages')
+				->with('shop')
+				->get();
+
+		return [
+			'data' => $data
+		];
 	}
 }
