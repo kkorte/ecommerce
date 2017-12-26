@@ -32,9 +32,9 @@
         "tylercd100/lern": "^3.6",
         "unisharp/laravel-ckeditor": "^4.5",
         "unisharp/laravel-filemanager": "^1.6",
-        "laravel/tinker": "^1.0",
         "hisorange/browser-detect": "2.*",
-        "flynsarmy/db-blade-compiler": "5.4.2"
+        "flynsarmy/db-blade-compiler": "5.4.2",
+        "laravel/passport": "^4.0@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
